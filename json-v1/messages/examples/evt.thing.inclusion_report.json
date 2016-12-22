@@ -1,0 +1,68 @@
+
+{
+"type": "evt.thing.inclusion_report",
+"serv": "zwave-ad",
+"val_type": "object",
+"val": {
+    "product_hash":"zw_010f_0800_1001_1_2.6-2.6",
+    "comm_tech":"zw",
+    "manufacturer_id":"010f",
+    "product_id":"1001",
+    "address":"12",
+    "device_id":"0x95f31d091b530604L",
+    "sw_ver":"2.6-2.6",
+    "hw_ver":"1",
+    "power_source":"battery",
+    "wakeup_interval":7200,
+    "tech_specific_props":{
+        "zw_protocol_ver":"3.3.67",
+        "zw_manufacturer_type":"",
+        "zw_lib_type":"",
+        "zw_dev_category":"",
+        "zw_is_sensor":"true",
+        "zw_sleep_capable":"true"
+    },
+    "prop_set":{
+        "nif_ch1":{
+            "zw_generic_dev_class":"",
+            "zw_specific_dev_class":"",
+            "zw_plus_version":"",
+            "zw_node_type":"",
+            "zw_role_type":"",
+            "zw_installer_icon":"",
+            "zw_user_icon":""
+            }
+    },
+    "services":[{
+        "name":"temp_sensor",
+        "address":"zw/12_1/temp_sensor",
+        "interfaces":[
+            {"intf_type":"out","msg_type":"evt.sensor.report","props":{}},
+            {"intf_type":"in" ,"msg_type":"cmd.sensor.get","props":{}}
+            ],
+        "prop_set_ref":"nif_ch1",
+        "location":"",
+        "groups":["ch1"]     
+
+    },{
+        "name":"sys_config",
+        "address":"zw/12_1/sys_config",
+        "interfaces":[
+            {"intf_type":"out","msg_type":"evt.config.report","props":{}},
+            {"intf_type":"in" ,"msg_type":"cmd.config.get","props":{}},
+            {"intf_type":"in" ,"msg_type":"cmd.config.all_get","props":{}},
+            {"intf_type":"in" ,"msg_type":"cmd.config.set","props":{}},
+            {"intf_type":"out","msg_type":"evt.assoc.report","props":{}},
+            {"intf_type":"in" ,"msg_type":"cmd.assoc.get","props":{}},
+            {"intf_type":"in" ,"msg_type":"cmd.assoc.set","props":{}}
+            ],
+        "prop_set_ref":"nif_ch1",
+        "location":"",
+        "groups":["ch1"]      
+
+    }]
+},
+"ctime": "2016-12-22T12:29:31.18369172+01:00",
+"ver": "1",
+"uid": "bcc5becd-fcd6-48da-9977-cbd45c880ac4"
+}
