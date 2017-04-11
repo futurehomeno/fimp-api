@@ -1,9 +1,0 @@
-{
-"type": "cmd.sensor.get",
-"serv": "temp_sensor",
-"val_t": "null",
-"val": null,
-"ctime": "2016-12-22T12:29:31.183+01:00",
-"ver": "1",
-"uid": "bcc5becd-fcd6-48da-9977-cbd45c880ac4"
-}
