@@ -3,7 +3,7 @@
 ### Service cocept.
 FIMP protocol is based on everything-is-a-service concept . 
 
-![Service concept](static/service_concept.svg) 
+![Service concept](static/service_concept.png) 
 
 ### List of technology independent services.
 
