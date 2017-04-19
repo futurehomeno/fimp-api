@@ -1,0 +1,12 @@
+{
+    "ctime": "2017-04-19T14:40:14+0200",
+    "props": {},
+    "serv": "alarm_burglar",
+    "tags": [],
+    "type": "evt.alarm.report",
+    "val": {
+        "event": "temper_removed_cover",
+        "status": "activ"
+    },
+    "val_t": "str_map"
+}
