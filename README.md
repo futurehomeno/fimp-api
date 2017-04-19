@@ -174,38 +174,38 @@ Supported alarm types :
 alarm_fire         | smoke ,smoke_test                       |
 alarm_heat         | overheat,temp_rise,underheat            |
 alarm_gas          | CO,CO2, combust_gas_detected            |
-                   | toxic_gas_detected ,test,replace        |
+   alarm_gas       | toxic_gas_detected ,test,replace        |
 alarm_water        | leak, level_drop, replace_filter        |
 alarm_lock         | manual_lock,rf_lock,kaypad_lock,        | TODO: move to doorlock service
-                   | manual_not_locked, rf_not_locked        |
-                   | auto_locked , jammed                    |
+   alarm_lock      | manual_not_locked, rf_not_locked        |
+   alarm_lock      | auto_locked , jammed                    |
 alarm_burglar      | intrusion,temper_removed_cover,         |
-                   | temper_invalid_code,glass_breakage      |
+   alarm_burglar   | temper_invalid_code,glass_breakage      |
 alarm_power        | on,ac_on,ac_off,surge,voltage_drop,     | TODO: move to power_supply service
-                   | over_current,over_voltage,              |
-                   | replace_soon,replace_now,charging,      |
-                   | charged,charge_soon,charge_now          | 
+   alarm_power     | over_current,over_voltage,              |
+   alarm_power     | replace_soon,replace_now,charging,      |
+   alarm_power     | charged,charge_soon,charge_now          | 
 alarm_system       | hw_failure,sw_failure,                  | 
-                   | hw_failure_with_code,                   | 
-                   | sw_failure_with_code                    | 
+   alarm_system    | hw_failure_with_code,                   | 
+   alarm_system    | sw_failure_with_code                    | 
 alarm_emergency    | police,fire,medical                     | 
 alarm_time         | wakeup,timer_ended,time_remaining       | 
 alarm_applience    | program_started,program_inprogress,     | 
-                   | program_completed,replace_filter ,      | 
-                   | set_temp_error,supplying_water,         | 
-                   | water_supply_err, boiling,              | 
-                   | boiling_err,washing,washing_err         | 
-                   | rinsing,rinsing_err,draining ,          | 
-                   | draining_err,spinnning,spinning_err,    | 
-                   | drying,drying_err,fan_err,              | 
-                   | compressor_err                          | 
+  alarm_applience  | program_completed,replace_filter ,      | 
+  alarm_applience  | set_temp_error,supplying_water,         | 
+  alarm_applience  | water_supply_err, boiling,              | 
+  alarm_applience  | boiling_err,washing,washing_err         | 
+  alarm_applience  | rinsing,rinsing_err,draining ,          | 
+  alarm_applience  | draining_err,spinnning,spinning_err,    | 
+  alarm_applience  | drying,drying_err,fan_err,              | 
+  alarm_applience  | compressor_err                          | 
 alarm_health       | leaving_bed,sitting_on_bed,lying_on_bed,| 
-                   | posture_change,sitting_on_bed_edge,     | 
-                   | volatile_organic_compound               | 
+  alarm_health     | posture_change,sitting_on_bed_edge,     | 
+  alarm_health     | volatile_organic_compound               | 
 alarm_siren        | inactive,siren_active                   | 
 alarm_water_valve  | valve_op,master_valve_op,               | 
-                   | valve_short_circuit,current_alarm       | 
-                   | master_valve_current_alarm              | 
+  alarm_water_valve| valve_short_circuit,current_alarm       | 
+  alarm_water_valve| master_valve_current_alarm              | 
  alarm_weather     | inactive,moisture                       | 
 
 Example message : [evt.sensor.report](json-v1/messages/examples/evt.alarm.report)
