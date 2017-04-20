@@ -5,7 +5,8 @@ FIMP protocol is based on everything-is-a-service concept .
 
 ![Service concept](static/service_concept.png) 
 
-### List of technology independent services.
+
+### Services
 
 ## Basic service 
 Service name : **basic**
@@ -17,6 +18,8 @@ Type  | Interface                | Value type | Description
 out   | evt.level.report         | int        | Reports level using numeric value 
 in    | cmd.level.set            | int        | Sets level using numeric value 
 in    | cmd.level.get_report     | null       | 
+
+Topic example : `pt:j1/mt:evt/rt:dev/rn:zw/ad:1/sv:basic/ad:15_0`
 
 ***
 
@@ -34,7 +37,7 @@ in    | cmd.group.delete_members | object     | Object has the same format as re
 in    | cmd.group.get_members    | string     | Value is a group name . 
 
 *Notes:*
-> z-wave configuration values should be in form <param_id>;<size>
+> z-wave configuration values should be in form <param_id>;size , for instance 12;2
 
 > z-wave association memeber should be in form <node_id>_<endpoint_id> , for instance 10_0 
 
@@ -44,7 +47,7 @@ in    | cmd.group.get_members    | string     | Value is a group name .
 
 Service name : **out_bin_switch** 
 
-Description  : The service is provided by wallplugs , relays , simple sirens , etc . 
+Description  : Wallplugs , relays , simple sirens , etc should be controlled over the service. 
 
 Type  | Interface                | Value type | Description 
 ------|--------------------------|------------|------------ 
@@ -52,12 +55,14 @@ out   | evt.binary.report        | bool       | Reports true when switch is ON a
 in    | cmd.binary.set           | bool       | 
 in    | cmd.binary.get_report    | null       | 
 
+Topic example : `pt:j1/mt:cmd/rt:dev/rn:zw/ad:1/sv:out_bin_switch/ad:15_0`
+
 ***
 
 ## Meter service 
 Service name : Refer to the table below.
 
-Description  : The service is used by meters to report consumption . 
+Description  : Meters report consumption over the sevice . 
 
 Type  | Interface                | Value type | Properties                | Description 
 ------|--------------------------|------------|---------------------------|------------- 
@@ -72,6 +77,8 @@ Service name       | Units                               | Description
  meter_elec        | kWh,kVAh,W,pulse_c,V,A,power_factor | Electric meter 
  meter_gas         | cub_m,cub_f,pulse_c                 | Gas meter 
  meter_water       | cub_m,cub_f,galon,pulse_c           | Water meter 
+
+Topic example : `pt:j1/mt:evt/rt:dev/rn:zw/ad:1/sv:meter_elec/ad:15_0`
 
 *Notes:*
 
@@ -148,7 +155,7 @@ in     | cmd.open.get_report      | null       |
 ## Presence sensor service 
 Service name : **sensor_presence** . 
   
-Description : Normally it represents motion sensor or some other way of presence detection .
+Description : Motion sensor or some other way of presence detection .
 
  Type  | Interface                | Value type | Description 
 -------|--------------------------|------------|-------------------- 
@@ -176,7 +183,7 @@ alarm_heat         | overheat,temp_rise,underheat            |
 alarm_gas          | CO,CO2, combust_gas_detected            |
    alarm_gas       | toxic_gas_detected ,test,replace        |
 alarm_water        | leak, level_drop, replace_filter        |
-alarm_lock         | manual_lock,rf_lock,kaypad_lock,        | TODO: move to doorlock service
+alarm_lock         | manual_lock,rf_lock,keypad_lock,        | TODO: move to doorlock service
    alarm_lock      | manual_not_locked, rf_not_locked        |
    alarm_lock      | auto_locked , jammed                    |
 alarm_burglar      | intrusion,temper_removed_cover,         |
@@ -208,7 +215,18 @@ alarm_water_valve  | valve_op,master_valve_op,               |
   alarm_water_valve| master_valve_current_alarm              | 
  alarm_weather     | inactive,moisture                       | 
 
-Example message : [evt.sensor.report](json-v1/messages/examples/evt.alarm.report)
+Example message : [evt.sensor.report](json-v1/messages/examples/evt.alarm.report.json)
+
 ***
 
-   |
+## Door lock service 
+Service name : **door_lock** . 
+  
+Description : Dorlock 
+
+ Type  | Interface                | Value type | Properties | Description 
+-------|--------------------------|------------|------------|------------------ 
+out    | evt.lock.report          | bool_map   | timeout_s  | value = ["is_secured":true,"door_is_closed":true,"bolt_is_locked":true,"latch_is_closed"]
+in     | cmd.lock.set             | bool       |            | Use true to secure a lock and false to unsecure
+in     | cmd.lock.get_report      | ?          |            |
+   
