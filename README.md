@@ -5,6 +5,13 @@ FIMP protocol is based on everything-is-a-service concept .
 
 ![Service concept](static/service_concept.png) 
 
+### Service discovery 
+
+TODO
+
+### Service addressing
+
+TODO
 
 ### Services
 
@@ -56,6 +63,25 @@ in    | cmd.binary.set           | bool       |
 in    | cmd.binary.get_report    | null       | 
 
 Topic example : `pt:j1/mt:cmd/rt:dev/rn:zw/ad:1/sv:out_bin_switch/ad:15_0`
+
+***
+
+## Output level switch service 
+
+Service name : **out_lvl_switch** 
+
+Description  :  
+
+Type  | Interface                | Value type | Properties                | Description 
+------|--------------------------|------------|---------------------------|------------ 
+out   | evt.lvl.report           | int        |                           |
+in    | cmd.lvl.set              | int        | duration                  | props = {"duration":"5"} . Duration is in seconds , factory default is used is propery is not defined .  
+in    | cmd.lvl.start            | string     | start_lvl                 | Start a level change. Value defines direction can be : up,down,auto 
+in    | cmd.lvl.stop             | null       |                           | Stop a level change 
+in    | cmd.lvl.get_report       | null       |                           |
+in    | cmd.binary.set           | bool       |                           | true is mapped t 255 , false to 0
+
+Topic example : `pt:j1/mt:cmd/rt:dev/rn:zw/ad:1/sv:out_lvl_switch/ad:15_0`
 
 ***
 
@@ -226,7 +252,7 @@ Description : Dorlock
 
  Type  | Interface                | Value type | Properties | Description 
 -------|--------------------------|------------|------------|------------------ 
-out    | evt.lock.report          | bool_map   | timeout_s  | value = ["is_secured":true,"door_is_closed":true,"bolt_is_locked":true,"latch_is_closed"]
+out    | evt.lock.report          | bool_map   | timeout_s  | value = ["is_secured":true,"door_is_closed":true,"bolt_is_locked":true,"latch_is_closed":true]
 in     | cmd.lock.set             | bool       |            | Use true to secure a lock and false to unsecure
 in     | cmd.lock.get_report      | ?          |            |
    
