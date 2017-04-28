@@ -76,11 +76,19 @@ Type  | Interface                | Value type | Properties                | Desc
 ------|--------------------------|------------|---------------------------|------------ 
 out   | evt.lvl.report           | int        |                           |
 in    | cmd.lvl.set              | int        | duration                  | props = {"duration":"5"} . Duration is in seconds , factory default is used is propery is not defined .  
-in    | cmd.lvl.start            | string     | start_lvl                 | Start a level change. Value defines direction can be : up,down,auto 
+in    | cmd.lvl.start            | string     | start_lvl,duration        | Start a level change. Value defines direction can be : up,down,auto 
 in    | cmd.lvl.stop             | null       |                           | Stop a level change 
 in    | cmd.lvl.get_report       | null       |                           |
 in    | cmd.binary.set           | bool       |                           | true is mapped t 255 , false to 0
 
+Descriptor properties : 
+Name      | Value example   | Description 
+----------|-----------------|-------------
+min_lvl   | 0               | minimum value 
+max_lvl   | 99              | maximum value 
+sw_type   | on_off,up_down  | type of level switch
+
+ 
 Topic example : `pt:j1/mt:cmd/rt:dev/rn:zw/ad:1/sv:out_lvl_switch/ad:15_0`
 
 ***
@@ -106,9 +114,11 @@ Service name       | Units                               | Description
 
 Topic example : `pt:j1/mt:evt/rt:dev/rn:zw/ad:1/sv:meter_elec/ad:15_0`
 
-*Notes:*
+Descriptor properties : 
 
-> A service should report supported units over `sup_units` property in inclusion report . 
+Name      | Value example   | Description 
+----------|-----------------|-------------
+sup_units | W,kWh,A,V       | comma separated list of supported units .
 
 ***
 
@@ -163,6 +173,12 @@ in     | cmd.sensor.get_report    | string     |                           | Val
  sensor_watpressure | kPa                   | Water pressure sensor
 
 Example message : [evt.sensor.report](json-v1/messages/examples/evt.sensor.report)
+
+Descriptor properties : 
+
+Name      | Value example   | Description 
+----------|-----------------|-------------
+sup_units | C,F             | comma separated list of supported units .
 
 ***
 
@@ -243,7 +259,26 @@ alarm_water_valve  | valve_op,master_valve_op,               |
 
 Example message : [evt.sensor.report](json-v1/messages/examples/evt.alarm.report.json)
 
+Descriptor properties : 
+
+Name       | Value example     | Description 
+-----------|-------------------|-------------
+sup_events | smoke ,smoke_test | comma separated list of supported events .
+
 ***
+
+## Battery service
+Service name : **battery** . 
+  
+Description :  
+
+ Type  | Interface                | Value type | Properties| Description 
+-------|--------------------------|------------|-----------|------------------ 
+out    | evt.lvl.report           | int        | state     | available states : charging,charged,replace,emtpy
+out    | evt.alarm.report         | str_map    |           | val = {"event": "low_battery","status": "activ"}   
+in     | cmd.lvl.get_report       | null       |           | Get battery level over level report . 
+   
+
 
 ## Door lock service 
 Service name : **door_lock** . 
