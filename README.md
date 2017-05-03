@@ -263,7 +263,7 @@ Descriptor properties :
 
 Name       | Value example     | Description 
 -----------|-------------------|-------------
-sup_events | smoke ,smoke_test | comma separated list of supported events .
+sup_events | smoke ,smoke_test | supported events .
 
 ***
 
@@ -278,7 +278,33 @@ out    | evt.lvl.report           | int        | state     | available states : 
 out    | evt.alarm.report         | str_map    |           | val = {"event": "low_battery","status": "activ"}   
 in     | cmd.lvl.get_report       | null       |           | Get battery level over level report . 
    
+## Thermostat service
+Service name : **thermostat** . 
+  
+Description :  
 
+ Type  | Interface                  | Value type | Properties| Description 
+-------|----------------------------|------------|-----------|------------------ 
+out    | evt.setpoint.report        | str_map    |           | val = {"type":"heating","temp":"21.5","unit":"C"}   
+in     | cmd.setpoint.set           | str_map    |           | val = {"type":"heating","temp":"21.5","unit":"C"} 
+in     | cmd.setpoint.get_report    | string     |           | value is a setpoint type 
+in     | cmd.mode.set               | string     |           |  Set thermostat mode :
+in     | cmd.mode.get_report        | null       |           |  
+out    | evt.mode.report            | null       |           |  
+out    | evt.state.report           | string     |           |  Reports operational state .
+in     | cmd.state.get_report       | null       |           |  
+   
+
+Descriptor properties : 
+
+Name           | Value example       | Description 
+---------------|---------------------|-------------
+sup_setpoints  | heating,cooling     | supported setpoints .
+sup_modes      | off,heating,cooling | supported modes .
+sup_states     | idle,heating,cooling| idle,heating,cooling,fan_only,pending_heat,pending_cool,vent
+
+Modes : off, heating,cooling,auto,aux_heat,resume,fan,furnance,dry_air,moist_air,auto_changeover,eco_heat,eco_cool,away
+Setpoint types : heating,cooling,furnance,dry_air,moist_air,auto_changeover,eco_heat,eco_cool,special_heat,
 
 ## Door lock service 
 Service name : **door_lock** . 
