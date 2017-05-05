@@ -303,8 +303,8 @@ sup_setpoints  | heating,cooling     | supported setpoints .
 sup_modes      | off,heating,cooling | supported modes .
 sup_states     | idle,heating,cooling| idle,heating,cooling,fan_only,pending_heat,pending_cool,vent
 
-Modes : off, heating,cooling,auto,aux_heat,resume,fan,furnance,dry_air,moist_air,auto_changeover,eco_heat,eco_cool,away
-Setpoint types : heating,cooling,furnance,dry_air,moist_air,auto_changeover,eco_heat,eco_cool,special_heat,
+Modes : off, heat,cool,auto,aux_heat,resume,fan,furnace,dry_air,moist_air,auto_changeover,energy_heat,energy_cool,away
+Setpoint types : heat,cool,furnace,dry_air,moist_air,auto_changeover,energy_heat,energy_cool,special_heat,
 
 ## Door lock service 
 Service name : **door_lock** . 
