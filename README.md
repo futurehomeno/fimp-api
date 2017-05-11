@@ -290,7 +290,7 @@ in     | cmd.setpoint.set           | str_map    |           | val = {"type":"he
 in     | cmd.setpoint.get_report    | string     |           | value is a setpoint type 
 in     | cmd.mode.set               | string     |           |  Set thermostat mode :
 in     | cmd.mode.get_report        | null       |           |  
-out    | evt.mode.report            | null       |           |  
+out    | evt.mode.report            | string     |           |  
 out    | evt.state.report           | string     |           |  Reports operational state .
 in     | cmd.state.get_report       | null       |           |  
    
@@ -317,3 +317,26 @@ out    | evt.lock.report          | bool_map   | timeout_s  | value = ["is_secur
 in     | cmd.lock.set             | bool       |            | Use true to secure a lock and false to unsecure
 in     | cmd.lock.get_report      | ?          |            |
    
+## Color control    
+Service name : **color_ctrl** 
+
+Description : The service is used to controll color of a lightning device . 
+
+Type  | Interface                | Value type |  Description 
+------|--------------------------|------------|-------------------
+in    | cmd.color.set            | int_map    | value is a map of color components . val= {"red":200,"green":100,"blue":45}
+in    | cmd.color.get_report     | null       | Requests for map color component values 
+out   | evt.color.report         | int_map    | Map of color components , where value is component intensity.
+Descriptor properties :
+
+Name           | Value example       | Description 
+---------------|---------------------|-------------
+sup_comp       | red,gree,blue       | List of supported color comoponents 
+
+Supported color components : red,green,blue,warm_w,cold_w,temp
+
+Notes :
+> temp - is color temperature in Kalvin. Value range 1000K-10000K .
+> warm_w - is warm white light source intensity.Value range 0-255 .
+> cold_w - is cold white light source intensity.Value range 0-255 .  
+> Mix of warm white intensity and cold white intensity forms color temperature . 
