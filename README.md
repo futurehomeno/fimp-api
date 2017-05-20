@@ -22,9 +22,9 @@ Description  : Meaning of **basic** service can vary from device to device . It'
 
 Type  | Interface                | Value type | Description 
 ------|--------------------------|------------|------------
-out   | evt.level.report         | int        | Reports level using numeric value 
-in    | cmd.level.set            | int        | Sets level using numeric value 
-in    | cmd.level.get_report     | null       | 
+out   | evt.lvl.report           | int        | Reports level using numeric value 
+in    | cmd.lvl.set              | int        | Sets level using numeric value 
+in    | cmd.lvl.get_report       | null       | 
 
 Topic example : `pt:j1/mt:evt/rt:dev/rn:zw/ad:1/sv:basic/ad:15_0`
 
@@ -315,7 +315,7 @@ Description : Dorlock
 -------|--------------------------|------------|------------|------------------ 
 out    | evt.lock.report          | bool_map   | timeout_s  | value = ["is_secured":true,"door_is_closed":true,"bolt_is_locked":true,"latch_is_closed":true]
 in     | cmd.lock.set             | bool       |            | Use true to secure a lock and false to unsecure
-in     | cmd.lock.get_report      | ?          |            |
+in     | cmd.lock.get_report      | null       |            |
    
 ## Color control    
 Service name : **color_ctrl** 
@@ -331,9 +331,9 @@ Descriptor properties :
 
 Name           | Value example       | Description 
 ---------------|---------------------|-------------
-sup_comp       | red,gree,blue       | List of supported color comoponents 
+sup_components | red,gree,blue       | List of supported color comoponents 
 
-Supported color components : red,green,blue,warm_w,cold_w,temp
+Supported color components : red,green,blue,warm_w,cold_w,temp,amber,cyan,purple
 
 Notes :
 > temp - is color temperature in Kalvin. Value range 1000K-10000K .
