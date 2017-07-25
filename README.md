@@ -4,6 +4,15 @@
 FIMP protocol is based on everything-is-a-service concept . 
 
 ![Service concept](static/service_concept.png) 
+### Adding / removing things to FH system
+
+The proces describes how to add/remove things to/from FH system . 
+
+[Add/remove thing](thing-management.md)
+
+Example : add zwave device , remove zwave device , add zigbee device , remove zigbee device .
+
+### Connecting / disconnecting 3rd party system to FH
 
 ### Service discovery 
 
@@ -320,7 +329,7 @@ in     | cmd.lock.get_report      | null       |            |
 ## Color control    
 Service name : **color_ctrl** 
 
-Description : The service is used to controll color of a lightning device . 
+Description : The service has to be used to controll color components of a lightning device . 
 
 Type  | Interface                | Value type |  Description 
 ------|--------------------------|------------|-------------------
@@ -340,3 +349,45 @@ Notes :
 > warm_w - is warm white light source intensity.Value range 0-255 .
 > cold_w - is cold white light source intensity.Value range 0-255 .  
 > Mix of warm white intensity and cold white intensity forms color temperature . 
+
+
+## Scene controller 
+Service name : **scene_ctrl** . 
+  
+Description : The service represents a device which can be used to controll scenes . Normally it's remote controller . 
+
+Type  | Interface                | Value type |  Description 
+------|--------------------------|------------|-------------------
+in    | cmd.scene.get_report     | null       | Request for current scene .  
+out   | evt.scene.report         | string     | Event is generated whenever scene button is pressed on controller.
+
+Descriptor properties :
+
+Name           | Value example       | Description 
+---------------|---------------------|-------------
+sup_scenes     | 1 , a , movies      | List of supported scenes  
+
+
+## Fan control 
+Service name : **fan_ctrl** 
+
+Description : The service has to be used to control a fan . 
+
+Type  | Interface                | Value type |  Description 
+------|--------------------------|------------|-------------------
+in    | cmd.mode.set             | string     | Fan mode . Supported values : AUTO_LOW,AUTO_HIGH,AUTO_MID,LOW,HIGH,MID , HUMID_CIRCULATION , UP_DOWN,LEFT_RIGHT,QUIET
+in    | cmd.mode.get_report      | null       | Request for current fan mode report.
+out   | evt.mode.report          | string     | Current fan mode 
+out   | evt.state.report         | string     | Report operational state. Supported values : IDLE,LOW,HIGH,MID
+in    | cmd.state.get_report     | null       | Request for current fan state report  
+in    | cmd.lvl.set              | int        | Fan speed , value 0 - 100 %   
+in    | cmd.lvl.get_report       | null       | Request for current fan speed.
+out   | evt.lvl.report           | null       | Fan speed.
+
+Descriptor properties :
+
+Name           | Value example       | Description 
+---------------|---------------------|-------------
+sup_modes      | AUTO_LOW,AUTO_MID   | List of supported modes 
+sup_states     | IDLE , LOW,HIGH     | 
+
