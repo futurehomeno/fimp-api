@@ -326,7 +326,7 @@ out    | evt.lock.report          | bool_map   | timeout_s  | value = ["is_secur
 in     | cmd.lock.set             | bool       |            | Use true to secure a lock and false to unsecure
 in     | cmd.lock.get_report      | null       |            |
    
-## Color control    
+## Color control service   
 Service name : **color_ctrl** 
 
 Description : The service has to be used to controll color components of a lightning device . 
@@ -334,7 +334,7 @@ Description : The service has to be used to controll color components of a light
 Type  | Interface                | Value type |  Description 
 ------|--------------------------|------------|-------------------
 in    | cmd.color.set            | int_map    | value is a map of color components . val= {"red":200,"green":100,"blue":45}
-in    | cmd.color.get_report     | null       | Requests for map color component values 
+in    | cmd.color.get_report     | null       | The command is a request for a map of color component values 
 out   | evt.color.report         | int_map    | Map of color components , where value is component intensity.
 Descriptor properties :
 
@@ -351,14 +351,14 @@ Notes :
 > Mix of warm white intensity and cold white intensity forms color temperature . 
 
 
-## Scene controller 
+## Scene controller service
 Service name : **scene_ctrl** . 
   
 Description : The service represents a device which can be used to controll scenes . Normally it's remote controller . 
 
 Type  | Interface                | Value type |  Description 
 ------|--------------------------|------------|-------------------
-in    | cmd.scene.get_report     | null       | Request for current scene .  
+in    | cmd.scene.get_report     | null       | The command is a request for current scene .  
 out   | evt.scene.report         | string     | Event is generated whenever scene button is pressed on controller.
 
 Descriptor properties :
@@ -368,20 +368,20 @@ Name           | Value example       | Description
 sup_scenes     | 1 , a , movies      | List of supported scenes  
 
 
-## Fan control 
+## Fan control service
 Service name : **fan_ctrl** 
 
-Description : The service has to be used to control a fan . 
+Description : The service has to be used to control a fan operational modes , speed and receive state opdates. 
 
 Type  | Interface                | Value type |  Description 
 ------|--------------------------|------------|-------------------
 in    | cmd.mode.set             | string     | Fan mode . Supported values : AUTO_LOW,AUTO_HIGH,AUTO_MID,LOW,HIGH,MID , HUMID_CIRCULATION , UP_DOWN,LEFT_RIGHT,QUIET
-in    | cmd.mode.get_report      | null       | Request for current fan mode report.
+in    | cmd.mode.get_report      | null       | The command is a request for current fan mode report.
 out   | evt.mode.report          | string     | Current fan mode 
 out   | evt.state.report         | string     | Report operational state. Supported values : IDLE,LOW,HIGH,MID
-in    | cmd.state.get_report     | null       | Request for current fan state report  
+in    | cmd.state.get_report     | null       | The command is a request for current fan state report  
 in    | cmd.lvl.set              | int        | Fan speed , value 0 - 100 %   
-in    | cmd.lvl.get_report       | null       | Request for current fan speed.
+in    | cmd.lvl.get_report       | null       | The command is a request for current fan speed.
 out   | evt.lvl.report           | null       | Fan speed.
 
 Descriptor properties :

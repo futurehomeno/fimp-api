@@ -1,9 +1,9 @@
 
-#### Adding Thing into a system .   
+#### Add a Thing to FH system .   
 
     Inclusion process consist of 2 steps : 
-    1. An application sends **inclusion** command to adapter. 
-    2. Adapter generates **inclusion_report** event right after a thing was added.
+    1. An application sends inclusion command to adapter. 
+    2. Adapter generates inclusion_report event right after a thing was added.
 
 #### Inclusion command:
 
@@ -313,7 +313,7 @@ Message :
 ```
 
 
-#### Removing Thing from a system 
+#### Remove a Thing from FH system 
 
 Exclusion process consist of 2 steps : 
 
