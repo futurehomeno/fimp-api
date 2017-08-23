@@ -44,15 +44,17 @@ Topic example : `pt:j1/mt:evt/rt:dev/rn:zw/ad:1/sv:basic/ad:15_0`
 #### Device/Thing system service 
 Service name : **dev_sys**
 
-Type  | Interface                | Value type | Description 
-------|--------------------------|------------|------------
-out   | evt.config.report        | str_map    | Reports configurations in form of key-value pairs . 
-in    | cmd.config.set           | str_map    | Sets configuration . Value is a key-value pairs.
-in    | cmd.config.get_report    | str_array  | Requests service to respond with config report . 
-out   | evt.group.members_report | object     | Object structure {"group":"group1","members":["node1","node2"]} 
-in    | cmd.group.add_members    | object     | Adds members to the group. Object has the same format as members_report
-in    | cmd.group.delete_members | object     | Object has the same format as report. 
-in    | cmd.group.get_members    | string     | Value is a group name . 
+Type  | Interface                  | Value type | Description 
+------|----------------------------|------------|------------
+out   | evt.config.report          | str_map    | Reports configurations in form of key-value pairs . 
+in    | cmd.config.set             | str_map    | Sets configuration . Value is a key-value pairs.
+in    | cmd.config.get_report      | str_array  | Requests service to respond with config report . If array is empty - report all parameters .
+in    | cmd.config.get_supp_list   | null       | Requests service to respond with a list of supported configurations . 
+in    | cmd.config.supp_list_report| str_map    | List of supported configurations . Key - config name , value - short description. 
+out   | evt.group.members_report   | object     | Object structure {"group":"group1","members":["node1","node2"]} 
+in    | cmd.group.add_members      | object     | Adds members to the group. Object has the same format as members_report
+in    | cmd.group.delete_members   | object     | Object has the same format as report. 
+in    | cmd.group.get_members      | string     | Value is a group name . 
 
 *Notes:*
 > z-wave configuration values should be in form <param_id>;size , for instance 12;2
