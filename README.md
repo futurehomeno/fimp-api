@@ -1,30 +1,32 @@
-# FIMP service catalog 
+# FIMP framework 
 
-### Service cocept.
-FIMP protocol is based on everything-is-a-service concept . 
+## Service cocept.
+FIMP framework is based on everything-is-a-service concept . 
 
 ![Service concept](static/service_concept.png) 
-### Adding / removing things to FH system
 
-The proces describes how to add/remove things to/from FH system . 
+## Component discovery mechanism.  
 
-[Add/remove thing](thing-management.md)
+The mechanism allows dynamically discover different system component like adapters and application .  
+
+[Component discovery flow and messages ](component-discovery.md) 
+
+## Adding / removing things to FH system. 
+
+Things can be added to FH ecosystem in 2 ways :
+
+1. [Adding/removing a thing to FH system via adapter](thing-management.md)
+2. [Connecting/disconnecting a system to FH system](system-management.md)
+
+First method should be used to add a thing which isn't paired with underlying RF module , for instance: Z-Wave , Zigbee , Bluetooth 
+ 
+Second method should be used to connect a system which already has a number of connected devices , for instance: Ikea Tradfri , Philips Hue , Sonos , etc. 
 
 Example : add zwave device , remove zwave device , add zigbee device , remove zigbee device .
 
-### Connecting / disconnecting 3rd party system to FH
+## Services.
 
-### Service discovery 
-
-TODO
-
-### Service addressing
-
-TODO
-
-### Services
-
-## Basic service 
+#### Basic service 
 Service name : **basic**
 
 Description  : Meaning of **basic** service can vary from device to device . It's generic and most simple way to interact with a device . 
@@ -39,7 +41,7 @@ Topic example : `pt:j1/mt:evt/rt:dev/rn:zw/ad:1/sv:basic/ad:15_0`
 
 ***
 
-## Device/Thing system service 
+#### Device/Thing system service 
 Service name : **dev_sys**
 
 Type  | Interface                | Value type | Description 
@@ -59,7 +61,7 @@ in    | cmd.group.get_members    | string     | Value is a group name .
 
 ***
 
-## Output binary switch service 
+#### Output binary switch service 
 
 Service name : **out_bin_switch** 
 
@@ -75,7 +77,7 @@ Topic example : `pt:j1/mt:cmd/rt:dev/rn:zw/ad:1/sv:out_bin_switch/ad:15_0`
 
 ***
 
-## Output level switch service 
+#### Output level switch service 
 
 Service name : **out_lvl_switch** 
 
@@ -102,7 +104,7 @@ Topic example : `pt:j1/mt:cmd/rt:dev/rn:zw/ad:1/sv:out_lvl_switch/ad:15_0`
 
 ***
 
-## Meter service 
+#### Meter service 
 Service name : Refer to the table below.
 
 Description  : Meters report consumption over the sevice . 
@@ -131,7 +133,7 @@ sup_units | W,kWh,A,V       | comma separated list of supported units .
 
 ***
 
-## Numeric sensor service 
+#### Numeric sensor service 
 Service name : Refer to the table below . 
   
 Description :  
@@ -191,7 +193,7 @@ sup_units | C,F             | comma separated list of supported units .
 
 ***
 
-## Contact sensor service 
+#### Contact sensor service 
 Service name : **sensor_contact** . 
   
 Description : Binary contact sensor , normally magnetic contact .
@@ -203,7 +205,7 @@ in     | cmd.open.get_report      | null       |
 
 ***
 
-## Presence sensor service 
+#### Presence sensor service 
 Service name : **sensor_presence** . 
   
 Description : Motion sensor or some other way of presence detection .
@@ -215,7 +217,7 @@ in     | cmd.presence.get_report  | null       |
 
 ***
 
-## Alarm services 
+#### Alarm services 
 Service name : Refer to the table below 
 
 Description : 
@@ -276,7 +278,7 @@ sup_events | smoke ,smoke_test | supported events .
 
 ***
 
-## Battery service
+#### Battery service
 Service name : **battery** . 
   
 Description :  
@@ -287,7 +289,7 @@ out    | evt.lvl.report           | int        | state     | available states : 
 out    | evt.alarm.report         | str_map    |           | val = {"event": "low_battery","status": "activ"}   
 in     | cmd.lvl.get_report       | null       |           | Get battery level over level report . 
    
-## Thermostat service
+#### Thermostat service
 Service name : **thermostat** . 
   
 Description :  
@@ -315,7 +317,7 @@ sup_states     | idle,heating,cooling| idle,heating,cooling,fan_only,pending_hea
 Modes : off, heat,cool,auto,aux_heat,resume,fan,furnace,dry_air,moist_air,auto_changeover,energy_heat,energy_cool,away
 Setpoint types : heat,cool,furnace,dry_air,moist_air,auto_changeover,energy_heat,energy_cool,special_heat,
 
-## Door lock service 
+#### Door lock service 
 Service name : **door_lock** . 
   
 Description : Dorlock 
@@ -326,7 +328,7 @@ out    | evt.lock.report          | bool_map   | timeout_s  | value = ["is_secur
 in     | cmd.lock.set             | bool       |            | Use true to secure a lock and false to unsecure
 in     | cmd.lock.get_report      | null       |            |
    
-## Color control service   
+#### Color control service   
 Service name : **color_ctrl** 
 
 Description : The service has to be used to controll color components of a lightning device . 
@@ -351,7 +353,7 @@ Notes :
 > Mix of warm white intensity and cold white intensity forms color temperature . 
 
 
-## Scene controller service
+#### Scene controller service
 Service name : **scene_ctrl** . 
   
 Description : The service represents a device which can be used to controll scenes . Normally it's remote controller . 
@@ -368,7 +370,7 @@ Name           | Value example       | Description
 sup_scenes     | 1 , a , movies      | List of supported scenes  
 
 
-## Fan control service
+#### Fan control service
 Service name : **fan_ctrl** 
 
 Description : The service has to be used to control a fan operational modes , speed and receive state opdates. 

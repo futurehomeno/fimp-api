@@ -1,7 +1,7 @@
 
-#### Add a Thing to FH system .   
+## Adding a thing to FH system .   
 
-    Inclusion process consist of 2 steps : 
+    Inclusion process consists of 2 steps : 
     1. An application sends inclusion command to adapter. 
     2. Adapter generates inclusion_report event right after a thing was added.
 
@@ -16,7 +16,9 @@ Message :
  "val_t":"bool",
  "val":true,
  "props":null,
- "tags":null
+ "tags":null,
+ "ctime":"2017-08-23T12:07:00+0200",
+ "uid":"124235254"
 }
 ```
 #### Inclusion report:
@@ -289,7 +291,9 @@ Message :
         },
         "wakeup_interval": "-1"
     },
-    "val_t": "object"
+    "val_t": "object",
+    "ctime":"2017-08-23T12:07:00+0200",
+    "uid":"124235254"
 }
 ```
 
@@ -313,7 +317,7 @@ Message :
 ```
 
 
-#### Remove a Thing from FH system 
+#### Removing a thing from FH system 
 
 Exclusion process consist of 2 steps : 
 
@@ -333,7 +337,9 @@ Message :
     "val_t": "bool",
     "val": false,
     "props": null,
-    "tags": null
+    "tags": null,
+    "ctime":"2017-08-23T12:07:00+0200",
+    "uid":"124235254"
 }
 
  ```   
@@ -353,6 +359,8 @@ Message :
     "val": {
         "address": "24"
     },
-    "val_t": "object"
+    "val_t": "object",
+    "ctime":"2017-08-23T12:07:00+0200",
+    "uid":"124235254"
 }
 ```
