@@ -22,6 +22,7 @@ Message :
 }
 ```
 System has to respond with : 
+
 Topic : pt:j1/mt:cmd/rt:ad/rn:ikea/ad:1 (ikea is just an example, it has to be replaces with real adapter name)
 
 Message :

@@ -385,8 +385,12 @@ out   | evt.mode.report          | string     | Current fan mode
 out   | evt.state.report         | string     | Report operational state. Supported values : IDLE,LOW,HIGH,MID
 in    | cmd.state.get_report     | null       | The command is a request for current fan state report  
 in    | cmd.lvl.set              | int        | Fan speed , value 0 - 100 %   
-in    | cmd.lvl.get_report       | null       | The command is a request for current fan speed.
-out   | evt.lvl.report           | null       | Fan speed.
+in    | cmd.lvl.get_report       | null       | The command is a request for current fan speed level.
+out   | evt.lvl.report           | null       | Current fan speed level.
+in    | cmd.modelvl.set          | int_map    | val = {"MID":90,"AUTO_LOW":10} 
+in    | cmd.modelvl.get_report   | string     | The command is a request for fan speed level for particular mode. If mode is set to "" , the device should report levels for all modes.
+out   | evt.modelvl.report       | int_map    | val = {"MID":90,"AUTO_LOW":10} 
+
 
 Descriptor properties :
 
