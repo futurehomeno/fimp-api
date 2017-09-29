@@ -344,7 +344,7 @@ Descriptor properties :
 
 Name           | Value example       | Description 
 ---------------|---------------------|-------------
-sup_components | red,gree,blue       | List of supported color comoponents 
+sup_components | ["red","green","blue"]       | List of supported color comoponents 
 
 Supported color components : red,green,blue,warm_w,cold_w,temp,amber,cyan,purple
 
