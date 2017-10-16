@@ -379,23 +379,23 @@ Description : The service has to be used to control a fan operational modes , sp
 
 Type  | Interface                | Value type |  Description 
 ------|--------------------------|------------|-------------------
-in    | cmd.mode.set             | string     | Fan mode . Supported values : AUTO_LOW,AUTO_HIGH,AUTO_MID,LOW,HIGH,MID , HUMID_CIRCULATION , UP_DOWN,LEFT_RIGHT,QUIET
+in    | cmd.mode.set             | string     | Fan mode . Supported values : auto_low,auto_high,auto_mid,low,high,mid ,  humid_circulation ,up_down,  left_right ,quiet
 in    | cmd.mode.get_report      | null       | The command is a request for current fan mode report.
 out   | evt.mode.report          | string     | Current fan mode 
-out   | evt.state.report         | string     | Report operational state. Supported values : IDLE,LOW,HIGH,MID
+out   | evt.state.report         | string     | Report operational state. Supported values : idle,low,high,mid
 in    | cmd.state.get_report     | null       | The command is a request for current fan state report  
 in    | cmd.lvl.set              | int        | Fan speed , value 0 - 100 %   
 in    | cmd.lvl.get_report       | null       | The command is a request for current fan speed level.
 out   | evt.lvl.report           | null       | Current fan speed level.
-in    | cmd.modelvl.set          | int_map    | val = {"MID":90,"AUTO_LOW":10} 
+in    | cmd.modelvl.set          | int_map    | val = {"mid":90,"auto_low":10} 
 in    | cmd.modelvl.get_report   | string     | The command is a request for fan speed level for particular mode. If mode is set to "" , the device should report levels for all modes.
-out   | evt.modelvl.report       | int_map    | val = {"MID":90,"AUTO_LOW":10} 
+out   | evt.modelvl.report       | int_map    | val = {"mid":90,"auto_low":10} 
 
 
 Descriptor properties :
 
 Name           | Value example       | Description 
 ---------------|---------------------|-------------
-sup_modes      | AUTO_LOW,AUTO_MID   | List of supported modes 
-sup_states     | IDLE , LOW,HIGH     | 
+sup_modes      | auto_low,auto_mid   | List of supported modes 
+sup_states     | idle,low,high       | 
 
