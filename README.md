@@ -298,8 +298,8 @@ Description :
 
  Type  | Interface                  | Value type | Properties| Description 
 -------|----------------------------|------------|-----------|------------------ 
-out    | evt.setpoint.report        | str_map    |           | val = {"type":"heating","temp":"21.5","unit":"C"}   
-in     | cmd.setpoint.set           | str_map    |           | val = {"type":"heating","temp":"21.5","unit":"C"} 
+out    | evt.setpoint.report        | str_map    |           | val = {"type":"heat","temp":"21.5","unit":"C"}   
+in     | cmd.setpoint.set           | str_map    |           | val = {"type":"heat","temp":"21.5","unit":"C"} 
 in     | cmd.setpoint.get_report    | string     |           | value is a setpoint type 
 in     | cmd.mode.set               | string     |           |  Set thermostat mode :
 in     | cmd.mode.get_report        | null       |           |  
@@ -312,9 +312,9 @@ Descriptor properties :
 
 Name           | Value example       | Description 
 ---------------|---------------------|-------------
-sup_setpoints  | heating,cooling     | supported setpoints .
-sup_modes      | off,heating,cooling | supported modes .
-sup_states     | idle,heating,cooling| idle,heating,cooling,fan_only,pending_heat,pending_cool,vent
+sup_setpoints  | heat,cool     | supported setpoints .
+sup_modes      | off,heat,cool | supported modes .
+sup_states     | idle,heat,cool| idle,heat,cool,fan_only,pending_heat,pending_cool,vent
 
 Modes : off, heat,cool,auto,aux_heat,resume,fan,furnace,dry_air,moist_air,auto_changeover,energy_heat,energy_cool,away
 Setpoint types : heat,cool,furnace,dry_air,moist_air,auto_changeover,energy_heat,energy_cool,special_heat,
