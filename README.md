@@ -1,9 +1,15 @@
-# FIMP framework 
+# Futurehome IoT Messaging Protocol - FIMP 
 
-## Service cocept.
-FIMP framework is based on everything-is-a-service concept . 
 
-![Service concept](static/service_concept.png) 
+## Service overview.
+In FIMP every device/app functionality is represented as service , every service should have at least one interface and at least one attribute . A service interacts with outer world by means of messages , it can either produce messages (events) , receive messages (commands) but also in some cases it may send command . Each service has its own unique address (topic) , all interfaces within the service share the same address . A service can't have more than one interface of the same type. 
+Abstract diagram : 
+
+![Fimp Service overview](static/fimp-service.png) 
+
+Device example :
+
+![Fimp Service overview](static/fimp-thing-example.png) 
 
 ## Component discovery mechanism.  
 
@@ -95,6 +101,7 @@ in    | cmd.lvl.get_report       | null       |                           |
 in    | cmd.binary.set           | bool       |                           | true is mapped t 255 , false to 0
 
 Descriptor properties : 
+
 Name      | Value example   | Description 
 ----------|-----------------|-------------
 min_lvl   | 0               | minimum value 
