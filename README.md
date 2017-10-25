@@ -406,3 +406,21 @@ Name           | Value example       | Description
 sup_modes      | auto_low,auto_mid   | List of supported modes 
 sup_states     | idle,low,high       | 
 
+
+#### Siren service
+Service name : **siren_ctrl**
+
+Description : Controlling sirens
+Type  | Interface                | Value type     | Description 
+------|--------------------------|----------------|------------
+in    | cmd.mode.set             | string         | Controll siren using selected tone 
+out   | evt.mode.report          | string         |
+in    | cmd.binary.set           | bool           | Turn on and off siren using default tone  
+out   | evt.binary.report        | bool           | Siren reports its state 
+Topic example : `pt:j1/mt:evt/rt:dev/rn:zw/ad:1/sv:siren/ad:15_0`
+
+Descriptor properties : 
+
+Name           | Value example       | Description 
+---------------|---------------------|-------------
+sup_modes      | on,off,fire,leak    | List of supported modes 
