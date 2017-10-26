@@ -333,10 +333,30 @@ Description : Dorlock
 
  Type  | Interface                | Value type | Properties | Description 
 -------|--------------------------|------------|------------|------------------ 
-out    | evt.lock.report          | bool_map   | timeout_s  | value = ["is_secured":true,"door_is_closed":true,"bolt_is_locked":true,"latch_is_closed":true]
+out    | evt.lock.report          | bool_map   | timeout_s , lock_type  | value = {"is_secured":true,"door_is_closed":true,"bolt_is_locked":true,"latch_is_closed":true} , lock_type properties reports how lock was locked or unlocked , it can take values : "key","pin","rfid"
 in     | cmd.lock.set             | bool       |            | Use true to secure a lock and false to unsecure
 in     | cmd.lock.get_report      | null       |            |
-   
+
+
+#### User code service 
+Service name : **user_code** . 
+  
+Description : Is used by door locks ,keypads, security panels to enter and manage pin codes and rfids.
+
+ Type  | Interface                | Value type | Properties | Description 
+-------|--------------------------|------------|------------|------------------ 
+out    | evt.usercode.config_report      | string_map |            | {"user_id":"123","user_status":"enabled","user_type":"master","code_type":"rfid","code":"4321"}
+in     | cmd.usercode.set         | string_map |            | {"user_id":"123","user_status":"enabled","user_type":"master","code_type":"rfid","code":"4321"}
+in     | cmd.usercode.get_config_report  | string     |            | Value is  UserID
+in     | cmd.usercode.clear_all    | null       |            |
+in     | cmd.usercode.clear        | string     |            | Value is UserID
+
+Descriptor properties :
+
+Name           | Value example       | Description 
+---------------|---------------------|-------------
+sup_usercodes  | ["pin","rfid"]      | List of supported user code types 
+
 #### Color control service   
 Service name : **color_ctrl** 
 
