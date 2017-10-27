@@ -436,8 +436,7 @@ Type  | Interface                | Value type     | Description
 ------|--------------------------|----------------|------------
 in    | cmd.mode.set             | string         | Controll siren using selected tone 
 out   | evt.mode.report          | string         |
-in    | cmd.binary.set           | bool           | Turn on and off siren using default tone  
-out   | evt.binary.report        | bool           | Siren reports its state 
+in    | cmd.mode.get_report      | null           |
 
 Topic example : `pt:j1/mt:evt/rt:dev/rn:zw/ad:1/sv:siren_ctrl/ad:15_0`
 
