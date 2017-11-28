@@ -445,3 +445,28 @@ Descriptor properties :
 Name           | Value example       | Description 
 ---------------|---------------------|-------------
 sup_modes      | on,off,fire,leak    | List of supported tones 
+
+#### Barrier control service 
+Service name : **barrier_ctrl**
+
+Description : The service represent devices like garage door openers , bariers , window protection shades , etc .
+
+Type  | Interface                 | Value type     | Description 
+------|---------------------------|----------------|------------
+in    | cmd.tstate.set            | string         | Setting target state  
+out   | evt.state.report          | string         | Current state 
+in    | cmd.state.get_report      | null           | Get current state 
+in    | cmd.notiftype.set         | bool_map       | Configuration of notification type device is is using while opening/closing door. 
+in    | cmd.notiftype.get_report  | null           | 
+out   | evt.notiftype.report      | bool_map       |     
+
+Topic example : `pt:j1/mt:evt/rt:dev/rn:zw/ad:1/sv:berier_ctrl/ad:15_0`
+
+Descriptor properties :
+
+Name           | Value example       | Description 
+---------------|---------------------|-------------
+sup_states     | open,closed,closing |  supported states 
+sup_tstates    | open,close          |  supported target states   
+sup_notiftypes | audio,visual        | supported notifications types , like siren , flashlight  
+
