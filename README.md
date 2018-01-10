@@ -453,7 +453,8 @@ Description : The service represent devices like garage door openers , bariers ,
 
 Type  | Interface                 | Value type     | Description 
 ------|---------------------------|----------------|------------
-in    | cmd.tstate.set            | string         | Setting target state  
+in    | cmd.tstate.set            | string         | Setting target state
+in    | cmd.op.stop               | null           | Emergency stop of any operation.   
 out   | evt.state.report          | string         | Current state 
 in    | cmd.state.get_report      | null           | Get current state 
 in    | cmd.notiftype.set         | bool_map       | Configuration of notification type device is is using while opening/closing door. 
