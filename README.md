@@ -136,9 +136,9 @@ Topic example : `pt:j1/mt:evt/rt:dev/rn:zw/ad:1/sv:meter_elec/ad:15_0`
 
 Descriptor properties : 
 
-Name      | Value example   | Description 
-----------|-----------------|-------------
-sup_units | W,kWh,A,V       | comma separated list of supported units .
+Name      | Value example       | Description 
+----------|---------------------|-------------
+sup_units | ["W","kWh","A","V"] | list of supported units .
 
 ***
 
@@ -198,7 +198,7 @@ Descriptor properties :
 
 Name      | Value example   | Description 
 ----------|-----------------|-------------
-sup_units | C,F             | comma separated list of supported units .
+sup_units | ["C","F"]       | list of supported units .
 
 ***
 
@@ -281,9 +281,9 @@ Example message : [evt.sensor.report](json-v1/messages/examples/evt.alarm.report
 
 Descriptor properties : 
 
-Name       | Value example     | Description 
------------|-------------------|-------------
-sup_events | smoke ,smoke_test | supported events .
+Name       | Value example          | Description 
+-----------|------------------------|-------------
+sup_events | ["smoke","smoke_test"] | supported events .
 
 ***
 
