@@ -99,6 +99,7 @@ in    | cmd.lvl.start            | string     | start_lvl,duration        | Star
 in    | cmd.lvl.stop             | null       |                           | Stop a level change 
 in    | cmd.lvl.get_report       | null       |                           |
 in    | cmd.binary.set           | bool       |                           | true is mapped t 255 , false to 0
+out		 |	evt.binary.report		      |	bool       |                           |
 
 Descriptor properties : 
 
