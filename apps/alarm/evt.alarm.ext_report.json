@@ -1,0 +1,15 @@
+{
+    "ctime": "2017-04-19T14:40:14+0200",
+    "serv": "alarm_service",
+    "type": "evt.alarm.ext_report",
+    "val": {
+        "event": "fire",
+        "status": "activ",
+        "trans_nr":"2400000001",
+        "room":"kitchen",
+        "device":"23"
+    },
+    "val_t": "str_map",
+    "props": {},
+    "tags": []
+}
