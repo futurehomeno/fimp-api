@@ -6,8 +6,10 @@
         "event": "fire",
         "status": "activ",
         "trans_nr":"2400000001",
-        "room":"kitchen",
-        "device":"23"
+        "location_id":"",
+        "location_desc":"kitchen",
+        "device_id":"23",
+        "device_desc":""
     },
     "val_t": "str_map",
     "props": {},
