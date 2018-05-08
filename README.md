@@ -390,6 +390,7 @@ Description : The service represents a device which can be used to controll scen
 Type  | Interface                | Value type |  Description 
 ------|--------------------------|------------|-------------------
 in    | cmd.scene.get_report     | null       | The command is a request for current scene .  
+in    | cmd.scene.set            | string     | Set scene 
 out   | evt.scene.report         | string     | Event is generated whenever scene button is pressed on controller.
 
 Descriptor properties :

@@ -1,0 +1,341 @@
+{
+  "ctime": "2018-05-07T11:28:30+0200",
+  "props": {},
+  "serv": "zwave-ad",
+  "tags": [],
+  "type": "evt.thing.inclusion_report",
+  "val": {
+    "address": "20",
+    "category": "UNKNOWN ",
+    "comm_tech": "zw",
+    "device_id": "0000000000000000000",
+    "groups": [
+      "ch_0",
+      "ch_2"
+    ],
+    "hw_ver": "1",
+    "is_sensor": "0",
+    "manufacturer_id": "134",
+    "power_source": "ac",
+    "product_hash": "zw_134_3_96",
+    "product_id": "3_96",
+    "product_name": "Aeotec - Smart Switch 6 - ZW096-C16",
+    "prop_set": {
+      "nif_0": {
+        "zw_generic_dev_class": "16",
+        "zw_installer_icon": "0",
+        "zw_node_type": "0",
+        "zw_plus_version": "0",
+        "zw_role_type": "0",
+        "zw_specific_dev_class": "1",
+        "zw_supported_cc": [
+          32,
+          94,
+          37,
+          38,
+          51,
+          112,
+          39,
+          50,
+          129,
+          133,
+          89,
+          114,
+          134,
+          122,
+          115
+        ]
+      }
+    },
+    "security": "insecure",
+    "services": [
+      {
+        "address": "/rt:dev/rn:zw/ad:1/sv:basic/ad:20_0",
+        "enabled": true,
+        "groups": [
+          "ch_0"
+        ],
+        "interfaces": [
+          {
+            "intf_t": "out",
+            "msg_t": "evt.lvl.report",
+            "val_t": "int",
+            "ver": "1"
+          },
+          {
+            "intf_t": "in",
+            "msg_t": "cmd.lvl.set",
+            "val_t": "int",
+            "ver": "1"
+          },
+          {
+            "intf_t": "in",
+            "msg_t": "cmd.lvl.get_report",
+            "val_t": "null",
+            "ver": "1"
+          }
+        ],
+        "location": "",
+        "name": "basic",
+        "prop_set_ref": "nif_0",
+        "props": {
+          "is_secure": false,
+          "is_unsecure": true
+        }
+      },
+      {
+        "address": "/rt:dev/rn:zw/ad:1/sv:out_bin_switch/ad:20_0",
+        "enabled": true,
+        "groups": [
+          "ch_0"
+        ],
+        "interfaces": [
+          {
+            "intf_t": "out",
+            "msg_t": "evt.binary.report",
+            "val_t": "bool",
+            "ver": "1"
+          },
+          {
+            "intf_t": "in",
+            "msg_t": "cmd.binary.set",
+            "val_t": "bool",
+            "ver": "1"
+          },
+          {
+            "intf_t": "in",
+            "msg_t": "cmd.binary.get_report",
+            "val_t": "null",
+            "ver": "1"
+          }
+        ],
+        "location": "",
+        "name": "out_bin_switch",
+        "prop_set_ref": "nif_0",
+        "props": {
+          "is_secure": false,
+          "is_unsecure": true
+        }
+      },
+      {
+        "address": "/rt:dev/rn:zw/ad:1/sv:out_lvl_switch/ad:20_0",
+        "enabled": true,
+        "groups": [
+          "ch_2"
+        ],
+        "interfaces": [
+          {
+            "intf_t": "out",
+            "msg_t": "evt.lvl.report",
+            "val_t": "int",
+            "ver": "1"
+          },
+          {
+            "intf_t": "in",
+            "msg_t": "cmd.lvl.set",
+            "val_t": "int",
+            "ver": "1"
+          },
+          {
+            "intf_t": "in",
+            "msg_t": "cmd.lvl.start",
+            "val_t": "string",
+            "ver": "1"
+          },
+          {
+            "intf_t": "in",
+            "msg_t": "cmd.lvl.stop",
+            "val_t": "null",
+            "ver": "1"
+          },
+          {
+            "intf_t": "in",
+            "msg_t": "cmd.lvl.get_report",
+            "val_t": "null",
+            "ver": "1"
+          },
+          {
+            "intf_t": "in",
+            "msg_t": "cmd.binary.set",
+            "val_t": "bool",
+            "ver": "1"
+          },
+          {
+            "intf_t": "out",
+            "msg_t": "evt.binary.report",
+            "val_t": "bool",
+            "ver": "1"
+          }
+        ],
+        "location": "",
+        "name": "out_lvl_switch",
+        "prop_set_ref": "nif_0",
+        "props": {
+          "is_secure": false,
+          "is_unsecure": true,
+          "max_lvl": 100,
+          "min_lvl": 0
+        }
+      },
+      {
+        "address": "/rt:dev/rn:zw/ad:1/sv:color_ctrl/ad:20_0",
+        "enabled": true,
+        "groups": [
+          "ch_2"
+        ],
+        "interfaces": [
+          {
+            "intf_t": "out",
+            "msg_t": "evt.color.report",
+            "val_t": "int_map",
+            "ver": "1"
+          },
+          {
+            "intf_t": "in",
+            "msg_t": "cmd.color.set",
+            "val_t": "int_map",
+            "ver": "1"
+          },
+          {
+            "intf_t": "in",
+            "msg_t": "cmd.color.get_report",
+            "val_t": "null",
+            "ver": "1"
+          }
+        ],
+        "location": "",
+        "name": "color_ctrl",
+        "prop_set_ref": "nif_0",
+        "props": {
+          "is_secure": false,
+          "is_unsecure": true,
+          "sup_components": [
+            "red",
+            "green",
+            "blue"
+          ]
+        }
+      },
+      {
+        "address": "/rt:dev/rn:zw/ad:1/sv:dev_sys/ad:20_0",
+        "enabled": true,
+        "groups": [
+          "ch_0"
+        ],
+        "interfaces": [
+          {
+            "intf_t": "out",
+            "msg_t": "evt.config.report",
+            "val_t": "str_map",
+            "ver": "1"
+          },
+          {
+            "intf_t": "in",
+            "msg_t": "cmd.config.set",
+            "val_t": "str_map",
+            "ver": "1"
+          },
+          {
+            "intf_t": "in",
+            "msg_t": "cmd.config.get_report",
+            "val_t": "str_array",
+            "ver": "1"
+          },
+          {
+            "intf_t": "out",
+            "msg_t": "evt.group.members_report",
+            "val_t": "object",
+            "ver": "1"
+          },
+          {
+            "intf_t": "in",
+            "msg_t": "cmd.group.add_members",
+            "val_t": "object",
+            "ver": "1"
+          },
+          {
+            "intf_t": "in",
+            "msg_t": "cmd.group.delete_members",
+            "val_t": "object",
+            "ver": "1"
+          },
+          {
+            "intf_t": "in",
+            "msg_t": "cmd.group.get_members",
+            "val_t": "string",
+            "ver": "1"
+          },
+          {
+            "intf_t": "out",
+            "msg_t": "evt.ping.report",
+            "val_t": "str_map",
+            "ver": "1"
+          },
+          {
+            "intf_t": "in",
+            "msg_t": "cmd.ping.send",
+            "val_t": "string",
+            "ver": "1"
+          }
+        ],
+        "location": "",
+        "name": "dev_sys",
+        "prop_set_ref": "nif_0",
+        "props": {
+          "is_secure": false,
+          "is_unsecure": true
+        }
+      },
+      {
+        "address": "/rt:dev/rn:zw/ad:1/sv:meter_elec/ad:20_0",
+        "enabled": true,
+        "groups": [
+          "ch_0"
+        ],
+        "interfaces": [
+          {
+            "intf_t": "out",
+            "msg_t": "evt.meter.report",
+            "val_t": "float",
+            "ver": "1"
+          },
+          {
+            "intf_t": "in",
+            "msg_t": "cmd.meter.reset",
+            "val_t": "null",
+            "ver": "1"
+          },
+          {
+            "intf_t": "in",
+            "msg_t": "cmd.meter.get_report",
+            "val_t": "string",
+            "ver": "1"
+          }
+        ],
+        "location": "",
+        "name": "meter_elec",
+        "prop_set_ref": "nif_0",
+        "props": {
+          "is_secure": false,
+          "is_unsecure": true,
+          "sup_units": [
+            "kWh",
+            "W",
+            "V",
+            "A"
+          ]
+        }
+      }
+    ],
+    "sw_ver": "256",
+    "tech_specific_props": {
+      "zw_lib_type": "3",
+      "zw_product_id": "96",
+      "zw_product_type": "3",
+      "zw_protocol_ver": "1029",
+      "zw_sleep_capable": "0"
+    },
+    "wakeup_interval": "-1"
+  },
+  "val_t": "object"
+}

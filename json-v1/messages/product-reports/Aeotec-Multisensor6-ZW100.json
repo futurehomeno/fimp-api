@@ -1,0 +1,386 @@
+{
+  "ctime": "2018-05-07T13:15:33+0200",
+  "props": {},
+  "serv": "zwave-ad",
+  "tags": [],
+  "type": "evt.thing.inclusion_report",
+  "val": {
+    "address": "13",
+    "category": "UNKNOWN ",
+    "comm_tech": "zw",
+    "device_id": "0000000000000000000",
+    "groups": [
+      "ch_0"
+    ],
+    "hw_ver": "1",
+    "is_sensor": "0",
+    "manufacturer_id": "134",
+    "power_source": "ac",
+    "product_hash": "zw_134_2_100",
+    "product_id": "2_100",
+    "product_name": "Aeotec - MultiSensor 6 - ZW100-C",
+    "prop_set": {
+      "nif_0": {
+        "zw_generic_dev_class": "33",
+        "zw_installer_icon": "0",
+        "zw_node_type": "0",
+        "zw_plus_version": "1",
+        "zw_role_type": "5",
+        "zw_specific_dev_class": "1",
+        "zw_supported_cc": [
+          32,
+          94,
+          134,
+          114,
+          89,
+          133,
+          92,
+          115,
+          113,
+          132,
+          128,
+          48,
+          49,
+          112,
+          122,
+          90
+        ]
+      }
+    },
+    "security": "insecure",
+    "services": [
+      {
+        "address": "/rt:dev/rn:zw/ad:1/sv:basic/ad:13_0",
+        "enabled": true,
+        "groups": [
+          "ch_0"
+        ],
+        "interfaces": [
+          {
+            "intf_t": "out",
+            "msg_t": "evt.lvl.report",
+            "val_t": "int",
+            "ver": "1"
+          },
+          {
+            "intf_t": "in",
+            "msg_t": "cmd.lvl.set",
+            "val_t": "int",
+            "ver": "1"
+          },
+          {
+            "intf_t": "in",
+            "msg_t": "cmd.lvl.get_report",
+            "val_t": "null",
+            "ver": "1"
+          }
+        ],
+        "location": "",
+        "name": "basic",
+        "prop_set_ref": "nif_0",
+        "props": {
+          "is_secure": false,
+          "is_unsecure": true
+        }
+      },
+      {
+        "address": "/rt:dev/rn:zw/ad:1/sv:dev_sys/ad:13_0",
+        "enabled": true,
+        "groups": [
+          "ch_0"
+        ],
+        "interfaces": [
+          {
+            "intf_t": "out",
+            "msg_t": "evt.group.members_report",
+            "val_t": "object",
+            "ver": "1"
+          },
+          {
+            "intf_t": "in",
+            "msg_t": "cmd.group.add_members",
+            "val_t": "object",
+            "ver": "1"
+          },
+          {
+            "intf_t": "in",
+            "msg_t": "cmd.group.delete_members",
+            "val_t": "object",
+            "ver": "1"
+          },
+          {
+            "intf_t": "in",
+            "msg_t": "cmd.group.get_members",
+            "val_t": "string",
+            "ver": "1"
+          },
+          {
+            "intf_t": "out",
+            "msg_t": "evt.ping.report",
+            "val_t": "str_map",
+            "ver": "1"
+          },
+          {
+            "intf_t": "in",
+            "msg_t": "cmd.ping.send",
+            "val_t": "string",
+            "ver": "1"
+          },
+          {
+            "intf_t": "out",
+            "msg_t": "evt.config.report",
+            "val_t": "str_map",
+            "ver": "1"
+          },
+          {
+            "intf_t": "in",
+            "msg_t": "cmd.config.set",
+            "val_t": "str_map",
+            "ver": "1"
+          },
+          {
+            "intf_t": "in",
+            "msg_t": "cmd.config.get_report",
+            "val_t": "str_array",
+            "ver": "1"
+          }
+        ],
+        "location": "",
+        "name": "dev_sys",
+        "prop_set_ref": "nif_0",
+        "props": {
+          "is_secure": false,
+          "is_unsecure": true
+        }
+      },
+      {
+        "address": "/rt:dev/rn:zw/ad:1/sv:sensor_presence/ad:13_0",
+        "enabled": true,
+        "groups": [
+          "ch_0"
+        ],
+        "interfaces": [
+          {
+            "intf_t": "out",
+            "msg_t": "evt.presence.report",
+            "val_t": "bool",
+            "ver": "1"
+          },
+          {
+            "intf_t": "in",
+            "msg_t": "cmd.presence.get_report",
+            "val_t": "null",
+            "ver": "1"
+          }
+        ],
+        "location": "",
+        "name": "sensor_presence",
+        "prop_set_ref": "nif_0",
+        "props": {
+          "is_secure": false,
+          "is_unsecure": true
+        }
+      },
+      {
+        "address": "/rt:dev/rn:zw/ad:1/sv:alarm_burglar/ad:13_0",
+        "enabled": true,
+        "groups": [
+          "ch_0"
+        ],
+        "interfaces": [
+          {
+            "intf_t": "out",
+            "msg_t": "evt.alarm.report",
+            "val_t": "str_map",
+            "ver": "1"
+          },
+          {
+            "intf_t": "in",
+            "msg_t": "cmd.alarm.get_report",
+            "val_t": "string",
+            "ver": "1"
+          }
+        ],
+        "location": "",
+        "name": "alarm_burglar",
+        "prop_set_ref": "nif_0",
+        "props": {
+          "is_secure": false,
+          "is_unsecure": true,
+          "sup_events": [
+            "temper_removed_cover"
+          ]
+        }
+      },
+      {
+        "address": "/rt:dev/rn:zw/ad:1/sv:battery/ad:13_0",
+        "enabled": true,
+        "groups": [
+          "ch_0"
+        ],
+        "interfaces": [
+          {
+            "intf_t": "out",
+            "msg_t": "evt.lvl.report",
+            "val_t": "int",
+            "ver": "1"
+          },
+          {
+            "intf_t": "out",
+            "msg_t": "evt.alarm.report",
+            "val_t": "str_map",
+            "ver": "1"
+          },
+          {
+            "intf_t": "in",
+            "msg_t": "cmd.lvl.get_report",
+            "val_t": "null",
+            "ver": "1"
+          }
+        ],
+        "location": "",
+        "name": "battery",
+        "prop_set_ref": "nif_0",
+        "props": {
+          "is_secure": false,
+          "is_unsecure": true
+        }
+      },
+      {
+        "address": "/rt:dev/rn:zw/ad:1/sv:sensor_temp/ad:13_0",
+        "enabled": true,
+        "groups": [
+          "ch_0"
+        ],
+        "interfaces": [
+          {
+            "intf_t": "out",
+            "msg_t": "evt.sensor.report",
+            "val_t": "float",
+            "ver": "1"
+          },
+          {
+            "intf_t": "in",
+            "msg_t": "cmd.sensor.get_report",
+            "val_t": "string",
+            "ver": "1"
+          }
+        ],
+        "location": "",
+        "name": "sensor_temp",
+        "prop_set_ref": "nif_0",
+        "props": {
+          "is_secure": false,
+          "is_unsecure": true,
+          "sup_units": [
+            "C",
+            "F"
+          ]
+        }
+      },
+      {
+        "address": "/rt:dev/rn:zw/ad:1/sv:sensor_lumin/ad:13_0",
+        "enabled": true,
+        "groups": [
+          "ch_0"
+        ],
+        "interfaces": [
+          {
+            "intf_t": "out",
+            "msg_t": "evt.sensor.report",
+            "val_t": "float",
+            "ver": "1"
+          },
+          {
+            "intf_t": "in",
+            "msg_t": "cmd.sensor.get_report",
+            "val_t": "string",
+            "ver": "1"
+          }
+        ],
+        "location": "",
+        "name": "sensor_lumin",
+        "prop_set_ref": "nif_0",
+        "props": {
+          "is_secure": false,
+          "is_unsecure": true,
+          "sup_units": [
+            "Lux"
+          ]
+        }
+      },
+      {
+        "address": "/rt:dev/rn:zw/ad:1/sv:sensor_humid/ad:13_0",
+        "enabled": true,
+        "groups": [
+          "ch_0"
+        ],
+        "interfaces": [
+          {
+            "intf_t": "out",
+            "msg_t": "evt.sensor.report",
+            "val_t": "float",
+            "ver": "1"
+          },
+          {
+            "intf_t": "in",
+            "msg_t": "cmd.sensor.get_report",
+            "val_t": "string",
+            "ver": "1"
+          }
+        ],
+        "location": "",
+        "name": "sensor_humid",
+        "prop_set_ref": "nif_0",
+        "props": {
+          "is_secure": false,
+          "is_unsecure": true,
+          "sup_units": [
+            "%"
+          ]
+        }
+      },
+      {
+        "address": "/rt:dev/rn:zw/ad:1/sv:sensor_uv/ad:13_0",
+        "enabled": true,
+        "groups": [
+          "ch_0"
+        ],
+        "interfaces": [
+          {
+            "intf_t": "out",
+            "msg_t": "evt.sensor.report",
+            "val_t": "float",
+            "ver": "1"
+          },
+          {
+            "intf_t": "in",
+            "msg_t": "cmd.sensor.get_report",
+            "val_t": "string",
+            "ver": "1"
+          }
+        ],
+        "location": "",
+        "name": "sensor_uv",
+        "prop_set_ref": "nif_0",
+        "props": {
+          "is_secure": false,
+          "is_unsecure": true,
+          "sup_units": [
+            "index"
+          ]
+        }
+      }
+    ],
+    "sw_ver": "264",
+    "tech_specific_props": {
+      "zw_lib_type": "3",
+      "zw_product_id": "100",
+      "zw_product_type": "2",
+      "zw_protocol_ver": "1029",
+      "zw_sleep_capable": "0"
+    },
+    "wakeup_interval": "3600"
+  },
+  "val_t": "object"
+}

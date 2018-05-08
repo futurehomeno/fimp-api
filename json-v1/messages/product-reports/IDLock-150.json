@@ -1,0 +1,297 @@
+{
+  "ctime": "2018-05-07T13:18:46+0200",
+  "props": {},
+  "serv": "zwave-ad",
+  "tags": [],
+  "type": "evt.thing.inclusion_report",
+  "val": {
+    "address": "17",
+    "category": "UNKNOWN ",
+    "comm_tech": "zw",
+    "device_id": "436513414413914649144",
+    "groups": [
+      "ch_0"
+    ],
+    "hw_ver": "1",
+    "is_sensor": "1",
+    "manufacturer_id": "560",
+    "power_source": "battery",
+    "product_hash": "zw_560_3_1",
+    "product_id": "3_1",
+    "product_name": "",
+    "prop_set": {
+      "nif_0": {
+        "zw_generic_dev_class": "64",
+        "zw_installer_icon": "768",
+        "zw_node_type": "0",
+        "zw_plus_version": "1",
+        "zw_role_type": "7",
+        "zw_specific_dev_class": "3",
+        "zw_supported_cc": [
+          32,
+          94,
+          114,
+          152,
+          90,
+          128,
+          115,
+          112,
+          104,
+          35,
+          134,
+          98,
+          99,
+          133,
+          92,
+          89,
+          113,
+          122
+        ]
+      }
+    },
+    "security": "secure_S0",
+    "services": [
+      {
+        "address": "/rt:dev/rn:zw/ad:1/sv:basic/ad:17_0",
+        "enabled": true,
+        "groups": [
+          "ch_0"
+        ],
+        "interfaces": [
+          {
+            "intf_t": "out",
+            "msg_t": "evt.lvl.report",
+            "val_t": "int",
+            "ver": "1"
+          },
+          {
+            "intf_t": "in",
+            "msg_t": "cmd.lvl.set",
+            "val_t": "int",
+            "ver": "1"
+          },
+          {
+            "intf_t": "in",
+            "msg_t": "cmd.lvl.get_report",
+            "val_t": "null",
+            "ver": "1"
+          }
+        ],
+        "location": "",
+        "name": "basic",
+        "prop_set_ref": "nif_0",
+        "props": {
+          "is_secure": true,
+          "is_unsecure": true
+        }
+      },
+      {
+        "address": "/rt:dev/rn:zw/ad:1/sv:battery/ad:17_0",
+        "enabled": true,
+        "groups": [
+          "ch_0"
+        ],
+        "interfaces": [
+          {
+            "intf_t": "out",
+            "msg_t": "evt.lvl.report",
+            "val_t": "int",
+            "ver": "1"
+          },
+          {
+            "intf_t": "out",
+            "msg_t": "evt.alarm.report",
+            "val_t": "str_map",
+            "ver": "1"
+          },
+          {
+            "intf_t": "in",
+            "msg_t": "cmd.lvl.get_report",
+            "val_t": "null",
+            "ver": "1"
+          }
+        ],
+        "location": "",
+        "name": "battery",
+        "prop_set_ref": "nif_0",
+        "props": {
+          "is_secure": false,
+          "is_unsecure": true
+        }
+      },
+      {
+        "address": "/rt:dev/rn:zw/ad:1/sv:dev_sys/ad:17_0",
+        "enabled": true,
+        "groups": [
+          "ch_0"
+        ],
+        "interfaces": [
+          {
+            "intf_t": "out",
+            "msg_t": "evt.ping.report",
+            "val_t": "str_map",
+            "ver": "1"
+          },
+          {
+            "intf_t": "in",
+            "msg_t": "cmd.ping.send",
+            "val_t": "string",
+            "ver": "1"
+          },
+          {
+            "intf_t": "out",
+            "msg_t": "evt.config.report",
+            "val_t": "str_map",
+            "ver": "1"
+          },
+          {
+            "intf_t": "in",
+            "msg_t": "cmd.config.set",
+            "val_t": "str_map",
+            "ver": "1"
+          },
+          {
+            "intf_t": "in",
+            "msg_t": "cmd.config.get_report",
+            "val_t": "str_array",
+            "ver": "1"
+          },
+          {
+            "intf_t": "out",
+            "msg_t": "evt.group.members_report",
+            "val_t": "object",
+            "ver": "1"
+          },
+          {
+            "intf_t": "in",
+            "msg_t": "cmd.group.add_members",
+            "val_t": "object",
+            "ver": "1"
+          },
+          {
+            "intf_t": "in",
+            "msg_t": "cmd.group.delete_members",
+            "val_t": "object",
+            "ver": "1"
+          },
+          {
+            "intf_t": "in",
+            "msg_t": "cmd.group.get_members",
+            "val_t": "string",
+            "ver": "1"
+          }
+        ],
+        "location": "",
+        "name": "dev_sys",
+        "prop_set_ref": "nif_0",
+        "props": {
+          "is_secure": false,
+          "is_unsecure": true
+        }
+      },
+      {
+        "address": "/rt:dev/rn:zw/ad:1/sv:door_lock/ad:17_0",
+        "enabled": true,
+        "groups": [
+          "ch_0"
+        ],
+        "interfaces": [
+          {
+            "intf_t": "out",
+            "msg_t": "evt.lock.report",
+            "val_t": "bool_map",
+            "ver": "1"
+          },
+          {
+            "intf_t": "in",
+            "msg_t": "cmd.lock.set",
+            "val_t": "bool",
+            "ver": "1"
+          },
+          {
+            "intf_t": "in",
+            "msg_t": "cmd.lock.get_report",
+            "val_t": "string",
+            "ver": "1"
+          }
+        ],
+        "location": "",
+        "name": "door_lock",
+        "prop_set_ref": "nif_0",
+        "props": {
+          "is_secure": true,
+          "is_unsecure": false
+        }
+      },
+      {
+        "address": "/rt:dev/rn:zw/ad:1/sv:alarm_lock/ad:17_0",
+        "enabled": true,
+        "groups": [
+          "ch_0"
+        ],
+        "interfaces": [
+          {
+            "intf_t": "out",
+            "msg_t": "evt.alarm.report",
+            "val_t": "str_map",
+            "ver": "1"
+          },
+          {
+            "intf_t": "in",
+            "msg_t": "cmd.alarm.get_report",
+            "val_t": "string",
+            "ver": "1"
+          }
+        ],
+        "location": "",
+        "name": "alarm_lock",
+        "prop_set_ref": "nif_0",
+        "props": {
+          "is_secure": true,
+          "is_unsecure": false,
+          "sup_events": [
+            "rf_not_locked"
+          ]
+        }
+      },
+      {
+        "address": "/rt:dev/rn:zw/ad:1/sv:sensor_presence/ad:17_0",
+        "enabled": true,
+        "groups": [
+          "ch_0"
+        ],
+        "interfaces": [
+          {
+            "intf_t": "out",
+            "msg_t": "evt.presence.report",
+            "val_t": "bool",
+            "ver": "1"
+          },
+          {
+            "intf_t": "in",
+            "msg_t": "cmd.presence.get_report",
+            "val_t": "null",
+            "ver": "1"
+          }
+        ],
+        "location": "",
+        "name": "sensor_presence",
+        "prop_set_ref": "nif_0",
+        "props": {
+          "is_secure": true,
+          "is_unsecure": false
+        }
+      }
+    ],
+    "sw_ver": "256",
+    "tech_specific_props": {
+      "zw_lib_type": "3",
+      "zw_product_id": "1",
+      "zw_product_type": "3",
+      "zw_protocol_ver": "1029",
+      "zw_sleep_capable": "0"
+    },
+    "wakeup_interval": "-1"
+  },
+  "val_t": "object"
+}

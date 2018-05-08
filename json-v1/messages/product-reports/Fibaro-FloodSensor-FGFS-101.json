@@ -1,0 +1,371 @@
+{
+  "ctime": "2018-05-07T13:17:05+0200",
+  "props": {},
+  "serv": "zwave-ad",
+  "tags": [],
+  "type": "evt.thing.inclusion_report",
+  "val": {
+    "address": "15",
+    "category": "SENSOR_ALARM",
+    "comm_tech": "zw",
+    "device_id": "",
+    "groups": [
+      "ch_0",
+      "ch_1",
+      "ch_2"
+    ],
+    "hw_ver": "1",
+    "is_sensor": "0",
+    "manufacturer_id": "271",
+    "power_source": "battery",
+    "product_hash": "zw_271_2816_4097",
+    "product_id": "2816_4097",
+    "product_name": "Fibaro Flood sensor FGFS-101",
+    "prop_set": {
+      "nif_0": {
+        "zw_generic_dev_class": "161",
+        "zw_installer_icon": "0",
+        "zw_node_type": "0",
+        "zw_plus_version": "0",
+        "zw_role_type": "0",
+        "zw_specific_dev_class": "2",
+        "zw_supported_cc": [
+          32,
+          48,
+          156,
+          96,
+          133,
+          92,
+          142,
+          114,
+          112,
+          134,
+          128,
+          132,
+          104,
+          35
+        ]
+      },
+      "nif_1": {
+        "zw_generic_dev_class": "32",
+        "zw_installer_icon": "0",
+        "zw_node_type": "0",
+        "zw_plus_version": "0",
+        "zw_role_type": "0",
+        "zw_specific_dev_class": "1",
+        "zw_supported_cc": [
+          32,
+          48
+        ]
+      },
+      "nif_2": {
+        "zw_generic_dev_class": "33",
+        "zw_installer_icon": "0",
+        "zw_node_type": "0",
+        "zw_plus_version": "0",
+        "zw_role_type": "0",
+        "zw_specific_dev_class": "1",
+        "zw_supported_cc": [
+          32,
+          49
+        ]
+      }
+    },
+    "security": "insecure",
+    "services": [
+      {
+        "address": "/rt:dev/rn:zw/ad:1/sv:basic/ad:15_0",
+        "enabled": true,
+        "groups": [
+          "ch_0"
+        ],
+        "interfaces": [
+          {
+            "intf_t": "out",
+            "msg_t": "evt.lvl.report",
+            "val_t": "int",
+            "ver": "1"
+          },
+          {
+            "intf_t": "in",
+            "msg_t": "cmd.lvl.set",
+            "val_t": "int",
+            "ver": "1"
+          },
+          {
+            "intf_t": "in",
+            "msg_t": "cmd.lvl.get_report",
+            "val_t": "null",
+            "ver": "1"
+          }
+        ],
+        "location": "",
+        "name": "basic",
+        "prop_set_ref": "nif_0",
+        "props": {
+          "is_secure": false,
+          "is_unsecure": true
+        }
+      },
+      {
+        "address": "/rt:dev/rn:zw/ad:1/sv:alarm_gp/ad:15_0",
+        "enabled": true,
+        "groups": [
+          "ch_0"
+        ],
+        "interfaces": [
+          {
+            "intf_t": "out",
+            "msg_t": "evt.alarm.report",
+            "val_t": "str_map",
+            "ver": "1"
+          },
+          {
+            "intf_t": "in",
+            "msg_t": "cmd.alarm.get_report",
+            "val_t": "string",
+            "ver": "1"
+          }
+        ],
+        "location": "",
+        "name": "alarm_gp",
+        "prop_set_ref": "nif_0",
+        "props": {
+          "is_secure": false,
+          "is_unsecure": true,
+          "sup_events": "gp"
+        }
+      },
+      {
+        "address": "/rt:dev/rn:zw/ad:1/sv:alarm_water/ad:15_0",
+        "enabled": true,
+        "groups": [
+          "ch_0"
+        ],
+        "interfaces": [
+          {
+            "intf_t": "out",
+            "msg_t": "evt.alarm.report",
+            "val_t": "str_map",
+            "ver": "1"
+          },
+          {
+            "intf_t": "in",
+            "msg_t": "cmd.alarm.get_report",
+            "val_t": "string",
+            "ver": "1"
+          }
+        ],
+        "location": "",
+        "name": "alarm_water",
+        "prop_set_ref": "nif_0",
+        "props": {
+          "is_secure": false,
+          "is_unsecure": true,
+          "sup_events": "leak"
+        }
+      },
+      {
+        "address": "/rt:dev/rn:zw/ad:1/sv:dev_sys/ad:15_0",
+        "enabled": true,
+        "groups": [
+          "ch_0"
+        ],
+        "interfaces": [
+          {
+            "intf_t": "out",
+            "msg_t": "evt.group.members_report",
+            "val_t": "object",
+            "ver": "1"
+          },
+          {
+            "intf_t": "in",
+            "msg_t": "cmd.group.add_members",
+            "val_t": "object",
+            "ver": "1"
+          },
+          {
+            "intf_t": "in",
+            "msg_t": "cmd.group.delete_members",
+            "val_t": "object",
+            "ver": "1"
+          },
+          {
+            "intf_t": "in",
+            "msg_t": "cmd.group.get_members",
+            "val_t": "string",
+            "ver": "1"
+          },
+          {
+            "intf_t": "out",
+            "msg_t": "evt.config.report",
+            "val_t": "str_map",
+            "ver": "1"
+          },
+          {
+            "intf_t": "in",
+            "msg_t": "cmd.config.set",
+            "val_t": "str_map",
+            "ver": "1"
+          },
+          {
+            "intf_t": "in",
+            "msg_t": "cmd.config.get_report",
+            "val_t": "str_array",
+            "ver": "1"
+          }
+        ],
+        "location": "",
+        "name": "dev_sys",
+        "prop_set_ref": "nif_0",
+        "props": {
+          "is_secure": false,
+          "is_unsecure": true
+        }
+      },
+      {
+        "address": "/rt:dev/rn:zw/ad:1/sv:battery/ad:15_0",
+        "enabled": true,
+        "groups": [
+          "ch_0"
+        ],
+        "interfaces": [
+          {
+            "intf_t": "out",
+            "msg_t": "evt.lvl.report",
+            "val_t": "int",
+            "ver": "1"
+          },
+          {
+            "intf_t": "out",
+            "msg_t": "evt.alarm.report",
+            "val_t": "str_map",
+            "ver": "1"
+          },
+          {
+            "intf_t": "in",
+            "msg_t": "cmd.lvl.get_report",
+            "val_t": "null",
+            "ver": "1"
+          }
+        ],
+        "location": "",
+        "name": "battery",
+        "prop_set_ref": "nif_0",
+        "props": {
+          "is_secure": false,
+          "is_unsecure": true
+        }
+      },
+      {
+        "address": "/rt:dev/rn:zw/ad:1/sv:basic/ad:15_1",
+        "enabled": true,
+        "groups": [
+          "ch_1"
+        ],
+        "interfaces": [
+          {
+            "intf_t": "out",
+            "msg_t": "evt.lvl.report",
+            "val_t": "int",
+            "ver": "1"
+          },
+          {
+            "intf_t": "in",
+            "msg_t": "cmd.lvl.set",
+            "val_t": "int",
+            "ver": "1"
+          },
+          {
+            "intf_t": "in",
+            "msg_t": "cmd.lvl.get_report",
+            "val_t": "null",
+            "ver": "1"
+          }
+        ],
+        "location": "",
+        "name": "basic",
+        "prop_set_ref": "nif_1",
+        "props": {
+          "is_secure": false,
+          "is_unsecure": true
+        }
+      },
+      {
+        "address": "/rt:dev/rn:zw/ad:1/sv:basic/ad:15_2",
+        "enabled": true,
+        "groups": [
+          "ch_2"
+        ],
+        "interfaces": [
+          {
+            "intf_t": "out",
+            "msg_t": "evt.lvl.report",
+            "val_t": "int",
+            "ver": "1"
+          },
+          {
+            "intf_t": "in",
+            "msg_t": "cmd.lvl.set",
+            "val_t": "int",
+            "ver": "1"
+          },
+          {
+            "intf_t": "in",
+            "msg_t": "cmd.lvl.get_report",
+            "val_t": "null",
+            "ver": "1"
+          }
+        ],
+        "location": "",
+        "name": "basic",
+        "prop_set_ref": "nif_2",
+        "props": {
+          "is_secure": false,
+          "is_unsecure": true
+        }
+      },
+      {
+        "address": "/rt:dev/rn:zw/ad:1/sv:sensor_temp/ad:15_2",
+        "enabled": true,
+        "groups": [
+          "ch_2"
+        ],
+        "interfaces": [
+          {
+            "intf_t": "out",
+            "msg_t": "evt.sensor.report",
+            "val_t": "float",
+            "ver": "1"
+          },
+          {
+            "intf_t": "in",
+            "msg_t": "cmd.sensor.get_report",
+            "val_t": "string",
+            "ver": "1"
+          }
+        ],
+        "location": "",
+        "name": "sensor_temp",
+        "prop_set_ref": "nif_2",
+        "props": {
+          "is_secure": false,
+          "is_unsecure": true,
+          "sup_units": [
+            "C"
+          ]
+        }
+      }
+    ],
+    "sw_ver": "6425",
+    "tech_specific_props": {
+      "zw_lib_type": "3",
+      "zw_product_id": "4097",
+      "zw_product_type": "2816",
+      "zw_protocol_ver": "835",
+      "zw_sleep_capable": "1"
+    },
+    "wakeup_interval": "4000"
+  },
+  "val_t": "object"
+}
