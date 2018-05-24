@@ -279,6 +279,8 @@ alarm_water_valve  | valve_op,master_valve_op,               |
 
 Example message : [evt.sensor.report](json-v1/messages/examples/evt.alarm.report.json)
 
+Supported statuses : activ,deactiv
+
 Descriptor properties : 
 
 Name       | Value example          | Description 
