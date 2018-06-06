@@ -1,0 +1,507 @@
+{
+  "ctime": "2018-06-06T09:24:58+0200",
+  "props": {},
+  "serv": "zwave-ad",
+  "tags": [],
+  "type": "evt.thing.inclusion_report",
+  "val": {
+    "address": "54",
+    "category": "UNKNOWN ",
+    "comm_tech": "zw",
+    "device_id": "255255255255255255255255",
+    "groups": [
+      "ch_0",
+      "ch_1",
+      "ch_2",
+      "ch_3",
+      "ch_4"
+    ],
+    "hw_ver": "1",
+    "is_sensor": "0",
+    "manufacturer_id": "411",
+    "power_source": "ac",
+    "product_hash": "zw_411_3_514",
+    "product_id": "3_514",
+    "product_name": "",
+    "prop_set": {
+      "nif_0": {
+        "zw_generic_dev_class": "8",
+        "zw_installer_icon": "4608",
+        "zw_node_type": "0",
+        "zw_plus_version": "1",
+        "zw_role_type": "5",
+        "zw_specific_dev_class": "6",
+        "zw_supported_cc": [
+          32,
+          94,
+          85,
+          152,
+          159,
+          104,
+          35,
+          134,
+          133,
+          92,
+          142,
+          89,
+          96,
+          114,
+          90,
+          115,
+          112,
+          122,
+          67,
+          64,
+          37,
+          108,
+          50
+        ]
+      },
+      "nif_1": {
+        "zw_generic_dev_class": "16",
+        "zw_installer_icon": "0",
+        "zw_node_type": "0",
+        "zw_plus_version": "0",
+        "zw_role_type": "0",
+        "zw_specific_dev_class": "0",
+        "zw_supported_cc": [
+          32,
+          94,
+          152,
+          159
+        ]
+      },
+      "nif_2": {
+        "zw_generic_dev_class": "33",
+        "zw_installer_icon": "0",
+        "zw_node_type": "0",
+        "zw_plus_version": "0",
+        "zw_role_type": "0",
+        "zw_specific_dev_class": "0",
+        "zw_supported_cc": [
+          32,
+          94,
+          152,
+          159
+        ]
+      },
+      "nif_3": {
+        "zw_generic_dev_class": "33",
+        "zw_installer_icon": "0",
+        "zw_node_type": "0",
+        "zw_plus_version": "0",
+        "zw_role_type": "0",
+        "zw_specific_dev_class": "0",
+        "zw_supported_cc": [
+          32,
+          94,
+          152,
+          159
+        ]
+      },
+      "nif_4": {
+        "zw_generic_dev_class": "33",
+        "zw_installer_icon": "0",
+        "zw_node_type": "0",
+        "zw_plus_version": "0",
+        "zw_role_type": "0",
+        "zw_specific_dev_class": "0",
+        "zw_supported_cc": [
+          32,
+          94,
+          152,
+          159
+        ]
+      }
+    },
+    "security": "secure_S2",
+    "services": [
+      {
+        "address": "/rt:dev/rn:zw/ad:1/sv:basic/ad:54_0",
+        "enabled": true,
+        "groups": [
+          "ch_0"
+        ],
+        "interfaces": [
+          {
+            "intf_t": "out",
+            "msg_t": "evt.lvl.report",
+            "val_t": "int",
+            "ver": "1"
+          },
+          {
+            "intf_t": "in",
+            "msg_t": "cmd.lvl.set",
+            "val_t": "int",
+            "ver": "1"
+          },
+          {
+            "intf_t": "in",
+            "msg_t": "cmd.lvl.get_report",
+            "val_t": "null",
+            "ver": "1"
+          }
+        ],
+        "location": "",
+        "name": "basic",
+        "prop_set_ref": "nif_0",
+        "props": {
+          "is_secure": true,
+          "is_unsecure": true
+        }
+      },
+      {
+        "address": "/rt:dev/rn:zw/ad:1/sv:dev_sys/ad:54_0",
+        "enabled": true,
+        "groups": [
+          "ch_0"
+        ],
+        "interfaces": [
+          {
+            "intf_t": "out",
+            "msg_t": "evt.group.members_report",
+            "val_t": "object",
+            "ver": "1"
+          },
+          {
+            "intf_t": "in",
+            "msg_t": "cmd.group.add_members",
+            "val_t": "object",
+            "ver": "1"
+          },
+          {
+            "intf_t": "in",
+            "msg_t": "cmd.group.delete_members",
+            "val_t": "object",
+            "ver": "1"
+          },
+          {
+            "intf_t": "in",
+            "msg_t": "cmd.group.get_members",
+            "val_t": "string",
+            "ver": "1"
+          },
+          {
+            "intf_t": "out",
+            "msg_t": "evt.ping.report",
+            "val_t": "str_map",
+            "ver": "1"
+          },
+          {
+            "intf_t": "in",
+            "msg_t": "cmd.ping.send",
+            "val_t": "string",
+            "ver": "1"
+          },
+          {
+            "intf_t": "out",
+            "msg_t": "evt.config.report",
+            "val_t": "str_map",
+            "ver": "1"
+          },
+          {
+            "intf_t": "in",
+            "msg_t": "cmd.config.set",
+            "val_t": "str_map",
+            "ver": "1"
+          },
+          {
+            "intf_t": "in",
+            "msg_t": "cmd.config.get_report",
+            "val_t": "str_array",
+            "ver": "1"
+          }
+        ],
+        "location": "",
+        "name": "dev_sys",
+        "prop_set_ref": "nif_0",
+        "props": {
+          "is_secure": true,
+          "is_unsecure": false
+        }
+      },
+      {
+        "address": "/rt:dev/rn:zw/ad:1/sv:thermostat/ad:54_0",
+        "enabled": true,
+        "groups": [
+          "ch_0"
+        ],
+        "interfaces": [
+          {
+            "intf_t": "out",
+            "msg_t": "evt.setpoint.report",
+            "val_t": "str_map",
+            "ver": "1"
+          },
+          {
+            "intf_t": "in",
+            "msg_t": "cmd.setpoint.set",
+            "val_t": "str_map",
+            "ver": "1"
+          },
+          {
+            "intf_t": "in",
+            "msg_t": "cmd.setpoint.get_report",
+            "val_t": "string",
+            "ver": "1"
+          },
+          {
+            "intf_t": "out",
+            "msg_t": "evt.mode.report",
+            "val_t": "string",
+            "ver": "1"
+          },
+          {
+            "intf_t": "in",
+            "msg_t": "cmd.mode.set",
+            "val_t": "string",
+            "ver": "1"
+          },
+          {
+            "intf_t": "in",
+            "msg_t": "cmd.mode.get_report",
+            "val_t": "null",
+            "ver": "1"
+          }
+        ],
+        "location": "",
+        "name": "thermostat",
+        "prop_set_ref": "nif_0",
+        "props": {
+          "is_secure": true,
+          "is_unsecure": false,
+          "sup_modes": [
+            "off",
+            "heat",
+            "cool",
+            "energy_heat"
+          ],
+          "sup_setpoints": [
+            "heat",
+            "cool",
+            "energy_heat"
+          ]
+        }
+      },
+      {
+        "address": "/rt:dev/rn:zw/ad:1/sv:out_bin_switch/ad:54_0",
+        "enabled": true,
+        "groups": [
+          "ch_0"
+        ],
+        "interfaces": [
+          {
+            "intf_t": "out",
+            "msg_t": "evt.binary.report",
+            "val_t": "bool",
+            "ver": "1"
+          },
+          {
+            "intf_t": "in",
+            "msg_t": "cmd.binary.set",
+            "val_t": "bool",
+            "ver": "1"
+          },
+          {
+            "intf_t": "in",
+            "msg_t": "cmd.binary.get_report",
+            "val_t": "null",
+            "ver": "1"
+          }
+        ],
+        "location": "",
+        "name": "out_bin_switch",
+        "prop_set_ref": "nif_0",
+        "props": {
+          "is_secure": true,
+          "is_unsecure": false
+        }
+      },
+      {
+        "address": "/rt:dev/rn:zw/ad:1/sv:meter_elec/ad:54_0",
+        "enabled": true,
+        "groups": [
+          "ch_0"
+        ],
+        "interfaces": [
+          {
+            "intf_t": "out",
+            "msg_t": "evt.meter.report",
+            "val_t": "float",
+            "ver": "1"
+          },
+          {
+            "intf_t": "in",
+            "msg_t": "cmd.meter.reset",
+            "val_t": "null",
+            "ver": "1"
+          },
+          {
+            "intf_t": "in",
+            "msg_t": "cmd.meter.get_report",
+            "val_t": "string",
+            "ver": "1"
+          }
+        ],
+        "location": "",
+        "name": "meter_elec",
+        "prop_set_ref": "nif_0",
+        "props": {
+          "is_secure": true,
+          "is_unsecure": false,
+          "sup_units": [
+            "kWh",
+            "W",
+            "V"
+          ]
+        }
+      },
+      {
+        "address": "/rt:dev/rn:zw/ad:1/sv:basic/ad:54_1",
+        "enabled": true,
+        "groups": [
+          "ch_1"
+        ],
+        "interfaces": [
+          {
+            "intf_t": "out",
+            "msg_t": "evt.lvl.report",
+            "val_t": "int",
+            "ver": "1"
+          },
+          {
+            "intf_t": "in",
+            "msg_t": "cmd.lvl.set",
+            "val_t": "int",
+            "ver": "1"
+          },
+          {
+            "intf_t": "in",
+            "msg_t": "cmd.lvl.get_report",
+            "val_t": "null",
+            "ver": "1"
+          }
+        ],
+        "location": "",
+        "name": "basic",
+        "prop_set_ref": "nif_1",
+        "props": {
+          "is_secure": true,
+          "is_unsecure": false
+        }
+      },
+      {
+        "address": "/rt:dev/rn:zw/ad:1/sv:basic/ad:54_2",
+        "enabled": true,
+        "groups": [
+          "ch_2"
+        ],
+        "interfaces": [
+          {
+            "intf_t": "out",
+            "msg_t": "evt.lvl.report",
+            "val_t": "int",
+            "ver": "1"
+          },
+          {
+            "intf_t": "in",
+            "msg_t": "cmd.lvl.set",
+            "val_t": "int",
+            "ver": "1"
+          },
+          {
+            "intf_t": "in",
+            "msg_t": "cmd.lvl.get_report",
+            "val_t": "null",
+            "ver": "1"
+          }
+        ],
+        "location": "",
+        "name": "basic",
+        "prop_set_ref": "nif_2",
+        "props": {
+          "is_secure": true,
+          "is_unsecure": false
+        }
+      },
+      {
+        "address": "/rt:dev/rn:zw/ad:1/sv:basic/ad:54_3",
+        "enabled": true,
+        "groups": [
+          "ch_3"
+        ],
+        "interfaces": [
+          {
+            "intf_t": "out",
+            "msg_t": "evt.lvl.report",
+            "val_t": "int",
+            "ver": "1"
+          },
+          {
+            "intf_t": "in",
+            "msg_t": "cmd.lvl.set",
+            "val_t": "int",
+            "ver": "1"
+          },
+          {
+            "intf_t": "in",
+            "msg_t": "cmd.lvl.get_report",
+            "val_t": "null",
+            "ver": "1"
+          }
+        ],
+        "location": "",
+        "name": "basic",
+        "prop_set_ref": "nif_3",
+        "props": {
+          "is_secure": true,
+          "is_unsecure": false
+        }
+      },
+      {
+        "address": "/rt:dev/rn:zw/ad:1/sv:basic/ad:54_4",
+        "enabled": true,
+        "groups": [
+          "ch_4"
+        ],
+        "interfaces": [
+          {
+            "intf_t": "out",
+            "msg_t": "evt.lvl.report",
+            "val_t": "int",
+            "ver": "1"
+          },
+          {
+            "intf_t": "in",
+            "msg_t": "cmd.lvl.set",
+            "val_t": "int",
+            "ver": "1"
+          },
+          {
+            "intf_t": "in",
+            "msg_t": "cmd.lvl.get_report",
+            "val_t": "null",
+            "ver": "1"
+          }
+        ],
+        "location": "",
+        "name": "basic",
+        "prop_set_ref": "nif_4",
+        "props": {
+          "is_secure": true,
+          "is_unsecure": false
+        }
+      }
+    ],
+    "sw_ver": "518",
+    "tech_specific_props": {
+      "zw_lib_type": "3",
+      "zw_product_id": "514",
+      "zw_product_type": "3",
+      "zw_protocol_ver": "1085",
+      "zw_sleep_capable": "0"
+    },
+    "wakeup_interval": "-1"
+  },
+  "val_t": "object"
+}
