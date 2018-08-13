@@ -474,3 +474,13 @@ sup_states     | open,closed,closing |  supported states
 sup_tstates    | open,close          |  supported target states   
 sup_notiftypes | audio,visual        | supported notifications types , like siren , flashlight  
 
+
+#### Complex alarm system service 
+Service name : **complex_alarm_system**
+
+Description : The service represents alarm system or sub-system with internal logic . It can be either an app or complex alarm device.
+
+Type  | Interface                 | Value type     | Description 
+------|---------------------------|----------------|------------
+in    | cmd.alarm.silence         | string         | Silence sirens without ceasing alarm situation . 
+
