@@ -233,7 +233,7 @@ Description :
 
 Type   | Interface                | Value type | Description 
 -------|--------------------------|------------|-------------------- 
-out    | evt.alarm.report         | str_map    | val = {"event": "temper_removed_cover","status": "activ"} 
+out    | evt.alarm.report         | str_map    | val = {"event": "tamper_removed_cover","status": "activ"} 
 in     | cmd.alarm.get_report     | ?          |    
 
 Supported alarm types : 
@@ -248,8 +248,8 @@ alarm_water        | leak, level_drop, replace_filter        |
 alarm_lock         | manual_lock,rf_lock,keypad_lock,        | TODO: move to doorlock service
    alarm_lock      | manual_not_locked, rf_not_locked        |
    alarm_lock      | auto_locked , jammed                    |
-alarm_burglar      | intrusion,temper_removed_cover,         |
-   alarm_burglar   | temper_invalid_code,glass_breakage      |
+alarm_burglar      | intrusion,tamper_removed_cover,         |
+   alarm_burglar   | tamper_invalid_code,glass_breakage      |
 alarm_power        | on,ac_on,ac_off,surge,voltage_drop,     | TODO: move to power_supply service
    alarm_power     | over_current,over_voltage,              |
    alarm_power     | replace_soon,replace_now,charging,      |
