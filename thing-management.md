@@ -364,3 +364,24 @@ Message :
     "uid":"124235254"
 }
 ```
+
+#### Delete device from network command:
+
+Topic : pt:j1/mt:cmd/rt:ad/rn:zw/ad:1
+
+Message : 
+```json
+{
+  "serv": "zwave-ad",
+  "type": "cmd.thing.delete",
+  "val_t": "str_map",
+  "val": {
+    "address": "71",
+    "stop": ""
+  },
+  "props": null,
+  "tags": null,
+  "ctime":"2017-08-23T12:07:00+0200",
+  "uid":"124235254"
+}
+```
