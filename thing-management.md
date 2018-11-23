@@ -1,5 +1,6 @@
+### Technology adapter API
 
-## Adding a thing to FH system .   
+### Adding a thing to FH system .   
 
     Inclusion process consists of 2 steps : 
     1. An application sends inclusion command to adapter. 
@@ -319,10 +320,14 @@ Message :
 
 #### Removing a thing from FH system 
 
-Exclusion process consist of 2 steps : 
+Exclusion process type 1 (zwave) .The process consist of 2 steps : 
 
-    1. An application sends exclusion command to adapter. 
+    1. An application sends exclusion command to adapter , adapter goes into exclusion mode, after that user can exclude device from network by triggering exclusion sequence on the device .  
     2. Adapter generates exclusion_report event right after a thing was removed from system.
+
+Exclusion process type 2 (zigbee) .The process consist of 2 steps : 
+    1. User finds in UI device which he wants to delete and clicks "Delete" button , UI sends special delete command with device address to adapter and adapter removes the device from network. 
+    2. Adapter generates exclusion_report event right after a thing was deleted from system.
 
 
 #### Exclusion command:
@@ -385,3 +390,31 @@ Message :
   "uid":"124235254"
 }
 ```
+
+
+### Error reporting . 
+
+Topic : pt:j1/mt:evt/rt:ad/rn:zw/ad:1 or service address : pt:j1/mt:evt/rt:dev/rn:zw/ad:1/sv:dev_sys/ad:95_0
+
+Message :
+```json 
+{
+  "serv": "zigbee",
+  "type": "evt.error.report",   
+  "val": "TX_ERROR",
+  "val_t": "string",
+  "props": {
+    "msg": "TRANSMIT_COMPLETE_NOROUTE",
+    "src": "nodeId=64_0"
+  },
+  "tags": [],
+  "ctime": "2018-11-22T23:14:40+0100",
+  "uid":"76533455876765"
+ }
+```
+
+val - is error code , src - origin of the error .
+
+
+
+
