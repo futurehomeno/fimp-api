@@ -415,6 +415,81 @@ Message :
 
 val - is error code , src - origin of the error .
 
+### Requesting list of devices from adapter .
+
+An adapter has to support api for requesting a list of devices and respond with the list . 
+
+Command :
+
+Topic : pt:j1/mt:cmd/rt:ad/rn:zigbee/ad:1
+
+Message : 
+```json
+{
+  "serv": "zigbee",
+  "type": "cmd.network.get_all_nodes",
+  "val_t": "null",
+  "val": null,
+  "props": null,
+  "tags": null,
+  "ctime": "2018-11-22T23:14:40+0100",
+  "uid":"76533455876765"
+}
+```
+Report event : 
+
+Topic : pt:j1/mt:evt/rt:ad/rn:zigbee/ad:1
+
+Message : 
+```json 
+{
+  "ctime": "2018-11-23T16:53:11+0100",
+  "props": {},
+  "serv": "zigbee",
+  "tags": [],
+  "type": "evt.network.all_nodes_report",
+  "val": [
+    
+    {
+      "address": "46",
+      "alias":"Sensor 1 ",
+      "hash": "zw_398_3_12",
+      "power_source": "battery",
+      "status": "DOWN",
+      "wakeup_int": "4200"
+    },
+    {
+      "address": "63",
+      "alias":"Sensor 2 ",
+      "hash": "zw_271_1794_4096",
+      "power_source": "battery",
+      "status": "UP",
+      "wakeup_int": "3600"
+    },
+    {
+      "address": "80",
+      "alias":"Dimmer ",
+      "hash": "zw_134_3_96",
+      "power_source": "ac",
+      "status": "UP",
+      "wakeup_int": "-1"
+    }
+  ],
+  "val_t": "object"
+}
+```
+address - is technology specific device address  
+
+alias (optional) - device or product name or alias 
+
+hash (optional) - product unique identifier
+
+power_source - power source descriptor , ac ,battery 
+
+status (optional) - device status 
+
+wakeup_int (optional) - device wakeup interval , applicable only if device is battery powered .
+
 
 
 
