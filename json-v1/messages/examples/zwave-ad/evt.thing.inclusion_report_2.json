@@ -1,0 +1,231 @@
+{
+    "ctime": "2017-04-21T16:39:59+0200",
+    "props": {},
+    "serv": "zwave-ad",
+    "tags": [],
+    "type": "evt.thing.inclusion_report",
+    "val": {
+        "address": "110",
+        "category": "UNKNOWN ",
+        "comm_tech": "zw",
+        "device_id": "",
+        "hw_ver": "1",
+        "is_sensor": "0",
+        "manufacturer_id": "134",
+        "power_source": "0",
+        "product_hash": "zw_134_3_99",
+        "product_id": "3_99",
+        "prop_set": {
+            "nif_0": {
+                "zw_generic_dev_class": "17",
+                "zw_installer_icon": "0",
+                "zw_node_type": "0",
+                "zw_plus_version": "",
+                "zw_role_type": "0",
+                "zw_specific_dev_class": "1",
+                "zw_unhandled_cc": [
+                    94,
+                    51,
+                    129,
+                    96,
+                    142,
+                    39,
+                    92,
+                    89,
+                    114,
+                    134,
+                    122,
+                    115
+                ],
+                "zw_unhandled_secure_cc": []
+            }
+        },
+        "services": [
+            {
+                "address": "/rt:dev/rn:zw/ad:1/sv:basic/ad:110_0",
+                "groups": [
+                    "ch_0"
+                ],
+                "interfaces": [
+                    {
+                        "intf_t": "out",
+                        "msg_t": "evt.level.report",
+                        "val_t": "int",
+                        "ver": "1"
+                    },
+                    {
+                        "intf_t": "in",
+                        "msg_t": "cmd.level.set",
+                        "val_t": "int",
+                        "ver": "1"
+                    },
+                    {
+                        "intf_t": "in",
+                        "msg_t": "cmd.level.get_report",
+                        "val_t": "null",
+                        "ver": "1"
+                    }
+                ],
+                "location": "",
+                "name": "basic",
+                "prop_set_ref": "nif_0",
+                "props": {
+                    "is_secure": "false",
+                    "is_unsecure": "true"
+                }
+            },
+            {
+                "address": "/rt:dev/rn:zw/ad:1/sv:out_lvl_switch/ad:110_0",
+                "groups": [
+                    "ch_0"
+                ],
+                "interfaces": [
+                    {
+                        "intf_t": "out",
+                        "msg_t": "evt.lvl.report",
+                        "val_t": "int",
+                        "ver": "1"
+                    },
+                    {
+                        "intf_t": "in",
+                        "msg_t": "cmd.lvl.set",
+                        "val_t": "int",
+                        "ver": "1"
+                    },
+                    {
+                        "intf_t": "in",
+                        "msg_t": "cmd.lvl.start",
+                        "val_t": "string",
+                        "ver": "1"
+                    },
+                    {
+                        "intf_t": "in",
+                        "msg_t": "cmd.lvl.stop",
+                        "val_t": "null",
+                        "ver": "1"
+                    },
+                    {
+                        "intf_t": "in",
+                        "msg_t": "cmd.lvl.get_report",
+                        "val_t": "null",
+                        "ver": "1"
+                    },
+                    {
+                        "intf_t": "in",
+                        "msg_t": "cmd.binary.set",
+                        "val_t": "bool",
+                        "ver": "1"
+                    }
+                ],
+                "location": "",
+                "name": "out_lvl_switch",
+                "prop_set_ref": "nif_0",
+                "props": {
+                    "is_secure": "false",
+                    "is_unsecure": "true"
+                }
+            },
+            {
+                "address": "/rt:dev/rn:zw/ad:1/sv:meter_elec/ad:110_0",
+                "groups": [
+                    "ch_0"
+                ],
+                "interfaces": [
+                    {
+                        "intf_t": "out",
+                        "msg_t": "evt.meter.report",
+                        "val_t": "float",
+                        "ver": "1"
+                    },
+                    {
+                        "intf_t": "in",
+                        "msg_t": "cmd.meter.reset",
+                        "val_t": "null",
+                        "ver": "1"
+                    },
+                    {
+                        "intf_t": "in",
+                        "msg_t": "cmd.meter.get_report",
+                        "val_t": "string",
+                        "ver": "1"
+                    }
+                ],
+                "location": "",
+                "name": "meter_elec",
+                "prop_set_ref": "nif_0",
+                "props": {
+                    "is_secure": "false",
+                    "is_unsecure": "true",
+                    "sup_units": "kWh,W,V,A"
+                }
+            },
+            {
+                "address": "/rt:dev/rn:zw/ad:1/sv:dev_sys/ad:110_0",
+                "groups": [
+                    "ch_0"
+                ],
+                "interfaces": [
+                    {
+                        "intf_t": "out",
+                        "msg_t": "evt.config.report",
+                        "val_t": "str_map",
+                        "ver": "1"
+                    },
+                    {
+                        "intf_t": "in",
+                        "msg_t": "cmd.config.set",
+                        "val_t": "str_map",
+                        "ver": "1"
+                    },
+                    {
+                        "intf_t": "in",
+                        "msg_t": "cmd.config.get_report",
+                        "val_t": "str_array",
+                        "ver": "1"
+                    },
+                    {
+                        "intf_t": "out",
+                        "msg_t": "evt.group.members_report",
+                        "val_t": "object",
+                        "ver": "1"
+                    },
+                    {
+                        "intf_t": "in",
+                        "msg_t": "cmd.group.add_members",
+                        "val_t": "object",
+                        "ver": "1"
+                    },
+                    {
+                        "intf_t": "in",
+                        "msg_t": "cmd.group.delete_members",
+                        "val_t": "object",
+                        "ver": "1"
+                    },
+                    {
+                        "intf_t": "in",
+                        "msg_t": "cmd.group.get_members",
+                        "val_t": "string",
+                        "ver": "1"
+                    }
+                ],
+                "location": "",
+                "name": "dev_sys",
+                "prop_set_ref": "nif_0",
+                "props": {
+                    "is_secure": "false",
+                    "is_unsecure": "true"
+                }
+            }
+        ],
+        "sw_ver": "258",
+        "tech_specific_props": {
+            "zw_lib_type": "3",
+            "zw_product_id": "99",
+            "zw_product_type": "3",
+            "zw_protocol_ver": "1029",
+            "zw_sleep_capable": "0"
+        },
+        "wakeup_interval": "0"
+    },
+    "val_t": "object"
+}
