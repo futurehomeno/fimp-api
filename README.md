@@ -7,9 +7,15 @@ Abstract diagram :
 
 ![Fimp Service overview](static/fimp-service.png) 
 
+
 Device example :
 
 ![Fimp Service overview](static/fimp-thing-example.png) 
+
+Message format :
+
+[FIMP message format ](message-format.md) 
+
 
 ## Component discovery mechanism.  
 
