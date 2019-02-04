@@ -494,7 +494,7 @@ in    | cmd.alarm.silence         | string         | Silence sirens without ceas
 #### Gateway service 
 Service name : **gateway**
 
-Description : The service represents gateway , hub or host computer.
+Description : The service represents gateway , hub or host computer. Adapter topic should be used to communicate with gateway service , *pt:j1/mt:evt/rt:ad/rn:gateway/ad:1* and *pt:j1/mt:evt/rt:ad/rn:gateway/ad:1*
 
 Type  | Interface                 | Value type     | Description 
 ------|---------------------------|----------------|------------
