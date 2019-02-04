@@ -490,3 +490,15 @@ Type  | Interface                 | Value type     | Description
 ------|---------------------------|----------------|------------
 in    | cmd.alarm.silence         | string         | Silence sirens without ceasing alarm situation . 
 
+
+#### Gateway service 
+Service name : **gateway**
+
+Description : The service represents gateway , hub or host computer.
+
+Type  | Interface                 | Value type     | Description 
+------|---------------------------|----------------|------------
+in    | cmd.gateway.reboot        | null           | Gateways reboot
+in    | cmd.gateway.shutdown      | null           | Gateways shutdown
+in    | cmd.gateway.factory_reset | null           | Instructs gateway to perform factory reset 
+out   | evt.gateway.factory_reset | null           | Factory reset event .  
