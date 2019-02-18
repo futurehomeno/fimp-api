@@ -21,6 +21,12 @@ pt:j1/mt:evt/rt:ad/rn:zigbee/ad:1
 
 pt:j1/mt:cmd/rt:ad/rn:zigbee/ad:1
 
+##### Cloud API topic 
+
+pt:j1/mt:evt/rt:cloud/rn:auth-api/ad:1
+
+pt:j1/mt:cmd/rt:cloud/rn:auth-api/ad:1
+
 
 ##### FIMP json format . 
  

@@ -38,6 +38,7 @@ Message :
         "address": "21",
         "category": "UNKNOWN ",
         "comm_tech": "zw",
+        "device_type":"dimmer",
         "device_id": "",
         "hw_ver": "1",
         "is_sensor": "0",

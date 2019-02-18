@@ -11,7 +11,7 @@ Topic : pt:j1/mt:cmd/rt:ad/rn:ikea/ad:1 (ikea is just an example, it has to be r
 
 Message :
 ```json 
-{"serv":"ikea-ad",
+{"serv":"ikea",
  "type":"cmd.system.get_connect_params",
  "val_t":"null",
  "val":null,
@@ -27,7 +27,7 @@ Topic : pt:j1/mt:cmd/rt:ad/rn:ikea/ad:1 (ikea is just an example, it has to be r
 
 Message :
 ```json 
-{"serv":"ikea-ad",
+{"serv":"ikea",
  "type":"evt.system.connect_params_report",
  "val_t":"str_map",
  "val":{"address":"192.168.80.2","security_key":""},
@@ -45,7 +45,7 @@ Topic : pt:j1/mt:cmd/rt:ad/rn:ikea/ad:1 (ikea is just an example, it has to be r
 
 Message :
 ```json 
-{"serv":"ikea-ad",
+{"serv":"ikea",
  "type":"cmd.system.connect",
  "val_t":"str_map",
  "val":{"security_key":"12324234324","address":"192.168.80.2"},
@@ -64,6 +64,25 @@ In response the system should generate one inclusion report per device.
 
 [Inclusion report](thing-management.md)
 
+#### System synchronization command:
+
+Topic : pt:j1/mt:cmd/rt:ad/rn:ikea/ad:1
+
+Message :
+ ```json 
+{
+    "serv": "ikea",
+    "type": "cmd.system.sync",
+    "val_t": "string",
+    "val": "",
+    "props": null,
+    "tags": null,
+    "ctime":"2017-08-23T12:07:00+0200",
+    "uid":"124235254"
+}
+```
+
+System should generate inclusion reports for all devices .
 
 #### System disconnect command:
 
@@ -72,7 +91,7 @@ Topic : pt:j1/mt:cmd/rt:ad/rn:ikea/ad:1
 Message :
  ```json 
 {
-    "serv": "ikea-ad",
+    "serv": "ikea",
     "type": "cmd.system.disconnect",
     "val_t": "string",
     "val": "",
