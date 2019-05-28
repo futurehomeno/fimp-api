@@ -42,7 +42,12 @@ Fields :
 * ctime - message creation time .
 * ver - version of the message format .
 * uid - message unique identifier .
-* corid - message correlation id . Is used for request - response correlation . (Optional) 
+* corid - message correlation id . Is used for request - response 
+correlation . (Optional)
+* src - Source or of the message , should be set only for commands (optional)
+* resp_t - Response topic , in request-response pattern requester can set a topic where it will expect to receive response .
+
+
 
 List of supported value types : 
 
@@ -72,7 +77,7 @@ Message example:
  	"valType":"float",
  	"val":21.5,
  	"tags":["tag1","alarm"],
- 	"props":{"prop1":"4","prop2:"6"},
+ 	"props":{"prop1":"4","prop2":"6"},
  	"ctime":"2016-12-21T13:34:14.085581515+01:00",
  	"ver":"1.0",
  	"corid":"uid_of_request",
