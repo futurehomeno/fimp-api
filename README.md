@@ -128,8 +128,8 @@ Description  : Meters report consumption over the sevice .
 Type  | Interface                | Value type | Properties                | Description 
 ------|--------------------------|------------|---------------------------|------------- 
 out   | evt.meter.report         | float      | unit , prv_data , delta_t | prv_data - previous meter reading , delta_t - time delta 
-in    | evt.meter.reset          | null       |                           | Resets all historical readings . 
-in    | evt.meter.get_report     | string     |                           | Value - is a unit . May not be supported by all meter .
+in    | cmd.meter.reset          | null       |                           | Resets all historical readings . 
+in    | cmd.meter.get_report     | string     |                           | Value - is a unit . May not be supported by all meter .
 
 Supported meter types and their units : 
 
