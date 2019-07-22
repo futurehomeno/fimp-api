@@ -69,7 +69,7 @@ in    | cmd.group.delete_members   | object     | Object has the same format as 
 in    | cmd.group.get_members      | string     | Value is a group name . 
 
 *Notes:*
-> z-wave configuration values should be in form <param_id>;size , for instance 12;2
+> z-wave configuration values should be in form <value>;size , for instance 12;2
 
 > z-wave association memeber should be in form <node_id>_<endpoint_id> , for instance 10_0 
 
