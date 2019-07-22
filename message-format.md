@@ -42,7 +42,7 @@ ctime    | String              | Yes     | Message creation time, e.g. `"2019-05
 ver      | String              | Yes     | Version of the message format, default: `"1"`.
 uid      | String              | Yes     | Unique message identifier.
 corid    | String              | No      | Message correlation id. Used for request - response matching.
-src      | String              | No      | Source or of the message, should be set only for commands.
+src      | String              | Yes     | Source or of the message, should be set only for commands.
 resp_to  | String              | No*     | Response topic where requester will expect to receive response.
 
 * Required for Prime Fimp messages.
