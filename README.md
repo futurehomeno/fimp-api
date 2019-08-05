@@ -105,7 +105,7 @@ Topic example: `pt:j1/mt:cmd/rt:dev/rn:zw/ad:1/sv:out_bin_switch/ad:15_0`
 
 ***
 
-### Output binary switch service
+### Output level switch service
 
 Used for dimmers and things generally controlled with sliders.
 
@@ -122,7 +122,7 @@ in   | cmd.lvl.set        | int        | duration            | props = {"duratio
 in   | cmd.lvl.start      | string     | start_lvl, duration | Start a level change. Value defines direction can be: up, down, auto
 in   | cmd.lvl.stop       | null       |                     | Stop a level change
 in   | cmd.lvl.get_report | null       |                     |
-in   | cmd.binary.set     | bool       |                     | true is mapped t 255, false to 0
+in   | cmd.binary.set     | bool       |                     | true is mapped to 255, false to 0
 out  | evt.binary.report  | bool       |                     |
 
 Topic example: `pt:j1/mt:cmd/rt:dev/rn:zw/ad:1/sv:out_lvl_switch/ad:15_0`
