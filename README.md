@@ -259,7 +259,7 @@ Service name        | Event                                   | Description
 `alarm_system`      | hw_failure, sw_failure, hw_failure_with_code, sw_failure_with_code |
 `alarm_emergency`   | police, fire, medical                   |
 `alarm_time`        | wakeup, timer_ended, time_remaining     |
-`alarm_applience`   | program_started, program_inprogress, program_completed, replace_filter, set_temp_error, supplying_water, water_supply_err, boiling, boiling_err, washing, washing_err, rinsing, rinsing_err, draining, draining_err, spinnning, spinning_err, drying, drying_err, fan_err, compressor_err |
+`alarm_appliance`   | program_started, program_inprogress, program_completed, replace_filter, set_temp_error, supplying_water, water_supply_err, boiling, boiling_err, washing, washing_err, rinsing, rinsing_err, draining, draining_err, spinnning, spinning_err, drying, drying_err, fan_err, compressor_err |
 `alarm_health`      | leaving_bed, sitting_on_bed, lying_on_bed, alarm_health, posture_change, sitting_on_bed_edge, alarm_health, volatile_organic_compound |
 `alarm_siren`       | inactive, siren_active                  |
 `alarm_water_valve` | valve_op, master_valve_op, alarm_water_valve, valve_short_circuit, current_alarm, alarm_water_valve, master_valve_current_alarm |
