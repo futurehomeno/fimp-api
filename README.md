@@ -147,7 +147,7 @@ Service name  | Units                                     | Description
 ------------- |-------------------------------------------|------------
 `meter_elec`  | kWh, kVAh, W, pulse_c, V, A, power_factor | Electric meter
 `meter_gas`   | cub_m, cub_f, pulse_c                     | Gas meter
-`meter_water` | cub_m, cub_f, galon, pulse_c              | Water meter
+`meter_water` | cub_m, cub_f, gallon, pulse_c              | Water meter
 
 #### Interfaces
 
