@@ -225,37 +225,21 @@ sup_units | ["C", "F"]    | list of supported units.
 
 ***
 
-### Contact sensor service
-
-Binary contact sensor, normally magnetic contact.
+### Binary sensor services
 
 #### Service names
 
-`sensor_contact`
+Service name         | Units                | Description
+---------------------|----------------------|------------
+`sensor_contact`     |                      | Binary contact sensor, normally magnetic contact. true = open
+`sensor_presence`    |                      | Motion sensor or some other way of presence detection. true = presence
 
 #### Interfaces
 
 Type | Interface           | Value type | Description
 -----|---------------------|------------|--------------------
-out  | evt.open.report     | bool       | true - contact is open (window/door is open), false - contact is closed.
+out  | evt.open.report     | bool       |
 in   | cmd.open.get_report | null       |
-
-***
-
-### Presence sensor service
-
-Motion sensor or some other way of presence detection.
-
-#### Service names
-
-`sensor_presence`
-
-#### Interfaces
-
-Type | Interface               | Value type | Description
------|-------------------------|------------|--------------------
-out  | evt.presence.report     | bool       | true - presence detected.
-in   | cmd.presence.get_report | null       |
 
 ***
 
@@ -522,8 +506,8 @@ Topic example: `pt:j1/mt:evt/rt:dev/rn:zw/ad:1/sv:berier_ctrl/ad:15_0`
 
 Name           | Value example         | Description
 ---------------|-----------------------|-------------
-sup_states     | open, closed, closing |  supported states
-sup_tstates    | open, close           |  supported target states
+sup_states     | open, closed, closing | supported states
+sup_tstates    | open, close           | supported target states
 sup_notiftypes | audio, visual         | supported notifications types, like siren, flashlight
 
 ### Complex alarm system service
