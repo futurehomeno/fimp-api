@@ -272,7 +272,7 @@ Type | Interface            | Value type | Description
 out  | evt.alarm.report     | str_map    | val = {"event": "tamper_removed_cover", "status": "activ"}
 in   | cmd.alarm.get_report | ?          |
 
-Supported statuses: activ, deactiv
+Supported statuses: activ, deactiv. IMPORTANT: These are shorthands for "activated" and "deactivated", not typos.
 
 Example message: [evt.sensor.report](json-v1/messages/examples/evt.alarm.report.json)
 
