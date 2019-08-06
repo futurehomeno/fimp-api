@@ -115,25 +115,32 @@ Used for dimmers and things generally controlled with sliders.
 
 #### Interfaces
 
-Type | Interface          | Value type | Properties          | Description
------|--------------------|------------|---------------------|------------
-out  | evt.lvl.report     | int        |                     |
-in   | cmd.lvl.set        | int        | duration            | props = {"duration":"5"}. Duration is in seconds, factory default is used is propery is not defined.
-in   | cmd.lvl.start      | string     | start_lvl, duration | Start a level change. Value defines direction can be: up, down, auto
-in   | cmd.lvl.stop       | null       |                     | Stop a level change
-in   | cmd.lvl.get_report | null       |                     |
-in   | cmd.binary.set     | bool       |                     | true is mapped to 255, false to 0
-out  | evt.binary.report  | bool       |                     |
+Type | Interface          | Value type | Properties              | Description
+-----|--------------------|------------|-------------------------|------------
+out  | evt.lvl.report     | int        |                         |
+in   | cmd.lvl.set        | int        | `duration`              |
+in   | cmd.lvl.start      | string     | `start_lvl`, `duration` |
+in   | cmd.lvl.stop       | null       |                         | Stop a level change
+in   | cmd.lvl.get_report | null       |                         |
+in   | cmd.binary.set     | bool       |                         | true is mapped to 255, false to 0
+out  | evt.binary.report  | bool       |                         |
 
 Topic example: `pt:j1/mt:cmd/rt:dev/rn:zw/ad:1/sv:out_lvl_switch/ad:15_0`
 
-#### Props
+#### Interface props
 
-Name    | Value example   | Description
---------|-----------------|-------------
-min_lvl | 0               | minimum value
-max_lvl | 99              | maximum value
-sw_type | on_off, up_down | type of level switch
+Name        | Value example | Description
+------------|---------------|-------------
+`duration`  | "10"          | duration in seconds. Factory default is used if no value is provided.
+`start_lvl` | "up"          | level change direction. Supported values are `up`, `down` and `auto`.
+
+#### Service props
+
+Name      | Value example | Description
+----------|---------------|-------------
+`min_lvl` | 0             | minimum value.
+`max_lvl` | 99            | maximum value.
+`sw_type` | "on_off"      | type of level switch. Supported values are "on_off" or "up_down".
 
 ***
 
@@ -147,19 +154,27 @@ Service name  | Units                                     | Description
 ------------- |-------------------------------------------|------------
 `meter_elec`  | kWh, kVAh, W, pulse_c, V, A, power_factor | Electric meter
 `meter_gas`   | cub_m, cub_f, pulse_c                     | Gas meter
-`meter_water` | cub_m, cub_f, gallon, pulse_c              | Water meter
+`meter_water` | cub_m, cub_f, gallon, pulse_c             | Water meter
 
 #### Interfaces
 
 Type | Interface            | Value type | Properties              | Description
 -----|----------------------|------------|-------------------------|-------------
-out  | evt.meter.report     | float      | unit, prv_data, delta_t | prv_data - previous meter reading, delta_t - time delta
+out  | evt.meter.report     | float      | unit, prv_data, delta_t |
 in   | cmd.meter.reset      | null       |                         | Resets all historical readings.
-in   | cmd.meter.get_report | string     |                         | Value - is a unit. May not be supported by all meter.
+in   | cmd.meter.get_report | string     |                         | Value - is a unit. May not be supported by all meters.
 
 Topic example: `pt:j1/mt:evt/rt:dev/rn:zw/ad:1/sv:meter_elec/ad:15_0`
 
-#### Props
+#### Interface props
+
+Name     | Value example | Description
+---------|---------------|-------------
+unit     |               |
+prv_data |               | previous meter reading
+delta_t  |               | time delta
+
+#### Service props
 
 Name      | Value example          | Description
 ----------|------------------------|-------------
@@ -217,7 +232,7 @@ in   | cmd.sensor.get_report | string     |            | Value is desired unit. 
 
 Example message: [evt.sensor.report](json-v1/messages/examples/evt.sensor.report)
 
-#### Props
+#### Service props
 
 Name      | Value example | Description
 ----------|---------------|-------------
@@ -229,10 +244,10 @@ sup_units | ["C", "F"]    | list of supported units.
 
 #### Service names
 
-Service name         | Units                | Description
----------------------|----------------------|------------
-`sensor_contact`     |                      | Binary contact sensor, normally magnetic contact. true = open
-`sensor_presence`    |                      | Motion sensor or some other way of presence detection. true = presence
+Service name         | Units | Description
+---------------------|-------|------------
+`sensor_contact`     |       | Binary contact sensor, normally magnetic contact. true = open
+`sensor_presence`    |       | Motion sensor or some other way of presence detection. true = presence
 
 #### Interfaces
 
@@ -276,7 +291,7 @@ Supported statuses: activ, deactiv. IMPORTANT: These are shorthands for "activat
 
 Example message: [evt.sensor.report](json-v1/messages/examples/evt.alarm.report.json)
 
-#### Props
+#### Service props
 
 Name       | Value example           | Description
 -----------|-------------------------|-------------
@@ -294,9 +309,15 @@ sup_events | ["smoke", "smoke_test"] | supported events.
 
 Type | Interface          | Value type | Properties | Description
 -----|--------------------|------------|----------- |------------------
-out  | evt.lvl.report     | int        | state      | available states: charging, charged, replace, emtpy
+out  | evt.lvl.report     | int        | state      |
 out  | evt.alarm.report   | str_map    |            | val = {"event": "low_battery", "status": "activ"}
 in   | cmd.lvl.get_report | null       |            | Get battery level over level report.
+
+#### Interface props
+
+Name  | Value example | Description
+------|---------------|-------------
+state | "charging"    | available states: charging, charged, replace, emtpy
 
 ### Thermostat service
 
@@ -317,7 +338,7 @@ out  | evt.mode.report         | string     |
 out  | evt.state.report        | string     |  Reports operational state.
 in   | cmd.state.get_report    | null       |
 
-#### Props
+#### Service props
 
 Name           | Value example                                                                  | Description
 ---------------|--------------------------------------------------------------------------------|-------------
@@ -339,12 +360,19 @@ Set-point types: heat, cool, furnace, dry_air, moist_air, auto_changeover, energ
 
 Type | Interface               | Value type | Properties           | Description
 -----|-------------------------|------------|----------------------|------------------
-out  | evt.lock.report         | bool_map   | timeout_s, lock_type | value = {"is_secured":true, "door_is_closed":true, "bolt_is_locked":true, "latch_is_closed":true}, lock_type properties reports how lock was locked or unlocked, it can take values: "key", "pin", "rfid"
+out  | evt.lock.report         | bool_map   | timeout_s, lock_type | value = {"is_secured":true, "door_is_closed":true, "bolt_is_locked":true, "latch_is_closed":true}
 in   | cmd.lock.set            | bool       |                      | Use true to secure a lock and false to unsecure
 in   | cmd.lock.set_with_code  | str_map    |                      | Used to lock/unlock locks required PIN/RFID, {“op”:”lock”, ”code_type”:”pin”, ”12345” }
 in   | cmd.lock.get_report     | null       |                      |
 
-#### Props
+#### Interface props
+
+Name      | Value example | Description
+----------|---------------|-------------
+timeout_s |               |
+lock_type | "key"         | how lock was activated, it can take values: "key", "pin", "rfid"
+
+#### Service props
 
 Name           | Value example                                                         | Description
 ---------------|-----------------------------------------------------------------------|-------------
@@ -366,7 +394,7 @@ in   | cmd.usercode.get_config_report | str_map    | {"user_id":"123", "code_typ
 in   | cmd.usercode.clear_all         | null       | Clear all codes
 in   | cmd.usercode.clear             | str_map    | {"user_id":"123", "code_type":"rfid"}, code type should be either "all" or one of supported types
 
-#### Props
+#### Service props
 
 Name           | Value example              | Description
 ---------------|----------------------------|-------------
@@ -390,7 +418,7 @@ in   | cmd.color.set        | int_map    | value is a map of color components. v
 in   | cmd.color.get_report | null       | The command is a request for a map of color component values
 out  | evt.color.report     | int_map    | Map of color components, where value is component intensity.
 
-#### Props
+#### Service props
 
 Name           | Value example            | Description
 ---------------|--------------------------|-------------
@@ -421,7 +449,7 @@ in   | cmd.scene.get_report | null       | The command is a request for current 
 in   | cmd.scene.set        | string     | Set scene
 out  | evt.scene.report     | string     | Event is generated whenever scene button is pressed on controller.
 
-#### Props
+#### Service props
 
 Name       | Value example | Description
 -----------|---------------|-------------
@@ -451,7 +479,7 @@ in   | cmd.modelvl.set        | int_map    | val = {"mid":90, "auto_low":10}
 in   | cmd.modelvl.get_report | string     | The command is a request for fan speed level for particular mode. If mode is set to "", the device should report levels for all modes.
 out  | evt.modelvl.report     | int_map    | val = {"mid":90, "auto_low":10}
 
-#### Props
+#### Service props
 
 Name       | Value example      | Description
 -----------|--------------------|-------------
@@ -474,11 +502,11 @@ in   | cmd.mode.get_report | null       |
 
 Topic example: `pt:j1/mt:evt/rt:dev/rn:zw/ad:1/sv:siren_ctrl/ad:15_0`
 
-#### Props
+#### Service props
 
 Name           | Value example       | Description
 ---------------|---------------------|-------------
-sup_modes      | on, off, fire, leak    | List of supported tones
+sup_modes      | on, off, fire, leak | List of supported tones
 
 ### Barrier control service
 
@@ -502,7 +530,7 @@ out  | evt.notiftype.report     | bool_map   |
 
 Topic example: `pt:j1/mt:evt/rt:dev/rn:zw/ad:1/sv:berier_ctrl/ad:15_0`
 
-#### Props
+#### Service props
 
 Name           | Value example         | Description
 ---------------|-----------------------|-------------
