@@ -178,9 +178,9 @@ Name       | Value example | Description
 
 #### Service props
 
-Name      | Value example          | Description
-----------|------------------------|-------------
-sup_units | ["W", "kWh", "A", "V"] | list of supported units.
+Name        | Value example          | Description
+------------|------------------------|-------------
+`sup_units` | ["W", "kWh", "A", "V"] | list of supported units.
 
 ***
 
