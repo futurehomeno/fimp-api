@@ -72,7 +72,7 @@ in   | cmd.config.get_supp_list    | null       | Requests service to respond wi
 in   | cmd.config.set              | str_map    | Sets configuration. Value is a key-value pairs.
 in   | cmd.config.supp_list_report | str_map    | List of supported configurations. Key - config name, value - short description.
 out  | evt.config.report           | str_map    | Reports configurations in form of key-value pairs.
-|||
+-|-|-|-
 in   | cmd.group.add_members       | object     | Adds members to the group. Object has the same format as members_report
 in   | cmd.group.delete_members    | object     | Object has the same format as report.
 in   | cmd.group.get_members       | string     | Value is a group name.
@@ -120,7 +120,7 @@ Type | Interface          | Value type | Properties              | Description
 -----|--------------------|------------|-------------------------|------------
 in   | cmd.binary.set     | bool       |                         | true is mapped to 255, false to 0
 out  | evt.binary.report  | bool       |                         |
-|||
+-|-|-|-
 in   | cmd.lvl.get_report | null       |                         |
 in   | cmd.lvl.set        | int        | `duration`              |
 in   | cmd.lvl.start      | string     | `start_lvl`, `duration` |
@@ -313,7 +313,7 @@ Type | Interface          | Value type | Properties | Description
 -----|--------------------|------------|----------- |------------------
 in   | cmd.lvl.get_report | null       |            | Get battery level over level report.
 out  | evt.lvl.report     | int        | state      |
-|||
+-|-|-|-
 out  | evt.alarm.report   | str_map    |            | val = {"event": "low_battery", "status": "activ"}
 
 #### Interface props
@@ -335,11 +335,11 @@ Type | Interface               | Value type | Description
 in   | cmd.mode.get_report     | null       |
 in   | cmd.mode.set            | string     |  Set thermostat mode:
 out  | evt.mode.report         | string     |
-|||
+-|-|-|-
 in   | cmd.setpoint.get_report | string     | value is a set-point type
 in   | cmd.setpoint.set        | str_map    | val = {"type":"heat", "temp":"21.5", "unit":"C"}
 out  | evt.setpoint.report     | str_map    | val = {"type":"heat", "temp":"21.5", "unit":"C"}
-|||
+-|-|-|-
 in   | cmd.state.get_report    | null       |
 out  | evt.state.report        | string     |  Reports operational state.
 
@@ -478,15 +478,15 @@ Type | Interface              | Value type |  Description
 in   | cmd.lvl.get_report     | null       | The command is a request for current fan speed level.
 in   | cmd.lvl.set            | int        | Fan speed, value 0 - 100 %
 out  | evt.lvl.report         | null       | Current fan speed level.
-|||
+-|-|-|-
 in   | cmd.mode.get_report    | null       | The command is a request for current fan mode report.
 in   | cmd.mode.set           | string     | Fan mode. Supported values: auto_low, auto_high, auto_mid, low, high, mid,  humid_circulation, up_down,  left_right, quiet
 out  | evt.mode.report        | string     | Current fan mode
-|||
+-|-|-|-
 in   | cmd.modelvl.get_report | string     | The command is a request for fan speed level for particular mode. If mode is set to "", the device should report levels for all modes.
 in   | cmd.modelvl.set        | int_map    | val = {"mid":90, "auto_low":10}
 out  | evt.modelvl.report     | int_map    | val = {"mid":90, "auto_low":10}
-|||
+-|-|-|-
 in   | cmd.state.get_report   | null       | The command is a request for current fan state report
 out  | evt.state.report       | string     | Report operational state. Supported values: idle, low, high, mid
 
@@ -534,12 +534,12 @@ Type | Interface                | Value type | Description
 in   | cmd.notiftype.get_report | null       |
 in   | cmd.notiftype.set        | bool_map   | Configuration of notification type device is is using while opening/closing door.
 out  | evt.notiftype.report     | bool_map   |
-|||
+-|-|-|-
 in   | cmd.op.stop              | null       | Emergency stop of any operation.
-|||
+-|-|-|-
 in   | cmd.state.get_report     | null       | Get current state
 out  | evt.state.report         | string     | Current state
-|||
+-|-|-|-
 in   | cmd.tstate.set           | string     | Setting target state
 
 Topic example: `pt:j1/mt:evt/rt:dev/rn:zw/ad:1/sv:berier_ctrl/ad:15_0`
