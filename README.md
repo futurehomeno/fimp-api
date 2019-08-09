@@ -8,13 +8,13 @@ Each service is further represented by interfaces, where a service must have at 
  
  1. The first part of the interface is the **type**. From the perspective of the receiver, it can be either `cmd` - representing an incoming message, or `evt` - representing an outgoing message.
  
- 2. The second part of the interface is the *attribute* which says something about the values supported by the interface. E.g. the `binary` attribute specifies that this interface only support boolean values. A service can have multiple interfaces with different attributes.
+ 2. The second part of the interface is the **attribute** which says something about the values supported by the interface. E.g. the `binary` attribute specifies that this interface only support boolean values. A service can have multiple interfaces with different attributes.
  
  3. The third part of the interface represents the **action** to perform in the case of a `cmd` interface, or the data in the case of `evt`. Typically this takes the form of getters ans setters. 
 
 Bringing it all together: the interface `cmd.binary.set` allows you to send a **command** to the **binary attribute** saying you want to **set** (change) it. Similarly, `evt.binary.report` says that there was an **event** (message received) on the **binary attribute** where a **report** was received.
 
-Additionally, each service it will have its own unique address (topic) over which it can send / receive messages, e.g. `pt:j1/mt:evt/rt:dev/rn:zw/ad:1/sv:basic/ad:15_0`. The address can be broken down into the following components:
+Additionally, each service it will have its own unique address (topic) over which it can send / receive messages, e.g. `pt:j1/mt:evt/rt:dev/rn:zw/ad:1/sv:out_bin_switch/ad:11_0`. The address can be broken down into the following components:
 
 Type | Sample values                  | Description
 -----|--------------------------------|------------
@@ -23,7 +23,7 @@ mt   | evt, cmd                       | message type
 rt   | ad, app, dev                   | resource type, ad = adapter, dev = device.
 rn   | zw, vinculum, zigbee, kind-owl | resource name, the actual name of the rt
 sv   | out_bin_sw, out_lvl_sw, etc.   | service name
-ad   |                                | address, the address of the preceding type.
+ad   |                                | the address of the preceding type.
 
 Breaking down the example `pt:j1/mt:evt/rt:dev/rn:zw/ad:1/sv:out_bin_switch/ad:11_0`, this is the address specifying JSON v1 formatted events sent to a device using zwave with address 1, and the service `out_bin_sw` with address of 11_0. Note here that zwave actually has an address. This is normally set to 1, but in the case of the gateway having multiple instances of zwave, it can be another address.
 
@@ -78,8 +78,6 @@ in   | cmd.lvl.get_report | null       |
 in   | cmd.lvl.set        | int        | Sets level using numeric value
 out  | evt.lvl.report     | int        | Reports level using numeric value
 
-Topic example: `pt:j1/mt:evt/rt:dev/rn:zw/ad:1/sv:basic/ad:15_0`
-
 ***
 
 ### System related device service
@@ -127,8 +125,6 @@ in   | cmd.binary.get_report | null       |
 in   | cmd.binary.set        | bool       |
 out  | evt.binary.report     | bool       | Reports true when switch is ON and false when switch is OFF
 
-Topic example: `pt:j1/mt:cmd/rt:dev/rn:zw/ad:1/sv:out_bin_switch/ad:15_0`
-
 ***
 
 ### Output level switch service
@@ -151,8 +147,6 @@ in   | cmd.lvl.set        | int        | `duration`              |
 in   | cmd.lvl.start      | string     | `start_lvl`, `duration` |
 in   | cmd.lvl.stop       | null       |                         | Stop a level change
 out  | evt.lvl.report     | int        |                         |
-
-Topic example: `pt:j1/mt:cmd/rt:dev/rn:zw/ad:1/sv:out_lvl_switch/ad:15_0`
 
 #### Interface props
 
@@ -190,8 +184,6 @@ Type | Interface            | Value type | Properties              | Description
 in   | cmd.meter.get_report | string     |                         | Value - is a unit. May not be supported by all meters.
 in   | cmd.meter.reset      | null       |                         | Resets all historical readings.
 out  | evt.meter.report     | float      | unit, prv_data, delta_t |
-
-Topic example: `pt:j1/mt:evt/rt:dev/rn:zw/ad:1/sv:meter_elec/ad:15_0`
 
 #### Interface props
 
@@ -567,13 +559,11 @@ out  | evt.state.report         | string     | Current state
 -|-|-|-
 in   | cmd.tstate.set           | string     | Setting target state
 
-Topic example: `pt:j1/mt:evt/rt:dev/rn:zw/ad:1/sv:berier_ctrl/ad:15_0`
-
 #### Service props
 
 Name             | Value example         | Description
 -----------------|-----------------------|-------------
-`sup_notiftypes` | audio, visual         | supported notifications types, like siren, flashlight
+`sup_notiftypes` | audio, visual         | supported notification-types, like siren, flashlight
 `sup_states`     | open, closed, closing | supported states
 `sup_tstates`    | open, close           | supported target states
 
