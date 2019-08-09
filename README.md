@@ -1,6 +1,30 @@
 # Futurehome IoT Messaging Protocol - FIMP
 
-## Service overview.
+* [Service overview](#service-overview)
+* [Component discovery mechanism](#component-discovery-mechanism)
+* [Adding / removing things to FH system](#adding--removing-things-to-fh-system)
+* [Services](#services)
+   * [Basic service](#basic-service)
+   * [System related device service](#system-related-device-service)
+   * [Output binary switch service](#output-binary-switch-service)
+   * [Output level switch service](#output-level-switch-service)
+   * [Meter services](#meter-services)
+   * [Numeric sensor services](#numeric-sensor-services)
+   * [Binary sensor services](#binary-sensor-services)
+   * [Alarm services](#alarm-services)
+   * [Battery service](#battery-service)
+   * [Thermostat service](#thermostat-service)
+   * [Door lock service](#door-lock-service)
+   * [User code service](#user-code-service)
+   * [Color control service](#color-control-service)
+   * [Scene controller service](#scene-controller-service)
+   * [Fan control service](#fan-control-service)
+   * [Siren service](#siren-service)
+   * [Barrier control service](#barrier-control-service)
+   * [Complex alarm system service](#complex-alarm-system-service)
+   * [Gateway service](#gateway-service)
+
+## Service overview
 
 In FIMP, the functionality of everything that's considered a device is represented by services. These say something about the capabilities of the device, e.g. the service `out_bin_sw` indicates that some part of the device can be turned on / off. Similarly `out_lvl_sw` indicates that some part of the device accepts a value between a given min and max. Note that the services are not specific as to what part of the device they represent. An `out_bin_sw` might turn on / off part of the device, or the device itself.
 
@@ -41,13 +65,13 @@ Message format:
 
 [FIMP message format](message-format.md)
 
-## Component discovery mechanism.
+## Component discovery mechanism
 
 The mechanism allows dynamically discover different system component like adapters and application.
 
 [Component discovery flow and messages](component-discovery.md)
 
-## Adding / removing things to FH system.
+## Adding / removing things to FH system
 
 Things can be added to FH ecosystem in 2 ways:
 
