@@ -53,8 +53,6 @@ Breaking down the example `pt:j1/mt:evt/rt:dev/rn:zw/ad:1/sv:out_bin_switch/ad:1
 
 Lastly, not that each interface within a service share the same address and that a service can never have more than one interface of the same type.
 
-Message format:
-
 [FIMP message format](message-format.md)
 
 ## Component discovery mechanism
