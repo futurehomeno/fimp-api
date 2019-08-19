@@ -1,87 +1,45 @@
 # FIMP message format 
 
-## FIMP topic format format
+Messages send using FIMP are JSON messages containing the following properties:
 
-### Device service topic
+Property | Type                | Required | Description               
+---------|---------------------|----------|------------
+corid    | String              | No       | Message correlation id. Used for request - response matching.
+ctime    | String              | Yes      | Message creation time, e.g. `"2019-05-31 17:36:31 +0200"`
+props    | Map<String, String> | Yes      | Map of properties.
+resp_to  | String              | No*      | Response topic where requester will expect to receive response.
+serv     | String              | Yes      | Service name the interface is part of.
+src      | String              | Yes      | Source or of the message, should be set only for commands.
+tags     | List<String>        | No       | List of tags.
+type     | String              | Yes      | Interface type, defines message format.
+uid      | String              | Yes      | Unique message identifier.
+val      | dynamic             | Yes      | "payload" - type is defined by `val_t`.
+val_t    | String              | Yes      | Data format of `val` field. See below.
+ver      | String              | Yes      | Version of the message format, default: `"1"`.
 
-pt:j1/mt:evt/rt:dev/rn:zw/ad:1/sv:sensor_presence/ad:16_0
+\*Required for Prime Fimp messages.
 
-pt:j1/mt:cmd/rt:dev/rn:zw/ad:1/sv:out_bin_switch/ad:15_0
+Since `val` can be any type, `val_t` defines what type it is. List of supported `val` types: 
 
-### Technology adapter topic
+`val_t`     | Sample `val`
+------------|-------------
+string      | `'Hello world!'`
+int         | `3`
+float       | `3.1415`
+bool        | `true`
+null        | `null`
+str_array   | `['hello, 'world']`
+int_array   | `[0, 1, 1, 2, 3, 5, 8, 13]`
+float_array | `[3.14, 2.71]`
+int_map     | `{"answer": 42}`
+str_map     | `{"ip": "192.168.1.1"}`
+float_map   | `{"pi: 3.14"}`
+bool_map    | `{"normalityRestored": true}`
+object*     | `{"nested": {"objects": "supported"}}`
+base64      | `U28gbG9uZywgYW5kIHRoYW5rcyBmb3IgYWxsIHRoZSBmaXNoLg==`
 
-pt:j1/mt:evt/rt:app/rn:cloud-bridge/ad:1
+\*A complex object which can't be mapped to primitive types. The structure of an object is defined by interface type and is unique for every interface type. 
 
-pt:j1/mt:cmd/rt:app/rn:cloud-bridge/ad:1
+# Example messages
 
-### Application topic 
-
-pt:j1/mt:evt/rt:ad/rn:zigbee/ad:1
-
-pt:j1/mt:cmd/rt:ad/rn:zigbee/ad:1
-
-### Cloud API topic 
-
-pt:j1/mt:evt/rt:cloud/rn:auth-api/ad:1
-
-pt:j1/mt:cmd/rt:cloud/rn:auth-api/ad:1
-
-### FIMP JSON format. 
- 
-Fields:
-
-Property | Type                |Required | Desc               
----------|---------------------|---------|----------------------------------------------------------------
-type     | String              | Yes     | Interface type, defines message format.
-serv     | String              | Yes     | Service name the interface is part of.
-val_t    | String              | Yes     | Data format of `val` field. See below.
-val      | dynamic             | Yes     | "payload" - it can be either simple type or complex object.
-tags     | List<String>        | No      | List of tags.
-props    | Map<String, String> | Yes     | Map of properties.
-ctime    | String              | Yes     | Message creation time, e.g. `"2019-05-31 17:36:31 +0200"`
-ver      | String              | Yes     | Version of the message format, default: `"1"`.
-uid      | String              | Yes     | Unique message identifier.
-corid    | String              | No      | Message correlation id. Used for request - response matching.
-src      | String              | Yes     | Source or of the message, should be set only for commands.
-resp_to  | String              | No*     | Response topic where requester will expect to receive response.
-
-* Required for Prime Fimp messages.
-
-List of supported `val` types: 
-
-* string
-* int
-* float 
-* bool
-* null
-* str_array
-* int_array
-* float_array
-* int_map
-* str_map
-* float_map
-* bool_map
-* object - A complex object which can't be mapped to primitive types. The structure of an object is defined by interface type and is unique for every interface type. 
-* base64
-
-Message example: 
-
-```json
-{
-   "type": "evt.sensor.report",
-   "serv": "temp_sensor",
-   "val_t": "float",
-   "val": 21.5,
-   "tags": ["tag1", "alarm"],
-   "props": {
-     "prop1": "4",
-     "prop2": "6"
-   },
-   "ctime": "2016-12-21T13:34:14.085581515+01:00",
-   "ver": "1.0",
-   "uid": "fb033c27-e7b5-4834-97ec-632ccb987e9e",
-   "corid": "uid_of_request",
-   "src": "vinculum",
-   "resp_to": "/pt:j1/mt:rsp/rn:smarthome-app/ad:1"
-}
-```
+TODO(alivinco): add sample FIMP messages.
