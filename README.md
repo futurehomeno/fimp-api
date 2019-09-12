@@ -55,6 +55,8 @@ Lastly, not that each interface within a service share the same address and that
 
 [FIMP message format](message-format.md)
 
+[Topic examples](topics.mg)
+
 ## Component discovery mechanism
 
 The mechanism allows dynamically discover different system component like adapters and application.
