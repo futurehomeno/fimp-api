@@ -55,7 +55,7 @@ Lastly, not that each interface within a service share the same address and that
 
 [FIMP message format](message-format.md)
 
-[Topic examples](topics.mg)
+[Topic examples](topics.md)
 
 ## Component discovery mechanism
 
