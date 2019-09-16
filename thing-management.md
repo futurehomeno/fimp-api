@@ -1,6 +1,6 @@
 ### Technology adapter API
 
-### Adding a thing to FH system .   
+### Adding a thing to FH system
 
     Inclusion process consists of 2 steps : 
     1. An application sends inclusion command to adapter. 
@@ -479,6 +479,7 @@ Message :
   "val_t": "object"
 }
 ```
+
 address - is technology specific device address  
 
 alias (optional) - device or product name or alias 
@@ -491,6 +492,37 @@ status (optional) - device status
 
 wakeup_int (optional) - device wakeup interval , applicable only if device is battery powered .
 
+### Certification Test
+Supported by zigbee-ad. When `cmd.cert_test.start` is received, the transiever starts sending `cmd.binary.set` to the device which node id and endpoint are provided in the payload every 50ms. When `cmd.cert_test.stop` is received the test is stopped.
 
+__Topic__
 
+`pt:j1/mt:cmd/rt:ad/rn:zigbee/ad:1`
 
+__Message__
+
+`val` has the format `<node_id>_<endpoint_id>`. It only matters in the start command.
+
+```json
+{
+  "type": "cmd.cert_test.start",
+  "val_t": "string",
+  "val": "1_1",
+  "props": null,
+  "tags": null,
+  "src": "thingsplex-ui",
+  "ver": "1"
+}
+```
+
+```json
+{
+  "type": "cmd.cert_test.stop",
+  "val_t": "string",
+  "val": "1_1",
+  "props": null,
+  "tags": null,
+  "src": "thingsplex-ui",
+  "ver": "1"
+}
+```
