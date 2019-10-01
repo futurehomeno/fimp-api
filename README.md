@@ -10,7 +10,8 @@
    * [Output level switch service](#output-level-switch-service)
    * [Meter services](#meter-services)
    * [Numeric sensor services](#numeric-sensor-services)
-   * [Binary sensor services](#binary-sensor-services)
+   * [Contact sensor service](#contact-sensor-service)
+   * [Presence sensor service](#presence-sensor-service)
    * [Alarm services](#alarm-services)
    * [Battery service](#battery-service)
    * [Thermostat service](#thermostat-service)
@@ -29,12 +30,12 @@
 In FIMP, the functionality of everything that's considered a device is represented by services. These say something about the capabilities of the device, e.g. the service `out_bin_sw` indicates that some part of the device can be turned on / off. Similarly `out_lvl_sw` indicates that some part of the device accepts a value between a given min and max. Note that the services are not specific as to what part of the device they represent. An `out_bin_sw` might turn on / off part of the device, or the device itself.
 
 Each service is further represented by interfaces, where a service must have at least one interface. An interface consist of three parts separated by a period:
- 
+
  1. The first part of the interface is the **type**. From the perspective of the receiver, it can be either `cmd` - representing an incoming message, or `evt` - representing an outgoing message.
- 
+
  2. The second part of the interface is the **attribute** which says something about the values supported by the interface. E.g. the `binary` attribute specifies that this interface only support boolean values. A service can have multiple interfaces with different attributes.
- 
- 3. The third part of the interface represents the **action** to perform in the case of a `cmd` interface, or the data in the case of `evt`. Typically this takes the form of getters ans setters. 
+
+ 3. The third part of the interface represents the **action** to perform in the case of a `cmd` interface, or the data in the case of `evt`. Typically this takes the form of getters ans setters.
 
 Bringing it all together: the interface `cmd.binary.set` allows you to send a **command** to the **binary attribute** saying you want to **set** (change) it. Similarly, `evt.binary.report` says that there was an **event** (message received) on the **binary attribute** where a **report** was received.
 
@@ -275,21 +276,37 @@ Name        | Value example | Description
 
 ***
 
-### Binary sensor services
+### Contact sensor service
+
+Binary contact sensor, normally magnetic contact.
 
 #### Service names
 
-Service name         | Units | Description
----------------------|-------|------------
-`sensor_contact`     |       | Binary contact sensor, normally magnetic contact. true = open
-`sensor_presence`    |       | Motion sensor or some other way of presence detection. true = presence
+`sensor_contact`
 
 #### Interfaces
 
 Type | Interface           | Value type | Description
 -----|---------------------|------------|--------------------
 in   | cmd.open.get_report | null       |
-out  | evt.open.report     | bool       |
+out  | evt.open.report     | bool       | true = open
+
+***
+
+### Presence sensor service
+
+Motion sensor or some other way of presence detection.
+
+#### Service names
+
+`sensor_presence`
+
+#### Interfaces
+
+Type | Interface               | Value type | Description
+-----|-------------------------|------------|--------------------
+in   | cmd.presence.get_report | null       |
+out  | evt.presence.report     | bool       | true = presence
 
 ***
 
