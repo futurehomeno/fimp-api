@@ -19,6 +19,8 @@ ver      | String              | Yes      | Version of the message format, defau
 
 \*Required for Prime Fimp messages.
 
+## Value Types
+
 Since `val` can be any type, `val_t` defines what type it is. List of supported `val` types: 
 
 `val_t`     | Sample `val`
@@ -40,6 +42,6 @@ base64      | `U28gbG9uZywgYW5kIHRoYW5rcyBmb3IgYWxsIHRoZSBmaXNoLg==`
 
 \*A complex object which can't be mapped to primitive types. The structure of an object is defined by interface type and is unique for every interface type. 
 
-# Example messages
+## Example messages
 
 TODO(alivinco): add sample FIMP messages.
