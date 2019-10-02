@@ -1,34 +1,39 @@
-### Technology adapter API
+# Technology adapter API
 
-### Adding a thing to FH system
+## Adding a thing to FH system
 
-    Inclusion process consists of 2 steps : 
-    1. An application sends inclusion command to adapter. 
-    2. Adapter generates inclusion_report event right after a thing was added.
+Inclusion process consists of 2 steps:
 
-#### Inclusion command:
+1. An application sends inclusion command to adapter.
 
-Topic : pt:j1/mt:cmd/rt:ad/rn:zw/ad:1
+2. Adapter generates inclusion_report event right after a thing was added.
 
-Message :
-```json 
-{"serv":"zwave-ad",
- "type":"cmd.thing.inclusion",
- "val_t":"bool",
- "val":true,
- "props":null,
- "tags":null,
- "ctime":"2017-08-23T12:07:00+0200",
- "uid":"124235254"
+### Inclusion command
+
+Topic: `pt:j1/mt:cmd/rt:ad/rn:zw/ad:1`
+
+Message:
+
+```json
+{
+    "serv": "zwave-ad",
+    "type": "cmd.thing.inclusion",
+    "val_t": "bool",
+    "val": true,
+    "props": null,
+    "tags": null,
+    "ctime": "2017-08-23T12:07:00+0200",
+    "uid": "124235254"
 }
 ```
-#### Inclusion report:
+### Inclusion report
 
-Topic : pt:j1/mt:evt/rt:ad/rn:zw/ad:1
+Topic: pt:j1/mt:evt/rt:ad/rn:zw/ad:1
 
-Message : 
-```json 
-    {
+Message:
+
+```json
+{
     "ctime": "2017-07-25T17:53:12+0200",
     "props": {},
     "serv": "zwave-ad",
@@ -55,7 +60,7 @@ Message :
                 "zw_role_type": "5",
                 "zw_specific_dev_class": "1",
                 "zw_supported_cc": [
-                    
+
                 ]
             }
         },
@@ -299,14 +304,13 @@ Message :
 }
 ```
 
-In addition , an addapter should always respond with inclusion report on get_inclusion_report command :
+In addition, an addapter should always respond with inclusion report on `get_inclusion_report` command:
 
-Topic : pt:j1/mt:cmd/rt:ad/rn:zw/ad:1
+Topic: `pt:j1/mt:cmd/rt:ad/rn:zw/ad:1`
 
-Message : 
+Message:
 
-```json 
-
+```json
 {
     "serv": "zwave-ad",
     "type": "cmd.thing.get_inclusion_report",
@@ -315,28 +319,29 @@ Message :
     "props": null,
     "tags": null
 }
-
 ```
 
+## Removing a thing from FH system
 
-#### Removing a thing from FH system 
+Exclusion process type 1 (zwave). The process consist of 2 steps:
 
-Exclusion process type 1 (zwave) .The process consist of 2 steps : 
+1. An application sends exclusion command to adapter, adapter goes into exclusion mode, after that user can exclude device from network by triggering exclusion sequence on the device.
 
-    1. An application sends exclusion command to adapter , adapter goes into exclusion mode, after that user can exclude device from network by triggering exclusion sequence on the device .  
-    2. Adapter generates exclusion_report event right after a thing was removed from system.
+2. Adapter generates exclusion_report event right after a thing was removed from system.
 
-Exclusion process type 2 (zigbee) .The process consist of 2 steps : 
-    1. User finds in UI device which he wants to delete and clicks "Delete" button , UI sends special delete command with device address to adapter and adapter removes the device from network. 
-    2. Adapter generates exclusion_report event right after a thing was deleted from system.
+Exclusion process type 2 (zigbee). The process consist of 2 steps:
 
+1. User finds device in UI which he wants to delete and clicks "Delete" button, UI sends special delete command with device address to adapter and adapter removes the device from network.
 
-#### Exclusion command:
+2. Adapter generates exclusion_report event right after a thing was deleted from system.
 
-Topic : pt:j1/mt:cmd/rt:ad/rn:zw/ad:1
+### Exclusion command
 
-Message :
- ```json 
+Topic: `pt:j1/mt:cmd/rt:ad/rn:zw/ad:1`
+
+Message:
+
+```json
 {
     "serv": "zwave-ad",
     "type": "cmd.thing.exclusion",
@@ -347,15 +352,15 @@ Message :
     "ctime":"2017-08-23T12:07:00+0200",
     "uid":"124235254"
 }
+```
 
- ```   
+### Exclusion report
 
-#### Exclusion report:
+Topic: `pt:j1/mt:evt/rt:ad/rn:zw/ad:1`
 
-Topic : pt:j1/mt:evt/rt:ad/rn:zw/ad:1
+Message:
 
-Message : 
-```json 
+```json
 {
     "ctime": "2017-07-25T18:07:49+0200",
     "props": {},
@@ -371,128 +376,132 @@ Message :
 }
 ```
 
-#### Delete device from network command:
+### Delete device from network command:
 
-Topic : pt:j1/mt:cmd/rt:ad/rn:zw/ad:1
+Topic: `pt:j1/mt:cmd/rt:ad/rn:zw/ad:1`
 
-Message : 
+Message:
+
 ```json
 {
-  "serv": "zwave-ad",
-  "type": "cmd.thing.delete",
-  "val_t": "str_map",
-  "val": {
-    "address": "71",
-    "stop": ""
-  },
-  "props": null,
-  "tags": null,
-  "ctime":"2017-08-23T12:07:00+0200",
-  "uid":"124235254"
+    "serv": "zwave-ad",
+    "type": "cmd.thing.delete",
+    "val_t": "str_map",
+    "val": {
+        "address": "71",
+        "stop": ""
+    },
+    "props": null,
+    "tags": null,
+    "ctime":"2017-08-23T12:07:00+0200",
+    "uid":"124235254"
 }
 ```
 
+## Error reporting.
 
-### Error reporting . 
+Topic: `pt:j1/mt:evt/rt:ad/rn:zw/ad:1` or service address: `pt:j1/mt:evt/rt:dev/rn:zw/ad:1/sv:dev_sys/ad:95_0`
 
-Topic : pt:j1/mt:evt/rt:ad/rn:zw/ad:1 or service address : pt:j1/mt:evt/rt:dev/rn:zw/ad:1/sv:dev_sys/ad:95_0
+Message:
 
-Message :
-```json 
+```json
 {
-  "serv": "zigbee",
-  "type": "evt.error.report",   
-  "val": "TX_ERROR",
-  "val_t": "string",
-  "props": {
-    "msg": "TRANSMIT_COMPLETE_NOROUTE",
-    "src": "nodeId=64_0"
-  },
-  "tags": [],
-  "ctime": "2018-11-22T23:14:40+0100",
-  "uid":"76533455876765"
+    "serv": "zigbee",
+    "type": "evt.error.report",
+    "val": "TX_ERROR",
+    "val_t": "string",
+    "props": {
+        "msg": "TRANSMIT_COMPLETE_NOROUTE",
+        "src": "nodeId=64_0"
+    },
+    "tags": [],
+    "ctime": "2018-11-22T23:14:40+0100",
+    "uid":"76533455876765"
  }
 ```
 
-val - is error code , src - origin of the error .
+val - is error code, src - origin of the error.
 
-### Requesting list of devices from adapter .
+## Requesting list of devices from adapter.
 
-An adapter has to support api for requesting a list of devices and respond with the list . 
+An adapter has to support api for requesting a list of devices and respond with the list.
 
-Command :
+### Command
 
-Topic : pt:j1/mt:cmd/rt:ad/rn:zigbee/ad:1
+Topic: `pt:j1/mt:cmd/rt:ad/rn:zigbee/ad:1`
 
-Message : 
+Message:
+
 ```json
 {
-  "serv": "zigbee",
-  "type": "cmd.network.get_all_nodes",
-  "val_t": "null",
-  "val": null,
-  "props": null,
-  "tags": null,
-  "ctime": "2018-11-22T23:14:40+0100",
-  "uid":"76533455876765"
+    "serv": "zigbee",
+    "type": "cmd.network.get_all_nodes",
+    "val_t": "null",
+    "val": null,
+    "props": null,
+    "tags": null,
+    "ctime": "2018-11-22T23:14:40+0100",
+    "uid":"76533455876765"
 }
 ```
-Report event : 
 
-Topic : pt:j1/mt:evt/rt:ad/rn:zigbee/ad:1
+### Report event
 
-Message : 
-```json 
+Topic: `pt:j1/mt:evt/rt:ad/rn:zigbee/ad:1`
+
+Message:
+
+```json
 {
-  "ctime": "2018-11-23T16:53:11+0100",
-  "props": {},
-  "serv": "zigbee",
-  "tags": [],
-  "type": "evt.network.all_nodes_report",
-  "val": [
-    
-    {
-      "address": "46",
-      "alias":"Sensor 1 ",
-      "hash": "zw_398_3_12",
-      "power_source": "battery",
-      "status": "DOWN",
-      "wakeup_int": "4200"
-    },
-    {
-      "address": "63",
-      "alias":"Sensor 2 ",
-      "hash": "zw_271_1794_4096",
-      "power_source": "battery",
-      "status": "UP",
-      "wakeup_int": "3600"
-    },
-    {
-      "address": "80",
-      "alias":"Dimmer ",
-      "hash": "zw_134_3_96",
-      "power_source": "ac",
-      "status": "UP",
-      "wakeup_int": "-1"
-    }
-  ],
-  "val_t": "object"
+    "ctime": "2018-11-23T16:53:11+0100",
+    "props": {},
+    "serv": "zigbee",
+    "tags": [],
+    "type": "evt.network.all_nodes_report",
+    "val": [
+        {
+            "address": "46",
+            "alias":"Sensor 1 ",
+            "hash": "zw_398_3_12",
+            "power_source": "battery",
+            "status": "DOWN",
+            "wakeup_int": "4200"
+        },
+        {
+            "address": "63",
+            "alias":"Sensor 2 ",
+            "hash": "zw_271_1794_4096",
+            "power_source": "battery",
+            "status": "UP",
+            "wakeup_int": "3600"
+        },
+        {
+            "address": "80",
+            "alias":"Dimmer ",
+            "hash": "zw_134_3_96",
+            "power_source": "ac",
+            "status": "UP",
+            "wakeup_int": "-1"
+        }
+    ],
+    "val_t": "object"
 }
 ```
 
-address - is technology specific device address  
+address - is technology specific device address
 
-alias (optional) - device or product name or alias 
+alias (optional) - device or product name or alias
 
 hash (optional) - product unique identifier
 
-power_source - power source descriptor , ac ,battery 
+power_source - power source descriptor, ac,battery
 
-status (optional) - device status 
+status (optional) - device status
 
-wakeup_int (optional) - device wakeup interval , applicable only if device is battery powered .
+wakeup_int (optional) - device wakeup interval, applicable only if device is battery powered.
 
-### Certification Test
+## Certification Test
+
 Supported by zigbee-ad. When `cmd.cert_test.start` is received, the transiever starts sending `cmd.binary.set` to the device which node id and endpoint are provided in the payload every 50ms. When `cmd.cert_test.stop` is received the test is stopped.
 
 __Topic__
@@ -505,24 +514,24 @@ __Message__
 
 ```json
 {
-  "type": "cmd.cert_test.start",
-  "val_t": "string",
-  "val": "1_1",
-  "props": null,
-  "tags": null,
-  "src": "thingsplex-ui",
-  "ver": "1"
+    "type": "cmd.cert_test.start",
+    "val_t": "string",
+    "val": "1_1",
+    "props": null,
+    "tags": null,
+    "src": "thingsplex-ui",
+    "ver": "1"
 }
 ```
 
 ```json
 {
-  "type": "cmd.cert_test.stop",
-  "val_t": "string",
-  "val": "1_1",
-  "props": null,
-  "tags": null,
-  "src": "thingsplex-ui",
-  "ver": "1"
+    "type": "cmd.cert_test.stop",
+    "val_t": "string",
+    "val": "1_1",
+    "props": null,
+    "tags": null,
+    "src": "thingsplex-ui",
+    "ver": "1"
 }
 ```
