@@ -28,7 +28,7 @@ Message:
 ```
 ### Inclusion report
 
-Topic: pt:j1/mt:evt/rt:ad/rn:zw/ad:1
+Topic: `pt:j1/mt:evt/rt:ad/rn:zw/ad:1`
 
 Message:
 
