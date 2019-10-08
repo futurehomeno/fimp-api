@@ -21,6 +21,7 @@
    * [Scene controller service](#scene-controller-service)
    * [Fan control service](#fan-control-service)
    * [Siren service](#siren-service)
+   * [Indicator service](#indicator-service)
    * [Barrier control service](#barrier-control-service)
    * [Complex alarm system service](#complex-alarm-system-service)
    * [Gateway service](#gateway-service)
@@ -111,6 +112,7 @@ in   | cmd.config.get_report       | str_array  | Requests service to respond wi
 in   | cmd.config.get_supp_list    | null       | Requests service to respond with a list of supported configurations.
 in   | cmd.config.set              | str_map    | Sets configuration. Value is a key-value pairs.
 in   | cmd.config.supp_list_report | str_map    | List of supported configurations. Key - config name, value - short description.
+in   | cmd.thing.reboot            | string     | Requests device to run either complete reboot or reboot specific component. 
 out  | evt.config.report           | str_map    | Reports configurations in form of key-value pairs.
 -|||
 in   | cmd.group.add_members       | object     | Adds members to the group. Object has the same format as members_report
@@ -618,6 +620,7 @@ in   | cmd.alarm.silence | string     | Silence sirens without ceasing alarm sit
 
 The service represents gateway, hub or host computer. Adapter topic should be used to communicate with gateway service, *pt:j1/mt:evt/rt:ad/rn:gateway/ad:1* and *pt:j1/mt:evt/rt:ad/rn:gateway/ad:1*.
 
+
 #### Service names
 
 `gateway`
@@ -630,3 +633,22 @@ in   | cmd.gateway.factory_reset | null       | Instructs gateway to perform fac
 in   | cmd.gateway.reboot        | null       | Gateways reboot
 in   | cmd.gateway.shutdown      | null       | Gateways shutdown
 out  | evt.gateway.factory_reset | null       | Factory reset event.
+
+### Indicator service
+
+#### Service names 
+
+`indicator_ctrl`
+
+#### Interfaces 
+
+Type | Interface                          | Value type | Description
+-----|------------------------------------|------------|------------
+in   | cmd.indicator.set_visual_element   | int_map    | Requests visual element (led or some other light source) to display information. Key is a name of indicator component and value is actual value to set.
+in   | cmd.indicator.set_text             | str_map    | Requests text indicator to display text. Key is name of indicator component and value is text to be displayed by the component.
+
+#### Service props
+
+Name             | Value example       | Description
+-----------------|---------------------|-------------
+`duration`       | "4"                 | Defines duration of how long the indicator should display the information.
