@@ -1,18 +1,22 @@
 # Technology adapter API
 
+The following APIs should be common across all adapters, but the example code will use zwave-ad. Notes have been added for specific differences for the most common adapters.
+
 ## Adding a thing to FH system
 
-Inclusion process consists of 2 steps:
+Inclusion process generally consists of 2 steps:
 
-1. An application sends inclusion command to adapter.
+1. An application sends inclusion command to adapter. This indicates the beginning of the adding process.
 
-2. Adapter generates inclusion_report event right after a thing was added.
+2. Adapter generates inclusion_report event right after a thing was added. This indicates the end of the adding process.
 
-### Inclusion command
+> Note: Zigbee allows you to add multiple devices in one go, thus the generation of an inclusion report does not end the pairing process. Instead, the user has to manually stop the process or wait for it to time out.
+
+### Starting inclusion
 
 Topic: `pt:j1/mt:cmd/rt:ad/rn:zw/ad:1`
 
-Message:
+Message (command):
 
 ```json
 {
@@ -22,22 +26,39 @@ Message:
     "val": true,
     "props": null,
     "tags": null,
-    "ctime": "2017-08-23T12:07:00+0200",
-    "uid": "124235254"
+    "ctime": "1970-01-01T00:00:00+0000",
+    "uid": "123456789"
 }
 ```
-### Inclusion report
 
-Topic: `pt:j1/mt:evt/rt:ad/rn:zw/ad:1`
+### Stopping inclusion
 
-Message:
+Topic: `pt:j1/mt:cmd/rt:ad/rn:zw/ad:1`
+
+Message (command):
 
 ```json
 {
-    "ctime": "2017-07-25T17:53:12+0200",
-    "props": {},
     "serv": "zwave-ad",
-    "tags": [],
+    "type": "cmd.thing.inclusion",
+    "val_t": "bool",
+    "val": false,
+    "props": null,
+    "tags": null,
+    "ctime": "1970-01-01T00:00:00+0000",
+    "uid": "123456789"
+}
+```
+
+### Sample inclusion report
+
+Topic: `pt:j1/mt:evt/rt:ad/rn:zw/ad:1`
+
+Message (report):
+
+```json
+{
+    "serv": "zwave-ad",
     "type": "evt.thing.inclusion_report",
     "val": {
         "address": "21",
@@ -59,17 +80,13 @@ Message:
                 "zw_plus_version": "1",
                 "zw_role_type": "5",
                 "zw_specific_dev_class": "1",
-                "zw_supported_cc": [
-
-                ]
+                "zw_supported_cc": []
             }
         },
         "services": [
             {
                 "address": "/rt:dev/rn:zw/ad:1/sv:basic/ad:21_0",
-                "groups": [
-                    "ch_0"
-                ],
+                "groups": ["ch_0"],
                 "interfaces": [
                     {
                         "intf_t": "out",
@@ -100,9 +117,7 @@ Message:
             },
             {
                 "address": "/rt:dev/rn:zw/ad:1/sv:out_bin_switch/ad:21_0",
-                "groups": [
-                    "ch_0"
-                ],
+                "groups": ["ch_0"],
                 "interfaces": [
                     {
                         "intf_t": "out",
@@ -132,109 +147,8 @@ Message:
                 }
             },
             {
-                "address": "/rt:dev/rn:zw/ad:1/sv:meter_elec/ad:21_0",
-                "groups": [
-                    "ch_0"
-                ],
-                "interfaces": [
-                    {
-                        "intf_t": "out",
-                        "msg_t": "evt.meter.report",
-                        "val_t": "float",
-                        "ver": "1"
-                    },
-                    {
-                        "intf_t": "in",
-                        "msg_t": "cmd.meter.reset",
-                        "val_t": "null",
-                        "ver": "1"
-                    },
-                    {
-                        "intf_t": "in",
-                        "msg_t": "cmd.meter.get_report",
-                        "val_t": "string",
-                        "ver": "1"
-                    }
-                ],
-                "location": "",
-                "name": "meter_elec",
-                "prop_set_ref": "nif_0",
-                "props": {
-                    "is_secure": false,
-                    "is_unsecure": true,
-                    "sup_units": [
-                        "kWh",
-                        "W",
-                        "V",
-                        "A"
-                    ]
-                }
-            },
-            {
-                "address": "/rt:dev/rn:zw/ad:1/sv:alarm_heat/ad:21_0",
-                "groups": [
-                    "ch_0"
-                ],
-                "interfaces": [
-                    {
-                        "intf_t": "out",
-                        "msg_t": "evt.alarm.report",
-                        "val_t": "str_map",
-                        "ver": "1"
-                    },
-                    {
-                        "intf_t": "in",
-                        "msg_t": "cmd.alarm.get_report",
-                        "val_t": "string",
-                        "ver": "1"
-                    }
-                ],
-                "location": "",
-                "name": "alarm_heat",
-                "prop_set_ref": "nif_0",
-                "props": {
-                    "is_secure": false,
-                    "is_unsecure": true,
-                    "sup_events": [
-                        "overheat"
-                    ]
-                }
-            },
-            {
-                "address": "/rt:dev/rn:zw/ad:1/sv:alarm_power/ad:21_0",
-                "groups": [
-                    "ch_0"
-                ],
-                "interfaces": [
-                    {
-                        "intf_t": "out",
-                        "msg_t": "evt.alarm.report",
-                        "val_t": "str_map",
-                        "ver": "1"
-                    },
-                    {
-                        "intf_t": "in",
-                        "msg_t": "cmd.alarm.get_report",
-                        "val_t": "string",
-                        "ver": "1"
-                    }
-                ],
-                "location": "",
-                "name": "alarm_power",
-                "prop_set_ref": "nif_0",
-                "props": {
-                    "is_secure": false,
-                    "is_unsecure": true,
-                    "sup_events": [
-                        "over_current"
-                    ]
-                }
-            },
-            {
                 "address": "/rt:dev/rn:zw/ad:1/sv:dev_sys/ad:21_0",
-                "groups": [
-                    "ch_0"
-                ],
+                "groups": ["ch_0"],
                 "interfaces": [
                     {
                         "intf_t": "out",
@@ -299,16 +213,20 @@ Message:
         "wakeup_interval": "-1"
     },
     "val_t": "object",
-    "ctime":"2017-08-23T12:07:00+0200",
-    "uid":"124235254"
+    "ctime": "1970-01-01T00:00:00+0000",
+    "uid": "123456789",
+    "props": {},
+    "tags": []
 }
 ```
 
-In addition, an addapter should always respond with inclusion report on `get_inclusion_report` command:
+### Getting inclusion report
+
+An adapter should always respond with an inclusion report on `get_inclusion_report` command. In the following example, we ask for the inclusion report for the device with node-id of 22 on the zwave adapter.
 
 Topic: `pt:j1/mt:cmd/rt:ad/rn:zw/ad:1`
 
-Message:
+Message (command):
 
 ```json
 {
@@ -317,29 +235,52 @@ Message:
     "val_t": "string",
     "val": "22",
     "props": null,
-    "tags": null
+    "tags": null,
+    "ctime": "1970-01-01T00:00:00+0000",
+    "uid": "123456789"
 }
 ```
 
 ## Removing a thing from FH system
 
-Exclusion process type 1 (zwave). The process consist of 2 steps:
+There are two main ways of excluding a device:
+
+Exclusion process type 1 (zwave): The process consist of 2 steps:
 
 1. An application sends exclusion command to adapter, adapter goes into exclusion mode, after that user can exclude device from network by triggering exclusion sequence on the device.
 
 2. Adapter generates exclusion_report event right after a thing was removed from system.
 
-Exclusion process type 2 (zigbee). The process consist of 2 steps:
+Exclusion process type 2 (zigbee): The process consist of 2 steps:
 
 1. User finds device in UI which he wants to delete and clicks "Delete" button, UI sends special delete command with device address to adapter and adapter removes the device from network.
 
 2. Adapter generates exclusion_report event right after a thing was deleted from system.
 
-### Exclusion command
+### Starting exclusion
 
 Topic: `pt:j1/mt:cmd/rt:ad/rn:zw/ad:1`
 
-Message:
+Message (command):
+
+```json
+{
+    "serv": "zwave-ad",
+    "type": "cmd.thing.exclusion",
+    "val_t": "bool",
+    "val": true,
+    "props": null,
+    "tags": null,
+    "ctime": "1970-01-01T00:00:00+0000",
+    "uid": "123456789"
+}
+```
+
+### Stopping exclusion
+
+Topic: `pt:j1/mt:cmd/rt:ad/rn:zw/ad:1`
+
+Message (command):
 
 ```json
 {
@@ -349,20 +290,19 @@ Message:
     "val": false,
     "props": null,
     "tags": null,
-    "ctime":"2017-08-23T12:07:00+0200",
-    "uid":"124235254"
+    "ctime": "1970-01-01T00:00:00+0000",
+    "uid": "123456789"
 }
 ```
 
-### Exclusion report
+### Sample exclusion report
 
 Topic: `pt:j1/mt:evt/rt:ad/rn:zw/ad:1`
 
-Message:
+Message (report):
 
 ```json
 {
-    "ctime": "2017-07-25T18:07:49+0200",
     "props": {},
     "serv": "zwave-ad",
     "tags": [],
@@ -371,30 +311,32 @@ Message:
         "address": "24"
     },
     "val_t": "object",
-    "ctime":"2017-08-23T12:07:00+0200",
-    "uid":"124235254"
+    "ctime": "1970-01-01T00:00:00+0000",
+    "uid": "123456789"
 }
 ```
 
-### Delete device from network command:
+### Delete specific thing
 
-Topic: `pt:j1/mt:cmd/rt:ad/rn:zw/ad:1`
+The following example will delete the device with address id 1 from the network.
 
-Message:
+Topic: `pt:j1/mt:cmd/rt:ad/rn:zigbee/ad:1`
+
+Message (command):
 
 ```json
 {
-    "serv": "zwave-ad",
+    "serv": "zigbee-ad",
     "type": "cmd.thing.delete",
     "val_t": "str_map",
     "val": {
-        "address": "71",
+        "address": "1",
         "stop": ""
     },
     "props": null,
     "tags": null,
-    "ctime":"2017-08-23T12:07:00+0200",
-    "uid":"124235254"
+    "ctime": "1970-01-01T00:00:00+0000",
+    "uid": "123456789"
 }
 ```
 
@@ -424,7 +366,7 @@ val - is error code, src - origin of the error.
 
 ## Requesting list of devices from adapter.
 
-An adapter has to support api for requesting a list of devices and respond with the list.
+An adapter has to support an API for requesting a list of devices and respond with the list.
 
 ### Command
 
@@ -502,7 +444,7 @@ wakeup_int (optional) - device wakeup interval, applicable only if device is bat
 
 ## Certification Test
 
-Supported by zigbee-ad. When `cmd.cert_test.start` is received, the transiever starts sending `cmd.binary.set` to the device which node id and endpoint are provided in the payload every 50ms. When `cmd.cert_test.stop` is received the test is stopped.
+Supported by zigbee-ad. When `cmd.cert_test.start` is received, the transceiver starts sending `cmd.binary.set` to the device which node id and endpoint are provided in the payload every 50 ms. When `cmd.cert_test.stop` is received the test is stopped.
 
 __Topic__
 
