@@ -636,6 +636,8 @@ out  | evt.gateway.factory_reset | null       | Factory reset event.
 
 ### Indicator service
 
+The service represents indicator device , it can be either simple visual indicator ,like LED element or text based indicator like small LCD screen. Some indicators can be composed of several components , for instance multiple LED segments or multiple LCD displays in one device , one can display temperature another can display humidity , etc. Indicator components are set independently by using different keys in message payload (`val` element)  
+
 #### Service names 
 
 `indicator_ctrl`
@@ -645,5 +647,5 @@ out  | evt.gateway.factory_reset | null       | Factory reset event.
 Type | Interface                          | Value type | Properties | Description
 -----|------------------------------------|------------|------------|------------
 in   | cmd.indicator.set_visual_element   | int_map    |  duration  | Requests visual element (led or some other light source) to display information. Key is a name of indicator component and value is actual value to set. Duration property defines how long the indicator should display the information.
-in   | cmd.indicator.set_text             | str_map    |  duration | Requests text indicator to display text. Key is name of indicator component and value is text to be displayed by the component.Duration property defines how long the indicator should display the information.
+in   | cmd.indicator.set_text             | str_map    |  duration  | Requests text indicator to display text. Key is name of indicator component and value is text to be displayed by the component.Duration property defines how long the indicator should display the information.
 
