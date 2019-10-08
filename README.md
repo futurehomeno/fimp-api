@@ -642,13 +642,8 @@ out  | evt.gateway.factory_reset | null       | Factory reset event.
 
 #### Interfaces 
 
-Type | Interface                          | Value type | Description
------|------------------------------------|------------|------------
-in   | cmd.indicator.set_visual_element   | int_map    | Requests visual element (led or some other light source) to display information. Key is a name of indicator component and value is actual value to set.
-in   | cmd.indicator.set_text             | str_map    | Requests text indicator to display text. Key is name of indicator component and value is text to be displayed by the component.
+Type | Interface                          | Value type | Properties | Description
+-----|------------------------------------|------------|------------|------------
+in   | cmd.indicator.set_visual_element   | int_map    |  duration  | Requests visual element (led or some other light source) to display information. Key is a name of indicator component and value is actual value to set. Duration property defines how long the indicator should display the information.
+in   | cmd.indicator.set_text             | str_map    |  duration | Requests text indicator to display text. Key is name of indicator component and value is text to be displayed by the component.Duration property defines how long the indicator should display the information.
 
-#### Service props
-
-Name             | Value example       | Description
------------------|---------------------|-------------
-`duration`       | "4"                 | Defines duration of how long the indicator should display the information.
