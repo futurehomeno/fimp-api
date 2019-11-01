@@ -26,7 +26,7 @@ Message:
 
 val - is error code, src - origin of the error.
 
-## Requesting list of devices from adapter.
+## Requesting list of devices from adapter
 
 An adapter has to support an API for requesting a list of devices and respond with the list.
 
@@ -105,8 +105,7 @@ status (optional) - device status
 wakeup_int (optional) - device wakeup interval, applicable only if device is battery powered.
 
 ## Certification Test
-
-Supported by zigbee-ad. When `cmd.cert_test.start` is received, the transceiver starts sending `cmd.binary.set` to the device which node id and endpoint are provided in the payload every 50 ms. When `cmd.cert_test.stop` is received the test is stopped.
+Supported by zigbee-ad. When `cmd.cert_test.start` is received, the transceiver starts sending `cmd.binary.set` to the device which node id and endpoint are provided in the payload every 50ms. When `cmd.cert_test.stop` is received the test is stopped.
 
 __Topic__
 
@@ -114,7 +113,7 @@ __Topic__
 
 __Message__
 
-`val` has the format `<node_id>_<endpoint_id>`. It only matters in the start command.
+`val` field in the payload has the format `<node_id>_<endpoint_id>`. The `endpoint_id` is typically `1` for Ikea Trådfri plug and `3` for Osram Smart+ Plug. The `node_id` is the id the device gets when added to the network. Both values can be obtained from the Zigbee service description in FimpUI.
 
 ```json
 {
