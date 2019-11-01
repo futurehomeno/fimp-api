@@ -2,7 +2,7 @@
 
 The following APIs should be common across all adapters, but the example code will use zwave-ad. Notes have been added for specific differences for the most common adapters.
 
-## Error reporting.
+## Error reporting
 
 Topic: `pt:j1/mt:evt/rt:ad/rn:zw/ad:1` or service address: `pt:j1/mt:evt/rt:dev/rn:zw/ad:1/sv:dev_sys/ad:95_0`
 
@@ -103,6 +103,50 @@ power_source - power source descriptor, ac,battery
 status (optional) - device status
 
 wakeup_int (optional) - device wakeup interval, applicable only if device is battery powered.
+
+## Network Update
+
+### Update all nodes
+Supported by zigbee-ad and zwave-ad. Zigbee-ad does not care about the value field. It will rediscover all nodes in the network.
+
+Topic: `pt:j1/mt:cmd/rt:ad/rn:zw/ad:1`
+
+Message:
+
+```json
+{
+  "serv": "zwave-ad",
+  "type": "cmd.network.update",
+  "val_t": "string",
+  "val": "topology",
+  "props": null,
+  "tags": null,
+  "src": "tplex-ui",
+  "ver": "1",
+  "uid": "a964746d-cd26-4cc6-9d48-4c52044fd2ff"
+}
+```
+
+### Update one node
+Supported by zigbee-ad and zwave-ad.
+
+Topic: `pt:j1/mt:cmd/rt:ad/rn:zw/ad:1`
+
+Message:
+
+```json
+{
+  "serv": "zwave-ad",
+  "type": "cmd.network.node_update",
+  "val_t": "int",
+  "val": 124,
+  "props": null,
+  "tags": null,
+  "src": "tplex-ui",
+  "ver": "1",
+  "uid": "5e99da16-fa16-41e6-a25e-83ed66dd8e76"
+}
+```
 
 ## Certification Test
 Supported by zigbee-ad. When `cmd.cert_test.start` is received, the transceiver starts sending `cmd.binary.set` to the device which node id and endpoint are provided in the payload every 50ms. When `cmd.cert_test.stop` is received the test is stopped.
