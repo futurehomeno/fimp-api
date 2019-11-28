@@ -7,7 +7,8 @@
 
 
 #### Get system connection paramters : 
-Topic : pt:j1/mt:cmd/rt:ad/rn:ikea/ad:1 (ikea is just an example, it has to be replaces with real adapter name)
+Adapter topic : pt:j1/mt:cmd/rt:ad/rn:ikea/ad:1 (ikea is just an example, it has to be replaces with real adapter name)
+Application topic : pt:j1/mt:cmd/rt:app/rn:homekit/ad:1
 
 Message :
 ```json 
@@ -17,13 +18,15 @@ Message :
  "val":null,
  "props":null,
  "tags":null,
+ "resp_to":"",
  "ctime":"2017-08-23T12:07:00+0200",
  "uid":"124235254"
 }
 ```
-System has to respond with : 
-
-Topic : pt:j1/mt:cmd/rt:ad/rn:ikea/ad:1 (ikea is just an example, it has to be replaces with real adapter name)
+System has to respond to topic  : 
+Topic defined in "resp_to" field of request OR
+Adapter topic : pt:j1/mt:evt/rt:ad/rn:ikea/ad:1 (ikea is just an example, it has to be replaces with real adapter name)
+Application topic : pt:j1/mt:evt/rt:app/rn:homekit/ad:1
 
 Message :
 ```json 
