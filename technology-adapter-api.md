@@ -26,7 +26,7 @@ Message:
 
 val - is error code, src - origin of the error.
 
-## Requesting list of devices from adapter
+## Requesting list of devices
 
 An adapter has to support an API for requesting a list of devices and respond with the list.
 
@@ -180,5 +180,28 @@ __Message__
     "tags": null,
     "src": "thingsplex-ui",
     "ver": "1"
+}
+```
+
+## Reporting Inclusion Status
+This report is sent when certain events occur in the adapter.
+
+Status values supported by zwave-ad: 
+`ADD_NODE_STARTED` -> `ADD_NODE_ADDED` -> `ADD_NODE_PROTOCOL_DONE` -> `ADD_NODE_GET_NODE_INFO` -> `ADD_NODE_DONE`
+
+Status values supported by zigbee-ad: 
+- `ADD_NODE_STARTED` when the network is opened
+- `ADD_NODE_DONE` when the network is closed
+
+```json
+{
+  "serv": "zwave-ad",
+  "type": "evt.thing.inclusion_status_report",
+  "val_t": "string",
+  "val": "ADD_NODE_STARTED",
+  "val_t": "string",
+  "ctime": "2019-02-04T13:41:02+0100",
+  "props": {},
+  "tags": []
 }
 ```
