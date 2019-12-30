@@ -199,7 +199,61 @@ Status values supported by zigbee-ad:
   "type": "evt.thing.inclusion_status_report",
   "val_t": "string",
   "val": "ADD_NODE_STARTED",
-  "val_t": "string",
+  "ctime": "2019-02-04T13:41:02+0100",
+  "props": {},
+  "tags": []
+}
+```
+
+## Configuring Logging
+Supported by zigbee-ad.
+
+### Setting Log Configuration
+
+```json
+{
+  "serv": "zigbee-ad",
+  "type": "cmd.log.configure",
+  "val_t": "str_map",
+  "val": {
+      "level": "debug",
+      "max_size": "5"
+  },
+  "ctime": "2019-02-04T13:41:02+0100",
+  "props": {},
+  "tags": []
+}
+```
+ 
+Configurable values:
+- "level": Sets log level to one of `trace`, `debug`, `info`, `warn`, `error`, `fatal`, `panic`
+- "max_size": Sets the maximum log size in MB before rolling.
+
+### Getting Log Configuration
+
+```json
+{
+  "serv": "zigbee-ad",
+  "type": "cmd.log.get_configs",
+  "val_t": "null",
+  "val": null,
+  "ctime": "2019-02-04T13:41:02+0100",
+  "props": {},
+  "tags": []
+}
+```
+
+This will produce a report similar to this:
+
+```json
+{
+  "serv": "zigbee-ad",
+  "type": "evt.log.configs_report",
+  "val_t": "str_map",
+  "val": {
+      "level": "debug",
+      "max_size": "5"
+  },
   "ctime": "2019-02-04T13:41:02+0100",
   "props": {},
   "tags": []
