@@ -45,7 +45,7 @@ Additionally, each service it will have its own unique address (topic) over whic
 Type | Sample values                  | Description
 -----|--------------------------------|------------
 pt   | j1                             | parser type, typically j1, representing JSON v1.
-mt   | evt, cmd                       | message type
+mt   | evt, cmd , rsp                 | message type . cmd - command , evt - event , rsp - response to request
 rt   | ad, app, dev                   | resource type, ad = adapter, dev = device.
 rn   | zw, vinculum, zigbee, kind-owl | resource name, the actual name of the rt
 sv   | out_bin_sw, out_lvl_sw, etc.   | service name
