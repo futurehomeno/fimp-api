@@ -319,13 +319,13 @@ out  | evt.presence.report     | bool       | true = presence
 Service name        | Event                                   | Description
 --------------------|-----------------------------------------|------------
 `alarm_appliance`   | program_started, program_inprogress, program_completed, replace_filter, set_temp_error, supplying_water, water_supply_err, boiling, boiling_err, washing, washing_err, rinsing, rinsing_err, draining, draining_err, spinning, spinning_err, drying, drying_err, fan_err, compressor_err |
-`alarm_burglar`     | intrusion, tamper_removed_cover, alarm_burglar, tamper_invalid_code, glass_breakage |
+`alarm_burglar`     | intrusion, tamper_removed_cover, tamper_invalid_code, tamper_force_open, alarm_burglar, glass_breakage |
 `alarm_emergency`   | police, fire, medical                   |
 `alarm_fire`        | smoke, smoke_test                       |
 `alarm_gas`         | CO, CO2, combust_gas_detected, toxic_gas_detected, test, replace |
 `alarm_health`      | leaving_bed, sitting_on_bed, lying_on_bed, alarm_health, posture_change, sitting_on_bed_edge, alarm_health, volatile_organic_compound |
 `alarm_heat`        | overheat, temp_rise, underheat          |
-`alarm_lock`        | manual_lock, rf_lock, keypad_lock, manual_not_locked, rf_not_locked, auto_locked, jammed | TODO: move to doorlock service
+`alarm_lock`        | manual_lock, manual_unlock, rf_lock, rf_unlock, keypad_lock, keypad_unlock, tag_lock, tag_unlock, manual_not_locked, rf_not_locked, auto_locked, jammed, door_opened, door_closed, lock_failed | TODO: move to doorlock service
 `alarm_power`       | on, ac_on, ac_off, surge, voltage_drop, over_current, over_voltage, replace_soon, replace_now, charging, charged, charge_soon, charge_now | TODO: move to power_supply service
 `alarm_siren`       | inactive, siren_active                  |
 `alarm_system`      | hw_failure, sw_failure, hw_failure_with_code, sw_failure_with_code |
@@ -481,15 +481,19 @@ Name             | Value example            | Description
 -----------------|--------------------------|-------------
 `sup_components` | ["red", "green", "blue"] | List of supported color components
 
-Supported color components: red, green, blue, warm_w, cold_w, temp, amber, cyan, purple
+Supported color components:
+- Zwave: red, green, blue, warm_w, cold_w, amber, cyan, purple
+- Zigbee: red, green, blue, temp
 
 #### Notes
 
-- temp - is color temperature in Kalvin. Value range 1000K-10000K.
+- temp - is color temperature in Mired (micro reciprocal degree). It is related to Kelvins as:
+`temp_kelvins = 1,000,000 / temp_mireds`
+Supported `temp` values: 1-65279 mired. Actual color temperature supported by end devices is 2700K-6500K.
 
-- warm_w - is warm white light source intensity.Value range 0-255.
+- warm_w - is warm white light source intensity. Value range 0-255.
 
-- cold_w - is cold white light source intensity.Value range 0-255.
+- cold_w - is cold white light source intensity. Value range 0-255.
 
 - Mix of warm white intensity and cold white intensity forms color temperature.
 
@@ -649,3 +653,5 @@ Type | Interface                          | Value type | Properties | Descriptio
 in   | cmd.indicator.set_visual_element   | int_map    |  duration  | Requests visual element (led or some other light source) to display information. Key is a name of indicator component and value is actual value to set. Duration property defines how long the indicator should display the information.
 in   | cmd.indicator.set_text             | str_map    |  duration  | Requests text indicator to display text. Key is name of indicator component and value is text to be displayed by the component.Duration property defines how long the indicator should display the information.
 
+### Product Specific Services
+Documentation of product specific service can be found [here](product-specific-services.md).
