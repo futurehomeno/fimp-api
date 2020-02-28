@@ -604,7 +604,7 @@ Name             | Value example                  | Description
 -----------------|--------------------------------|-------------
 `sup_notiftypes` | audio, visual                  | supported notification-types, like siren, flashlight
 `sup_states`     | open, closed, closing, opening | supported states
-`sup_tstates`    | open, close                    | supported target states
+`sup_tstates`    | open, closed                    | supported target states
 
 ### Complex alarm system service
 
