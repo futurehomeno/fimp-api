@@ -203,7 +203,7 @@ Type | Interface                     | Value type | Properties              | De
 in   | cmd.meter.get_report          | string     |                         | Value - is a unit. May not be supported by all meters.
 in   | cmd.meter.reset               | null       |                         | Resets all historical readings.
 out  | evt.meter.report              | float      | unit, prv_data, delta_t |
-out  | evt.meter.extended_report     | object     |                         | [Extended meter report](#extended-report-object) with up to 17 data points
+out  | evt.meter.extended_report     | float_map  |                         | [Extended meter report](#extended-report-object) with up to 17 data points
 in   | cmd.meter.get_extended_report | null       |                         | Request extended report
 
 #### Interface props
@@ -222,25 +222,25 @@ Name        | Value example          | Description
 
 #### Extended report object
 
-Name            | Value type | Unit    | Description
-----------------|------------|---------|--------------
-`e_import`      | float      | kWh     | Energy Import
-`e_export`      | float      | kWh     | Energy Export
-`last_e_export` | float      | kWh     | Energy Export that day
-`last_e_import` | float      | kWh     | Energy Import that day
-`p_import`      | float      | W       | Power Import
-`p_import_avg`  | float      | W       | Power Import avarage
-`p_import_min`  | float      | W       | Power Import minimum that day
-`p_import_max`  | float      | W       | Power Import max that day
-`p_export`      | float      | W       | Power Export
-`p_export_min`  | float      | W       | Power Export minimum that day
-`p_export_max`  | float      | W       | Power Export max that day
-`u1`            | float      | V       | Voltage phase 1
-`u2`            | float      | V       | Voltage phase 2
-`u3`            | float      | V       | Voltage phase 3
-`i1`            | float      | A       | Current phase 1
-`i2`            | float      | A       | Current phase 2
-`i3`            | float      | A       | Current phase 3
+Name            | Unit    | Description
+----------------|---------|--------------
+`e_import`      | kWh     | Energy Import
+`e_export`      | kWh     | Energy Export
+`last_e_export` | kWh     | Energy Export that day
+`last_e_import` | kWh     | Energy Import that day
+`p_import`      | W       | Power Import
+`p_import_avg`  | W       | Power Import avarage
+`p_import_min`  | W       | Power Import minimum that day
+`p_import_max`  | W       | Power Import max that day
+`p_export`      | W       | Power Export
+`p_export_min`  | W       | Power Export minimum that day
+`p_export_max`  | W       | Power Export max that day
+`u1`            | V       | Voltage phase 1
+`u2`            | V       | Voltage phase 2
+`u3`            | V       | Voltage phase 3
+`i1`            | A       | Current phase 1
+`i2`            | A       | Current phase 2
+`i3`            | A       | Current phase 3
 
 
 ***
