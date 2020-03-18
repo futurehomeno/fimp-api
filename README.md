@@ -285,6 +285,7 @@ Service name         | Units                    | Description
 `sensor_watflow`     | l/h                      | Water flow sensor
 `sensor_watpressure` | kPa                      | Water pressure sensor
 `sensor_weight`      | kg, lbs                  | Weight sensor
+`sensor_noise`      | dB                  | Noise sensor
 
 #### Interfaces
 
