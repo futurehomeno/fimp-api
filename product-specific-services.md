@@ -10,17 +10,17 @@ Yale Doorman custom service definition.
 
 #### Interfaces
 
-Type | Interface                   | Value Type | Description            | Example
------|-----------------------------|------------|------------------------| --------
-out  | evt.doorman.session_report  | null       | Integration required   | {"slot_number":"0", "code_type":"pin", "code":"123456"}
-in   | cmd.doorman.integration     | str_map    | Start lock integration | {“parameter_id”:”5”, “value”: “1”}
-in   | cmd.doorman.set_param       | str_map    |                        | {"parameter_id":"5", "value":"5"}
-in   | cmd.doorman.get_params      | null       |                        | 
-out  | evt.doorman.param_report    | str_map    | Response to get_params | 
-in   | cmd.doorman.set_user        | str_map    | Set pin or tag         | {“slot_number”:”0”, ”code”:”123456”}
-in   | cmd.doorman.clear_user      | str_map    |                        | {“slot_number”:”0”}
-out  | evt.doorman.activity_report | str_map    | Sent after an activity | {“event_type”:”id”, “status”:”0”, “error_code”:”0”, “user_status”:”added”, “slot_number”:”0”, “alarm_type”:”0”, “alarm_level”:”0”, “arming_parameter”:”0”, “sequence_number”:”0”, ”card_uid_data”:”12345678”}
-in   | cmd.doorman.arm_confirm     | str_map    |                        | {“sequence_number”:”0”, “operating_parameter”:”0”}
+Type | Interface                     | Value Type | Description            | Example
+-----|-------------------------------|------------|------------------------| --------
+out  | evt.doorman_session.report    | null       | Integration required   | 
+in   | cmd.doorman.integration       | str_map    | Start lock integration | {“parameter_id”:”5”, “value”: “1”}
+in   | cmd.doorman_param.set         | str_map    |                        | {"parameter_id":"5", "value":"5"}
+in   | cmd.doorman_params.get_report | null       |                        | 
+out  | evt.doorman_param.report      | str_map    | Response to get_params | 
+in   | cmd.doorman_user.set          | str_map    | Set pin or tag         | {“slot_number”:”0”, ”code”:”123456”}
+in   | cmd.doorman_user.clear        | str_map    |                        | {“slot_number”:”0”}
+out  | evt.doorman_activity.report   | str_map    | Sent after an activity | {“event_type”:”id”, “status”:”0”, “error_code”:”0”, “user_status”:”added”, “slot_number”:”0”, “alarm_type”:”0”, “alarm_level”:”0”, “arming_parameter”:”0”, “sequence_number”:”0”, ”card_uid_data”:”12345678”}
+in   | cmd.doorman.arm_confirm       | str_map    |                        | {“sequence_number”:”0”, “operating_parameter”:”0”}
 
 More details and examples can be found on [Notion](https://www.notion.so/Assa-Abloy-Yale-doorman-v2-Zigbee-c94f3164a74f4035bf2d47d29ec9c9c0).
 
