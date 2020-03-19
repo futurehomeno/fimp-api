@@ -203,8 +203,8 @@ Type | Interface                     | Value type | Properties              | De
 in   | cmd.meter.get_report          | string     |                         | Value - is a unit. May not be supported by all meters.
 in   | cmd.meter.reset               | null       |                         | Resets all historical readings.
 out  | evt.meter.report              | float      | unit, prv_data, delta_t |
-out  | evt.meter.extended_report     | float_map  |                         | [Extended meter report](#extended-report-object) with up to 17 data points
-in   | cmd.meter.get_extended_report | null       |                         | Request extended report
+out  | evt.meter_ext.report          | float_map  |                         | [Extended meter report](#extended-report-object) with up to 17 data points
+in   | cmd.meter_ext.get_report      | null       |                         | Request extended report
 
 #### Interface props
 
@@ -216,9 +216,10 @@ Name       | Value example | Description
 
 #### Service props
 
-Name        | Value example          | Description
-------------|------------------------|-------------
-`sup_units` | ["W", "kWh", "A", "V"] | list of supported units.
+Name                | Value example                                  | Description
+--------------------|------------------------------------------------|-------------
+`sup_units`         | ["W", "kWh", "A", "V"]                         | list of supported units.
+`sup_extended_vals` | [See extended report](#extended-report-object) |
 
 #### Extended report object
 
