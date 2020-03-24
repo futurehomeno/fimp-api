@@ -13,9 +13,9 @@ Yale Doorman custom service definition.
 Type | Interface                     | Value Type | Description            | Example
 -----|-------------------------------|------------|------------------------| --------
 out  | evt.doorman_session.report    | null       | Integration required   | 
-in   | cmd.doorman.integration       | str_map    | Start lock integration | {“parameter_id”:”5”, “value”: “1”}
+in   | cmd.doorman.integration       | str_map    | Start lock integration | {"slot_number":"0", "code_type":"pin", "code":"123456"}
 in   | cmd.doorman_param.set         | str_map    |                        | {"parameter_id":"5", "value":"5"}
-in   | cmd.doorman_params.get_report | null       |                        | 
+in   | cmd.doorman_param.get_report | null       |                        | 
 out  | evt.doorman_param.report      | str_map    | Response to get_params | 
 in   | cmd.doorman_user.set          | str_map    | Set pin or tag         | {“slot_number”:”0”, ”code”:”123456”}
 in   | cmd.doorman_user.clear        | str_map    |                        | {“slot_number”:”0”}
