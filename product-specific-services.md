@@ -1,14 +1,14 @@
 # Product Specific Services
 The following services are designed for specific products.
 
-### Doorman service
+## Doorman service
 Yale Doorman custom service definition.
 
-#### Service names
+### Service names
 
 `doorman`
 
-#### Interfaces
+### Interfaces
 
 Type | Interface                     | Value Type | Description            | Example
 -----|-------------------------------|------------|------------------------| --------
@@ -21,10 +21,11 @@ in   | cmd.doorman_user.set          | str_map    | Set pin or tag         | {�
 in   | cmd.doorman_user.clear        | str_map    |                        | {“slot_number”:”0”}
 out  | evt.doorman_activity.report   | str_map    | Sent after an activity | {“event_type”:”id”, “status”:”0”, “error_code”:”0”, “user_status”:”added”, “slot_number”:”0”, “alarm_type”:”0”, “alarm_level”:”0”, “arming_parameter”:”0”, “sequence_number”:”0”, ”card_uid_data”:”12345678”}
 in   | cmd.doorman.arm_confirm       | str_map    |                        | {“sequence_number”:”0”, “operating_parameter”:”0”}
+out  | evt.op.ack                    | string     | Command sent to lock. Applies to `cmd.doorman_param.set` | Value can be "ack" or "nack"
 
 More details and examples can be found on [Notion](https://www.notion.so/Assa-Abloy-Yale-doorman-v2-Zigbee-c94f3164a74f4035bf2d47d29ec9c9c0).
 
-#### Interface props
+### Interface props
 
 Name              | Value                                              | Description
 ------------------|----------------------------------------------------|-------------
@@ -34,7 +35,7 @@ Name              | Value                                              | Descrip
 `card_uid_data`   |                                                    | The Hex format of the TAG UID
 `user_status`     | “added”, “removed”                                 | Determines whether a user was successfully added or removed from the system.
 
-#### Configuration parameters
+### Configuration parameters
 
 Name                 | ID | Value
 ---------------------|----|-------
