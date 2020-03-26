@@ -271,6 +271,7 @@ Service name         | Units                    | Description
 `sensor_humid`       | %, g/m3                  | Relative humidity sensor
 `sensor_lumin`       | Lux, %                   | Luminance sensor
 `sensor_moist`       | %, kOhm, m3/m3, aw       | Moisture sensor
+`sensor_noise`       | dB                       | Noise sensor
 `sensor_power`       | W, Btu/h                 | Power sensor. Btu/h - British thermal unit per hour
 `sensor_rain`        | mm/h, in/h               | Rain rate sensor
 `sensor_rotation`    | rpm, Hz                  | Rotation sensor
@@ -286,7 +287,6 @@ Service name         | Units                    | Description
 `sensor_watflow`     | l/h                      | Water flow sensor
 `sensor_watpressure` | kPa                      | Water pressure sensor
 `sensor_weight`      | kg, lbs                  | Weight sensor
-`sensor_noise`      | dB                  | Noise sensor
 
 #### Interfaces
 
