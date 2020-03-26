@@ -257,8 +257,8 @@ Service name         | Units                    | Description
 `sensor_accelz`      | m/s2                     | Acceleration, Z-axis
 `sensor_airflow`     | m3/h, ft3/m              | Air flow sensor
 `sensor_anglepos`    | %, degN, degS            | Angle Position sensor
-`sensor_atmo`        | kPa, ha                  | Atmospheric pressure sensor. ha - inches of Mercury
-`sensor_baro`        | kPa, ha                  | Barometric  pressure sensor. ha - inches of Mercury
+`sensor_atmo`        | kPa, ha, mbar                  | Atmospheric pressure sensor. ha - inches of Mercury
+`sensor_baro`        | kPa, ha, mbar                  | Barometric  pressure sensor. ha - inches of Mercury
 `sensor_co2`         | ppm                      | CO2-level sensor
 `sensor_co`          | mol/m3                   | Carbon Monoxide level sensor
 `sensor_current`     | A, mA                    | Current sensor
@@ -271,6 +271,7 @@ Service name         | Units                    | Description
 `sensor_humid`       | %, g/m3                  | Relative humidity sensor
 `sensor_lumin`       | Lux, %                   | Luminance sensor
 `sensor_moist`       | %, kOhm, m3/m3, aw       | Moisture sensor
+`sensor_noise`       | dB                       | Noise sensor
 `sensor_power`       | W, Btu/h                 | Power sensor. Btu/h - British thermal unit per hour
 `sensor_rain`        | mm/h, in/h               | Rain rate sensor
 `sensor_rotation`    | rpm, Hz                  | Rotation sensor
