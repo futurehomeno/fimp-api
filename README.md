@@ -287,6 +287,7 @@ Service name         | Units                    | Description
 `sensor_weight`      | kg, lbs                  | Weight sensor
 `sensor_noise`      | dB                  | Noise sensor
 `sensor_wind`      | kph                  | Wind sensor
+`sensor_gust`      | kph                  | Gust sensor
 
 #### Interfaces
 
