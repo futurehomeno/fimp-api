@@ -268,6 +268,7 @@ Service name         | Units                    | Description
 `sensor_elresist`    | ohm/m                    | Electrical resistivity sensor
 `sensor_freq`        | Hz, kHz                  | Frequency sensor
 `sensor_gp`          | %, NOM                   | General purpose sensor
+`sensor_gust`      | kph                  | Gust sensor
 `sensor_humid`       | %, g/m3                  | Relative humidity sensor
 `sensor_lumin`       | Lux, %                   | Luminance sensor
 `sensor_moist`       | %, kOhm, m3/m3, aw       | Moisture sensor
@@ -287,9 +288,7 @@ Service name         | Units                    | Description
 `sensor_watflow`     | l/h                      | Water flow sensor
 `sensor_watpressure` | kPa                      | Water pressure sensor
 `sensor_weight`      | kg, lbs                  | Weight sensor
-`sensor_noise`      | dB                  | Noise sensor
 `sensor_wind`      | kph                  | Wind sensor
-`sensor_gust`      | kph                  | Gust sensor
 
 #### Interfaces
 
