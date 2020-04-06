@@ -468,17 +468,19 @@ Name             | Value example                                                
 
 Is used by door locks, keypads, security panels to enter and manage pin codes and rfids.
 
+Detailed specification is avaliable on zwave-ad repo under docs folder.
+
 #### Service names
 
 `user_code`
 
 Type | Interface                      | Value type | Description
 -----|--------------------------------|------------|------------------
-in   | cmd.usercode.clear             | str_map    | {"user_id":"123", "code_type":"rfid"}, code type should be either "all" or one of supported types
-in   | cmd.usercode.clear_all         | null       | Clear all codes
-in   | cmd.usercode.get_config_report | str_map    | {"user_id":"123", "code_type":"rfid"}, code type should be either "all" or one of supported types
-in   | cmd.usercode.set               | str_map    | {"user_id":"123", "user_status":"enabled", "user_type":"master", "code_type":"rfid", "code":"4321"}
-out  | evt.usercode.config_report     | str_map    | {"user_id":"123", "user_status":"enabled", "user_type":"master", "code_type":"rfid", "code":"4321"}
+in   | cmd.usercode.clear             | str_map    | 
+in   | cmd.usercode.clear_all         | null       | 
+in   | cmd.usercode.get | str_map    | 
+in   | cmd.usercode.set               | str_map    |
+out  | evt.usercode.access_report     | str_map    | 
 
 #### Service props
 
@@ -684,3 +686,59 @@ in   | cmd.indicator.set_text             | str_map    |  duration  | Requests t
 
 ### Product Specific Services
 Documentation of product specific service can be found [here](product-specific-services.md).
+
+### Time service
+The Time Command Class, version1 is used to read date and time from a supporting node in a Z-Wave
+network. 
+
+#### Service names
+
+`time`
+
+#### Interface
+
+Type | Interface                 | Value type | Description
+-----|---------------------------|------------|------------
+in   | cmd.time.get_report | null       | Get current time (from Z-wave node)
+in   | cmd.date.get_report | null       | Get current date
+out  | evt.date.report | int_map       | Date report
+out  | evt.date.report | int_map       | Time report
+
+### Time parameters service
+The Time Parameters Command Class is used to set date and time in a device hosting this facility. In
+case the clock is updated via an external source such as SAT, internet, Rugby/Frankfurt source, omit this
+command class. Time zone offset and daylight savings may be set in the Time Command Class if
+necessary. The data formats are based on the International Standard ISO 8601.
+
+#### Service names
+
+`time_parameters`
+
+#### Interface
+
+Type | Interface                 | Value type | Description
+-----|---------------------------|------------|------------
+in   | cmd.time_parameters.get_report | null       | Get current time parameters
+in   | cmd.time_parameters.set | int_map       | Get current date
+out  | evt.time_parameters.report| int_map       | Time parameters report
+
+### Schedule Entry Lock Service 
+This command sets or erases a schedule slot for a identified user who already has valid user access
+code (ser_code service). The year day schedule represents two days, any time apart, where the specified user ID’s code is valid. When setting the schedule slot, the start parameters of the time fence needs to occur prior to the stop parameters and the year day schedule is automatically enabled for the identified user.
+
+Note: Each user can only use one type of scheduling at a time.
+
+Detailed specification is avaliable on zwave-ad repo under docs folder.
+
+#### Service names
+
+`schedule_entry`
+
+#### Interface
+
+Type | Interface                 | Value type | Description
+-----|---------------------------|------------|------------
+in   | cmd.schedule_entry.get_report | null       | Get schedule entry for specified slot
+in   | cmd.schedule_entry.set | int_map       | Set schedule entry
+in   | cmd.schedule_entry.clear | int_map       | Set schedule entry
+out  | evt.schedule_entry.report| int_map       | Schedule entry report
