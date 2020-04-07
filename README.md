@@ -709,6 +709,8 @@ out  | evt.date.report     | int_map    | Time report
 
 The Time Parameters service is used to set date and time. Time zone offset and daylight savings may be set in the Time Parameters service if necessary. The data formats is ISO-8601 compliant.
 
+Examples can be found in [Time.md](z-wave/Time.md) in the z-wave folder.
+
 Note: In the case where the clock is updated via an external source such as SAT, internet, Rugby/Frankfurt source, omit this service.
 
 #### Service names
@@ -723,13 +725,16 @@ in   | cmd.time_parameters.get_report | null       | Get current time parameters
 in   | cmd.time_parameters.set        | int_map    | Sets current time parameters
 out  | evt.time_parameters.report     | int_map    | Time parameters report
 
+Examples can be found in [Time.md](z-wave/Time.md) in the z-wave folder.
+
+
 ### Schedule Entry Service
 
-This service handles a schedule slot for an user who already has valid user access code (set_code service). The year day schedule represents two days, any time apart, where the specified user ID’s code is valid. When setting the schedule slot, the start parameters of the time fence needs to occur prior to the stop parameters and the year day schedule is automatically enabled for the identified user.
+This service handles a schedule slot for an user who already has valid user access code [user_code](#user-code-service) service. The [year day schedule](z-wave/User_Code.md#schedule_entry_lock) represents two days, any time apart, where the specified user ID’s code is valid. When setting the schedule slot, the start parameters of the time fence needs to occur prior to the stop parameters and the year day schedule is automatically enabled for the identified user.
 
 Note: Each user can only use one type of scheduling at a time.
 
-Detailed specification is avaliable on zwave-ad repo under docs folder.
+Detailed specification is avaliable in [User_Code.md](z-wave/User_Code.md) in the z-wave folder.
 
 #### Service names
 
