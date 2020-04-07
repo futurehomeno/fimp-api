@@ -723,7 +723,7 @@ in   | cmd.time_parameters.get_report | null       | Get current time parameters
 in   | cmd.time_parameters.set        | int_map    | Sets current time parameters
 out  | evt.time_parameters.report     | int_map    | Time parameters report
 
-### Schedule Entry Lock Service
+### Schedule Entry Service
 
 This service handles a schedule slot for an user who already has valid user access code (set_code service). The year day schedule represents two days, any time apart, where the specified user ID’s code is valid. When setting the schedule slot, the start parameters of the time fence needs to occur prior to the stop parameters and the year day schedule is automatically enabled for the identified user.
 
