@@ -45,7 +45,7 @@ Additionally, each service it will have its own unique address (topic) over whic
 Type | Sample values                  | Description
 -----|--------------------------------|------------
 pt   | j1                             | parser type, typically j1, representing JSON v1.
-mt   | evt, cmd , rsp                 | message type . cmd - command , evt - event , rsp - response to request
+mt   | evt, cmd, rsp                 | message type . cmd - command, evt - event, rsp - response to request
 rt   | ad, app, dev                   | resource type, ad = adapter, dev = device.
 rn   | zw, vinculum, zigbee, kind-owl | resource name, the actual name of the rt
 sv   | out_bin_sw, out_lvl_sw, etc.   | service name
@@ -112,7 +112,7 @@ in   | cmd.config.get_report       | str_array  | Requests service to respond wi
 in   | cmd.config.get_supp_list    | null       | Requests service to respond with a list of supported configurations.
 in   | cmd.config.set              | str_map    | Sets configuration. Value is a key-value pairs.
 in   | cmd.config.supp_list_report | str_map    | List of supported configurations. Key - config name, value - short description.
-in   | cmd.thing.reboot            | string     | Requests device to run either complete reboot or reboot specific component. 
+in   | cmd.thing.reboot            | string     | Requests device to run either complete reboot or reboot specific component.
 out  | evt.config.report           | str_map    | Reports configurations in form of key-value pairs.
 -|||
 in   | cmd.group.add_members       | object     | Adds members to the group. Object has the same format as members_report
@@ -268,6 +268,7 @@ Service name         | Units                    | Description
 `sensor_elresist`    | ohm/m                    | Electrical resistivity sensor
 `sensor_freq`        | Hz, kHz                  | Frequency sensor
 `sensor_gp`          | %, NOM                   | General purpose sensor
+`sensor_gust`      | kph                  | Gust sensor
 `sensor_humid`       | %, g/m3                  | Relative humidity sensor
 `sensor_lumin`       | Lux, %                   | Luminance sensor
 `sensor_moist`       | %, kOhm, m3/m3, aw       | Moisture sensor
@@ -287,7 +288,7 @@ Service name         | Units                    | Description
 `sensor_watflow`     | l/h                      | Water flow sensor
 `sensor_watpressure` | kPa                      | Water pressure sensor
 `sensor_weight`      | kg, lbs                  | Weight sensor
-`sensor_noise`      | dB                  | Noise sensor
+`sensor_wind`      | kph                  | Wind sensor
 
 #### Interfaces
 
@@ -467,17 +468,19 @@ Name             | Value example                                                
 
 Is used by door locks, keypads, security panels to enter and manage pin codes and rfids.
 
+Detailed specification is avaliable on zwave-ad repo under docs folder.
+
 #### Service names
 
 `user_code`
 
 Type | Interface                      | Value type | Description
 -----|--------------------------------|------------|------------------
-in   | cmd.usercode.clear             | str_map    | {"user_id":"123", "code_type":"rfid"}, code type should be either "all" or one of supported types
-in   | cmd.usercode.clear_all         | null       | Clear all codes
-in   | cmd.usercode.get_config_report | str_map    | {"user_id":"123", "code_type":"rfid"}, code type should be either "all" or one of supported types
-in   | cmd.usercode.set               | str_map    | {"user_id":"123", "user_status":"enabled", "user_type":"master", "code_type":"rfid", "code":"4321"}
-out  | evt.usercode.config_report     | str_map    | {"user_id":"123", "user_status":"enabled", "user_type":"master", "code_type":"rfid", "code":"4321"}
+in   | cmd.usercode.clear             | str_map    |
+in   | cmd.usercode.clear_all         | null       |
+in   | cmd.usercode.get               | str_map    |
+in   | cmd.usercode.set               | str_map    |
+out  | evt.usercode.access_report     | str_map    |
 
 #### Service props
 
@@ -645,7 +648,7 @@ The service represents alarm system or sub-system with internal logic. It can be
 #### Interfaces
 
 Type | Interface         | Value type | Description
------|-------------------|----------- |------------
+-----|-------------------|------------|------------
 in   | cmd.alarm.silence | string     | Silence sirens without ceasing alarm situation.
 
 ### Gateway service
@@ -664,22 +667,79 @@ Type | Interface                 | Value type | Description
 in   | cmd.gateway.factory_reset | null       | Instructs gateway to perform factory reset
 in   | cmd.gateway.reboot        | null       | Gateways reboot
 in   | cmd.gateway.shutdown      | null       | Gateways shutdown
-out  | evt.gateway.factory_reset | null       | Factory reset event.
+out  | evt.gateway.factory_reset | null       | Factory reset event
 
 ### Indicator service
 
-The service represents indicator device , it can be either simple visual indicator ,like LED element or text based indicator like small LCD screen. Some indicators can be composed of several components , for instance multiple LED segments or multiple LCD displays in one device , one can display temperature another can display humidity , etc. Indicator components are set independently by using different keys in message payload (`val` element)  
+The service represents indicator device e.g. a simple visual indicator like an LED element, text based indicator like small LCD screen, etc. Some indicators can be composed of several components, for instance multiple LED segments or multiple LCD displays in one device, where one can display temperature another can display humidity, etc. Indicator components are set independently by using different keys in message payload (`val`).
 
-#### Service names 
+#### Service names
 
 `indicator_ctrl`
 
-#### Interfaces 
+#### Interfaces
 
 Type | Interface                          | Value type | Properties | Description
 -----|------------------------------------|------------|------------|------------
-in   | cmd.indicator.set_visual_element   | int_map    |  duration  | Requests visual element (led or some other light source) to display information. Key is a name of indicator component and value is actual value to set. Duration property defines how long the indicator should display the information.
-in   | cmd.indicator.set_text             | str_map    |  duration  | Requests text indicator to display text. Key is name of indicator component and value is text to be displayed by the component.Duration property defines how long the indicator should display the information.
+in   | cmd.indicator.set_visual_element   | int_map    | duration   | Requests visual element (led or some other light source) to display information. Key is a name of indicator component and value is actual value to set. Duration property defines how long the indicator should display the information
+in   | cmd.indicator.set_text             | str_map    | duration   | Requests text indicator to display text. Key is name of indicator component and value is text to be displayed by the component. Duration property defines how long the indicator should display the information
 
 ### Product Specific Services
+
 Documentation of product specific service can be found [here](product-specific-services.md).
+
+### Time service
+
+Service used to read time and date information.
+
+#### Service names
+
+`time`
+
+#### Interface
+
+Type | Interface           | Value type | Description
+-----|---------------------|------------|------------
+in   | cmd.time.get_report | null       | Get current time (from Z-wave node)
+in   | cmd.date.get_report | null       | Get current date
+out  | evt.date.report     | int_map    | Date report
+out  | evt.date.report     | int_map    | Time report
+
+### Time parameters service
+
+The Time Parameters service is used to set date and time. Time zone offset and daylight savings may be set in the Time Parameters service if necessary. The data formats is ISO-8601 compliant.
+
+Note: In the case where the clock is updated via an external source such as SAT, internet, Rugby/Frankfurt source, omit this service.
+
+#### Service names
+
+`time_parameters`
+
+#### Interface
+
+Type | Interface                      | Value type | Description
+-----|--------------------------------|------------|------------
+in   | cmd.time_parameters.get_report | null       | Get current time parameters
+in   | cmd.time_parameters.set        | int_map    | Sets current time parameters
+out  | evt.time_parameters.report     | int_map    | Time parameters report
+
+### Schedule Entry Service
+
+This service handles a schedule slot for an user who already has valid user access code (set_code service). The year day schedule represents two days, any time apart, where the specified user ID’s code is valid. When setting the schedule slot, the start parameters of the time fence needs to occur prior to the stop parameters and the year day schedule is automatically enabled for the identified user.
+
+Note: Each user can only use one type of scheduling at a time.
+
+Detailed specification is avaliable on zwave-ad repo under docs folder.
+
+#### Service names
+
+`schedule_entry`
+
+#### Interface
+
+Type | Interface                     | Value type | Description
+-----|-------------------------------|------------|------------
+in   | cmd.schedule_entry.get_report | null       | Get schedule entry report for specified slot
+in   | cmd.schedule_entry.set        | int_map    | Set schedule entry
+in   | cmd.schedule_entry.clear      | int_map    | Clear schedule entry
+out  | evt.schedule_entry.report     | int_map    | Schedule entry report
