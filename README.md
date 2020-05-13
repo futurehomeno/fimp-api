@@ -230,18 +230,33 @@ Name            | Unit    | Description
 `last_e_export` | kWh     | Energy Export that day
 `last_e_import` | kWh     | Energy Import that day
 `p_import`      | W       | Power Import
-`p_import_avg`  | W       | Power Import avarage
+`p_import_react` | VAR    | Reactive Power Import
+`p_import_apparent` | VA  | Apparent Power Import
+`p_import_avg`  | W       | Power Import average
 `p_import_min`  | W       | Power Import minimum that day
 `p_import_max`  | W       | Power Import max that day
 `p_export`      | W       | Power Export
+`p_export_react` | VAR    | Reactive Power Export
 `p_export_min`  | W       | Power Export minimum that day
 `p_export_max`  | W       | Power Export max that day
+`freq`          | Hz      | Frequency
+`freq_min`      | Hz      | Frequency Min
+`freq_max`      | Hz      | Frequency Max
 `u1`            | V       | Voltage phase 1
 `u2`            | V       | Voltage phase 2
 `u3`            | V       | Voltage phase 3
 `i1`            | A       | Current phase 1
 `i2`            | A       | Current phase 2
 `i3`            | A       | Current phase 3
+`dc_p`          | W       | DC Power
+`dc_p_min`      | W       | DC Power
+`dc_p_max`      | W       | DC Power
+`dc_u`          | V       | DC Voltage
+`dc_u_min`      | V       | DC Min Voltage
+`dc_u_max`      | V       | DC Max Voltage
+`dc_i`          | A       | DC Current
+`dc_i_min`      | A       | DC Min Current
+`dc_i_max`      | A       | DC Max Current
 
 
 ***
