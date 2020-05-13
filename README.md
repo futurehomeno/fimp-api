@@ -230,13 +230,13 @@ Name            | Unit    | Description
 `last_e_export` | kWh     | Energy Export that day
 `last_e_import` | kWh     | Energy Import that day
 `p_import`      | W       | Power Import
-`p_import_react` | VA     | Reactive Power Import
+`p_import_react` | VAR    | Reactive Power Import
 `p_import_apparent` | VA  | Apparent Power Import
 `p_import_avg`  | W       | Power Import average
 `p_import_min`  | W       | Power Import minimum that day
 `p_import_max`  | W       | Power Import max that day
 `p_export`      | W       | Power Export
-`p_export_react` | VA     | Reactive Power Export
+`p_export_react` | VAR    | Reactive Power Export
 `p_export_min`  | W       | Power Export minimum that day
 `p_export_max`  | W       | Power Export max that day
 `freq`          | Hz      | Frequency
