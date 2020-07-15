@@ -384,6 +384,7 @@ Type | Interface            | Value type | Description
 -----|----------------------|------------|--------------------
 in   | cmd.alarm.get_report | ?          |
 out  | evt.alarm.report     | str_map    | val = {"event": "tamper_removed_cover", "status": "activ"}
+in   | cmd.alarm.clear      | string     | val = event that should be cleared – device should send a new report after.
 
 Supported statuses: activ, deactiv. IMPORTANT: These are shorthands for "activated" and "deactivated", not typos.
 
