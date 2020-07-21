@@ -463,13 +463,15 @@ Set-point types: heat, cool, furnace, dry_air, moist_air, auto_changeover, energ
 
 Type | Interface               | Value type | Properties           | Description
 -----|-------------------------|------------|----------------------|------------------
-in   | cmd.lock.get_report     | null       |                      |
-in   | cmd.lock.set            | bool       |                      | Use true to secure a lock and false to unsecure
-in   | cmd.lock.set_with_code  | str_map    |                      | Used to lock/unlock locks required PIN/RFID, {“op”:”lock”, ”code_type”:”pin”, ”12345” }
-out  | evt.lock.report         | bool_map   | timeout_s, lock_type | value = {"is_secured":true, "door_is_closed":true, "bolt_is_locked":true, "latch_is_closed":true}
+in   | cmd.lock.get_report          | null       |                      |
+in   | cmd.lock.set                 | bool       |                      | Use true to secure a lock and false to unsecure
+in   | cmd.lock.set_with_code       | str_map    |                      | Used to lock/unlock locks required PIN/RFID, {“op”:”lock”, ”code_type”:”pin”, ”12345” }
+out  | evt.lock.report              | bool_map   | timeout_s, lock_type | value = {"is_secured":true, "door_is_closed":true, "bolt_is_locked":true, "latch_is_closed":true}
 -|||
-in   | cmd.open.get_report     | null       |                      | 
-out  | evt.open.report         | bool       | true = open          | Used to report if the door is open or closed
+in   | cmd.open.get_report          | null       |                      | 
+out  | evt.open.report              | bool       | true = open          | Used to report if the door is open or closed
+in   | cmd.lock.get_configuration   | int_map    | [Lock configuration paramteres](#Lock-configuration-paramteres) | Get lock configuration report
+out  | cmd.lock.set_configuration   | int_map     | [Lock configuration paramteres](#Lock-configuration-paramteres)| Set lock configuration
 
 
 
@@ -479,6 +481,21 @@ Name        | Value example | Description
 ------------|---------------|-------------
 `lock_type` | "key"         | how lock was activated, it can take values: "key", "pin", "rfid"
 `timeout_s` |               |
+
+#### Lock configuration paramteres
+
+Name            | Unit    | Description
+----------------|---------|--------------
+`auto_rlck_tm`      |      | Time setting in seconds for auto-relock functionality. Zero means the functionality is disabled
+`blk_to_blk`      |      | Indicate if the block-to-block functionality is enabled. Non-zero means enabled; zero means disabled
+`hold_rel_tm` |      | Time setting in seconds for letting the latch retracted after the supporting node's mode has been changed to unsecured. Zero means the functionality is disabled
+`in_sta` |      | Inside door handles state. It's a 4-bit mask; bit=0 for disable, bit=1 for enable
+`out_sta` |      |  Outside door handles state. It's a 4-bit mask; bit set to 0 if disabled; bit set to 1 if enabled. When disabled, the actual handle cannot open the door locally. When enabled, the actual handle can open the door locally
+`tmout_min` |      | Lock timeout in minutes. Valid value: 0 to 253. Value of 254 means timeout is not supported
+`tmout_sec` |      | Lock timeout in seconds. Valid value: 0 to 59. Value of 254 means timeout is not supported
+`twist_asst` |      | Indicate if the twist assist functionality is enabled. Non-zero means enabled; zero means disabled
+`type` |      | Door lock operation type
+
 
 #### Service props
 
