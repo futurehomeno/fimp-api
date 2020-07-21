@@ -25,6 +25,7 @@
    * [Barrier control service](#barrier-control-service)
    * [Complex alarm system service](#complex-alarm-system-service)
    * [Gateway service](#gateway-service)
+   * [Version service](#version-service)
 
 ## Service overview
 
@@ -769,3 +770,30 @@ in   | cmd.schedule_entry.get_report | null       | Get schedule entry report fo
 in   | cmd.schedule_entry.set        | int_map    | Set schedule entry
 in   | cmd.schedule_entry.clear      | int_map    | Clear schedule entry
 out  | evt.schedule_entry.report     | int_map    | Schedule entry report
+
+### Version service
+
+Version service is exposing device hardware and software versions.
+
+#### Service names
+
+`version`
+
+#### Interfaces
+
+Type | Interface                     | Value type | Properties              | Description
+-----|-------------------------------|------------|-------------------------|-------------
+in   | cmd.version.get_report |  null     |  | get device software versions report
+out  | evt.version.report   |  int_map  |  |[Extended version report](#extended-version-object)
+
+#### Extended version report
+
+All numbers are in decimal representation.
+
+Name            | Unit    | Description
+----------------|---------|--------------
+`application_ver`       | int | Firmware main version
+`application_subver`    | int | Firmware minor version
+`hardware_ver`          | int | Hardware version
+`library_type`          | int | Library type (manufacturer internal)
+`protocol_ver`          | int | Protocol version (Z-Wave)
