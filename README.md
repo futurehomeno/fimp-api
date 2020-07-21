@@ -784,7 +784,7 @@ Version service is exposing device hardware and software versions.
 Type | Interface                     | Value type | Properties              | Description
 -----|-------------------------------|------------|-------------------------|-------------
 in   | cmd.version.get_report |  null     |  |supported by all meters.
-out  | evt.meter_ext.report   |  int_map  |  |[Extended version report](#extended-version-object)
+out  | evt.version.report   |  int_map  |  |[Extended version report](#extended-version-object)
 
 #### Extended version report
 
