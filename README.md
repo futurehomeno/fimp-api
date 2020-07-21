@@ -470,8 +470,9 @@ out  | evt.lock.report              | bool_map   | timeout_s, lock_type | value 
 -|||
 in   | cmd.open.get_report          | null       |                      | 
 out  | evt.open.report              | bool       | true = open          | Used to report if the door is open or closed
-in   | cmd.lock.get_configuration   | int_map    | [Lock configuration paramteres](#Lock-configuration-paramteres) | Get lock configuration report
-out  | cmd.lock.set_configuration   | int_map     | [Lock configuration paramteres](#Lock-configuration-paramteres)| Set lock configuration
+in   | cmd.lock.get_configuration   | null    |  | Get lock configuration report
+in   | cmd.lock.set_configuration   | int_map    | [Lock configuration paramteres](#Lock-configuration-paramteres) | Set lock configuration report
+out  | cmd.lock.configuration_report   | int_map     | [Lock configuration paramteres](#Lock-configuration-paramteres)| Lock configuration report
 
 
 
