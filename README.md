@@ -797,3 +797,20 @@ Name            | Unit    | Description
 `hardware_ver`          | int | Hardware version
 `library_type`          | int | Library type (manufacturer internal)
 `protocol_ver`          | int | Protocol version (Z-Wave)
+
+### Application/adapter logging 
+
+#### Service name 
+
+Command can belong to any service 
+
+#### Interfaces 
+
+Type | Interface             | Value type | Properties | Description 
+-----|-----------------------|------------|------------|--------------
+in   | cmd.log.set_level     | string     |            | 
+in   | cmd.log.get_level     | null       |            | 
+out  | cmd.log.level_report  | string     |            |   
+
+Supported log level : `trace`,`debug`,`info`,`warn`,`error`   
+
