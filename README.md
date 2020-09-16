@@ -792,11 +792,10 @@ All numbers are in decimal representation.
 
 Name            | Unit    | Description
 ----------------|---------|--------------
-`application_ver`       | int | Firmware main version
-`application_subver`    | int | Firmware minor version
-`hardware_ver`          | int | Hardware version
-`library_type`          | int | Library type (manufacturer internal)
-`protocol_ver`          | int | Protocol version (Z-Wave)
+`firmware`       | string | Firmware main version
+`hardware`          | string | Hardware version
+`sdk_library`          | string | SDK Library type (manufacturer internal)
+`protocol`          | string | Protocol version (Z-Wave)
 
 ### Application/adapter logging 
 
