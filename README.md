@@ -810,7 +810,7 @@ Type | Interface             | Value type | Properties | Description
 -----|-----------------------|------------|------------|--------------
 in   | cmd.log.set_level     | string     |            | 
 in   | cmd.log.get_level     | null       |            | 
-out  | cmd.log.level_report  | string     |            |   
+out  | evt.log.level_report  | string     |            |   
 
 Supported log level : `trace`,`debug`,`info`,`warn`,`error`   
 
