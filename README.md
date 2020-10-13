@@ -25,6 +25,7 @@
    * [Barrier control service](#barrier-control-service)
    * [Media player](#media-player-service)
    * [Complex alarm system service](#complex-alarm-system-service)
+   * [Chargepoint service](#chargepoint-service)
    * [Gateway service](#gateway-service)
    * [Version service](#version-service)
 
