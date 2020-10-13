@@ -790,12 +790,12 @@ out  | evt.version.report   |  int_map  |  |[Extended version report](#extended-
 
 All numbers are in decimal representation.
 
-Name            | Unit    | Description
-----------------|---------|--------------
-`firmware`       | string | Firmware main version
-`hardware`          | string | Hardware version
-`sdk_library`          | string | SDK Library type (manufacturer internal)
-`protocol`          | string | Protocol version (Z-Wave)
+Name            | Unit   | Description
+----------------|--------|--------------
+`firmware`      | string | Firmware main version
+`hardware`      | string | Hardware version
+`sdk_library`   | string | SDK Library type (manufacturer internal)
+`protocol`      | string | Protocol version (Z-Wave)
 
 ### Application/adapter logging 
 
