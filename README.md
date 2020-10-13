@@ -663,8 +663,11 @@ Name             | Value example                  | Description
 ### Media player service
 
 #### Service name
+
 `media_player`
+
 #### Interfaces
+
 Type        | Interface                         | Value type        | Description
 ------------|---------------------------        |-------------------|-------
 in          | cmd.playback.set                  | string            | play, pause, toggle_play_pause, next_track, previous_track
@@ -685,14 +688,14 @@ out         | evt.mute.report                   | bool              |
 -|||
 in          | cmd.metadata.get_report           | null              | 
 out         | evt.metadata.report               | str_map           | {"album": "", "track": "", "artist": "", "image_url": ""}
-​
+
 ### Service props
+
 Name           | Value example                                                      | Description
 ---------------|--------------------------------------------------------------------|-------
 `sup_modes`    | repeat, repeat_one, shuffle, crossfade                             | supported modes. 
 `sup_playback` | play, pause, toggle_play_pause, next_track, previous_track         | supported playbacks.
 `sup_metadata` | album, track, artist, image_url                                    | supported metadata.
-
 
 ### Complex alarm system service
 
