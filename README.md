@@ -745,6 +745,9 @@ out  | evt.smart_charge.report        | bool       |                         |
 in   | cmd.rated_current.get_report   | null       |                         | Get the rated or max current for ths CP
 out  | evt.rated_current.report       | int        |                         |
 -|||
+in   | cmd.current_session.get_report | null       |                         | Command for getting energy (kWh) for current session.
+out  | evt.current_session.report     | float      |                         |
+-|||
 out  | evt.error.report               | string     |                         | 
 
 #### Interface props
