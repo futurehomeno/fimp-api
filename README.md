@@ -54,7 +54,7 @@ rn   | zw, vinculum, zigbee, kind-owl | resource name, the actual name of the rt
 sv   | out_bin_sw, out_lvl_sw, etc.   | service name
 ad   |                                | the address of the preceding type.
 
-Breaking down the example `pt:j1/mt:evt/rt:dev/rn:zw/ad:1/sv:out_bin_switch/ad:11_0`, this is the address specifying JSON v1 formatted events sent to a device using zwave with address 1, and the service `out_bin_sw` with address of 11_0. Note here that zwave actually has an address. This is normally set to 1, but in the case of the gateway having multiple instances of zwave, it can be another address.
+Breaking down the example `pt:j1/mt:evt/rt:dev/rn:zw/ad:1/sv:out_bin_switch/ad:11_0`, this is the address specifying JSON v1 formatted events sent to a device using Z-Wave with address 1, and the service `out_bin_sw` with address of 11_0. Note here that Z-Wave actually has an address. This is normally set to 1, but in the case of the gateway having multiple instances of Z-Wave, it can be another address.
 
 Lastly, not that each interface within a service share the same address and that a service can never have more than one interface of the same type.
 
@@ -125,9 +125,9 @@ out  | evt.group.members_report    | object     | Object structure {"group":"gro
 
 #### Notes
 
-- z-wave configuration values should be in form <value>;size, for instance 12;2
+- Z-Wave configuration values should be in form <value>;size, for instance 12;2
 
-- z-wave association member should be in form <node_id>\_<endpoint_id>, for instance 10_0
+- Z-Wave association member should be in form <node_id>\_<endpoint_id>, for instance 10_0
 
 ***
 
@@ -500,19 +500,20 @@ Detailed specification is avaliable on zwave-ad repo under docs folder.
 
 Type | Interface                      | Value type | Description
 -----|--------------------------------|------------|------------------
-in   | cmd.usercode.clear             | str_map    |
-in   | cmd.usercode.clear_all         | null       |
-in   | cmd.usercode.get               | str_map    |
-in   | cmd.usercode.set               | str_map    |
+in   | cmd.usercode.clear             | str_map    | Delete specific slot
+in   | cmd.usercode.clear_all         | null       | Delete all users from all medium
+in   | cmd.usercode.get               | null       | Will return all slots for all medium
+in   | cmd.usercode.set               | str_map    | 
+in   | cmd.usercode.get_slot          | str_map    | Requesting specific slot {"slot": "3"}
 out  | evt.usercode.access_report     | str_map    |
+
 
 #### Service props
 
 Name             | Value example              | Description
 -----------------|----------------------------|-------------
-`sup_usercodes`  | ["pin", "rfid"]            | List of supported user code types
-`sup_userstatus` | ["enabled", "disabled"]    | List of supported user code types
-`sup_usertypes`  | ["master", "unrestricted"] | List of supported user code types
+`sup_users`  | int            | Number of supported users (combined rfid and pin)
+
 
 ### Color control service
 
@@ -537,7 +538,7 @@ Name             | Value example            | Description
 `sup_components` | ["red", "green", "blue"] | List of supported color components
 
 Supported color components:
-- Zwave: red, green, blue, warm_w, cold_w, amber, cyan, purple
+- Z-Wave: red, green, blue, warm_w, cold_w, amber, cyan, purple
 - Zigbee: red, green, blue, temp
 
 #### Notes
@@ -809,7 +810,7 @@ Service used to read time and date information.
 
 Type | Interface           | Value type | Description
 -----|---------------------|------------|------------
-in   | cmd.time.get_report | null       | Get current time (from Z-wave node)
+in   | cmd.time.get_report | null       | Get current time (from Z-Wave node)
 in   | cmd.date.get_report | null       | Get current date
 out  | evt.date.report     | int_map    | Date report
 out  | evt.date.report     | int_map    | Time report
@@ -818,7 +819,7 @@ out  | evt.date.report     | int_map    | Time report
 
 The Time Parameters service is used to set date and time. Time zone offset and daylight savings may be set in the Time Parameters service if necessary. The data formats is ISO-8601 compliant.
 
-Examples can be found in [Time.md](z-wave/Time.md) in the z-wave folder.
+Examples can be found in [Time.md](z-wave/Time.md) in the Z-Wave folder.
 
 Note: In the case where the clock is updated via an external source such as SAT, internet, Rugby/Frankfurt source, omit this service.
 
@@ -834,7 +835,7 @@ in   | cmd.time_parameters.get_report | null       | Get current time parameters
 in   | cmd.time_parameters.set        | int_map    | Sets current time parameters
 out  | evt.time_parameters.report     | int_map    | Time parameters report
 
-Examples can be found in [Time.md](z-wave/Time.md) in the z-wave folder.
+Examples can be found in [Time.md](z-wave/Time.md) in the Z-Wave folder.
 
 
 ### Schedule Entry Service
@@ -843,7 +844,7 @@ This service handles a schedule slot for an user who already has valid user acce
 
 Note: Each user can only use one type of scheduling at a time.
 
-Detailed specification is avaliable in [User_Code.md](z-wave/User_Code.md) in the z-wave folder.
+Detailed specification is avaliable in [User_Code.md](z-wave/User_Code.md) in the Z-Wave folder.
 
 #### Service names
 
