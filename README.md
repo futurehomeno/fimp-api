@@ -129,7 +129,7 @@ out  | evt.node_block.report"      | str_map    | Value example `{"expire_at":"2
 -|||
 in   | cmd.wuptimer.get            | null       |
 in   | cmd.wuptimer.set            | str_map    | Value example `{"interval":"3600"}`. Interval is in seconds. Min and Max are device specific values. Please refeer to device datasheet.
-out  | evt.wuptimer.config_report        | str_map    | Value example `{"current": 4200, "default": 86400, "interval": 60, "maximum": 86400, "minimum": 1800}`
+out  | evt.wuptimer.config_report  | str_map    | Value example `{"current": 4200, "default": 86400, "interval": 60, "maximum": 86400, "minimum": 1800}`
 -|||
 in   | cmd.node_reinterview        | str_map    | Value example `{"max_age":"1"}`. The maximum age of the NodeInfo frame, given in 2^n minutes. If the cache entry does not exist or if it is older than the value given in this field,  the ZIP will attempt to get a Fresh NodeInfo frame before responding to the Node Info Cached Get command. A value of 15 means infinite, i.e. No Cache Refresh.
 
