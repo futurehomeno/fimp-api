@@ -426,12 +426,36 @@ in   | cmd.lvl.get_report | null       |            | Get battery level over lev
 out  | evt.lvl.report     | int        | state      |
 -|||
 out  | evt.alarm.report   | str_map    |            | val = {"event": "low_battery", "status": "activ"}
+-|||
+in   | cmd.health.get_report| null     |            | Request battery health report
+out  | evt.health.report  | int        |            | Battery health in %
+in   | cmd.sensor.get_report | string  |            | Request battery temperature report in celsius.  
+out  | evt.sensor.report  | float      | unit       | Battery temperature in celsius.
+-|||
+in   | cmd.battery.get_report | null |              | Get full battery report
+out  | evt.battery.report | object |                | Battery full report 
+
+
+Battery report object example :
+
+```javascript
+
+{
+   "lvl": 90 ,
+   "health" : 70,
+   "state" : "charging",
+   "temp_sensor" : 40,
+}
+
+```
+
+
 
 #### Interface props
 
 Name    | Value example | Description
 --------|---------------|-------------
-`state` | "charging"    | available states: charging, charged, replace, emtpy
+`state` | "charging"    | available states: charging, charged, replace, emtpy , idle
 
 ### Thermostat service
 
@@ -910,4 +934,59 @@ in   | cmd.log.get_level     | null       |            |
 out  | evt.log.level_report  | string     |            |   
 
 Supported log level : `trace`,`debug`,`info`,`warn`,`error`   
+
+
+### Inverter 
+
+Inverter device normally is composed of one or several inverter services. Detailed diagram - [Inverter and battery charge controller](static/inverter.png)
+
+#### Service name 
+
+`inverter_grid_conn` - represents inverter connection to grid.
+
+#### Interfaces 
+
+Type | Interface             | Value type | Properties | Description 
+-----|-----------------------|------------|------------|--------------
+out  | evt.meter_ext.report          | float_map  |                         | [Extended meter report](#extended-report-object) with up to 17 data points
+in   | cmd.meter_ext.get_report      | null       |                         | Request extended report
+
+
+#### Service name 
+
+`inverter_consumer_conn` - represents inverter connection to consumer.
+
+#### Interfaces 
+
+Type | Interface             | Value type | Properties | Description 
+-----|-----------------------|------------|------------|--------------
+out  | evt.meter_ext.report          | float_map  |                         | [Extended meter report](#extended-report-object) with up to 17 data points
+in   | cmd.meter_ext.get_report      | null       |                         | Request extended report
+
+
+#### Service name 
+
+`inverter_solar_conn` - represents inverter connection to solar pannel.
+
+#### Interfaces 
+
+Type | Interface             | Value type | Properties | Description 
+-----|-----------------------|------------|------------|--------------
+out  | evt.meter_ext.report          | float_map  |                         | [Extended meter report](#extended-report-object) with up to 17 data points
+in   | cmd.meter_ext.get_report      | null       |                         | Request extended report
+
+
+### Battery charge controller
+
+#### Service name 
+
+`battery_charge_ctrl` - represents battery charge connection to battery.
+
+#### Interfaces 
+
+Type | Interface             | Value type | Properties | Description 
+-----|-----------------------|------------|------------|--------------
+out  | evt.meter_ext.report          | float_map  |                         | [Extended meter report](#extended-report-object) with up to 17 data points
+in   | cmd.meter_ext.get_report      | null       |                         | Request extended report
+
 
