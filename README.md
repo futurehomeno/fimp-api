@@ -133,11 +133,9 @@ out  | evt.wuptimer.config_report  | str_map    | Value example `{"current": 420
 -|||
 in   | cmd.node_reinterview        | str_map    | Value example `{"max_age":"1"}`. The maximum age of the NodeInfo frame, given in 2^n minutes. If the cache entry does not exist or if it is older than the value given in this field,  the ZIP will attempt to get a Fresh NodeInfo frame before responding to the Node Info Cached Get command. A value of 15 means infinite, i.e. No Cache Refresh.
 
-
 #### Notes
 
 - Z-Wave configuration values should be in form <value>;size, for instance 12;2
-
 - Z-Wave association member should be in form <node_id>\_<endpoint_id>, for instance 10_0
 
 ***
@@ -343,6 +341,7 @@ Name            | Unit    | Description
 `p_export_react` | VAR    | Reactive Power Export
 `p_export_min`  | W       | Power Export minimum that day
 `p_export_max`  | W       | Power Export max that day
+`p_factor`      |         | Power Factor
 `freq`          | Hz      | Frequency
 `freq_min`      | Hz      | Frequency Min
 `freq_max`      | Hz      | Frequency Max
@@ -625,19 +624,71 @@ Detailed specification is avaliable on zwave-ad repo under docs folder.
 
 Type | Interface                      | Value type | Description
 -----|--------------------------------|------------|------------------
-in   | cmd.usercode.clear             | str_map    |
-in   | cmd.usercode.clear_all         | null       |
-in   | cmd.usercode.get               | str_map    |
-in   | cmd.usercode.set               | str_map    |
-out  | evt.usercode.access_report     | str_map    |
+in   | cmd.usercode.clear             | str_map    | Clear a single slot. On success, a config report is sent with val: `{"event": "code_deleted"}`
+in   | cmd.usercode.clear_all         | null       | Clear all slots
+in   | cmd.usercode.get               | null       | Get all users. Response comes as `evt.usercode.users_report`
+in   | cmd.usercode.set               | str_map    | Set a new user. On success, a config report is sent with val: `{"event": "code_added"}`
+out  | evt.usercode.config_report     | str_map    | Confirms the success of a `set` or `clear` command
+out  | evt.usercode.users_report      | str_map    | A response to `get` command
 
 #### Service props
 
-Name             | Value example              | Description
+Name             | Values                     | Description
 -----------------|----------------------------|-------------
 `sup_usercodes`  | ["pin", "rfid"]            | List of supported user code types
-`sup_userstatus` | ["enabled", "disabled"]    | List of supported user code types
-`sup_usertypes`  | ["master", "unrestricted"] | List of supported user code types
+`sup_userstatus` | ["enabled", "disabled"]    | List of supported user status types
+`sup_usertypes`  | ["master", "unrestricted"] | List of supported user types
+
+#### Examples
+
+```json
+{
+  "serv": "user_code",
+  "type": "cmd.usercode.set",
+  "val_t": "str_map",
+  "val": {
+    "slot": "25",
+    "id_type": "pin",
+    "user_id": "1",
+    "user_status": "enabled",
+    "code": "2334",
+    "alias": "Jonny"
+  },
+  "ver": "1",
+  "props": null,
+  "tags": null
+}
+{
+  "serv": "user_code",
+  "type": "cmd.usercode.clear",
+  "val_t": "str_map",
+  "val": {
+    "id_type": "pin",
+    "slot": "1"
+  },
+  "ver": "1",
+  "props": null,
+  "tags": null
+}
+{
+  "serv": "user_code",
+  "type": "evt.usercode.users_report",
+  "val_t": "object",
+  "val": {
+    "pin": [
+      {
+        "slot": 1,
+        "alias": "Jonny",
+        "created_at": "2020-12-30T15:42:54.593324971+01:00"
+      },
+     ]
+  },
+  "ver": "1",
+  "props": null,
+  "tags": null
+}
+
+```
 
 ### Color control service
 
