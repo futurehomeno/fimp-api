@@ -145,6 +145,8 @@ This service allows creating a direct association between a source device (e.g. 
 
 This service intends to replace `group` commands in `dev_sys` service.
 
+A controllable device (like a lamp) would have a list of `in_services` that would indicate the services it supports. A controller (like a button) would have a list of `out_services` instead.
+
 #### Service Name
 
 `association`
@@ -163,7 +165,8 @@ out  | evt.association.report     | object     | Response for `get_report`
 
 Name             | Supported Values           | Description
 -----------------|----------------------------|-------------
-`out_services`   | `["out_bin_switch", "out_lvl_switch", "color"]` | List of supported outbound services by the device
+`in_services`   | `["out_bin_switch", "out_lvl_switch", "color"]` | List of services that can be controlled, e.g. on a lamp
+`out_services`   | `["out_bin_switch", "out_lvl_switch", "color"]` | List of services the device can control, e.g. on a button
 
 #### Examples
 
