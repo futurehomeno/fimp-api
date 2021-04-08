@@ -599,8 +599,14 @@ out  | evt.lock.report         | bool_map   | timeout_s, lock_type | value = {"i
 -|||
 in   | cmd.open.get_report     | null       |                      | 
 out  | evt.open.report         | bool       | true = open          | Used to report if the door is open or closed
-
-
+-|||
+in   | cmd.auto_lock.set        | bool      | true = auto-lock enabled | Enable/disable auto-lock feature
+in   | cmd.auto_lock.get_report | null      |                          | 
+out  | evt.auto_lock.report     | bool      | true = auto-lock enabled |
+-|||
+in   | cmd.volume.set           | int       | `min_volume`-`max_volume`
+in   | cmd.volume.get_report    | null      |
+out  | evt.volume.report        | int       | `min_volume`-`max_volume`
 
 #### Interface props
 
@@ -614,6 +620,8 @@ Name        | Value example | Description
 Name             | Value example                                                         | Description
 -----------------|-----------------------------------------------------------------------|-------------
 `sup_components` | ["is_secured", "door_is_closed", "bolt_is_locked", "latch_is_closed"] | List of supported lock component components
+`min_volume`     | 0                                                                     | Minimum volume level
+`max_volume`     | 2                                                                     | Maximum volume level
 
 ### User code service
 
