@@ -15,6 +15,7 @@
    * [Alarm services](#alarm-services)
    * [Battery service](#battery-service)
    * [Thermostat service](#thermostat-service)
+   * [Water heater service](#water-heater-service)
    * [Door lock service](#door-lock-service)
    * [User code service](#user-code-service)
    * [Color control service](#color-control-service)
@@ -26,8 +27,12 @@
    * [Media player](#media-player-service)
    * [Complex alarm system service](#complex-alarm-system-service)
    * [Chargepoint service](#chargepoint-service)
+   * [Inverter services](#inverter-services)
+   * [Battery charge controller service](#battery-charge-controller-service)
    * [Gateway service](#gateway-service)
    * [Version service](#version-service)
+   * [Logging service](#logging-interfaces)
+
 
 ## Service overview
 
@@ -378,8 +383,8 @@ Service name         | Units                    | Description
 `sensor_accelz`      | m/s2                     | Acceleration, Z-axis
 `sensor_airflow`     | m3/h, ft3/m              | Air flow sensor
 `sensor_anglepos`    | %, degN, degS            | Angle Position sensor
-`sensor_atmo`        | kPa, ha, mbar                  | Atmospheric pressure sensor. ha - inches of Mercury
-`sensor_baro`        | kPa, ha, mbar                  | Barometric  pressure sensor. ha - inches of Mercury
+`sensor_atmo`        | kPa, ha, mbar            | Atmospheric pressure sensor. ha - inches of Mercury
+`sensor_baro`        | kPa, ha, mbar            | Barometric  pressure sensor. ha - inches of Mercury
 `sensor_co2`         | ppm                      | CO2-level sensor
 `sensor_co`          | mol/m3                   | Carbon Monoxide level sensor
 `sensor_current`     | A, mA                    | Current sensor
@@ -389,7 +394,7 @@ Service name         | Units                    | Description
 `sensor_elresist`    | ohm/m                    | Electrical resistivity sensor
 `sensor_freq`        | Hz, kHz                  | Frequency sensor
 `sensor_gp`          | %, NOM                   | General purpose sensor
-`sensor_gust`      | kph                  | Gust sensor
+`sensor_gust`        | kph                      | Gust sensor
 `sensor_humid`       | %, g/m3                  | Relative humidity sensor
 `sensor_lumin`       | Lux, %                   | Luminance sensor
 `sensor_moist`       | %, kOhm, m3/m3, aw       | Moisture sensor
@@ -408,8 +413,9 @@ Service name         | Units                    | Description
 `sensor_voltage`     | V, mV                    | Voltage sensor
 `sensor_watflow`     | l/h                      | Water flow sensor
 `sensor_watpressure` | kPa                      | Water pressure sensor
+`sensor_wattemp`     | C, F                     | Water temperature sensor
 `sensor_weight`      | kg, lbs                  | Weight sensor
-`sensor_wind`      | kph                  | Wind sensor
+`sensor_wind`        | kph                      | Wind sensor
 
 #### Interfaces
 
@@ -560,7 +566,7 @@ Name    | Value example | Description
 Type | Interface               | Value type | Description
 -----|-------------------------|------------|------------------
 in   | cmd.mode.get_report     | null       |
-in   | cmd.mode.set            | string     |  Set thermostat mode:
+in   | cmd.mode.set            | string     | Set thermostat mode.
 out  | evt.mode.report         | string     |
 -|||
 in   | cmd.setpoint.get_report | string     | value is a set-point type
@@ -568,19 +574,55 @@ in   | cmd.setpoint.set        | str_map    | val = {"type":"heat", "temp":"21.5
 out  | evt.setpoint.report     | str_map    | val = {"type":"heat", "temp":"21.5", "unit":"C"}
 -|||
 in   | cmd.state.get_report    | null       |
-out  | evt.state.report        | string     |  Reports operational state.
+out  | evt.state.report        | string     | Reports operational state.
 
 #### Service props
 
 Name            | Value example                                                                  | Description
 ----------------|--------------------------------------------------------------------------------|-------------
-`sup_modes`     | off, heat, cool                                                                | supported modes.
-`sup_setpoints` | heat, cool                                                                     | supported set-points.
+`sup_modes`     | off, heat, cool                                                                | Supported modes.
+`sup_setpoints` | heat, cool                                                                     | Supported set-points.
 `sup_states`    | idle, heat, cool, idle, heat, cool, fan_only, pending_heat, pending_cool, vent |
 
 Modes: off, heat, cool, auto, aux_heat, resume, fan, furnace, dry_air, moist_air, auto_changeover, energy_heat, energy_cool, away.
 
-Set-point types: heat, cool, furnace, dry_air, moist_air, auto_changeover, energy_heat, energy_cool, special_heat,
+Set-point types: heat, cool, furnace, dry_air, moist_air, auto_changeover, energy_heat, energy_cool, special_heat.
+
+### Water heater service
+
+#### Service names
+
+`water_heater`
+
+#### Interfaces
+
+Type | Interface               | Value type | Description
+-----|-------------------------|------------|------------------
+in   | cmd.mode.get_report     | null       |
+in   | cmd.mode.set            | string     | Set water heater mode.
+out  | evt.mode.report         | string     |
+-|||
+in   | cmd.setpoint.get_report | string     | value is a set-point type
+in   | cmd.setpoint.set        | object     | val = {"type":"normal", "temp":81.5, "unit":"C"}
+out  | evt.setpoint.report     | object     | val = {"type":"normal", "temp":81.5, "unit":"C"}
+-|||
+in   | cmd.state.get_report    | null       |
+out  | evt.state.report        | string     | Reports operational state.
+
+#### Service props
+
+Name            | Value example                            | Description
+----------------|------------------------------------------|-------------
+`sup_modes`     | off, normal, boost, eco, vacation        | Supported modes.
+`sup_setpoints` | normal, boost, vacation                  | Supported set-points.
+`sup_states`    | idle, heat                               | Optional, supported states.
+`sup_range`     | {"min":20.0, "max":85.0}                 | Optional, supported range of temperature control.
+`sup_ranges`    | {"normal":{"min":20.0, "max":85.0}, ...} | Optional, supported ranges per mode, if set `sup_range` should be omitted.
+`sup_step`      | 1.0                                      | Optional, supported step for temperature control.
+
+Modes: off, normal, boost, eco, vacation.
+
+Set-point types: normal, boost, vacation.
 
 ### Door lock service
 
@@ -946,6 +988,69 @@ Name          | Value example                                                 | 
 `sup_errors`  | []                                                            | Error from CP
 
 
+### Inverter services
+
+An inverter device is normally composed of one or several inverter services. Detailed diagram - [Inverter and battery charge controller](static/inverter.png)
+
+#### Service name
+
+`inverter_grid_conn` - represents inverter connection to grid.
+
+#### Interfaces
+
+Type | Interface                | Value type | Properties | Description
+-----|--------------------------|------------|------------|--------------
+out  | evt.meter_ext.report     | float_map  |            | [Extended meter report](#extended-report-object) with up to 17 data points.
+in   | cmd.meter_ext.get_report | null       |            | Request extended report.
+
+
+#### Service name
+
+`inverter_consumer_conn` - represents inverter connection to consumer.
+
+#### Interfaces
+
+Type | Interface                | Value type | Properties | Description
+-----|--------------------------|------------|------------|--------------
+out  | evt.meter_ext.report     | float_map  |            | [Extended meter report](#extended-report-object) with up to 17 data points.
+in   | cmd.meter_ext.get_report | null       |            | Request extended report.
+
+
+#### Service name
+
+`inverter_solar_conn` - represents inverter connection to solar panel.
+
+#### Interfaces
+
+Type | Interface                | Value type | Properties | Description
+-----|--------------------------|------------|------------|--------------
+out  | evt.meter_ext.report     | float_map  |            | [Extended meter report](#extended-report-object) with up to 17 data points.
+in   | cmd.meter_ext.get_report | null       |            | Request extended report.
+
+
+### Battery charge controller service
+
+#### Service name
+
+`battery_charge_ctrl` - represents battery charge controller.
+
+#### Interfaces
+
+Type | Interface                | Value type | Properties | Description
+-----|--------------------------|------------|------------|--------------
+out  | evt.meter_ext.report     | float_map  |            | [Extended meter report](#extended-report-object) with up to 17 data points.
+in   | cmd.meter_ext.get_report | null       |            | Request extended report.
+in   | cmd.mode.get_report      | null       |            |
+-|||
+in   | cmd.mode.set             | string     |            | Set charge mode.
+out  | evt.mode.report          | string     |            | Charge mode report.
+
+
+#### Service props
+
+Name            | Value example                                                                  | Description
+----------------|--------------------------------------------------------------------------------|-------------
+`sup_modes`     | idle, charging, discharging                                                    | Supported modes.
 
 ### Gateway service
 
@@ -1071,11 +1176,11 @@ Name            | Value type   | Description
 `sdk_library`   | string       | SDK Library type (manufacturer internal)
 `protocol`      | string       | Protocol version (Z-Wave)
 
-### Application/adapter logging 
+### Logging interfaces 
 
 #### Service name 
 
-Command can belong to any service 
+Command can belong to any service of any application or adapter.
 
 #### Interfaces 
 
@@ -1085,68 +1190,4 @@ in   | cmd.log.set_level     | string     |            |
 in   | cmd.log.get_level     | null       |            | 
 out  | evt.log.level_report  | string     |            |   
 
-Supported log level : `trace`,`debug`,`info`,`warn`,`error`   
-
-
-### Inverter 
-
-Inverter device normally is composed of one or several inverter services. Detailed diagram - [Inverter and battery charge controller](static/inverter.png)
-
-#### Service name 
-
-`inverter_grid_conn` - represents inverter connection to grid.
-
-#### Interfaces 
-
-Type | Interface             | Value type | Properties | Description 
------|-----------------------|------------|------------|--------------
-out  | evt.meter_ext.report          | float_map  |                         | [Extended meter report](#extended-report-object) with up to 17 data points
-in   | cmd.meter_ext.get_report      | null       |                         | Request extended report
-
-
-#### Service name 
-
-`inverter_consumer_conn` - represents inverter connection to consumer.
-
-#### Interfaces 
-
-Type | Interface             | Value type | Properties | Description 
------|-----------------------|------------|------------|--------------
-out  | evt.meter_ext.report          | float_map  |                         | [Extended meter report](#extended-report-object) with up to 17 data points
-in   | cmd.meter_ext.get_report      | null       |                         | Request extended report
-
-
-#### Service name 
-
-`inverter_solar_conn` - represents inverter connection to solar pannel.
-
-#### Interfaces 
-
-Type | Interface             | Value type | Properties | Description 
------|-----------------------|------------|------------|--------------
-out  | evt.meter_ext.report          | float_map  |                         | [Extended meter report](#extended-report-object) with up to 17 data points
-in   | cmd.meter_ext.get_report      | null       |                         | Request extended report
-
-
-### Battery charge controller
-
-#### Service name 
-
-`battery_charge_ctrl` - represents battery charge controller..
-
-#### Interfaces 
-
-Type | Interface                | Value type | Properties | Description 
------|--------------------------|------------|------------|--------------
-out  | evt.meter_ext.report     | float_map  |            | [Extended meter report](#extended-report-object) with up to 17 data points
-in   | cmd.meter_ext.get_report | null       |            | Request extended report
-in   | cmd.mode.get_report      | null       |            |     
-in   | cmd.mode.set             | string     |            | Set charge mode.
-out  | evt.mode.report          | string     |            | Charge mode report.
-
-
-#### Service props
-
-Name            | Value example                                                                  | Description
-----------------|--------------------------------------------------------------------------------|-------------
-`sup_modes`     | idle, charging, and discharing                                                 | supported modes. This is product specific.
+Supported log level : `trace`,`debug`,`info`,`warn`,`error`
