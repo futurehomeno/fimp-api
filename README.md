@@ -1193,6 +1193,7 @@ out  | evt.log.level_report  | string     |            |
 Supported log level : `trace`,`debug`,`info`,`warn`,`error`
 
 ### OTA Service 
+This service is used to manage over-the-air (OTA) upgrades of end devices.
 
 #### Service name 
 
@@ -1200,12 +1201,13 @@ Supported log level : `trace`,`debug`,`info`,`warn`,`error`
 
 #### Interfaces 
 
-Type | Interface               | Value type | Properties | Description 
------|-------------------------|------------|------------|--------------
-out  | evt.ota_progress.report | int_map    |            | Shows upgrade progress and estimated time left
-out  | evt.ota_end.report      | string_map |            | Sent on upgrade end with upgrade status
+Type | Interface               | Value type | Description 
+-----|-------------------------|------------|--------------
+out  | evt.ota_progress.report | int_map    | Shows upgrade progress and estimated time left.
+out  | evt.ota_end.report      | string_map | Sent on upgrade end with upgrade status.
 
 #### Examples
+
 ```json
 {
    "type": "evt.ota_progress.report",
@@ -1217,12 +1219,15 @@ out  | evt.ota_end.report      | string_map |            | Sent on upgrade end w
       "remaining_sec": 3
    }
 }
+```
+
+```json
 {
    "type": "evt.ota_end.report",
    "serv": "ota",
    "val_t": "str_map",
    "val": {
-     "success": "true",
+      "success": "true",
       "error": ""
    }
 }
