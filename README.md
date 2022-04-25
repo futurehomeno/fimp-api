@@ -137,6 +137,9 @@ in   | cmd.wuptimer.set            | str_map    | Value example `{"interval":"36
 out  | evt.wuptimer.config_report  | str_map    | Value example `{"current": 4200, "default": 86400, "interval": 60, "maximum": 86400, "minimum": 1800}`
 -|||
 in   | cmd.node_reinterview        | str_map    | Value example `{"max_age":"1"}`. The maximum age of the NodeInfo frame, given in 2^n minutes. If the cache entry does not exist or if it is older than the value given in this field,  the ZIP will attempt to get a Fresh NodeInfo frame before responding to the Node Info Cached Get command. A value of 15 means infinite, i.e. No Cache Refresh.
+-|||
+in   | cmd.channel.get             | null    | Requests the current Zigbee channel.
+out  | evt.channel.report          | int     | Reports the current Zigbee channel. The value is 0 if the network has not been established yet.
 
 #### Notes
 
@@ -1204,7 +1207,7 @@ This service is used to manage over-the-air (OTA) upgrades of end devices.
 Type | Interface               | Value type | Description 
 -----|-------------------------|------------|--------------
 out  | evt.ota_progress.report | int_map    | Shows upgrade progress and estimated time left.
-out  | evt.ota_end.report      | string_map | Sent on upgrade end with upgrade status.
+out  | evt.ota_end.report      | object     | Sent on upgrade end with upgrade status.
 
 #### Examples
 
@@ -1225,9 +1228,9 @@ out  | evt.ota_end.report      | string_map | Sent on upgrade end with upgrade s
 {
    "type": "evt.ota_end.report",
    "serv": "ota",
-   "val_t": "str_map",
+   "val_t": "object",
    "val": {
-      "success": "true",
+      "success": true,
       "error": ""
    }
 }
