@@ -1207,7 +1207,7 @@ This service is used to manage over-the-air (OTA) upgrades of end devices.
 Type | Interface               | Value type | Description 
 -----|-------------------------|------------|--------------
 out  | evt.ota_progress.report | int_map    | Shows upgrade progress and estimated time left.
-out  | evt.ota_end.report      | string_map | Sent on upgrade end with upgrade status.
+out  | evt.ota_end.report      | object     | Sent on upgrade end with upgrade status.
 
 #### Examples
 
@@ -1228,9 +1228,9 @@ out  | evt.ota_end.report      | string_map | Sent on upgrade end with upgrade s
 {
    "type": "evt.ota_end.report",
    "serv": "ota",
-   "val_t": "str_map",
+   "val_t": "object",
    "val": {
-      "success": "true",
+      "success": true,
       "error": ""
    }
 }
