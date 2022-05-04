@@ -878,7 +878,7 @@ out  | evt.notiftype.report     | bool_map   |
 in   | cmd.op.stop              | null       | Emergency stop of any operation.
 -|||
 in   | cmd.state.get_report     | null       | Get current state
-out  | evt.state.report         | string     | Current state
+out  | evt.state.report         | string     | Current state (one of sup_states or number)
 -|||
 in   | cmd.tstate.set           | string     | Setting target state
 
@@ -887,7 +887,7 @@ in   | cmd.tstate.set           | string     | Setting target state
 Name             | Value example                  | Description
 -----------------|--------------------------------|-------------
 `sup_notiftypes` | audio, visual                  | supported notification-types, like siren, flashlight
-`sup_states`     | open, closed, closing, opening | supported states
+`sup_states`     | open, closed, closing, opening, stopped, range | supported states
 `sup_tstates`    | open, closed                    | supported target states
 
 ### Media player service
