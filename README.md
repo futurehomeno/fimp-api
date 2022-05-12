@@ -966,10 +966,6 @@ in   | cmd.cable_lock.set              | bool     |                             
 in   | cmd.cable\_lock.get\_report     | null     |                              | Get the status of the cable_lock.
 out  | evt.cable_lock.report           | bool     |                              | Cable lock report of the chargepoint (true = locked, false = unlocked).
 -|||
-in   | cmd.access.set                  | string   |                              | 
-in   | cmd.access.get_report           | null     |                              |
-out  | evt.access.report               | string   |                              |
--|||
 in   | cmd.current_session.get_report  | null     |                              | Command for getting energy (kWh) for the current session.
 out  | evt.current_session.report      | float    |                              |
 -|||
