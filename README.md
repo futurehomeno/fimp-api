@@ -954,26 +954,26 @@ Used for EV chargers.
 
 #### Interfaces
 
-Type | Interface                       | Value type | Properties                   | Description
------|---------------------------------|----------|------------------------------|------------
-in   | cmd.charge.start                | null     |                              | Start charging (allow cars to charge) OCPP: Remote Start Transaction.
-in   | cmd.charge.stop                 | null     |                              | Stop charging (stop cars from charging) OCPP: Remote Stop Transaction.
+Type | Interface                       | Value type | Properties                 | Description
+-----|---------------------------------|----------|----------------------------|------------
+in   | cmd.charge.start                | null     |                            | Start charging (allow cars to charge) OCPP: Remote Start Transaction.
+in   | cmd.charge.stop                 | null     |                            | Stop charging (stop cars from charging) OCPP: Remote Stop Transaction.
 -|||
-in   | cmd.state.get_report            | null     |                              | Get the state of the chargepoint, see sup_states.
-out  | evt.state.report                | string   |                              | State report of the chargepoint.
+in   | cmd.state.get_report            | null     |                            | Get the state of the chargepoint, see sup_states.
+out  | evt.state.report                | string   |                            | State report of the chargepoint.
 -|||
-in   | cmd.cable_lock.set              | bool     |                              | Lock & unlock the cable/connector.
-in   | cmd.cable\_lock.get\_report     | null     |                              | Get the status of the cable_lock.
-out  | evt.cable_lock.report           | bool     |                              | Cable lock report of the chargepoint (true = locked, false = unlocked).
+in   | cmd.cable_lock.set              | bool     |                            | Lock & unlock the cable/connector.
+in   | cmd.cable\_lock.get\_report     | null     |                            | Get the status of the cable_lock.
+out  | evt.cable_lock.report           | bool     |                            | Cable lock report of the chargepoint (true = locked, false = unlocked).
 -|||
-in   | cmd.current_session.get_report  | null     |                              | Command for getting energy (kWh) for the current session.
-out  | evt.current_session.report      | float    |                              |
+in   | cmd.current_session.get_report  | null     |                            | Command for getting energy (kWh) for the current session.
+out  | evt.current_session.report      | float    |                            |
 -|||
-in   | cmd.electric_current.set        | object   | val = {"maxCurrent": 30.0}   | Command for setting an electric current maximum amperage.
-in   | cmd.electric_current.get_report | null     |                              |
-out  | evt.electric_current.report     | object   | val = {"maxCurrent": 30.0    |
+in   | cmd.electric_current.set        | object   | val = {"maxCurrent": 30.0} | Command for setting an electric current maximum amperage.
+in   | cmd.electric_current.get_report | null     |                            |
+out  | evt.electric_current.report     | object   | val = {"maxCurrent": 30.0} |
 -|||
-out  | evt.error.report                | string   |                              | 
+out  | evt.error.report                | string   |                            | 
 
 #### Interface props
 
