@@ -977,9 +977,10 @@ out  | evt.error.report             | string   |               |
 
 #### Interface props
 
-Name          | Value example                                                                                                           | Description
---------------|-------------------------------------------------------------------------------------------------------------------------|-------------
-`sup_states`  | ["disconnected", “requesting”, “charging”, “ready_to_charge”, "finished", "reserved", "unavailable", "error", "unknown"] | State of the CP.
+Name                  | Value example                                                                                                            | Description
+----------------------|--------------------------------------------------------------------------------------------------------------------------|-------------
+`sup_states`          | ["disconnected", “requesting”, “charging”, “ready_to_charge”, "finished", "reserved", "unavailable", "error", "unknown"] | State of the CP.
+`sup_charging_modes`  | ["slow", “normal”]                                                                                                       | Optional, supported chargning modes. Required, if the device supports energy management.
 
 ### Inverter services
 
