@@ -885,6 +885,12 @@ out  | evt.state.report         | string     | Current state
 -|||
 in   | cmd.tstate.set           | string     | Setting target state
 
+#### Interface props
+
+Name        | Value example | Description
+------------|---------------|-------------
+`stopped_at`| 30            | stopped at exact position (percentage value)
+
 #### Service props
 
 Name             | Value example                  | Description
