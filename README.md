@@ -889,7 +889,7 @@ in   | cmd.tstate.set           | string     | Setting target state
 
 Name        | Value example | Description
 ------------|---------------|-------------
-`stopped_at`| 30            | stopped at exact position (percentage value)
+`stopped_at`| 30            | Stopped at exact position (percentage value).
 
 #### Service props
 
