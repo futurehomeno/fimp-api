@@ -497,11 +497,13 @@ Service name        | Event                                   | Description
 
 Type | Interface            | Value type | Description
 -----|----------------------|------------|--------------------
-in   | cmd.alarm.get_report | ?          |
+in   | cmd.alarm.get_report | str_map    | val = {"event": "tamper_removed_cover"}
 out  | evt.alarm.report     | str_map    | val = {"event": "tamper_removed_cover", "status": "activ"}
 in   | cmd.alarm.clear      | string     | val = event that should be cleared – device should send a new report after.
 
 Supported statuses: activ, deactiv. IMPORTANT: These are shorthands for "activated" and "deactivated", not typos.
+
+Interface cmd.alarm.get_report is used in Z-wave to clear last event for given event. 
 
 Example message: [evt.sensor.report](json-v1/messages/examples/evt.alarm.report.json)
 
