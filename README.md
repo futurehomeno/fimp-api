@@ -1243,3 +1243,78 @@ out  | evt.ota_end.report      | object     | Sent on upgrade end with upgrade s
    }
 }
 ```
+
+### Zwave Specific service 
+This service is used to meet all zwave specific requirements that are not satisfied with already implemented services.
+
+#### Service name 
+
+`zwave_specific`
+
+#### Interfaces
+
+Type | Interface               | Value type | Description 
+-----|-------------------------|------------|--------------
+out  | evt.notification.report | str_map    | Notification Reports that are sent by slave devices.
+
+#### Storage property
+
+Key        | Value description 
+-----------|----------------------------------
+sub_value  | Values pair to store in Vinculum.
+
+#### Examples
+
+Motion Detection occurs for state Motion Sensor Status:
+
+```json
+{
+   "type": "evt.notification.report",
+   "serv": "zwave_specific",
+   "val_t": "str_map",
+   "val": {
+      "notificationEventState": "motion_detection",
+      "notificationType": "home_security",
+      "stateVariable": "motion_sensor_status"
+   },
+   "storage": {
+     "sub_value": "home_security:motion_sensor_status"
+   }
+}
+```
+
+Motion Sensor Status state has been changed to State Idle:
+
+```json
+{
+   "type": "evt.notification.report",
+   "serv": "zwave_specific",
+   "val_t": "str_map",
+   "val": {
+      "notificationEventState": "state_idle",
+      "notificationType": "home_security",
+      "stateVariable": "motion_sensor_status"
+   },
+   "storage": {
+     "sub_value": "home_security:motion_sensor_status"
+   }
+}
+```
+
+Stateles (event) notification occurs:
+
+```json
+{
+   "type": "evt.notification.report",
+   "serv": "zwave_specific",
+   "val_t": "str_map",
+   "val": {
+      "notificationEventState": "glass_breakage_location_provided",
+      "notificationType": "home_security",
+      "stateVariable": "event"
+   },
+   "storage": {
+     "sub_value": "home_security:glass_breakage_location_provided"
+   }
+}
+```
