@@ -758,11 +758,14 @@ The service has to be used to control color components of a lightning device.
 
 #### Interfaces
 
-Type | Interface            | Value type |  Description
------|----------------------|------------|-------------------
-in   | cmd.color.get_report | null       | The command is a request for a map of color component values
-in   | cmd.color.set        | int_map    | value is a map of color components. val= {"red":200, "green":100, "blue":45}
-out  | evt.color.report     | int_map    | Map of color components, where value is component intensity.
+Type | Interface                  | Value type |  Description
+-----|----------------------------|------------|-------------------
+in   | cmd.color.get_report       | null       | The command is a request for a map of color component values
+in   | cmd.color.set              | int_map    | value is a map of color components. val= {"red":200, "green":100, "blue":45}
+out  | evt.color.report           | int_map    | Map of color components, where value is component intensity.
+-|||
+in   | cmd.color.start_transition | object     | Example value: val= {"component": "red", "transition": "up"}
+in   | cmd.color.stop_transition  | str        | Stop fading/enhancing single color component. val = "red"
 
 #### Service props
 
