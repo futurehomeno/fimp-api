@@ -2,7 +2,229 @@
 
 The following APIs should be common across all adapters, but the example code will use zwave-ad. Notes have been added for specific differences for the most common adapters.
 
-## Adding a thing to FH system
+## Adding a thing to FH system - SmartStart (Z-Wave only)
+
+Smart Start inclusion is a process of adding devices with pre-configuration step using it's DSK printed on a back of a device.
+With this functionality, you simply mount your device and power it on.
+The devices are then automatically recognized and added to the network because they already come with a configuration set beforehand.
+
+There are two types of adding devices using SmartStart:
+1. Scanning it's DSK using mobile phone camera.
+2. Manually writing a DSK code into a Node Provisioning List of a Smarthub.
+
+What is a Node Provisioning List?
+NPL is a list which contains all the DSK's for devices that can be added using SmartStart or by a classic inclusion with Security S2 capability without additional classic inclusion security bootstraping key exchange step.
+NPL is a Z-Wave abstraction which is used mostly for SmartStart functionality but also for simplifying S2 capable nodes inclusion.
+NPL comes with a possibility to add, remove or edit it's entries.
+
+### Adding a Z-Wave device to Node Provisioning List with QR Code
+
+Topic: `pt:j1/mt:cmd/rt:ad/rn:zw/ad:1`
+
+Message (command):
+
+    {
+        "serv": "zwave-ad",
+        "type": "cmd.npl.qr",
+        "val_t": "str",
+        "val": "92011287329843274893247893247324",
+        "props": null,
+        "tags": null,
+        "ctime": "1970-01-01T00:00:00+0000",
+        "uid": "123456789"
+    }
+
+### Adding or editing a Z-Wave device to Node Provisioning List manually
+
+Topic: `pt:j1/mt:cmd/rt:ad/rn:zw/ad:1`
+
+Message (command):
+
+    {
+        "serv": "zwave-ad",
+        "type": "cmd.npl.upsert",
+        "val_t": "str",
+        "val": "67656-08786-98576-65768-67656-08786-98576-65768",
+        "props": {
+            "inclusion_setting": "pending"/"passive"/"ignored",
+            "bootstraping_mode": "s2_only"/"smart_start"/"smart_start_lr",
+            "network_status": {
+                "node_id": 10,
+                "status": "not_in_network"/"failing"
+            }
+            "generic_device_class": "0x10",
+            "specific_device_class": "0x15",
+            "installer_icon_type": "0x10",
+            "manufacturer_id": "0x0012",
+            "product_type": "0x0013",
+            "product_id": "0x0014",
+            "application_version": "0x15",
+            "application_subversion": "0x16",
+            "inclusion_request_interval": "512",
+            "uuid_representation": "6",
+            "uuid": "58D5E212-165B-4CA0-909B-C86B9CEE0111",
+            "supported_protocols": "1",
+            "name": "FH Smart Start Plug",
+            "location": "Living Room",
+            "joining_info_type": "3",
+        },
+        "tags": null,
+        "ctime": "1970-01-01T00:00:00+0000",
+        "uid": "123456789"
+    }
+
+### Removing a Z-Wave device from Node Provisioning List
+
+Topic: `pt:j1/mt:cmd/rt:ad/rn:zw/ad:1`
+
+Message (command):
+
+    {
+        "serv": "zwave-ad",
+        "type": "cmd.npl.entry_delete",
+        "val_t": "str",
+        "val": "67656-08786-98576-65768-67656-08786-98576-65768",
+        "props": null,
+        "tags": null,
+        "ctime": "1970-01-01T00:00:00+0000",
+        "uid": "123456789"
+    }
+
+### Report for Node Provisioning List Entry
+Below report can occur in four situations:
+1. After adding entry (status="added").
+2. After deleting entry (status="deleted" or status="deleted_only_from_npl").
+3. After editing entry (status="edited", network_status: {"status": "not_in_network"}).
+4. After powering up a device (status="edited", network_status: {"status": "included"}).
+5. After inclusion in wrong network (status="included_bad_network").
+
+Topic: `pt:j1/mt:cmd/rt:ad/rn:zw/ad:1`
+
+Message (command):
+
+    {
+        "serv": "zwave-ad",
+        "type": "evt.npl.entry_report",
+        "val_t": "object",
+        "val": {
+            "status": "added"/"edited"/"deleted"/"deleted_only_from_npl"/"included_bad_network",
+            "dsk": "67656-08786-98576-65768-67656-08786-98576-65768"
+        },
+        "props": {
+            "inclusion_setting": "pending"/"passive"/"ignored",
+            "bootstraping_mode": "s2_only"/"smart_start"/"smart_start_lr",
+            "network_status": {
+                "node_id": 10,
+                "status": "not_in_network"/"failing/"included"
+            }
+            "generic_device_class": "0x10",
+            "specific_device_class": "0x15",
+            "installer_icon_type": "0x10",
+            "manufacturer_id": "0x0012",
+            "product_type": "0x0013",
+            "product_id": "0x0014",
+            "application_version": "0x15",
+            "application_subversion": "0x16",
+            "inclusion_request_interval": "512",
+            "uuid_representation": "6",
+            "uuid": "58D5E212-165B-4CA0-909B-C86B9CEE0111",
+            "supported_protocols": "1",
+            "name": "FH Smart Start Plug",
+            "location": "Living Room",
+            "joining_info_type": "3",
+        },
+        "tags": null,
+        "ctime": "1970-01-01T00:00:00+0000",
+        "uid": "123456789"
+    }
+
+### Getting all entries for a Node Provisioning List
+
+Topic: `pt:j1/mt:cmd/rt:ad/rn:zw/ad:1`
+
+Message (command):
+
+    {
+        "serv": "zwave-ad",
+        "type": "cmd.npl.get_list",
+        "val_t": "null",
+        "val": null,
+        "props": null,
+        "tags": null,
+        "ctime": "1970-01-01T00:00:00+0000",
+        "uid": "123456789"
+    }
+
+### Report after getting all entries for a Node Provisioning List
+
+Topic: `pt:j1/mt:cmd/rt:ad/rn:zw/ad:1`
+
+Topic: `pt:j1/mt:cmd/rt:ad/rn:zw/ad:1`
+
+Message (command):
+
+    {
+        "serv": "zwave-ad",
+        "type": "evt.npl.list",
+        "val_t": "str_array",
+        "val": [
+            "67656-08786-98576-65768-67656-08786-98576-65768",
+            "67621-02386-98426-64568-12446-24561-98576-65768"
+        ]
+        "props": [
+            {
+                "inclusion_setting": "pending"/"passive"/"ignored",
+                "bootstraping_mode": "s2_only"/"smart_start"/"smart_start_lr",
+                "network_status": {
+                    "node_id": 10,
+                    "status": "not_in_network"/"failing"
+                }
+                "generic_device_class": "0x10",
+                "specific_device_class": "0x15",
+                "installer_icon_type": "0x10",
+                "manufacturer_id": "0x0012",
+                "product_type": "0x0013",
+                "product_id": "0x0014",
+                "application_version": "0x15",
+                "application_subversion": "0x16",
+                "inclusion_request_interval": "512",
+                "uuid_representation": "6",
+                "uuid": "58D5E212-165B-4CA0-909B-C86B9CEE0111",
+                "supported_protocols": "1",
+                "name": "FH Smart Start Plug",
+                "location": "Living Room",
+                "joining_info_type": "3",
+            },
+            {
+                "inclusion_setting": "pending"/"passive"/"ignored",
+                "bootstraping_mode": "s2_only"/"smart_start"/"smart_start_lr",
+                "network_status": {
+                    "node_id": 11,
+                    "status": "not_in_network"/"failing"
+                }
+                "generic_device_class": "0x11",
+                "specific_device_class": "0x11",
+                "installer_icon_type": "0x14",
+                "manufacturer_id": "0x4235",
+                "product_type": "0x1235",
+                "product_id": "0x5453",
+                "application_version": "0x15",
+                "application_subversion": "0x16",
+                "inclusion_request_interval": "512",
+                "uuid_representation": "6",
+                "uuid": "58D5E212-165B-4CA0-909B-C86B9CEE0111",
+                "supported_protocols": "1",
+                "name": "Fibaro Wall Plug",
+                "location": "Hallway",
+                "joining_info_type": "3",
+            },
+        ]
+        "tags": null,
+        "ctime": "1970-01-01T00:00:00+0000",
+        "uid": "123456789"
+    }
+
+## Adding a thing to FH system - classic inclusion
 
 Inclusion process generally consists of 2 steps:
 
