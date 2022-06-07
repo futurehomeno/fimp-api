@@ -764,14 +764,15 @@ in   | cmd.color.get_report       | null       | The command is a request for a 
 in   | cmd.color.set              | int_map    | value is a map of color components. val= {"red":200, "green":100, "blue":45}
 out  | evt.color.report           | int_map    | Map of color components, where value is component intensity.
 -|||
-in   | cmd.color.start_transition | object     | Example value: val= {"component": "red", "transition": "up"}
+in   | cmd.color.start_transition | object     | Example value: val= {"component": "red", "transition": "up", "duration": 127}
 in   | cmd.color.stop_transition  | str        | Stop fading/enhancing single color component. val = "red"
 
 #### Service props
 
-Name             | Value example            | Description
------------------|--------------------------|-------------
-`sup_components` | ["red", "green", "blue"] | List of supported color components
+Name             | Value example                                                            | Description
+-----------------|--------------------------------------------------------------------------|-------------
+`sup_components` | ["red", "green", "blue"]                                                 | List of supported color components
+`duration`       | {"minSeconds": 1, "maxSeconds": 127, "minMinutes": 1, "maxMinutes": 127} | Supported duration steps for transition change (optional).
 
 Supported color components:
 - Zwave: red, green, blue, warm_w, cold_w, amber, cyan, purple
@@ -788,6 +789,8 @@ Supported `temp` values: 1-65279 mired. Actual color temperature supported by en
 - cold_w - is cold white light source intensity. Value range 0-255.
 
 - Mix of warm white intensity and cold white intensity forms color temperature.
+
+- Duration property within cmd.color.start_transition command is optional and means seconds.
 
 ### Scene controller service
 
