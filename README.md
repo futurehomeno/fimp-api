@@ -792,6 +792,10 @@ Supported `temp` values: 1-65279 mired. Actual color temperature supported by en
 
 - Duration property within cmd.color.start_transition command is optional and means seconds.
 
+- For Z-Wave protocol, every duration value above the 'maxSeconds' value will not be handled and will be cut into full minutes.
+  Example: sending "duration": 128 (seconds = 2 minutes and 8 seconds) will result in adapter setting only 2 minutes within device.
+  Duration increment step should be '1' for seconds: 1, 2, 3...125, 126, 127 and '60' for minutes, starting from: 180, 240, 300...7620.
+
 ### Scene controller service
 
 The service represents a device which can be used to control scenes. Normally it's remote controller.
