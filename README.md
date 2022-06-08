@@ -593,6 +593,30 @@ Modes: off, heat, cool, auto, aux_heat, resume, fan, furnace, dry_air, moist_air
 
 Set-point types: heat, cool, furnace, dry_air, moist_air, auto_changeover, energy_heat, energy_cool, special_heat.
 
+#### Interface storage
+
+Name        | Value example | Description
+------------|---------------|-------------
+`sub_value` | "heat"        | With usage of sub_value, Vinculum will know that it has to store separate temperature for every mode of given thermostat temperature.
+
+#### Examples
+```json
+{
+    "val_t": "str_map",
+    "val": {"type": "heat", "temp": 22.0,"unit": "C" },
+    "storage": {
+       "sub_value": "heat"
+    }
+}
+{
+    "val_t": "str_map",
+    "val": {"type": "cool", "temp": 20.0,"unit": "C" },
+    "storage": {
+       "sub_value": "cool"
+    }
+}
+```
+
 ### Water heater service
 
 #### Service names
