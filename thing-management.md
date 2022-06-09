@@ -4,25 +4,26 @@ The following APIs should be common across all adapters, but the example code wi
 
 ## Adding a thing to FH system - SmartStart (Z-Wave only)
 
-Smart Start inclusion is a process of adding devices with pre-configuration step using it's DSK printed on a back of a device.
-With this functionality, you simply mount your device and power it on.
-The devices are then automatically recognized and added to the network because they already come with a configuration set beforehand.
+SmartStart inclusion is a process of adding a device with a pre-configuration step using a DSK printed on the back of the devices.
+With this functionality, you simply set up your device and power it on.
+The device is then automatically recognized and added to the network because they already come with a configuration set beforehand.
 
-There are two types of adding devices using SmartStart:
-1. Scanning it's DSK using mobile phone camera.
-2. Manually writing a DSK code into a Node Provisioning List of a Smarthub.
+There are two ways of adding devices using SmartStart:
+1. Scanning its DSK using mobile phone camera.
+2. Manually writing a DSK code into the Node Provisioning List (NPL) of a Smarthub.
 
 What is a Node Provisioning List?
-NPL is a list which contains all the DSK's for devices that can be added using SmartStart or by a classic inclusion with Security S2 capability without additional classic inclusion security bootstraping key exchange step.
-NPL is a Z-Wave abstraction which is used mostly for SmartStart functionality but also for simplifying S2 capable nodes inclusion.
-NPL comes with a possibility to add, remove or edit it's entries.
+NPL is a list which contains all the DSKs for devices that can be added using SmartStart or by classic inclusion with Security S2 without the additional classic inclusion security bootstraping key exchange step.
+NPL is a Z-Wave abstraction which is used mostly for SmartStart functionality but also for simplifying inclusion of S2 capable nodes.
+NPL comes with the possibility to add, remove or edit its entries.
 
-### Adding a Z-Wave device to Node Provisioning List with QR Code
+### Adding a Z-Wave device to NPL with QR Code
 
 Topic: `pt:j1/mt:cmd/rt:ad/rn:zw/ad:1`
 
 Message (command):
 
+```json
     {
         "serv": "zwave-ad",
         "type": "cmd.npl.qr",
@@ -33,13 +34,15 @@ Message (command):
         "ctime": "1970-01-01T00:00:00+0000",
         "uid": "123456789"
     }
+```
 
-### Adding or editing a Z-Wave device to Node Provisioning List manually
+### Adding or editing a Z-Wave device to NPL manually
 
 Topic: `pt:j1/mt:cmd/rt:ad/rn:zw/ad:1`
 
 Message (command):
 
+```json
     {
         "serv": "zwave-ad",
         "type": "cmd.npl.upsert",
@@ -72,13 +75,15 @@ Message (command):
         "ctime": "1970-01-01T00:00:00+0000",
         "uid": "123456789"
     }
+```
 
-### Removing a Z-Wave device from Node Provisioning List
+### Removing a Z-Wave device from NPL
 
 Topic: `pt:j1/mt:cmd/rt:ad/rn:zw/ad:1`
 
 Message (command):
 
+```json
     {
         "serv": "zwave-ad",
         "type": "cmd.npl.entry_delete",
@@ -89,12 +94,14 @@ Message (command):
         "ctime": "1970-01-01T00:00:00+0000",
         "uid": "123456789"
     }
+```
 
-### Report for Node Provisioning List Entry
-Below report can occur in four situations:
-1. After adding entry (status="added").
-2. After deleting entry (status="deleted" or status="deleted_only_from_npl").
-3. After editing entry (status="edited", network_status: {"status": "not_in_network"}).
+### Report for NPL Entry
+
+The following report can occur in five situations:
+1. After adding an entry (status="added").
+2. After deleting an entry (status="deleted" or status="deleted_only_from_npl").
+3. After editing an entry (status="edited", network_status: {"status": "not_in_network"}).
 4. After powering up a device (status="edited", network_status: {"status": "included"}).
 5. After inclusion in wrong network (status="included_bad_network").
 
@@ -102,6 +109,7 @@ Topic: `pt:j1/mt:cmd/rt:ad/rn:zw/ad:1`
 
 Message (command):
 
+```json
     {
         "serv": "zwave-ad",
         "type": "evt.npl.entry_report",
@@ -137,13 +145,15 @@ Message (command):
         "ctime": "1970-01-01T00:00:00+0000",
         "uid": "123456789"
     }
+```
 
-### Getting all entries for a Node Provisioning List
+### Getting all entries for a NPL
 
 Topic: `pt:j1/mt:cmd/rt:ad/rn:zw/ad:1`
 
 Message (command):
 
+```json
     {
         "serv": "zwave-ad",
         "type": "cmd.npl.get_list",
@@ -154,15 +164,15 @@ Message (command):
         "ctime": "1970-01-01T00:00:00+0000",
         "uid": "123456789"
     }
+```
 
-### Report after getting all entries for a Node Provisioning List
-
-Topic: `pt:j1/mt:cmd/rt:ad/rn:zw/ad:1`
+### Report after getting all entries for a NPL
 
 Topic: `pt:j1/mt:cmd/rt:ad/rn:zw/ad:1`
 
 Message (command):
 
+```json
     {
         "serv": "zwave-ad",
         "type": "evt.npl.list",
@@ -223,6 +233,7 @@ Message (command):
         "ctime": "1970-01-01T00:00:00+0000",
         "uid": "123456789"
     }
+```
 
 ## Adding a thing to FH system - classic inclusion
 
