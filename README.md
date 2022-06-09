@@ -772,7 +772,7 @@ in   | cmd.color.stop_transition  | str        | Stop fading/enhancing single co
 Name             | Value example                                                            | Description
 -----------------|--------------------------------------------------------------------------|-------------
 `sup_components` | ["red", "green", "blue"]                                                 | List of supported color components
-`duration`       | {"minSeconds": 1, "maxSeconds": 127, "minMinutes": 1, "maxMinutes": 127} | Supported duration steps for transition change (optional).
+`sup_durations`  | {"minSeconds": 1, "maxSeconds": 127, "minMinutes": 1, "maxMinutes": 127} | Supported duration steps for transition change (optional).
 
 Supported color components:
 - Zwave: red, green, blue, warm_w, cold_w, amber, cyan, purple
