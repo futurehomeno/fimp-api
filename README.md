@@ -1249,19 +1249,20 @@ This service is used to meet all zwave specific requirements that are not satisf
 
 #### Service name 
 
-`zwave_specific`
+`notification`
 
 #### Interfaces
 
 Type | Interface               | Value type | Description 
 -----|-------------------------|------------|--------------
-out  | evt.notification.report | str_map    | Notification Reports that are sent by slave devices.
+out  | evt.notification.report | object     | Notification reports that are sent by slave devices.
 
-#### Storage property
+#### Interface storage
 
-Key        | Value description 
------------|----------------------------------
-sub_value  | Values pair to store in Vinculum.
+Name        | Value example                 | Description
+------------|-------------------------------|-------------
+`sub_value` | "home_security:sensor_status" | With usage of sub_value, Vinculum will know that it has to store separate value for every pair of choosen properties for given notification.
+
 
 #### Examples
 
@@ -1269,17 +1270,18 @@ Motion Detection occurs for state Motion Sensor Status:
 
 ```json
 {
-   "type": "evt.notification.report",
-   "serv": "zwave_specific",
-   "val_t": "str_map",
-   "val": {
-      "notificationEventState": "motion_detection",
-      "notificationType": "home_security",
-      "stateVariable": "motion_sensor_status"
-   },
-   "storage": {
-     "sub_value": "home_security:motion_sensor_status"
-   }
+  "serv": "notification",
+  "val_t": "object",
+  "val": {
+    "domain": "zwave",
+    "type": "state",
+    "category": "home_security",
+    "subject": "sensor_status",
+    "value": "motion_detected"
+  },
+  "storage": {
+       "sub_value": "home_security:sensor_status"
+  }
 }
 ```
 
@@ -1287,17 +1289,18 @@ Motion Sensor Status state has been changed to State Idle:
 
 ```json
 {
-   "type": "evt.notification.report",
-   "serv": "zwave_specific",
-   "val_t": "str_map",
-   "val": {
-      "notificationEventState": "state_idle",
-      "notificationType": "home_security",
-      "stateVariable": "motion_sensor_status"
-   },
-   "storage": {
-     "sub_value": "home_security:motion_sensor_status"
-   }
+  "serv": "notification",
+  "val_t": "object",
+  "val": {
+    "domain": "zwave",
+    "type": "state",
+    "category": "home_security",
+    "subject": "sensor_status",
+    "value": "state_idle"
+  },
+  "storage": {
+       "sub_value": "home_security:sensor_status"
+  }
 }
 ```
 
@@ -1305,16 +1308,35 @@ Stateles (event) notification occurs:
 
 ```json
 {
-   "type": "evt.notification.report",
-   "serv": "zwave_specific",
-   "val_t": "str_map",
-   "val": {
-      "notificationEventState": "glass_breakage_location_provided",
-      "notificationType": "home_security",
-      "stateVariable": "event"
-   },
-   "storage": {
-     "sub_value": "home_security:glass_breakage_location_provided"
-   }
+  "serv": "notification",
+  "val_t": "str_map",
+  "val": {
+    "domain": "zwave",
+    "type": "event",
+    "category": "home_security",
+    "value": "glass_breakage"
+  },
+  "storage": {
+       "sub_value": "home_security:glass_breakage"
+  }
+}
+```
+
+Unknown notification occurs:
+
+```json
+{
+  "serv": "notification",
+  "val_t": "object",
+  "val": {
+    "domain": "zwave",
+    "type": "state",
+    "category": "31",
+    "subject": "30",
+    "value": "30"
+  },
+  "storage": {
+       "sub_value": "31:30"
+  }
 }
 ```
