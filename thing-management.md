@@ -6,33 +6,40 @@ The following APIs should be common across all adapters, but the example code wi
 
 SmartStart inclusion is a process of adding a device with a pre-configuration step using a DSK printed on the back of the device. With this functionality, you simply set up your device and power it on. The device is then automatically recognized and added to the network because it already comes with a configuration set by default.
 
-There are two ways of adding a device using SmartStart:
+There are two ways of adding a device to the NPL:
 1. Scanning the DSK using a mobile phone camera (QR).
-2. Manually entering the DSK into the Node Provisioning List (NPL).
+2. Manually entering the DSK into the Node Provisioning List.
 
 ### What is the Node Provisioning List?
 
 NPL is a list which contains all the DSKs for devices that will be added using SmartStart (if those are SmartStart capable) or by classic inclusion with Security S2 without the additional classic inclusion security bootstrapping key exchange step. It is a Z-Wave abstraction which is used mostly for SmartStart functionality but also for simplifying inclusion of S2 capable nodes. It comes with the possibility to add, edit or remove its entries.
 
+### Additional documentation for SmartStart and NPL
+
+All documents are located in z-wave/smartstart directory.
+1. Node Provisioning Information Type Registry: Most of properties used in FIMP model are taken from this document. Example: 3.1.2.8 SmartStart Inclusion Setting Information Type is basically translated to "inclusion_setting" in FIMP protocol.
+2. Node Provisioning QR Code Format: Document for any kind of front end application which would want to implement QR Code scanning capability.
+3. Z-Wave Network Protocol Command Class Specification: Adnotation 4.5.12.5 shows diagrams for use cases of SmartStart and NPL.
+
 ### NPL Data Model
 
-TODO(dev): Check the information in this section.
+All of the properties are optional with three exceptions: 'inclusion_setting', 'bootstraping_mode' and 'network_status'.
 
 #### `inclusion_setting`
 
 Can be one of the following:
 
-- `pending`: ??
-- `passive`: ??
-- `ignored`: ??
+- `pending`: Device will be added to network right after powering it up. 
+- `passive`: Controller has decided to not perform inclusion right after powering up a device. When get for all entries is executed this state is changed automatically to 'pending'.
+- `ignored`: Controller has decided to not perform inclusion right after powering up a device. This state can be changed only manually.
 
 #### `bootstrapping_mode`
 
 Can be one of the following:
 
-- `s2_only`
-- `smart_start`
-- `smart_start_lr`
+- `s2_only`: Device must manually be set to Learn Mode and follow S2 bootstraping instructions.
+- `smart_start`: Device will be included and S2 bootstrapped automatically using Z-Wave Smart Start.
+- `smart_start_lr`: Device will be included and S2 bootstrapped automatically using Z-Wave Long Range Smart Start.
 
 #### `network_status`
 
@@ -41,29 +48,73 @@ Object containing nodeId and status.
 > `status` can be `not_in_network`, `failing` or `included`.
 
 #### `generic_device_class`
+
+Z-Wave generic device class.
+Examples: GENERIC_TYPE_ENTRY_CONTROL, GENERIC_TYPE_SWITCH_BINARY, GENERIC_TYPE_SWITCH_MULTILEVEL.
+
 #### `specific_device_class`
+
+Z-Wave specific device class. Along with generic device type creates a specific information about device type.
+Examples: SPECIFIC_TYPE_COLOR_TUNABLE_BINARY, SPECIFIC_TYPE_DOOR_LOCK, SPECIFIC_TYPE_CLASS_A_MOTOR_CONTROL
+
+Example of generic and specific device class pair and a matching meaning:
+GENERIC_TYPE_SWITCH_MULTILEVEL and SPECIFIC_TYPE_CLASS_A_MOTOR_CONTROL means Z-Wave Window Covering device type.
+GENERIC_TYPE_SWITCH_MULTILEVEL and SPECIFIC_TYPE_COLOR_TUNABLE_MULTILEVEL means Z-Wave Color Switch device type.
+
 #### `installer_icon_type`
+
+Z-Wave specification has a list of icons with hexadecimal values corresponded to every one of them.
+
 #### `manufacturer_id`
+
+Unique value given for every manufacturer who sells Z-Wave devices. 
+
 #### `product_type`
+
+Manufacturer - defined number which should represent a group of devices within a single manufacturer.
+
 #### `product_id`
+
+Manufacturer - defined number which right along with manufacturer_id and product_type creates a unique set of number representing one single Z-Wave device model.
+
 #### `application_version`
+
+Version of application installed on Z-Wave device.
+
 #### `application_subversion`
+
+Subversion of application installed on Z-Wave device.
+
 #### `inclusion_request_interval`
+
+Interval defined by seconds for sending inclusion requests from slave device to Z-Wave controller. Default is set to 512 seconds.
+
 #### `uuid_representation`
+
+Described in Node Provisioning Information Type Registry 3.1.2.4.
+
 #### `uuid`
+
+Described in Node Provisioning Information Type Registry 3.1.2.4.
+
 #### `supported_protocols`
+
+Can be one of the following:
+- 1: Z-Wave is supported
+- 2: Z-Wave Long Range is supported
 
 #### `name`
 
 The name of the device being upserted in the NPL.
 
 #### `location`
+
+Location assigned to a device.
 #### `joining_info_type`
 
+Number that should be interpreted by a zwave adapter according to table from document Node Provisioning Information Type Registry: 3.1.2.9 Table 5.
 
 ### NPL Report Data Model
-
-TODO(dev): Check the information in this section.
 
 #### `status`
 
@@ -72,8 +123,8 @@ Included in reports from NPL entry. Can be one of the following:
 - `added`: A device has been added to the NPL.
 - `edited`: An existing device has been changed in the NPL.
 - `deleted`: A device has been deleted from the NPL.
-- `deleted_only_from_npl`: ??
-- `included_bad_network`: ??
+- `deleted_only_from_npl`: A device has been deleted from NPL, but still need to be manually excluded from network. 
+- `included_bad_network`: A device has been added to other Z-Wave network. User should perform device's reset for successful Smart Start inclusion.
 
 #### `dsk`
 
