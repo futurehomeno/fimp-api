@@ -22,8 +22,8 @@ TODO(dev): Check the information in this section.
 
 Can be one of the following:
 
-- `pending`: A device has been added to the NPL.
-- `passive`: An existing device has been changed in the NPL.
+- `pending`: ??
+- `passive`: ??
 - `ignored`: ??
 
 #### `bootstrapping_mode`
