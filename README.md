@@ -52,12 +52,12 @@ Additionally, each service it will have its own unique address (topic) over whic
 
 Type | Sample values                  | Description
 -----|--------------------------------|------------
-pt   | j1                             | parser type, typically j1, representing JSON v1.
-mt   | evt, cmd, rsp                 | message type . cmd - command, evt - event, rsp - response to request
-rt   | ad, app, dev                   | resource type, ad = adapter, dev = device.
-rn   | zw, vinculum, zigbee, kind-owl | resource name, the actual name of the rt
-sv   | out_bin_sw, out_lvl_sw, etc.   | service name
-ad   |                                | the address of the preceding type.
+pt   | j1, j1c1                       | Parser type, typically j1 (JSON v1) or j1c1 (JSON v1 compression type 1 (gzip)).
+mt   | evt, cmd, rsp                  | Message type: cmd - command, evt - event, rsp - response to request.
+rt   | ad, app, dev                   | Resource type: ad = adapter, app = application, dev = device.
+rn   | zw, vinculum, zigbee, kind-owl | Resource name, i.e. the actual name of the rt.
+sv   | out_bin_sw, out_lvl_sw, etc.   | Service name.
+ad   |                                | The address of the preceding type.
 
 Breaking down the example `pt:j1/mt:evt/rt:dev/rn:zw/ad:1/sv:out_bin_switch/ad:11_0`, this is the address specifying JSON v1 formatted events sent to a device using zwave with address 1, and the service `out_bin_sw` with address of 11_0. Note here that zwave actually has an address. This is normally set to 1, but in the case of the gateway having multiple instances of zwave, it can be another address.
 
