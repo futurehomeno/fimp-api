@@ -772,7 +772,7 @@ in   | cmd.color.stop_transition  | str        | Stop fading/enhancing single co
 Name             | Value example                                                              | Description
 -----------------|----------------------------------------------------------------------------|-------------
 `sup_components` | ["red", "green", "blue"]                                                   | List of supported color components
-`sup_durations`  | [{"min": 1, "max": 127, "step": 1}, {"min": 180, "max": 7620, "step": 60}} | Supported duration steps for transition change (optional). Min and max always reflects seconds.
+`sup_durations`  | [{"min": 1, "max": 127, "step": 1}, {"min": 180, "max": 7620, "step": 60}] | Supported duration steps for transition change (optional). Min and max always reflects seconds.
 
 Supported color components:
 - Zwave: red, green, blue, warm_w, cold_w, amber, cyan, purple
@@ -792,7 +792,7 @@ Supported `temp` values: 1-65279 mired. Actual color temperature supported by en
 
 - Duration property within cmd.color.start_transition command is optional and means seconds.
 
-- For Z-Wave protocol, slave devices will accept only values from range 1...127 seconds or 1...127 minutes. This is why sup_durations property was introduced. Zwave adapter will be responsible for converting seconds above value 127 to minutes.
+- In the Z-Wave protocol, color component transition duration can only be set between 1 - 127 seconds or 1 - 127 minutes. In order to fully support the Z-Wave protocol, sup_durations property can contain an array of ranges with a specific step.
 
 ### Scene controller service
 
