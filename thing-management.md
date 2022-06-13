@@ -7,6 +7,7 @@ The following APIs should be common across all adapters, but the example code wi
 SmartStart inclusion is a process of adding a device with a pre-configuration step using a DSK printed on the back of the device. With this functionality, you simply set up your device and power it on. The device is then automatically recognized and added to the network because it already comes with a configuration set by default.
 
 There are two ways of adding a device to the NPL:
+
 1. Scanning the DSK using a mobile phone camera (QR).
 2. Manually entering the DSK into the Node Provisioning List.
 
@@ -17,6 +18,7 @@ NPL is a list which contains all the DSKs for devices that will be added using S
 ### Additional documentation for SmartStart and NPL
 
 All documents are located in z-wave/smartstart directory.
+
 1. Node Provisioning Information Type Registry: Most of properties used in FIMP model are taken from this document. Example: 3.1.2.8 SmartStart Inclusion Setting Information Type is basically translated to "inclusion_setting" in FIMP protocol.
 2. Node Provisioning QR Code Format: Document for any kind of front end application which would want to implement QR Code scanning capability.
 3. Z-Wave Network Protocol Command Class Specification: Adnotation 4.5.12.5 shows diagrams for use cases of SmartStart and NPL.
