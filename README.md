@@ -1244,8 +1244,9 @@ out  | evt.ota_end.report      | object     | Sent on upgrade end with upgrade s
 }
 ```
 
-### Zwave Specific service 
-This service is used to meet all zwave specific requirements that are not satisfied with already implemented services.
+### Notification service
+
+This service is used to receive notifications from devices.
 
 #### Service name 
 
@@ -1255,7 +1256,7 @@ This service is used to meet all zwave specific requirements that are not satisf
 
 Type | Interface               | Value type | Description 
 -----|-------------------------|------------|--------------
-out  | evt.notification.report | object     | Notification reports that are sent by slave devices.
+out  | evt.notification.report | object     | Notification reports that are sent by devices.
 
 #### Interface storage
 
