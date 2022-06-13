@@ -224,6 +224,7 @@ Message (command):
 ### Report for NPL Entry
 
 The following report can occur in five situations:
+
 1. After adding an entry (status="added").
 2. After deleting an entry (status="deleted" or status="deleted_only_from_npl").
 3. After editing an entry (status="edited", network_status: {"status": "not_in_network"}).
