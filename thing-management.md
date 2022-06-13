@@ -47,7 +47,11 @@ Can be one of the following:
 
 Object containing nodeId and status.
 
-> `status` can be `not_in_network`, `failing` or `included`.
+> `status` can be:
+- `not_in_network`: A device is not currently included in the network.
+- `included`: A device is included in the network and is functional.
+- `failing`: A device is included in the network but is now marked as failing (e.g. communication fails or it has not woken up for longer than expected)
+> `nodeId`: Unique identifier assigned to a device by a Smarthub.
 
 #### `generic_device_class`
 
