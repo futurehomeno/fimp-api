@@ -52,14 +52,22 @@ Object containing nodeId and status.
 #### `generic_device_class`
 
 Z-Wave generic device class.
-Examples: GENERIC_TYPE_ENTRY_CONTROL, GENERIC_TYPE_SWITCH_BINARY, GENERIC_TYPE_SWITCH_MULTILEVEL.
+
+Examples:
+
+GENERIC_TYPE_ENTRY_CONTROL, GENERIC_TYPE_SWITCH_BINARY, GENERIC_TYPE_SWITCH_MULTILEVEL.
 
 #### `specific_device_class`
 
 Z-Wave specific device class. Along with generic device type creates a specific information about device type.
-Examples: SPECIFIC_TYPE_COLOR_TUNABLE_BINARY, SPECIFIC_TYPE_DOOR_LOCK, SPECIFIC_TYPE_CLASS_A_MOTOR_CONTROL
+
+Examples:
+
+SPECIFIC_TYPE_COLOR_TUNABLE_BINARY, SPECIFIC_TYPE_DOOR_LOCK, SPECIFIC_TYPE_CLASS_A_MOTOR_CONTROL
 
 Example of generic and specific device class pair and a matching meaning:
+
+
 GENERIC_TYPE_SWITCH_MULTILEVEL and SPECIFIC_TYPE_CLASS_A_MOTOR_CONTROL means Z-Wave Window Covering device type.
 GENERIC_TYPE_SWITCH_MULTILEVEL and SPECIFIC_TYPE_COLOR_TUNABLE_MULTILEVEL means Z-Wave Color Switch device type.
 
@@ -102,6 +110,7 @@ Described in Node Provisioning Information Type Registry 3.1.2.4.
 #### `supported_protocols`
 
 Can be one of the following:
+
 - 1: Z-Wave is supported
 - 2: Z-Wave Long Range is supported
 
@@ -112,6 +121,7 @@ The name of the device being upserted in the NPL.
 #### `location`
 
 Location assigned to a device.
+
 #### `joining_info_type`
 
 Number that should be interpreted by a zwave adapter according to table from document Node Provisioning Information Type Registry: 3.1.2.9 Table 5.
