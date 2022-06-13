@@ -303,11 +303,14 @@ Meters report consumption over the service.
 
 #### Service names
 
-Service name  | Units                                     | Description
-------------- |-------------------------------------------|------------
-`meter_elec`  | kWh, kVAh, W, pulse_c, V, A, power_factor | Electric meter
-`meter_gas`   | cub_m, cub_f, pulse_c                     | Gas meter
-`meter_water` | cub_m, cub_f, gallon, pulse_c             | Water meter
+Service name    | Units                                     | Description
+----------------|-------------------------------------------|------------
+`meter_elec`    | kWh, kVAh, W, pulse_c, V, A, power_factor | Electric meter
+`meter_gas`     | cub_m, cub_f, pulse_c                     | Gas meter
+`meter_water`   | cub_m, cub_f, gallon, pulse_c             | Water meter
+`meter_heating` | kWh                                       | Heating meter
+`meter_cooling` | kWh                                       | Cooling meter
+`meter_unknown` | Numbers representing units.               | Unknown meter
 
 #### Interfaces
 
@@ -321,11 +324,19 @@ in   | cmd.meter_ext.get_report      | null       |                         | Re
 
 #### Interface props
 
-Name       | Value example | Description
------------|---------------|-------------
-`delta_t`  |               | time delta
-`prv_data` |               | previous meter reading
-`unit`     |               |
+Name         | Value example | Description
+-------------|---------------|-------------
+`delta_t`    |               | time delta
+`prv_data`   |               | previous meter reading
+`unit`       |               | One of sup_units. For meter_unknown it will be a number.
+`rate_type`  | "export"      | Defines whether reading is based on consumption (import) or production (export).
+`meter_type` | 10            | Number representing meter type. Applicable ONLY for meter_unknown service.
+
+#### Interface storage
+
+Name        | Value example | Description
+------------|---------------|-------------
+`sub_value` | "kWh:export"  | With usage of sub_value, Vinculum will know that it has to store separate meter reading for each pair of unit and rate_type.
 
 #### Service props
 
