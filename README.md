@@ -291,9 +291,9 @@ Name        | Value example | Description
 
 Name      | Value example | Description
 ----------|---------------|-------------
-`max_lvl` | 99            | maximum value.
-`min_lvl` | 0             | minimum value.
-`sw_type` | "on_off"      | type of level switch. Supported values are `on_off` or `up_down`.
+`max_lvl` | 99            | A maximum supported value.
+`min_lvl` | 0             | A minimum supported value.
+`sw_type` | "on_off"      | A type of level switch. Supported values are `on_off` or `up_down`.
 
 ***
 
