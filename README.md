@@ -271,7 +271,7 @@ Used for dimmers and things generally controlled with sliders.
 
 Type | Interface          | Value type | Properties              | Description
 -----|--------------------|------------|-------------------------|------------
-in   | cmd.binary.set     | bool       |                         | True is mapped to 255, false to 0.
+in   | cmd.binary.set     | bool       |                         | True should result in setting last known non-zero level or fallback to maximum.
 out  | evt.binary.report  | bool       |                         | Deprecated. Service should use `evt.lvl.report` instead.
 -|||
 in   | cmd.lvl.get_report | null       |                         |
