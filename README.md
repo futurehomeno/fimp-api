@@ -707,13 +707,22 @@ Name        | Value example | Description
 
 Name                        | Value example                                                         | Description
 ----------------------------|-----------------------------------------------------------------------|-------------
-`sup_components`            | ["is_secured", "door_is_closed", "bolt_is_locked", "latch_is_closed"] | List of supported lock component components.
+`sup_components`            | ["is_secured", "door_is_closed", "bolt_is_locked", "latch_is_closed"] | List of supported lock configuration components.
 `min_volume`                | 0                                                                     | Minimum volume level.
 `max_volume`                | 2                                                                     | Maximum volume level.
 `supports_auto_relock`      | true                                                                  | Defines if device supports auto-relock capability.
 `supports_hold_and_release` | false                                                                 | Defines if device supports hold and release capability.
 `supports_block-to-block`   | true                                                                  | Defines if device supports block-to-block capability.
 `supports_twist_assist`     | false                                                                 | Defines if device supports twist assist capability.
+`min_lock_timeout_seconds`  | 0                                                                     | Defines minimum value of lock going to a secured state after receiving cmd.lock.set with one of timed modes as a value. This properties value represents seconds.
+`max_lock_timeout_seconds`  | 59                                                                    | Defines maximum value of lock going to a secured state after receiving cmd.lock.set with one of timed modes as a value. This properties value represents seconds.
+`min_lock_timeout_minutes`  | 0                                                                     | Defines minimum value of lock going to a secured state after receiving cmd.lock.set with one of timed modes as a value. This properties value represents minutes.
+`max_lock_timeout_minutes`  | 253                                                                   | Defines maximum value of lock going to a secured state after receiving cmd.lock.set with one of timed modes as a value. This properties value represents minutes.
+`min_hold_and_release_time` | 1                                                                     | Defines minimum value of hold and release functionality in seconds.
+`max_hold_and_release_time` | 65535                                                                 | Defines maximum value of hold and release functionality in seconds.
+`min_auto_relock_time`      | 0                                                                     | Defines minimum value of lock going automatically to a secured state in seconds.
+`max_hold_and_release_time` | 65535                                                                 | Defines maximum value of lock going automatically to a secured state in seconds.
+
 
 #### Example
 
@@ -756,11 +765,11 @@ Messages cmd.lock.set_configuration and evt.lock.configuration_report will look 
 
 Explanation of cmd.lock.set_configuration interface value properties.
 
-- operation_type - One of sup_operation_types property within service. At the moment supported values are: 'timed' and 'constant'.
+- operation_type - One of sup_operation_types property within the service. At the moment supported values are: 'timed' and 'constant'.
 
 - outside_handles_mode - Defines whether any of four outside handles can be opened locally, 1 means cannot open locally, 0 means can open locally. This field might be ommited, then all door handles can be opened locally.
 
-- inside_handles_mode - Defines whether any of four outside handles can be opened locally, 1 means cannot open locally, 0 means can open locally. This field might be ommited, then all door handles can be opened locally.
+- inside_handles_mode - Defines whether any of four inside handles can be opened locally, 1 means cannot open locally, 0 means can open locally. This field might be ommited, then all door handles can be opened locally.
 
 - lock_timeout_minutes - This field is used to specify the time that a device must wait before returning to the secured mode when receiving timed operation modes. Values in range 0...253 must indicate the actual number of minutes. This field must be in range 0...253 if the operation_type field is set to 'timed'. This field might be ommited when operation_type field is set to 'constant'.
 
@@ -774,9 +783,13 @@ Explanation of cmd.lock.set_configuration interface value properties.
 
 - twist_assist - The value true must indicate that the twist assist functionality is enabled and value false indicates that it's disabled. This field will be ignored (so also can be ommited by client) if a device does not support a capability of twist assist (service property 'supports_twist_assist').
 
-Explanation of a possible values for sup_components service property for Z-Wave protocol.
+Possible values for sup_components service property for Z-Wave protocol.
 
-Possible values: `unsecured`, `unsecured_with_timeout`, `unsecured_for_inside_door_handles`, `unsecured_for_inside_door_handles_with_timeout`, `unsecured_for_outside_door_handles`, `unsecured_for_outside_door_handles_with_timeout`, `secured`.
+- `unsecured`, `unsecured_with_timeout`, `unsecured_for_inside_door_handles`, `unsecured_for_inside_door_handles_with_timeout`, `unsecured_for_outside_door_handles`, `unsecured_for_outside_door_handles_with_timeout`, `secured`
+
+Possible values for operation_type property for Z-Wave protocol.
+
+- `constant`, `timed`.
 
 Timed operation components (modes) must not be selectable by the end user if the door lock is not configured in timed operation.
 
