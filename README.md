@@ -678,14 +678,14 @@ Set-point types: normal, boost, vacation.
 Type | Interface                     | Value type | Properties               | Description
 -----|-------------------------------|------------|--------------------------|------------------
 in   | cmd.lock.get_report           | null       |                          |
-in   | cmd.lock.set                  | bool       |                          | Use true to secure a lock and false to unsecure
-in   | cmd.lock.set_with_code        | str_map    |                          | Used to lock/unlock locks required PIN/RFID, {“op”:”lock”, ”code_type”:”pin”, ”12345” }
-out  | evt.lock.report               | bool_map   | timeout_s, lock_type     | value = {"is_secured":true, "door_is_closed":true, "bolt_is_locked":true, "latch_is_closed":true}
+in   | cmd.lock.set                  | bool       |                          | Use true to secure a lock and false to unsecure.
+in   | cmd.lock.set_with_code        | str_map    |                          | Used to lock/unlock locks required PIN/RFID, {“op”:”lock”, ”code_type”:”pin”, "code":”12345” }.
+out  | evt.lock.report               | bool_map   | timeout_s, lock_type     | value = {"is_secured":true, "door_is_closed":true, "bolt_is_locked":true, "latch_is_closed":true}.
 -|||   
 in   | cmd.open.get_report           | null       |                          | 
-out  | evt.open.report               | bool       | true = open              | Used to report if the door is open or closed
+out  | evt.open.report               | bool       | true = open              | Used to report if the door is open or closed.
 -|||   
-in   | cmd.auto_lock.set             | bool       | true = auto-lock enabled | Enable/disable auto-lock feature
+in   | cmd.auto_lock.set             | bool       | true = auto-lock enabled | Enable/disable auto-lock feature.
 in   | cmd.auto_lock.get_report      | null       |                          | 
 out  | evt.auto_lock.report          | bool       | true = auto-lock enabled |
 -|||   
@@ -693,7 +693,7 @@ in   | cmd.volume.set                | int        | `min_volume`-`max_volume`
 in   | cmd.volume.get_report         | null       |
 out  | evt.volume.report             | int        | `min_volume`-`max_volume`
 -|||   
-in   | cmd.lock.set_configuration    | object     |                          | Used to set configuration for door lock.
+in   | cmd.lock.set_configuration    | object     |                          | Used to set configuration for door lock. Properties described within Notes section.
 in   | evt.lock.configuration_report | object     |                          | Used to report actual configuration for door lock.
 
 #### Interface props
@@ -708,6 +708,7 @@ Name        | Value example | Description
 Name                        | Value example                                                         | Description
 ----------------------------|-----------------------------------------------------------------------|-------------
 `sup_components`            | ["is_secured", "door_is_closed", "bolt_is_locked", "latch_is_closed"] | List of supported lock configuration components.
+`supported_op_types`        | ["timed", "constant"]                                                 | List of supported operation types.
 `min_volume`                | 0                                                                     | Minimum volume level.
 `max_volume`                | 2                                                                     | Maximum volume level.
 `supports_auto_relock`      | true                                                                  | Defines if device supports auto-relock capability.
@@ -734,16 +735,32 @@ Name                        | Value example                                     
   "val": {
     "operation_type": "timed",
     "outside_handles_mode": {
-      "handle1": 1,
-      "handle2": 1,
-      "handle3": 1,
-      "handle4": 1,
+      "1": {
+        "can_open": true
+      },
+      "1": {
+        "can_open": true
+      },
+      "3": {
+        "can_open": true
+      },
+      "4" {
+        "can_open": true
+      }
     },
     "inside_handles_mode": {
-      "handle1": 1,
-      "handle2": 1,
-      "handle3": 1,
-      "handle4": 1,
+      "1": {
+        "can_open": true
+      },
+      "1": {
+        "can_open": true
+      },
+      "3": {
+        "can_open": true
+      },
+      "4" {
+        "can_open": true
+      }
     },
     "lock_timeout_minutes": 2,
     "lock_timeout_seconds": 1,
