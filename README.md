@@ -1421,11 +1421,11 @@ Motion Detection occurs for state Motion Sensor Status:
     "domain": "zwave",
     "type": "state",
     "category": "home_security",
-    "subject": "sensor_status",
+    "subject": "motion_sensor_status",
     "value": "motion_detected"
   },
   "storage": {
-       "sub_value": "home_security:sensor_status"
+       "sub_value": "home_security:motion_sensor_status"
   }
 }
 ```
@@ -1441,11 +1441,11 @@ Motion Sensor Status state has been changed to State Idle:
     "domain": "zwave",
     "type": "state",
     "category": "home_security",
-    "subject": "sensor_status",
+    "subject": "motion_sensor_status",
     "value": "state_idle"
   },
   "storage": {
-       "sub_value": "home_security:sensor_status"
+       "sub_value": "home_security:motion_sensor_status"
   }
 }
 ```
