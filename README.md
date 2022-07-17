@@ -31,8 +31,11 @@
    * [Battery charge controller service](#battery-charge-controller-service)
    * [Gateway service](#gateway-service)
    * [Version service](#version-service)
-   * [Logging service](#logging-interfaces)
-
+   * [OTA service](#OTA-service)
+   * [Virtual energy service](#Virtual-energy-service)
+   * [Technology specific service](#Technology-specific-service)
+* [Common interfaces](#interfaces)
+   * [Logging interface](#logging-interface)
 
 ## Service overview
 
@@ -1328,22 +1331,6 @@ Name            | Value type   | Description
 `sdk_library`   | string       | SDK Library type (manufacturer internal)
 `protocol`      | string       | Protocol version (Z-Wave)
 
-### Logging interfaces 
-
-#### Service name 
-
-Command can belong to any service of any application or adapter.
-
-#### Interfaces 
-
-Type | Interface             | Value type | Properties | Description 
------|-----------------------|------------|------------|--------------
-in   | cmd.log.set_level     | string     |            | 
-in   | cmd.log.get_level     | null       |            | 
-out  | evt.log.level_report  | string     |            |   
-
-Supported log level : `trace`,`debug`,`info`,`warn`,`error`
-
 ### OTA Service 
 This service is used to manage over-the-air (OTA) upgrades of end devices.
 
@@ -1384,6 +1371,63 @@ out  | evt.ota_end.report      | object     | Sent on upgrade end with upgrade s
    }
 }
 ```
+### Virtual energy service
+
+The service allows devices with output binary switch service or thermostat service to report accumulated energy consumption in case they do not have their own electric measurement or metering service. Thank to this service delivered energy is calculated based on manually provided power of a device. A device shall calculate energy at every relay state change, mode change or at least every interval value - 30 minutes by default.
+
+#### Service names
+
+`virtual_energy`
+
+#### Interfaces
+
+Type | Interface                | Value type | Description
+-----|--------------------------|------------|------------
+in   | cmd.meter.get_report     | null       | Triggers "evt.meter.report" on a remote device.
+in   | cmd.meter.reset          | null       | Sets energy counter on a remote device to 0.
+out  | evt.meter.report         | float      | Measurement of delivered energy. Default unit should be kWh.
+-|||
+in   | cmd.set_interval         | int        | Interval in minutes for energy recalculation. Overwrites a default value.
+in   | cmd.add_device           | int_map    | Adds Virtual energy service to a selected device. The device shall be reporting energy consumption. Map of integers passed as an argument should provide energy consumption for every mode in watts.
+in   | cmd.remove_device        | null       | Removes Virtual energy service from a selected device. The device shall not be reporting energy consumption.
+-|||
+in   | cmd.mode.get_report      | null       | Triggers "evt.mode.report" on a remote device.
+out  | evt.mode.report          | int        | Number of modes supported by a device. In each mode a device may consume various amount of energy.
+
+#### Service props
+
+Name             | Supported values               | Description
+-----------------|--------------------------------|-------------
+`unit`           | "Wh", "kWh", "MWh"             | If energy delivered is less then 1 kWh, unit should be Wh
+
+#### Examples
+
+Adding Virtual energy service on a device working in a one of three available modes (eg. 0-standby, 1-heating, 2-fan):
+
+```json
+{
+   "type": "cmd.add_device",
+   "serv": "virtual_energy",
+   "val_t": "int_map",
+   "val": {
+      "0": 10,
+      "1": 1500,
+      "2": 250
+   }
+}
+```
+
+Virtual energy service measurement reporting energy delivered value equal 125.5 kWh:
+
+```json
+{
+   "type": "evt.meter.report",
+   "serv": "virtual_energy",
+   "val_t": "float",
+   "val": { 123.5 }
+   "prop": {"unit": "kWh"}
+}
+```
 
 ### Technology specific service
 
@@ -1407,6 +1451,23 @@ Name        | Value example                 | Description
 ------------|-------------------------------|-------------
 `sub_value` | "home_security:sensor_status" | With usage of sub_value, Vinculum will know that it has to store separate value for every pair of choosen properties for given notification.
 
+## Common interfaces
+
+### Logging interface 
+
+#### Service name 
+
+Command can belong to any service of any application or adapter.
+
+#### Interfaces 
+
+Type | Interface             | Value type | Properties | Description 
+-----|-----------------------|------------|------------|--------------
+in   | cmd.log.set_level     | string     |            | 
+in   | cmd.log.get_level     | null       |            | 
+out  | evt.log.level_report  | string     |            |   
+
+Supported log level : `trace`,`debug`,`info`,`warn`,`error`
 
 #### Examples
 
