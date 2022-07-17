@@ -1433,7 +1433,7 @@ Adding Virtual energy service on a device working in a one of three available mo
 }
 ```
 
-Virtual energy service measurement reporting energy delivered value equal 125.5 kWh:
+Virtual energy service measurement reporting energy delivered value equal 123.5 kWh:
 
 ```json
 {
