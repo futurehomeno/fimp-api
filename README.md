@@ -350,8 +350,8 @@ Name        | Value example | Description
 Name                | Value example                                  | Description
 --------------------|------------------------------------------------|-------------
 `sup_units`         | ["W", "kWh", "A", "V"]                         | List of supported units.
-`sup_directions`    | ["import", "export"]                           | List of supported directions.
-`sup_extended_vals` | [See extended report](#extended-report-object) |
+`sup_directions`    | ["import", "export"]    (this is not used anywhere? remove?)                       | List of supported directions.
+`sup_extended_vals` | [See extended report](#extended-report-object)  (this is not used anywhere? remove?) |
 
 #### Extended report object
 
@@ -390,6 +390,8 @@ Name            | Unit    | Description
 `dc_i`          | A       | DC current
 `dc_i_min`      | A       | DC min current
 `dc_i_max`      | A       | DC max current
+
+#### Examples
 
 Meter reading reported by a energy meter:
 ```json
