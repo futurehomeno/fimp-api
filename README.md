@@ -306,32 +306,34 @@ Meters report consumption over the service.
 
 #### Service names
 
-Service name    | Units                                     | Description
-----------------|-------------------------------------------|------------
-`meter_elec`    | kWh, kVAh, W, pulse_c, V, A, power_factor | Electric meter
-`meter_gas`     | cub_m, cub_f, pulse_c                     | Gas meter
-`meter_water`   | cub_m, cub_f, gallon, pulse_c             | Water meter
-`meter_heating` | kWh                                       | Heating meter
-`meter_cooling` | kWh                                       | Cooling meter
+Service name    | Measurements                                                                     | Description
+----------------|----------------------------------------------------------------------------------|------------
+`meter_elec`    | energy, power, reactive power, frequency, voltage, current, power_factor, pulses | Electric meters
+`meter_gas`     | volume, energy, pulses, flow, pressure                                           | Gas meter
+`meter_water`   | volume, energy, pulses, flow, pressure                                           | Water meter
+`meter_heating` | energy consumption                                                               | Heating meter
+`meter_cooling` | energy consumption                                                               | Cooling meter
 
 #### Interfaces
 
-Type | Interface                     | Value type | Properties                         | Description
------|-------------------------------|------------|------------------------------------|-------------
-in   | cmd.meter.get_report          | string     | direction                          | Value - is a unit. May not be supported by all meters.
-in   | cmd.meter.reset               | null       |                                    | Resets all historical readings.
-out  | evt.meter.report              | float      | unit, prv_data, delta_t, direction |
-out  | evt.meter_ext.report          | float_map  |                                    | [Extended meter report](#extended-report-object) with up to 17 data points
-in   | cmd.meter_ext.get_report      | null       |                                    | Request extended report
+Dir  | `type`                        | `val_t`            | `prop`                             | Description
+-----|-------------------------------|--------------------|------------------------------------|-------------
+in   | cmd.meter.get_report          | string             | direction                          | Triggers evt.meter.report. An argument is "export" or "import".
+in   | cmd.meter.reset               | null               |                                    | Resets all historical readings.
+out  | evt.meter.report              | float              | unit, prv_data, delta_t, direction | Meter reading
+out  | evt.meter_ext.report          | float_map          |                                    | [Extended meter report](#extended-report-object) with up to 17 data points
+in   | cmd.meter_ext.get_report      | null               |                                    | Request extended report
 
 #### Interface props
 
-Name         | Value example | Description
--------------|---------------|-------------
-`delta_t`    |               | Elapsed time in seconds between the 'Meter Value' and the 'Previous Meter Value' measurements.
-`prv_data`   |               | Previous meter reading.
-`unit`       | "kWh"         | One of sup_units. For meter_unknown it will be a number.
-`direction`  | "export"      | Defines whether reading is based on consumption (import) or production (export). Applicable for every meter except for meter_elec.
+Name         | Value type                  | Description
+-------------|-----------------------------|-------------
+`delta_t`    | int [seconds]               | Time between the current and the previous meter reading.
+`prv_data`   | float                       | Previous meter reading.
+`unit`       | Defined by prop `sup_units` | Unit of a value in `val` field.
+`prv_unit`   | Defined by prop `sup_units` | Unit of a value in `prv_data` prop.
+`direction`  | string                      | Defines whether reading is based on consumption ("import") or production ("export").
+`virtual`    | null                        | Informs that energy measurement was calculated by Virtual energy service. 
 
 #### Important notes
 
@@ -355,40 +357,64 @@ Name                | Value example                                  | Descripti
 
 Name            | Unit    | Description
 ----------------|---------|--------------
-`e_import`      | kWh     | Energy Import
-`e_export`      | kWh     | Energy Export
-`last_e_export` | kWh     | Energy Export that day
-`last_e_import` | kWh     | Energy Import that day
-`p_import`      | W       | Power Import
-`p_import_react` | VAR    | Reactive Power Import
-`p_import_apparent` | VA  | Apparent Power Import
-`p_import_avg`  | W       | Power Import average
-`p_import_min`  | W       | Power Import minimum that day
-`p_import_max`  | W       | Power Import max that day
-`p_export`      | W       | Power Export
-`p_export_react` | VAR    | Reactive Power Export
-`p_export_min`  | W       | Power Export minimum that day
-`p_export_max`  | W       | Power Export max that day
-`p_factor`      |         | Power Factor
+`e_import`      | kWh     | Energy import
+`e_export`      | kWh     | Energy export
+`last_e_export` | kWh     | Energy export that day
+`last_e_import` | kWh     | Energy import that day
+`p_import`      | W       | Power import
+`p_import_react` | VAR    | Reactive power import
+`p_import_apparent` | VA  | Apparent power import
+`p_import_avg`  | W       | Power import average
+`p_import_min`  | W       | Power import min that day
+`p_import_max`  | W       | Power import max that day
+`p_export`      | W       | Power export
+`p_export_react` | VAR    | Reactive power export
+`p_export_min`  | W       | Power export min that day
+`p_export_max`  | W       | Power export max that day
+`p_factor`      | -       | Power factor
 `freq`          | Hz      | Frequency
-`freq_min`      | Hz      | Frequency Min
-`freq_max`      | Hz      | Frequency Max
+`freq_min`      | Hz      | Frequency min
+`freq_max`      | Hz      | Frequency max
 `u1`            | V       | Voltage phase 1
 `u2`            | V       | Voltage phase 2
 `u3`            | V       | Voltage phase 3
 `i1`            | A       | Current phase 1
 `i2`            | A       | Current phase 2
 `i3`            | A       | Current phase 3
-`dc_p`          | W       | DC Power
-`dc_p_min`      | W       | DC Power
-`dc_p_max`      | W       | DC Power
-`dc_u`          | V       | DC Voltage
-`dc_u_min`      | V       | DC Min Voltage
-`dc_u_max`      | V       | DC Max Voltage
-`dc_i`          | A       | DC Current
-`dc_i_min`      | A       | DC Min Current
-`dc_i_max`      | A       | DC Max Current
+`dc_p`          | W       | DC power
+`dc_p_min`      | W       | DC min power
+`dc_p_max`      | W       | DC max power
+`dc_u`          | V       | DC voltage
+`dc_u_min`      | V       | DC min voltage
+`dc_u_max`      | V       | DC max voltage
+`dc_i`          | A       | DC current
+`dc_i_min`      | A       | DC min current
+`dc_i_max`      | A       | DC max current
 
+Meter reading reported by a energy meter:
+```json
+{
+   "type": "evt.meter.report",
+   "serv": "meter_elec",
+   "val_t": "float",
+   "val": { 123.5 },
+   "prop": {"unit": "kWh", "delta_t": 3600},
+}
+```
+
+Extended meter reading reported by a one phase AC current meter:
+```json
+{
+   "type": "evt.meter_ext.report",
+   "serv": "meter_elec",
+   "val_t": "float_map",
+   "val": { 
+    "u1": 237,
+    "i1": 0.12,
+    "p_import": 28.4,
+    },
+}
+```
 
 ***
 
@@ -1373,7 +1399,7 @@ out  | evt.ota_end.report      | object     | Sent on upgrade end with upgrade s
 ```
 ### Virtual energy service
 
-The service allows devices with output binary switch service or thermostat service to report accumulated energy consumption in case they do not have their own electric measurement or metering service. Thank to this service delivered energy is calculated based on manually provided power of a device. A device shall calculate energy at every relay state change, mode change or at least every interval value - 30 minutes by default.
+The service allows devices with output binary switch service or thermostat service to report accumulated energy consumption in case they do not have their own electric measurement or metering service. Thank to this service delivered energy is calculated based on manually provided power of a device. A device shall calculate energy at every relay state change, mode change or at least every interval value - 30 minutes by default. When service is added on a device, service meter_elec is created. service to send measurements.
 
 #### Service names
 
@@ -1383,22 +1409,12 @@ The service allows devices with output binary switch service or thermostat servi
 
 Type | Interface                | Value type | Description
 -----|--------------------------|------------|------------
-in   | cmd.meter.get_report     | null       | Triggers "evt.meter.report" on a remote device.
-in   | cmd.meter.reset          | null       | Sets energy counter on a remote device to 0.
-out  | evt.meter.report         | float      | Measurement of delivered energy. Default unit should be kWh.
--|||
 in   | cmd.set_interval         | int        | Interval in minutes for energy recalculation. Overwrites a default value.
 in   | cmd.add_device           | int_map    | Adds Virtual energy service to a selected device. The device shall be reporting energy consumption. Map of integers passed as an argument should provide energy consumption for every mode in watts.
 in   | cmd.remove_device        | null       | Removes Virtual energy service from a selected device. The device shall not be reporting energy consumption.
 -|||
 in   | cmd.mode.get_report      | null       | Triggers "evt.mode.report" on a remote device.
 out  | evt.mode.report          | int        | Number of modes supported by a device. In each mode a device may consume various amount of energy.
-
-#### Service props
-
-Name             | Supported values               | Description
------------------|--------------------------------|-------------
-`unit`           | "Wh", "kWh", "MWh"             | If energy delivered is less then 1 kWh, unit should be Wh
 
 #### Examples
 
@@ -1422,10 +1438,10 @@ Virtual energy service measurement reporting energy delivered value equal 125.5 
 ```json
 {
    "type": "evt.meter.report",
-   "serv": "virtual_energy",
+   "serv": "meter_elec",
    "val_t": "float",
    "val": { 123.5 }
-   "prop": {"unit": "kWh"}
+   "prop": {"unit": "kWh", "virtual"}
 }
 ```
 
