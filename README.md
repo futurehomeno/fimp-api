@@ -1384,6 +1384,50 @@ out  | evt.ota_end.report      | object     | Sent on upgrade end with upgrade s
    }
 }
 ```
+### Virtual energy service
+
+The service allows devices with output binary switch service or thermostat service to report accumulated energy consumption in case they do not have their own electric measurement or metering service. Thank to this service delivered energy is calculated based on manually provided power of a device. A device shall calculate energy at every relay state change, mode change or at least every interval value - 30 minutes by default. When service is added on a device, service meter_elec is created. service to send measurements.
+
+#### Service names
+
+`virtual_energy`
+
+#### Interfaces
+
+Type | Interface                | Value type |   Unit  | Description
+-----|--------------------------|------------|---------|------------
+in   | cmd.set_interval         | int        | minutes | Interval  for energy recalculation. Overwrites a default value.
+in   | cmd.add                  | int_map    | watts   | Adds Virtual energy service to a selected device to report energy consumption. Map of integers shall provide power use for every mode.
+in   | cmd.remove_device        | null       |         | Removes Virtual energy service from a selected device. The device shall not be reporting energy consumption.
+
+#### Examples
+
+Adding Virtual energy service on a device working in a one of three available modes (eg. 0-standby, 1-heating, 2-fan):
+
+```json
+{
+   "type": "cmd.add_device",
+   "serv": "virtual_energy",
+   "val_t": "int_map",
+   "val": {
+      "off": 10,
+      "heat": 1500,
+      "fan": 250
+   }
+}
+```
+
+Virtual energy service measurement reporting energy delivered value equal 123.5 kWh:
+
+```json
+{
+   "type": "evt.meter.report",
+   "serv": "meter_elec",
+   "val_t": "float",
+   "val": { 123.5 },
+   "props": {"unit": "kWh", "virtual" : "true"}
+}
+```
 
 ### Technology specific service
 
