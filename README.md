@@ -1402,7 +1402,7 @@ in   | cmd.remove_device        | null       |         | Removes Virtual energy 
 
 #### Examples
 
-Adding Virtual energy service on a device working in a one of three available modes (eg. 0-standby, 1-heating, 2-fan):
+Adding Virtual energy service on a device working in a one of three available modes "off", "heat" or "fan":
 
 ```json
 {
