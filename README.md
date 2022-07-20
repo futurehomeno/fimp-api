@@ -349,8 +349,8 @@ Name        | Value example | Description
 Name                | Value example                                  | Description
 --------------------|------------------------------------------------|-------------
 `sup_units`         | ["W", "kWh", "A", "V"]                         | List of supported units.
-`sup_directions`    | ["import", "export"]    (this is not used anywhere? remove?)                       | List of supported directions.
-`sup_extended_vals` | [See extended report](#extended-report-object)  (this is not used anywhere? remove?) |
+`sup_directions`    | ["import", "export"]                           | List of supported directions.
+`sup_extended_vals` | [See extended report](#extended-report-object) |
 
 #### Extended report object
 
