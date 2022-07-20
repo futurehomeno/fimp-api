@@ -329,8 +329,7 @@ Name         | Value type                  | Description
 -------------|-----------------------------|-------------
 `delta_t`    | int [seconds]               | Time between the current and the previous meter reading.
 `prv_data`   | float                       | Previous meter reading.
-`unit`       | Defined by prop `sup_units` | Unit of a value in `val` field.
-`prv_unit`   | Defined by prop `sup_units` | Unit of a value in `prv_data` prop.
+`unit`       | Defined by prop `sup_units` | Unit of a value in `val` field and 'prv_data' props field.
 `direction`  | string                      | Defines whether reading is based on consumption ("import") or production ("export").
 `virtual`    | null                        | Informs that energy measurement was calculated by Virtual energy service. 
 
