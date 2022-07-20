@@ -1388,7 +1388,7 @@ out  | evt.ota_end.report      | object     | Sent on upgrade end with upgrade s
 ```
 ### Virtual meter service
 
-The service allows devices with output binary switch service or thermostat service to report accumulated energy consumption in case they do not have their own electric measurement or metering service. Thank to this service delivered energy is calculated based on manually provided power of a device. A device shall calculate energy at every relay state change, mode change or at least every interval value - 30 minutes by default. When service is added on a device, service meter_elec is created. service to send measurements.
+This service enables a device to report accumulated consumption in case it does not have its own metering capabilities (eg. a relay with output binary switch service or thermostat). Thanks to the service accumulated consumption is calculated based on manually provided consumption in a unit of time (eg. watts, m3/h). A device shall calculate cumulated consumption at every state's change, mode change and at least every interval value - 30 minutes by default. When this service is added on a device, appropriate metering service is created (eg. meter_elec, meter_water) and a device starts to send measurements.
 
 #### Service names
 
@@ -1399,9 +1399,15 @@ The service allows devices with output binary switch service or thermostat servi
 Type | Interface                | Value type |   Unit  | Description
 -----|--------------------------|------------|---------|------------
 in   | cmd.set_interval         | int        | minutes | Interval  for energy recalculation. Overwrites a default value.
-in   | cmd.add                  | int_map    | watts   | Adds Virtual meter service to a selected device to report energy consumption. Map of integers shall provide power use for every mode.
-in   | cmd.remove               | null       |         | Removes Virtual meter service from a selected device. The device shall not be reporting energy consumption.
+in   | cmd.add                  | int_map    | define by `unit` props   | Adds Virtual meter service to a selected device to report consumption. Map of integers shall provide power use for every mode.
+in   | cmd.remove               | null       |         | Removes Virtual meter service from a selected device. The device shall not be reporting consumption.
 
+  #### Interface props
+
+Name         | Value example | Description
+-------------|---------------|-------------
+`unit`       | "kWh"         | One of sup_units. For meter_unknown it will be a number.
+  
 #### Examples
 
 Adding Virtual meter service on a device working in a one of three available modes "off", "heat" or "fan":
