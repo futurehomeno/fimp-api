@@ -1398,15 +1398,15 @@ This service enables a device to report accumulated consumption in case it does 
 
 Type | Interface                | Value type |   Unit  | Description
 -----|--------------------------|------------|---------|------------
-in   | cmd.set_interval         | int        | minutes | Interval  for energy recalculation. Overwrites a default value.
-in   | cmd.add                  | int_map    | define by `unit` props   | Adds Virtual meter service to a selected device to report consumption. Map of integers shall provide power use for every mode.
-in   | cmd.remove               | null       |         | Removes Virtual meter service from a selected device. The device shall not be reporting consumption.
+in   | cmd.set_interval         | int        | minutes | Interval  for accumulated consumption recalculation. Overwrites a default value.
+in   | cmd.add                  | int_float  | define by `unit` props   | Adds Virtual meter service to a selected device to report accumulated consumption. Map of floats shall provide consumption for every mode.
+in   | cmd.remove               | null       |         | Removes Virtual meter service from a selected device. The device shall not be reporting accumulated consumption.
 
   #### Interface props
 
 Name         | Value example | Description
 -------------|---------------|-------------
-`unit`       | "kWh"         | One of sup_units. For meter_unknown it will be a number.
+`unit`       | "W", "m3/h"   |  Consumption
   
 #### Examples
 
@@ -1416,7 +1416,7 @@ Adding Virtual meter service on a device working in a one of three available mod
 {
    "type": "cmd.add_device",
    "serv": "meter_virtual",
-   "val_t": "int_map",
+   "val_t": "int_float",
    "val": {
       "off": 10,
       "heat": 1500,
