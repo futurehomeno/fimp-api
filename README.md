@@ -330,7 +330,7 @@ Name         | Value example | Description
 `prv_data`   |               | Previous meter reading.
 `unit`       | "kWh"         | One of sup_units. For meter_unknown it will be a number.
 `direction`  | "export"      | Defines whether reading is based on consumption (import) or production (export). Applicable for every meter except for meter_elec.
-`virtual`    | "elec"        | Field is presend if the measurement was calculated by a virtual service. Allowed options: "elec", "gas", "water", "heating", "cooling".
+`virtual`    | "true"        | Field is present and equal "true' if the measurement was calculated by a virtual service. "false" or not being present have equal meaning.
 
 #### Important notes
 
