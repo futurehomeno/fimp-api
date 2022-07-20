@@ -317,7 +317,7 @@ Service name    | Measurements                                                  
 
 Dir  | `type`                        | `val_t`            | `prop`                             | Description
 -----|-------------------------------|--------------------|------------------------------------|-------------
-in   | cmd.meter.get_report          | string             | direction                          | Triggers evt.meter.report. An argument is "export" or "import".
+in   | cmd.meter.get_report          | string             | direction                          | Triggers evt.meter.report. Field `val` reports a unit. May not be supported by all meters.
 in   | cmd.meter.reset               | null               |                                    | Resets all historical readings.
 out  | evt.meter.report              | float              | unit, prv_data, delta_t, direction | Meter reading
 out  | evt.meter_ext.report          | float_map          |                                    | [Extended meter report](#extended-report-object) with up to 17 data points
@@ -391,6 +391,16 @@ Name            | Unit    | Description
 `dc_i_max`      | A       | DC max current
 
 #### Examples
+
+Requesting a reported from an energy meter:
+```json
+{
+   "type": "cmd.meter.get_report",
+   "serv": "meter_elec",
+   "val_t": "string",
+   "val": { "kW" },
+}
+```
 
 Meter reading reported by a energy meter:
 ```json
