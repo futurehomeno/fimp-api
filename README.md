@@ -30,7 +30,6 @@
    * [Inverter services](#inverter-services)
    * [Battery charge controller service](#battery-charge-controller-service)
    * [Gateway service](#gateway-service)
-   * [Version service](#version-service)
    * [OTA service](#OTA-service)
    * [Virtual energy service](#Virtual-energy-service)
    * [Technology specific service](#Technology-specific-service)
@@ -1397,53 +1396,6 @@ out  | evt.ota_end.report      | object     | Sent on upgrade end with upgrade s
       "success": true,
       "error": ""
    }
-}
-```
-### Virtual energy service
-
-The service allows devices with output binary switch service or thermostat service to report accumulated energy consumption in case they do not have their own electric measurement or metering service. Thank to this service delivered energy is calculated based on manually provided power of a device. A device shall calculate energy at every relay state change, mode change or at least every interval value - 30 minutes by default. When service is added on a device, service meter_elec is created. service to send measurements.
-
-#### Service names
-
-`virtual_energy`
-
-#### Interfaces
-
-Type | Interface                | Value type | Description
------|--------------------------|------------|------------
-in   | cmd.set_interval         | int        | Interval in minutes for energy recalculation. Overwrites a default value.
-in   | cmd.add_device           | int_map    | Adds Virtual energy service to a selected device. The device shall be reporting energy consumption. Map of integers passed as an argument should provide energy consumption for every mode in watts.
-in   | cmd.remove_device        | null       | Removes Virtual energy service from a selected device. The device shall not be reporting energy consumption.
--|||
-in   | cmd.mode.get_report      | null       | Triggers "evt.mode.report" on a remote device.
-out  | evt.mode.report          | int        | Number of modes supported by a device. In each mode a device may consume various amount of energy.
-
-#### Examples
-
-Adding Virtual energy service on a device working in a one of three available modes (eg. 0-standby, 1-heating, 2-fan):
-
-```json
-{
-   "type": "cmd.add_device",
-   "serv": "virtual_energy",
-   "val_t": "int_map",
-   "val": {
-      "0": 10,
-      "1": 1500,
-      "2": 250
-   }
-}
-```
-
-Virtual energy service measurement reporting energy delivered value equal 123.5 kWh:
-
-```json
-{
-   "type": "evt.meter.report",
-   "serv": "meter_elec",
-   "val_t": "float",
-   "val": { 123.5 }
-   "prop": {"unit": "kWh", "virtual"}
 }
 ```
 
