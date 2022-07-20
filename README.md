@@ -329,6 +329,7 @@ Name         | Value example | Description
 `prv_data`   |               | Previous meter reading.
 `unit`       | "kWh"         | One of sup_units. For meter_unknown it will be a number.
 `direction`  | "export"      | Defines whether reading is based on consumption (import) or production (export). Applicable for every meter except for meter_elec.
+`virtual`    | "true"        | "true" informs that energy measurement was calculated by Virtual energy service. "false" has the same meaning as if the filed is not present.
 
 #### Important notes
 
