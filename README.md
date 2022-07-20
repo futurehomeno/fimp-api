@@ -31,6 +31,7 @@
    * [Battery charge controller service](#battery-charge-controller-service)
    * [Gateway service](#gateway-service)
    * [Version service](#version-service)
+   * [Virtual meter service](#virtual-meter-service)
    * [Logging service](#logging-interfaces)
 
 
@@ -329,7 +330,7 @@ Name         | Value example | Description
 `prv_data`   |               | Previous meter reading.
 `unit`       | "kWh"         | One of sup_units. For meter_unknown it will be a number.
 `direction`  | "export"      | Defines whether reading is based on consumption (import) or production (export). Applicable for every meter except for meter_elec.
-`virtual`    | "true"        | "true" informs that energy measurement was calculated by Virtual energy service. "false" has the same meaning as if the filed is not present.
+`virtual`    | "elec"        | If present, then the measurement was calculated by a virtual service. Allowed options: "elec", "gas", "water", "heating", "cooling".
 
 #### Important notes
 
@@ -1385,30 +1386,30 @@ out  | evt.ota_end.report      | object     | Sent on upgrade end with upgrade s
    }
 }
 ```
-### Virtual energy service
+### Virtual meter service
 
 The service allows devices with output binary switch service or thermostat service to report accumulated energy consumption in case they do not have their own electric measurement or metering service. Thank to this service delivered energy is calculated based on manually provided power of a device. A device shall calculate energy at every relay state change, mode change or at least every interval value - 30 minutes by default. When service is added on a device, service meter_elec is created. service to send measurements.
 
 #### Service names
 
-`virtual_energy`
+`meter_virtual`
 
 #### Interfaces
 
 Type | Interface                | Value type |   Unit  | Description
 -----|--------------------------|------------|---------|------------
 in   | cmd.set_interval         | int        | minutes | Interval  for energy recalculation. Overwrites a default value.
-in   | cmd.add                  | int_map    | watts   | Adds Virtual energy service to a selected device to report energy consumption. Map of integers shall provide power use for every mode.
-in   | cmd.remove_device        | null       |         | Removes Virtual energy service from a selected device. The device shall not be reporting energy consumption.
+in   | cmd.add                  | int_map    | watts   | Adds Virtual meter service to a selected device to report energy consumption. Map of integers shall provide power use for every mode.
+in   | cmd.remove               | null       |         | Removes Virtual meter service from a selected device. The device shall not be reporting energy consumption.
 
 #### Examples
 
-Adding Virtual energy service on a device working in a one of three available modes "off", "heat" or "fan":
+Adding Virtual meter service on a device working in a one of three available modes "off", "heat" or "fan":
 
 ```json
 {
    "type": "cmd.add_device",
-   "serv": "virtual_energy",
+   "serv": "meter_virtual",
    "val_t": "int_map",
    "val": {
       "off": 10,
@@ -1418,7 +1419,7 @@ Adding Virtual energy service on a device working in a one of three available mo
 }
 ```
 
-Virtual energy service measurement reporting energy delivered value equal 123.5 kWh:
+Virtual meter service measurement reporting energy delivered value equal 123.5 kWh:
 
 ```json
 {
