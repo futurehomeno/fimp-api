@@ -1399,8 +1399,8 @@ This service enables a device to report accumulated consumption in case it does 
 Type | Interface                | Value type |  Props  | Description
 -----|--------------------------|------------|---------|------------
 in   | cmd.set_interval         | int        |         | Interval in minutes for accumulated consumption recalculation. Overwrites a default value 30 minutes.
-in   | cmd.add                  | float_map  | `unit`  | Adds Virtual meter service to a selected device to report accumulated consumption. Map of floats shall provide consumption for every mode.
-in   | cmd.remove               | null       |         | Removes Virtual meter service from a selected device. The device shall not be reporting accumulated consumption.
+in   | cmd.add                  | float_map  | `unit`  | Adds corresponding meter service (eg. meter_elec) to a selected device to report accumulated consumption. Map of floats shall provide consumption for every mode.
+in   | cmd.remove               | null       |         | Removes corresponding meter service from a selected device. The device shall not be reporting accumulated consumption.
 
   #### Interface props
 
