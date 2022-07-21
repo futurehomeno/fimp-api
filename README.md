@@ -313,13 +313,15 @@ Service name    | Units                                     | Description
 
 #### Interfaces
 
-Type | Interface                     | Value type | Properties                         | Description
------|-------------------------------|------------|------------------------------------|-------------
-in   | cmd.meter.get_report          | string     | direction                          | Value - is a unit. May not be supported by all meters.
-in   | cmd.meter.reset               | null       |                                    | Resets all historical readings.
-out  | evt.meter.report              | float      | unit, prv_data, delta_t, direction |
-out  | evt.meter_ext.report          | float_map  |                                    | [Extended meter report](#extended-report-object) with up to 17 data points
-in   | cmd.meter_ext.get_report      | null       |                                    | Request extended report
+Type | Interface                     | Value type | Properties              | Description
+-----|-------------------------------|------------|-------------------------|-------------
+in   | cmd.meter.get_report          | string     |                         | Value - is a unit. May not be supported by all meters.
+in   | cmd.meter.get_export_report   | string     |                         | Value - is an export unit. May not be supported by all meters.
+in   | cmd.meter.reset               | null       |                         | Resets all historical readings.
+out  | evt.meter.report              | float      | unit, prv_data, delta_t | Returns consumption meter report.
+out  | evt.meter.export_report       | float      | unit, prv_data, delta_t | Returns production meter report.
+out  | evt.meter_ext.report          | float_map  |                         | [Extended meter report](#extended-report-object) with up to 17 data points
+in   | cmd.meter_ext.get_report      | null       |                         | Request extended report
 
 #### Interface props
 
@@ -328,24 +330,23 @@ Name         | Value example | Description
 `delta_t`    |               | Elapsed time in seconds between the 'Meter Value' and the 'Previous Meter Value' measurements.
 `prv_data`   |               | Previous meter reading.
 `unit`       | "kWh"         | One of sup_units. For meter_unknown it will be a number.
-`direction`  | "export"      | Defines whether reading is based on consumption (import) or production (export). Applicable for every meter except for meter_elec.
 
 #### Important notes
 
-For backward compatibility, for service "meter_elec", interface "evt.meter.report" - reports should only support "import" direction.
+For backward compatibility, for service "meter_elec", interface "evt.meter.report" - reports should only support "import" direction. Created "evt.meter.export_report" to possibly report exported meter readings.
 
 #### Interface storage
 
 Name        | Value example | Description
 ------------|---------------|-------------
-`sub_value` | "kWh:export"  | With usage of sub_value, Vinculum will know that it has to store separate meter reading for each pair of unit and direction.
+`sub_value` | "kWh"         | With usage of sub_value, Vinculum will know that it has to store separate meter reading for each unit.
 
 #### Service props
 
 Name                | Value example                                  | Description
 --------------------|------------------------------------------------|-------------
-`sup_units`         | ["W", "kWh", "A", "V"]                         | List of supported units.
-`sup_directions`    | ["import", "export"]                           | List of supported directions.
+`sup_units`         | ["W", "kWh", "A", "V"]                         | List of supported import units.
+`sup_export_units`  | ["W", "kWh", "A", "V"]                         | List of supported export units.
 `sup_extended_vals` | [See extended report](#extended-report-object) |
 
 #### Extended report object
