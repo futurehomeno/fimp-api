@@ -1423,7 +1423,7 @@ Adding Virtual meter service on a device working in a one of three available mod
 {
    "type": "cmd.add",
    "serv": "meter_virtual",
-   "val_t": "int_float",
+   "val_t": "float_map",
    "val": {
       "off": 10,
       "heat": 1500,
