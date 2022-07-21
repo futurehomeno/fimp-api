@@ -1407,6 +1407,13 @@ in   | cmd.remove               | null       |         | Removes corresponding m
 Name         | Value example | Description
 -------------|---------------|-------------
 `unit`       | "W", "m3/h"   | Consumption per unit of time
+
+#### Service props
+
+Name                | Value example                                                   | Description
+--------------------|-----------------------------------------------------------------|-------------
+`sup_units`         | ["W", "kW", "m3/h"]                                             | List of supported units.
+`sup_modes`         | ["on", "off"] for relay, ["off", "heat", "cool"] for thermostat | List of supported modes.
   
 #### Examples
 
