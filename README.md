@@ -1406,7 +1406,7 @@ in   | cmd.remove               | null       |         | Removes Virtual meter s
 
 Name         | Value example | Description
 -------------|---------------|-------------
-`unit`       | "W", "m3/h"   |  of energy per unit of time
+`unit`       | "W", "m3/h"   | Consumption per unit of time
   
 #### Examples
 
@@ -1421,6 +1421,9 @@ Adding Virtual meter service on a device working in a one of three available mod
       "off": 10,
       "heat": 1500,
       "fan": 250
+   },
+   "props": {
+      "unit": "W"
    }
 }
 ```
