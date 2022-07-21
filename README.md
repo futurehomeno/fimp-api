@@ -330,7 +330,7 @@ Name         | Value example | Description
 `prv_data`   |               | Previous meter reading.
 `unit`       | "kWh"         | One of sup_units. For meter_unknown it will be a number.
 `direction`  | "export"      | Defines whether reading is based on consumption (import) or production (export). Applicable for every meter except for meter_elec.
-`virtual`    | "true"        | Field is present and equal "true' if the measurement was calculated by a virtual service. "false" or not being present have equal meaning.
+`virtual`    | "true"        | Field is present and equal "true" if the measurement was calculated by a virtual service. "false" or not being present have equal meaning.
 
 #### Important notes
 
@@ -1388,7 +1388,7 @@ out  | evt.ota_end.report      | object     | Sent on upgrade end with upgrade s
 ```
 ### Virtual meter service
 
-This service enables a device to report accumulated consumption in case it does not have its own metering capabilities (eg. a relay with output binary switch service or thermostat). Thanks to the service accumulated consumption is calculated based on manually provided consumption in a unit of time (eg. watts, m3/h). A device shall calculate cumulated consumption at every state's change, mode change and at least every interval value - 30 minutes by default. When this service is added on a device, appropriate metering service is created (eg. meter_elec, meter_water) and a device starts to send measurements.
+This service enables a device to report accumulated consumption in case it does not have its own metering capabilities (eg. a relay with output binary switch service or thermostat). Thanks to the service accumulated consumption is calculated based on manually provided consumption per unit of time (eg. watts, m3/h). The service shall calculate cumulated consumption at every state's change, mode change and at least every interval value. When this service is added on a device, appropriate metering service is created (eg. meter_elec, meter_water) and the service starts to send measurements.
 
 #### Service names
 
@@ -1396,17 +1396,17 @@ This service enables a device to report accumulated consumption in case it does 
 
 #### Interfaces
 
-Type | Interface                | Value type |   Unit  | Description
+Type | Interface                | Value type |  Props  | Description
 -----|--------------------------|------------|---------|------------
-in   | cmd.set_interval         | int        | minutes | Interval  for accumulated consumption recalculation. Overwrites a default value.
-in   | cmd.add                  | int_float  | define by `unit` props   | Adds Virtual meter service to a selected device to report accumulated consumption. Map of floats shall provide consumption for every mode.
+in   | cmd.set_interval         | int        |         | Interval in minutes for accumulated consumption recalculation. Overwrites a default value 30 minutes.
+in   | cmd.add                  | float_map  | `unit`  | Adds Virtual meter service to a selected device to report accumulated consumption. Map of floats shall provide consumption for every mode.
 in   | cmd.remove               | null       |         | Removes Virtual meter service from a selected device. The device shall not be reporting accumulated consumption.
 
   #### Interface props
 
 Name         | Value example | Description
 -------------|---------------|-------------
-`unit`       | "W", "m3/h"   |  Consumption
+`unit`       | "W", "m3/h"   |  of energy per unit of time
   
 #### Examples
 
@@ -1414,7 +1414,7 @@ Adding Virtual meter service on a device working in a one of three available mod
 
 ```json
 {
-   "type": "cmd.add_device",
+   "type": "cmd.add",
    "serv": "meter_virtual",
    "val_t": "int_float",
    "val": {
