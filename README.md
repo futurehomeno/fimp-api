@@ -330,7 +330,7 @@ Name         | Value example | Description
 `prv_data`   |               | Previous meter reading.
 `unit`       | "kWh"         | One of sup_units. For meter_unknown it will be a number.
 `direction`  | "export"      | Defines whether reading is based on consumption (import) or production (export). Applicable for every meter except for meter_elec.
-`virtual`    | "true"        | Field is present and equal "true" if the measurement was calculated by a virtual service. "false" or not being present have equal meaning.
+`virtual`    | "true"        | Field is present and equal "true" if the measurement was calculated by a virtual service, and "false" or not being present otherwise.
 
 #### Important notes
 
@@ -1388,17 +1388,17 @@ out  | evt.ota_end.report      | object     | Sent on upgrade end with upgrade s
 ```
 ### Virtual meter service
 
-This service enables a device to report accumulated consumption and/or pulses in case it does not have its own metering capabilities (eg. a relay with output binary switch service or thermostat accumulating pulses (watts) into consumption(kWh)). For every existing meter_X service corresponging virtual_meter_X service can be created (eg. virtual_meter_elec will create meter_elec) to report accumulated consumption using manually provided consumption per unit of time (pulses). The service shall calculate cumulated consumption at every state's change, mode change and at least every interval value multiplying this interval by pulses and send measurements.
+This service enables a device to report accumulated consumption and/or pulses in case it does not have its own metering capabilities (eg. a relay with output binary switch service or thermostat accumulating momentary power measured in Watts into energy consumption measured in kWh). If a virtual meter service is present in a device, upon manual configuration providing a consumption per supported unit, a proper meter service will be added to the device. The service then will calculate cumulated consumption at every state change, mode change and at least once during a configured interval.
 
 #### Service names
 
-`virtual_meter_[type]`
+`virtual_meter_elec`
 
 #### Interfaces
 
 Type | Interface                      | Value type |  Props  | Description
 -----|----------------------------- --|------------|---------|------------
-in   | cmd.meter.set_interval         | int        |         | Interval in minutes for accumulated consumption recalculation. Overwrites a default value 30 minutes.
+in   | cmd.meter.set_interval         | int        |         | Interval in minutes for accumulated consumption recalculation. Overwrites a default value of 30 minutes.
 in   | cmd.meter.add                  | float_map  | `unit`  | Adds corresponding meter service (eg. meter_elec) to a selected device to report accumulated consumption. Map of floats shall provide consumption for every mode.
 in   | cmd.meter.remove               | null       |        | Removes all added virtual meter services from a selected device. The device shall not be reporting accumulated consumption nor pulses anymore.
 
@@ -1406,7 +1406,7 @@ in   | cmd.meter.remove               | null       |        | Removes all added 
 
 Name         | Value example | Description
 -------------|---------------|-------------
-`unit`       | "W", "m3/h"   | Pulse's unit - Consumption per unit of time
+`unit`       | "W", "m3/h"   | Pulse's unit - consumption per unit of time.
 
 #### Service props
 
@@ -1417,7 +1417,7 @@ Name                | Value example                                             
   
 #### Examples
 
-Adding Virtual meter service on a device working in a one of three available modes "off", "heat" or "fan":
+Adding virtual meter service on a device working in a one of three available modes "off", "heat" or "fan":
 
 ```json
 {
@@ -1435,7 +1435,7 @@ Adding Virtual meter service on a device working in a one of three available mod
 }
 ```
 
-Virtual meter service measurement reporting energy delivered value equal 123.5 kWh:
+Virtual meter service measurement reporting consumed energy value equal 123.5 kWh:
 
 ```json
 {
