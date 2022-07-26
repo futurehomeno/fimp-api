@@ -49,47 +49,33 @@ Object containing nodeId and status.
 
 > `status` can be:
 - `not_in_network`: A device is not currently included in the network.
-- `included`: A device is included in the network and is functional.
-- `failing`: A device is included in the network but is now marked as failing (e.g. communication fails or it has not woken up for longer than expected)
+- `added`: A device is included in the network and is functional.
+- `failed`: A device is included in the network but is now marked as failing (e.g. communication fails or it has not woken up for longer than expected)
 > `nodeId`: Unique identifier assigned to a device by a Smarthub.
 
 #### `generic_device_class`
 
-Z-Wave generic device class.
-
-Examples:
-
-GENERIC_TYPE_ENTRY_CONTROL, GENERIC_TYPE_SWITCH_BINARY, GENERIC_TYPE_SWITCH_MULTILEVEL.
+Z-Wave generic device class (represented by a number).
 
 #### `specific_device_class`
 
-Z-Wave specific device class. Along with generic device type creates a specific information about device type.
-
-Examples:
-
-SPECIFIC_TYPE_COLOR_TUNABLE_BINARY, SPECIFIC_TYPE_DOOR_LOCK, SPECIFIC_TYPE_CLASS_A_MOTOR_CONTROL
-
-Example of generic and specific device class pair and a matching meaning:
-
-
-GENERIC_TYPE_SWITCH_MULTILEVEL and SPECIFIC_TYPE_CLASS_A_MOTOR_CONTROL means Z-Wave Window Covering device type.
-GENERIC_TYPE_SWITCH_MULTILEVEL and SPECIFIC_TYPE_COLOR_TUNABLE_MULTILEVEL means Z-Wave Color Switch device type.
+Z-Wave specific device class. Pair of generic_device_class and specific_device_class represents specific device type.
 
 #### `installer_icon_type`
 
-Z-Wave specification has a list of icons with hexadecimal values corresponded to every one of them.
+Z-Wave specification has a list of icons with integer values corresponding with each of them.
 
 #### `manufacturer_id`
 
-Unique value given for every manufacturer who sells Z-Wave devices. 
+Unique integer value given for every manufacturer who sells Z-Wave devices. 
 
 #### `product_type`
 
-Manufacturer - defined number which should represent a group of devices within a single manufacturer.
+Manufacturer - defined integer value which should represent a group of devices within a single manufacturer.
 
 #### `product_id`
 
-Manufacturer - defined number which right along with manufacturer_id and product_type creates a unique set of number representing one single Z-Wave device model.
+Manufacturer - defined integer value which right along with manufacturer_id and product_type creates a unique set of number representing one single Z-Wave device model.
 
 #### `application_version`
 
@@ -115,36 +101,46 @@ Described in Node Provisioning Information Type Registry 3.1.2.4.
 
 Can be one of the following:
 
-- 1: Z-Wave is supported
-- 2: Z-Wave Long Range is supported
+- 0: Z-Wave is supported
+- 1: Z-Wave Long Range is supported
 
 #### `name`
 
 The name of the device being upserted in the NPL.
+The Name:
+- must be UTF-8 encoded
+- must not contain any appended termination characters
+- may contain the dot
+- must not contain the underscore character “_”.
+- Each name sub-string (separated by the dot character “.”) must not end with the dash character “-”.
+
+Device name is case sensitive.
+The combined Name and Location strings must not be longer than 62 characters.
+
 
 #### `location`
 
 Location assigned to a device.
+The Location:
+- must be UTF-8 encoded
+- must not contain any appended termination characters
+- may contain the dot
+- must not contain the underscore character “_”.
+- Each location sub-string (separated by the dot character “.”) must not end with the dash character “-”.
+
+Device location is case sensitive.
+The combined Name and Location strings must not be longer than 62 characters.
 
 #### `joining_info_type`
 
-Number that should be interpreted by a zwave adapter according to table from document Node Provisioning Information Type Registry: 3.1.2.9 Table 5.
+Array of strings which represents joining mode.
+Possible values: ["s0", "s2_unauth", "s2_auth", "s2_ac"]
 
 ### NPL Report Data Model
 
-#### `status`
-
-Included in reports from NPL entry. Can be one of the following:
-
-- `added`: A device has been added to the NPL.
-- `edited`: An existing device has been changed in the NPL.
-- `deleted`: A device has been deleted from the NPL.
-- `deleted_only_from_npl`: A device has been deleted from NPL, but still need to be manually excluded from network. 
-- `included_bad_network`: A device has been added to other Z-Wave network. User should perform device's reset for successful Smart Start inclusion.
-
 #### `dsk`
 
-The DSK of the device that has been acted upon. Action is defined by the `status`.
+The DSK of the device that has been acted upon.
 
 ### Adding a Z-Wave device to NPL with QR Code
 
@@ -156,8 +152,8 @@ Message (command):
 {
     "serv": "zwave-ad",
     "type": "cmd.npl.qr",
-    "val_t": "str",
-    "val": "92011287329843274893247893247324",
+    "val_t": "string",
+    "val": "900126418131374522186120921014625903142418367280825200100435401536022000271023060409601280",
     "props": null,
     "tags": null,
     "ctime": "1970-01-01T00:00:00+0000",
@@ -174,32 +170,42 @@ Message (command):
 ```json
 {
     "serv": "zwave-ad",
-    "type": "cmd.npl.upsert",
-    "val_t": "str",
-    "val": "67656-08786-98576-65768-67656-08786-98576-65768",
-    "props": {
-        "inclusion_setting": "pending",
-        "bootstrapping_mode": "s2_only",
-        "network_status": {
-            "node_id": 10,
-            "status": "not_in_network"
-        },
-        "generic_device_class": "0x10",
-        "specific_device_class": "0x15",
-        "installer_icon_type": "0x10",
-        "manufacturer_id": "0x0012",
-        "product_type": "0x0013",
-        "product_id": "0x0014",
-        "application_version": "0x15",
-        "application_subversion": "0x16",
-        "inclusion_request_interval": "512",
-        "uuid_representation": "6",
-        "uuid": "58D5E212-165B-4CA0-909B-C86B9CEE0111",
-        "supported_protocols": "1",
-        "name": "FH Smart Start Plug",
-        "location": "Living Room",
-        "joining_info_type": "3"
+    "type": "cmd.npl.entry_upsert",
+    "val_t": "object",
+    "val": {
+        "dsk": "67656-08786-98576-65768-67656-08786-98576-65768",
+        "metadata": {
+            "product_type_info": {
+                "generic_device_class": 7,
+                "specific_device_class": 1,
+                "installer_icon_type": 1792
+            },
+            "product_id_info": {
+                "manufacturer_id": 271,
+                "product_type": 1536,
+                "product_id": 4096,
+                "application_version": 1,
+                "application_subversion": 2
+            },
+            "inclusion_request_interval": 512,
+            "uuid16_info": {
+                "uuid_representation": 6,
+                "uuid": "58D5E212-165B-4CA0-909B-C86B9CEE0111"
+            },
+            "supported_protocols": 0,
+            "name": "FH Smart Start Plug",
+            "location": "Living Room",
+            "inclusion_setting": "pending",
+            "joining_info_type": [
+                "s0",
+                "s2_unauth",
+                "s2_auth",
+                "s2_ac"
+            ],
+            "bootstrapping_mode": "s2_only"
+        }
     },
+    "props": null,
     "tags": null,
     "ctime": "1970-01-01T00:00:00+0000",
     "uid": "123456789"
@@ -216,7 +222,7 @@ Message (command):
 {
     "serv": "zwave-ad",
     "type": "cmd.npl.entry_delete",
-    "val_t": "str",
+    "val_t": "string",
     "val": "67656-08786-98576-65768-67656-08786-98576-65768",
     "props": null,
     "tags": null,
@@ -225,15 +231,64 @@ Message (command):
 }
 ```
 
+### Remove all NPL entries.
+
+Topic: `pt:j1/mt:cmd/rt:ad/rn:zw/ad:1`
+
+Message (command):
+
+```json
+{
+    "serv": "zwave-ad",
+    "type": "cmd.npl.all_entries_remove",
+    "val_t": "null",
+    "val": null,
+    "props": null,
+    "tags": null,
+    "ctime": "1970-01-01T00:00:00+0000",
+    "uid": "123456789"
+}
+```
+
+### Get NPL entry report for given DSK.
+
+Topic: `pt:j1/mt:cmd/rt:ad/rn:zw/ad:1`
+
+Message (command):
+
+```json
+{
+    "serv": "zwave-ad",
+    "type": "cmd.npl.entry_get",
+    "val_t": "string",
+    "val": "67656-08786-98576-65768-67656-08786-98576-65768",
+    "props": null,
+    "tags": null,
+    "ctime": "1970-01-01T00:00:00+0000",
+    "uid": "123456789"
+}
+```
+
+### Get NPL all entries report.
+
+Topic: `pt:j1/mt:cmd/rt:ad/rn:zw/ad:1`
+
+Message (command):
+
+```json
+{
+    "serv": "zwave-ad",
+    "type": "cmd.npl.all_entries_get",
+    "val_t": "null",
+    "val": null,
+    "props": null,
+    "tags": null,
+    "ctime": "1970-01-01T00:00:00+0000",
+    "uid": "123456789"
+}
+```
+
 ### Report for NPL Entry
-
-The following report can occur in five situations:
-
-1. After adding an entry (status="added").
-2. After deleting an entry (status="deleted" or status="deleted_only_from_npl").
-3. After editing an entry (status="edited", network_status: {"status": "not_in_network"}).
-4. After powering up a device (status="edited", network_status: {"status": "included"}).
-5. After inclusion in wrong network (status="included_bad_network").
 
 Topic: `pt:j1/mt:cmd/rt:ad/rn:zw/ad:1`
 
@@ -245,50 +300,42 @@ Message (command):
     "type": "evt.npl.entry_report",
     "val_t": "object",
     "val": {
-        "status": "added",
-        "dsk": "67656-08786-98576-65768-67656-08786-98576-65768"
+        "dsk": "67656-08786-98576-65768-67656-08786-98576-65768",
+        "metadata": {
+            "product_type_info": {
+                "generic_device_class": 7,
+                "specific_device_class": 1,
+                "installer_icon_type": 1792
+            },
+            "product_id_info": {
+                "manufacturer_id": 271,
+                "product_type": 1536,
+                "product_id": 4096,
+                "application_version": 1,
+                "application_subversion": 2
+            },
+            "inclusion_request_interval": 512,
+            "uuid16_info": {
+                "uuid_representation": 6,
+                "uuid": "58D5E212-165B-4CA0-909B-C86B9CEE0111"
+            },
+            "supported_protocols": 0,
+            "name": "FH Smart Start Plug",
+            "location": "Living Room",
+            "inclusion_setting": "pending",
+            "joining_info_type": [
+                "s0",
+                "s2_unauth",
+                "s2_auth",
+                "s2_ac"
+            ],
+            "bootstrapping_mode": "s2_only",
+            "network_status_info": {
+                "node_id": 10,
+                "status": "not_in_network"
+            }
+        }
     },
-    "props": {
-        "inclusion_setting": "pending",
-        "bootstrapping_mode": "s2_only",
-        "network_status": {
-            "node_id": 10,
-            "status": "not_in_network"
-        },
-        "generic_device_class": "0x10",
-        "specific_device_class": "0x15",
-        "installer_icon_type": "0x10",
-        "manufacturer_id": "0x0012",
-        "product_type": "0x0013",
-        "product_id": "0x0014",
-        "application_version": "0x15",
-        "application_subversion": "0x16",
-        "inclusion_request_interval": "512",
-        "uuid_representation": "6",
-        "uuid": "58D5E212-165B-4CA0-909B-C86B9CEE0111",
-        "supported_protocols": "1",
-        "name": "FH Smart Start Plug",
-        "location": "Living Room",
-        "joining_info_type": "3"
-    },
-    "tags": null,
-    "ctime": "1970-01-01T00:00:00+0000",
-    "uid": "123456789"
-}
-```
-
-### Getting all entries for a NPL
-
-Topic: `pt:j1/mt:cmd/rt:ad/rn:zw/ad:1`
-
-Message (command):
-
-```json
-{
-    "serv": "zwave-ad",
-    "type": "cmd.npl.get_list",
-    "val_t": "null",
-    "val": null,
     "props": null,
     "tags": null,
     "ctime": "1970-01-01T00:00:00+0000",
@@ -308,57 +355,80 @@ Message (command):
     "type": "evt.npl.list",
     "val_t": "str_array",
     "val": [
-        "67656-08786-98576-65768-67656-08786-98576-65768",
-        "67621-02386-98426-64568-12446-24561-98576-65768"
-    ],
-    "props": [
         {
-            "inclusion_setting": "pending",
-            "bootstrapping_mode": "s2_only",
-            "network_status": {
-                "node_id": 10,
-                "status": "not_in_network"
-            },
-            "generic_device_class": "0x10",
-            "specific_device_class": "0x15",
-            "installer_icon_type": "0x10",
-            "manufacturer_id": "0x0012",
-            "product_type": "0x0013",
-            "product_id": "0x0014",
-            "application_version": "0x15",
-            "application_subversion": "0x16",
-            "inclusion_request_interval": "512",
-            "uuid_representation": "6",
-            "uuid": "58D5E212-165B-4CA0-909B-C86B9CEE0111",
-            "supported_protocols": "1",
-            "name": "FH Smart Start Plug",
-            "location": "Living Room",
-            "joining_info_type": "3"
+            "dsk": "67656-08786-98576-65768-67656-08786-98576-65768",
+            "metadata": {
+                "product_type_info": {
+                    "generic_device_class": 7,
+                    "specific_device_class": 1,
+                    "installer_icon_type": 1792
+                },
+                "product_id_info": {
+                    "manufacturer_id": 271,
+                    "product_type": 1536,
+                    "product_id": 4096,
+                    "application_version": 1,
+                    "application_subversion": 2
+                },
+                "inclusion_request_interval": 512,
+                "uuid16_info": {
+                    "uuid_representation": 6,
+                    "uuid": "58D5E212-165B-4CA0-909B-C86B9CEE0111"
+                },
+                "supported_protocols": 0,
+                "name": "FH Smart Start Plug",
+                "location": "Living Room",
+                "inclusion_setting": "pending",
+                "joining_info_type": [
+                    "s0",
+                    "s2_unauth",
+                    "s2_auth",
+                    "s2_ac"
+                ],
+                "bootstrapping_mode": "s2_only",
+                "network_status_info": {
+                    "node_id": 10,
+                    "status": "not_in_network"
+                }
+            }
         },
         {
-            "inclusion_setting": "pending",
-            "bootstrapping_mode": "s2_only",
-            "network_status": {
-                "node_id": 11,
-                "status": "not_in_network"
-            },
-            "generic_device_class": "0x11",
-            "specific_device_class": "0x11",
-            "installer_icon_type": "0x14",
-            "manufacturer_id": "0x4235",
-            "product_type": "0x1235",
-            "product_id": "0x5453",
-            "application_version": "0x15",
-            "application_subversion": "0x16",
-            "inclusion_request_interval": "512",
-            "uuid_representation": "6",
-            "uuid": "58D5E212-165B-4CA0-909B-C86B9CEE0111",
-            "supported_protocols": "1",
-            "name": "Fibaro Wall Plug",
-            "location": "Hallway",
-            "joining_info_type": "3"
+            "dsk": "67621-02386-98426-64568-12446-24561-98576-65768",
+            "metadata": {
+                "product_type_info": {
+                    "generic_device_class": 7,
+                    "specific_device_class": 1,
+                    "installer_icon_type": 1792
+                },
+                "product_id_info": {
+                    "manufacturer_id": 271,
+                    "product_type": 1536,
+                    "product_id": 4096,
+                    "application_version": 1,
+                    "application_subversion": 2
+                },
+                "inclusion_request_interval": 512,
+                "uuid16_info": {
+                    "uuid_representation": 6,
+                    "uuid": "58D5E212-165B-4CA0-909B-C86B9CEE0111"
+                },
+                "supported_protocols": 0,
+                "name": "Fibaro Wall Plug",
+                "location": "Bedroom",
+                "inclusion_setting": "pending",
+                "joining_info_type": [
+                    "s0",
+                    "s2_unauth",
+                ],
+                "bootstrapping_mode": "smart_start",
+                "network_status_info": {
+                    "node_id": 11,
+                    "status": "not_in_network"
+                }
+            }
         }
     ],
+    "props": null,
     "tags": null,
     "ctime": "1970-01-01T00:00:00+0000",
     "uid": "123456789"
