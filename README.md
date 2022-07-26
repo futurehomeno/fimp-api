@@ -1412,7 +1412,7 @@ Name         | Value example | Description
 
 Name                | Value example                                                   | Description
 --------------------|-----------------------------------------------------------------|-------------
-`sup_units`         | ["W", "kW", "m3/h"]                                             | List of supported units.
+`sup_units`         | ["W"]                                                           | List of supported units. 
 `sup_modes`         | ["on", "off"] for relay, ["off", "heat", "cool"] for thermostat | List of supported modes.
   
 #### Examples
