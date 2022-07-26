@@ -59,23 +59,23 @@ Z-Wave generic device class (represented by a number).
 
 #### `specific_device_class`
 
-Z-Wave specific device class. Along with generic device type creates a specific information about device type (represented by a number).
+Z-Wave specific device class. Pair of generic_device_class and specific_device_class represents specific device type.
 
 #### `installer_icon_type`
 
-Z-Wave specification has a list of icons with decimal values corresponded to every one of them.
+Z-Wave specification has a list of icons with integer values corresponding with each of them.
 
 #### `manufacturer_id`
 
-Unique decimal value given for every manufacturer who sells Z-Wave devices. 
+Unique integer value given for every manufacturer who sells Z-Wave devices. 
 
 #### `product_type`
 
-Manufacturer - defined decimal value which should represent a group of devices within a single manufacturer.
+Manufacturer - defined integer value which should represent a group of devices within a single manufacturer.
 
 #### `product_id`
 
-Manufacturer - defined decimal value which right along with manufacturer_id and product_type creates a unique set of number representing one single Z-Wave device model.
+Manufacturer - defined integer value which right along with manufacturer_id and product_type creates a unique set of number representing one single Z-Wave device model.
 
 #### `application_version`
 
