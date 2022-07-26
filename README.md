@@ -1392,7 +1392,7 @@ This service enables a device to report accumulated consumption and/or pulses in
 
 #### Service names
 
-`virtual_meter_X`
+`virtual_meter_[type]`
 
 #### Interfaces
 
@@ -1400,7 +1400,7 @@ Type | Interface                      | Value type |  Props  | Description
 -----|----------------------------- --|------------|---------|------------
 in   | cmd.meter.set_interval         | int        |         | Interval in minutes for accumulated consumption recalculation. Overwrites a default value 30 minutes.
 in   | cmd.meter.add                  | float_map  | `unit`  | Adds corresponding meter service (eg. meter_elec) to a selected device to report accumulated consumption. Map of floats shall provide consumption for every mode.
-in   | cmd.meter.remove               | null       |        | Removes all added virtual meter services from a selected device. The device shall not be reporting accumulated consumption.
+in   | cmd.meter.remove               | null       |        | Removes all added virtual meter services from a selected device. The device shall not be reporting accumulated consumption nor pulses anymore.
 
   #### Interface props
 
@@ -1421,7 +1421,7 @@ Adding Virtual meter service on a device working in a one of three available mod
 
 ```json
 {
-   "type": "cmd.add",
+   "type": "cmd.meter.add",
    "serv": "virtual_meter_elec",
    "val_t": "float_map",
    "val": {
