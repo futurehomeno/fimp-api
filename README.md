@@ -31,6 +31,7 @@
    * [Battery charge controller service](#battery-charge-controller-service)
    * [Gateway service](#gateway-service)
    * [Version service](#version-service)
+   * [Virtual meter service](#virtual-meter-service)
    * [Logging service](#logging-interfaces)
 
 
@@ -330,6 +331,8 @@ Name         | Value example | Description
 `delta_t`    |               | Elapsed time in seconds between the 'Meter Value' and the 'Previous Meter Value' measurements.
 `prv_data`   |               | Previous meter reading.
 `unit`       | "kWh"         | One of sup_units. For meter_unknown it will be a number.
+`direction`  | "export"      | Defines whether reading is based on consumption (import) or production (export). Applicable for every meter except for meter_elec.
+`virtual`    | "true"        | Field is present and equal "true" if the measurement was calculated by a virtual service, and "false" or not being present otherwise.
 
 #### Important notes
 
@@ -1383,6 +1386,66 @@ out  | evt.ota_end.report      | object     | Sent on upgrade end with upgrade s
       "success": true,
       "error": ""
    }
+}
+```
+### Virtual meter service
+
+This service enables a device to report accumulated consumption and/or pulses in case it does not have its own metering capabilities (eg. a relay with output binary switch service or thermostat accumulating momentary power measured in Watts into energy consumption measured in kWh). If a virtual meter service is present in a device, upon manual configuration providing a consumption per supported unit, a proper meter service will be added to the device. The service then will calculate cumulated consumption at every state change, mode change and at least once during a configured interval.
+
+#### Service names
+
+`virtual_meter_elec`
+
+#### Interfaces
+
+Type | Interface                      | Value type |  Props  | Description
+-----|----------------------------- --|------------|---------|------------
+in   | cmd.meter.set_interval         | int        |         | Interval in minutes for accumulated consumption recalculation. Overwrites a default value of 30 minutes.
+in   | cmd.meter.add                  | float_map  | `unit`  | Adds corresponding meter service (eg. meter_elec) to a selected device to report accumulated consumption. Map of floats shall provide consumption for every mode.
+in   | cmd.meter.remove               | null       |        | Removes all added virtual meter services from a selected device. The device shall not be reporting accumulated consumption nor pulses anymore.
+
+  #### Interface props
+
+Name         | Value example | Description
+-------------|---------------|-------------
+`unit`       | "W", "m3/h"   | Pulse's unit - consumption per unit of time.
+
+#### Service props
+
+Name                | Value example                                                   | Description
+--------------------|-----------------------------------------------------------------|-------------
+`sup_units`         | ["W"]                                                           | List of supported units. 
+`sup_modes`         | ["on", "off"] for relay, ["off", "heat", "cool"] for thermostat | List of supported modes.
+  
+#### Examples
+
+Adding virtual meter service on a device working in a one of three available modes "off", "heat" or "fan":
+
+```json
+{
+   "type": "cmd.meter.add",
+   "serv": "virtual_meter_elec",
+   "val_t": "float_map",
+   "val": {
+      "off": 10,
+      "heat": 1500,
+      "fan": 250
+   },
+   "props": {
+      "unit": "W"
+   }
+}
+```
+
+Virtual meter service measurement reporting consumed energy value equal 123.5 kWh:
+
+```json
+{
+   "type": "evt.meter.report",
+   "serv": "meter_elec",
+   "val_t": "float",
+   "val": { 123.5 },
+   "props": {"unit": "kWh", "virtual" : "true"}
 }
 ```
 
