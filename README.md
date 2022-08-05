@@ -1396,7 +1396,7 @@ This service enables a device to report accumulated consumption and/or pulses in
 
 `virtual_meter_elec`
 
-#### Interfaces 
+#### Interfaces
 
 Type | Interface               | Value type | Description 
 -----|-------------------------|------------|--------------
