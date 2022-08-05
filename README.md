@@ -1398,7 +1398,7 @@ This service enables a device to report accumulated consumption and/or pulses in
 
 #### Interfaces
 
-Type | Interface               | Value type | Description 
+Type | Interface               | Value type | Description
 -----|-------------------------|------------|--------------
 in   | cmd.meter.set_interval         | int        |         | Interval in minutes for accumulated consumption recalculation. Overwrites a default value of 30 minutes.
 in   | cmd.meter.add                  | float_map  | `unit`  | Adds corresponding meter service (eg. meter_elec) to a selected device to report accumulated consumption. Map of floats shall provide consumption for every mode.
