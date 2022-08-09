@@ -1410,7 +1410,7 @@ out  | evt.meter.report        | float_map  | `unit` | Reports currently set val
 
 Name         | Value example | Description
 -------------|---------------|-------------
-`unit`       | "W", "m3/h"   | Pulse's unit - consumption per unit of time. Default unit for `virtual_meter_elec` is `W`.
+`unit`       | "W", "m3/h"   | Pulse's unit - consumption per unit of time. This is a **required** property.
 
 #### Service props
 
