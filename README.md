@@ -1400,9 +1400,11 @@ This service enables a device to report accumulated consumption and/or pulses in
 
 Type | Interface               | Value type | Props  | Description
 -----|-------------------------|------------|--------|-------------
-in   | cmd.meter.set_interval  | int        |        | Interval in minutes for accumulated consumption recalculation. Overwrites a default value of 30 minutes.
+in   | cmd.config.set_interval  | int        |        | Sets reporting interval in minutes for accumulated consumption and pulses. Overwrites a default value of 30 minutes.
+in   | cmd.config.get_interval  | null        |        | Requests reporting interval in minutes for accumulated consumption and pulses. Overwrites a default value of 30 minutes.
+in   | evt.config.interval_report  | int        |        | Reports reporting interval in minutes for accumulated consumption and pulses. Overwrites a default value of 30 minutes.
 in   | cmd.meter.add           | float_map  | `unit` | Adds corresponding meter service (eg. meter_elec) to a selected device and the provided `unit` to report accumulated consumption. Map of floats shall provide consumption for every mode.
-in   | cmd.meter.remove        | null       |        | Removes all added virtual meter services from a selected device. The device shall not be reporting accumulated consumption nor pulses anymore.
+in   | cmd.meter.remove        | null       |        | Removes all added virtual meter services from a selected device. The device shall not be reporting accumulated consumption nor pulses anymore. To confirm succesfull remoal evt.meter.report with an empty float_map is received.
 in   | cmd.meter.get_report    | null       |        | Requests the report of the currently set values for each mode.
 out  | evt.meter.report        | float_map  | `unit` | Reports currently set values for each mode and the provided `unit`.
 
