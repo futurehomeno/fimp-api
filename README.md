@@ -1404,7 +1404,7 @@ in   | cmd.config.set_interval | int        |        | Sets minimal reporting in
 in   | cmd.config.get_interval | null       |        | Requests reporting interval in minutes for accumulated consumption and pulses.
 in   | evt.config.interval_report  | int    |        | Reports reporting interval in minutes for accumulated consumption and pulses.
 in   | cmd.meter.add           | float_map  | `unit` | Adds corresponding meter service (eg. meter_elec) to a selected device and the provided `unit` to report accumulated consumption. Map of floats shall provide consumption for every mode.
-in   | cmd.meter.remove        | null       |        | Removes all added virtual meter services from a selected device. The device shall not be reporting accumulated consumption nor pulses anymore. If removal was succesfull evt.meter.report with nil in `val` field is received.
+in   | cmd.meter.remove        | null       |        | Removes all added virtual meter services from a selected device. The device shall not be reporting accumulated consumption nor pulses anymore. If removal was successful `evt.meter.report` with `null` in `val` field is sent.
 in   | cmd.meter.get_report    | null       |        | Requests the report of the currently set values for each mode.
 out  | evt.meter.report        | float_map  | `unit` | Reports currently set values for each mode and the provided `unit`.
 
