@@ -1403,7 +1403,7 @@ Type | Interface               | Value type | Props  | Description
 in   | cmd.meter.set_interval  | int        |        | Interval in minutes for accumulated consumption recalculation. Overwrites a default value of 30 minutes.
 in   | cmd.meter.add           | float_map  | `unit` | Adds corresponding meter service (eg. meter_elec) to a selected device and the provided `unit` to report accumulated consumption. Map of floats shall provide consumption for every mode.
 in   | cmd.meter.remove        | null       |        | Removes all added virtual meter services from a selected device. The device shall not be reporting accumulated consumption nor pulses anymore.
-in   | cmd.meter.get_report    | null       | `unit` | Requests the report of the currently set values for each mode and the provided `unit`.
+in   | cmd.meter.get_report    | null       |        | Requests the report of the currently set values for each mode.
 out  | evt.meter.report        | float_map  | `unit` | Reports currently set values for each mode and the provided `unit`.
 
 #### Interface props
