@@ -756,7 +756,7 @@ Message (command):
 
 ```json
 {
-    "serv": "zigbee-ad",
+    "serv": "zigbee",
     "type": "cmd.thing.delete",
     "val_t": "str_map",
     "val": {
