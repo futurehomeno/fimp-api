@@ -33,6 +33,7 @@
    * [Version service](#version-service)
    * [Virtual meter service](#virtual-meter-service)
    * [Logging service](#logging-interfaces)
+   * [Technology specific service](#technology-specific-service)
 
 
 ## Service overview
@@ -1464,6 +1465,15 @@ Type | Interface               | Value type | Description
 out  | evt.notification.report | object     | Notification reports that are sent by devices.
 out  | evt.sensor.report       | object     | Multilevel sensor reports with unknown sensor type or/and unknown unit.
 out  | evt.meter.report        | object     | Meter reports with unknown meter type or/and unit.
+
+#### Interface props
+
+Name         | Value example | Description
+-------------|---------------|-------------
+`meter_type`       | "meter_elec", "6"   | Meter type - described as text when known and number if unknown.
+`sup_units`       | ["W", "kWh", "4"]   | Supported import units - described as text when known and number if unknown.
+`sup_export_units`       | ["W", "kWh", "4"]   | Supported export units - described as text when known and number if unknown.
+`rate_type`       | "import", "export"   | Meter rate type.
 
 #### Interface storage
 
