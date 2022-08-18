@@ -1472,8 +1472,8 @@ in   | evt.meter.reset         | null       | Resets all historical readings.
 Name               | Value example          | Description
 -------------------|------------------------|-------------
 `meter_type`       | "meter_elec", "6"      | Meter type - described as text when known and number if unknown.
-`sup_units`        | ["W", "kWh", "4"]      | Supported import units - described as text when known and number if unknown.
-`sup_export_units` | ["W", "kWh", "4"]      | Supported export units - described as text when known and number if unknown.
+`sup_units`        | ["2", "8", "4"]        | Supported import units.
+`sup_export_units` | ["2", "8", "4"]        | Supported export units.
 `rate_type`        | ["import"], ["export"] | Meter rate types.
 
 #### Interface storage
