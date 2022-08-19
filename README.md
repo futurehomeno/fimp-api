@@ -1465,13 +1465,13 @@ Type | Interface               | Value type | Description
 out  | evt.notification.report | object     | Notification reports that are sent by devices.
 out  | evt.sensor.report       | object     | Multilevel sensor reports with unknown sensor type or/and unknown unit.
 out  | evt.meter.report        | object     | Meter reports with unknown meter type or/and unit.
-in   | evt.meter.reset         | null       | Resets all historical readings.
+in   | cmd.meter.reset         | null       | Resets all historical readings for all meters of this device.
 
 #### Service props
 
 Name               | Value example          | Description
 -------------------|------------------------|-------------
-`meter_type`       | "meter_elec", "6"      | Meter type - described as text when known and number if unknown.
+`meter_type`       | "meter_elec"           | Meter type - described as text when known and number if unknown.
 `sup_units`        | ["2", "8", "4"]        | Supported import units.
 `sup_export_units` | ["2", "8", "4"]        | Supported export units.
 `rate_type`        | ["import"], ["export"] | Meter rate types.
