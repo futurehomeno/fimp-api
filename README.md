@@ -1028,7 +1028,7 @@ The service represent devices like garage door openers, barriers, window protect
 
 Type | Interface                | Value type | Props     | Description
 -----|--------------------------|------------|-----------|----
-in   | cmd.notiftype.get_report | null       |           | Requests the report of the notification type .
+in   | cmd.notiftype.get_report | null       |           | Requests the report of the notification type.
 in   | cmd.notiftype.set        | bool_map   |           | Configures notification type a barrier uses while opening/closing door.
 out  | evt.notiftype.report     | bool_map   |           | Reports currently set notification type.
 -||||
