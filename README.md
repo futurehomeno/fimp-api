@@ -1026,32 +1026,32 @@ The service represent devices like garage door openers, barriers, window protect
 
 #### Interfaces
 
-Type | Interface                | Value type | Description
------|--------------------------|------------|------------
-in   | cmd.notiftype.get_report | null       |
-in   | cmd.notiftype.set        | bool_map   | Configuration of notification type device is is using while opening/closing door.
-out  | evt.notiftype.report     | bool_map   |
--|||
-in   | cmd.op.stop              | null       | Emergency stop of any operation.
--|||
-in   | cmd.state.get_report     | null       | Get current state
-out  | evt.state.report         | string     | Current state
--|||
-in   | cmd.tstate.set           | string     | Setting target state
+Type | Interface                | Value type | Props     | Description
+-----|--------------------------|------------|-----------|----
+in   | cmd.notiftype.get_report | null       |           | Requests the report of the notification type .
+in   | cmd.notiftype.set        | bool_map   |           | Configures notification type a barrier uses while opening/closing door.
+out  | evt.notiftype.report     | bool_map   |           | Reports currently set notification type.
+-||||
+in   | cmd.op.stop              | null       |           | Stops recent action triggered by cmd.tstate.set. Event evt.state.report is sent as a confirmation.
+-||||
+in   | cmd.state.get_report     | null       |           | Requests the evt.state.report reporting current barrier's state.
+out  | evt.state.report         | string     | `cur_pos` | Reports current state using values from `sup_states`.
+-||||
+in   | cmd.tstate.set           | string     |           | This command sets target barrier's state using value from `sup_tstates`. Event evt.state.report is sent as a confirmation.
 
 #### Interface props
 
-Name        | Value example | Description
-------------|---------------|-------------
-`stopped_at`| 30            | Stopped at exact position (percentage value).
+Name           | Value example | Description
+---------------|---------------|-------------
+`cur_pos`      | 30            | Current barrier position in percentage.
 
 #### Service props
 
-Name             | Value example                  | Description
------------------|--------------------------------|-------------
-`sup_notiftypes` | audio, visual                  | supported notification-types, like siren, flashlight
-`sup_states`     | open, closed, closing, opening | supported states
-`sup_tstates`    | open, closed                    | supported target states
+Name             | Value example                 | Description
+-----------------|-------------------------------|-------------
+`sup_notiftypes` | audio, visual                 | Supported notification-types like siren, flashlight.
+`sup_states`     | closing, opening, stopped     | Supported transition states reflecting momentary barrier's state.
+`sup_tstates`    | open, closed, close, n%       | Supported target states where 'n' is an interger value withing range <0,100>.
 
 ### Media player service
 
