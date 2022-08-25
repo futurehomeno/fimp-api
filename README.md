@@ -1467,15 +1467,6 @@ out  | evt.sensor.report       | object     | Multilevel sensor reports with unk
 out  | evt.meter.report        | object     | Meter reports with unknown meter type or/and unit.
 in   | cmd.meter.reset         | null       | Resets all historical readings for all meters of this device.
 
-#### Service props
-
-Name               | Value example          | Description
--------------------|------------------------|-------------
-`meter_type`       | "meter_elec"           | Meter type - described as text when known and number if unknown.
-`sup_units`        | ["2", "8", "4"]        | Supported import units.
-`sup_export_units` | ["2", "8", "4"]        | Supported export units.
-`rate_type`        | ["import"], ["export"] | Meter rate types.
-
 #### Interface storage
 
 Name        | Value example                 | Description
