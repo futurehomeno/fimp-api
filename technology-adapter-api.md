@@ -62,6 +62,7 @@ Message:
     "serv": "zigbee",
     "tags": [],
     "type": "evt.network.all_nodes_report",
+    "val_t": "object",
     "val": [
         {
             "address": "46",
@@ -69,7 +70,7 @@ Message:
             "hash": "zw_398_3_12",
             "power_source": "battery",
             "status": "DOWN",
-            "wakeup_int": "4200"
+            "wakeup_interval": "4200"
         },
         {
             "address": "63",
@@ -77,7 +78,7 @@ Message:
             "hash": "zw_271_1794_4096",
             "power_source": "battery",
             "status": "UP",
-            "wakeup_int": "3600"
+            "wakeup_interval": "3600"
         },
         {
             "address": "80",
@@ -85,10 +86,9 @@ Message:
             "hash": "zw_134_3_96",
             "power_source": "ac",
             "status": "UP",
-            "wakeup_int": "-1"
+            "wakeup_interval": "-1"
         }
-    ],
-    "val_t": "object"
+    ]
 }
 ```
 
