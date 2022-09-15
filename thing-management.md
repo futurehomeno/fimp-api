@@ -482,6 +482,63 @@ Message (command):
 }
 ```
 
+### Starting inclusion v2
+
+New inclusion process consistent with Z-Wave documentation.
+
+Topic: `pt:j1/mt:cmd/rt:ad/rn:zw/ad:1`
+
+Message (command):
+
+```json
+{
+    "serv": "zwave-ad",
+    "type": "cmd.thing.inclusion_v2",
+    "val_t": "null",
+    "props": {},
+    "tags": null,
+    "uid": "123456789"
+}
+```
+
+### Inclusion v2 PIN requested
+
+If included device requests a PIN then the following message will sent:
+
+Topic: `pt:j1/mt:evt/rt:ad/rn:zw/ad:1`
+
+Message (command):
+
+```json
+{
+    "serv": "zwave_ad",
+    "type": "evt.thing.pin_needed",
+    "val_t": "null",
+    "props": {},
+    "tags": null,
+    "uid": "123456789",
+}
+```
+
+### Inclusion v2 input PIN
+
+Topic: `pt:j1/mt:cmd/rt:ad/rn:zw/ad:1`
+
+Message (command):
+
+```json
+{
+    "serv": "zwave-ad",
+    "type": "cmd.thing.pin",
+    "val_t": "string",
+    "val": "123456",
+    "props": {},
+    "tags": null,
+    "uid": "123456789",
+}
+```
+
+
 ### Sample inclusion report
 
 Topic: `pt:j1/mt:evt/rt:ad/rn:zw/ad:1`
