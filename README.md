@@ -1241,6 +1241,7 @@ Type | Interface                          | Value type | Properties | Descriptio
 -----|------------------------------------|------------|------------|------------
 in   | cmd.indicator.set_visual_element   | int_map    | duration   | Requests visual element (led or some other light source) to display information. Key is a name of indicator component and value is actual value to set. Duration property defines how long the indicator should display the information
 in   | cmd.indicator.set_text             | str_map    | duration   | Requests text indicator to display text. Key is name of indicator component and value is text to be displayed by the component. Duration property defines how long the indicator should display the information
+in   | cmd.indicator.identify             | null       |            | Requests device to identify itself by switching on and off several times.
 
 ### Product Specific Services
 
