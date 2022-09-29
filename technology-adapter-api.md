@@ -259,3 +259,36 @@ This will produce a report similar to this:
   "tags": []
 }
 ```
+
+## Resetting network
+Supported by zwave-ad. Forcefully removes all devices from the network.
+
+### Start reset process
+
+```json
+{
+  "serv": "zwave-ad",
+  "type": "cmd.network,reset",
+  "val_t" : "null",
+  "ctime": "2019-02-04T13:41:02+0100",
+  "props": {},
+  "tags": []
+}
+```
+
+### Reset done notification
+
+After this all devices should be removed.
+
+```json
+{
+  "serv": "zwave-ad",
+  "type": "evt.network.reset_done",
+  "val_t": "null",
+  "ctime": "2019-02-04T13:41:02+0100",
+  "props": {},
+  "tags": []
+}
+```
+
+
