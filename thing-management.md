@@ -503,11 +503,11 @@ Message (command):
 
 ### Inclusion v2 PIN requested
 
-If included device requests a PIN then the following message will sent:
+If included device requests a PIN then the following message will be sent:
 
 Topic: `pt:j1/mt:evt/rt:ad/rn:zw/ad:1`
 
-Message (command):
+Message (event):
 
 ```json
 {
