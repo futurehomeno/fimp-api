@@ -268,7 +268,7 @@ Supported by zwave-ad. Forcefully removes all devices from the network.
 ```json
 {
   "serv": "zwave-ad",
-  "type": "cmd.network,reset",
+  "type": "cmd.network.reset",
   "val_t" : "null",
   "ctime": "2019-02-04T13:41:02+0100",
   "props": {},
