@@ -291,4 +291,15 @@ After this all devices should be removed.
 }
 ```
 
+### Identify
 
+Allows the user to identify the hub. Following sequence will be repeated three times - a light will turn on for 600ms then turn off for 200ms. 
+
+```json
+{
+  "type": "cmd.thing.identify",
+  "val_t": "null",
+  "ctime": "2019-02-04T13:41:02+0100",
+  "props": {},
+  "tags": []
+}

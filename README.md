@@ -1239,9 +1239,15 @@ The service represents indicator device e.g. a simple visual indicator like an L
 
 Type | Interface                          | Value type | Properties | Description
 -----|------------------------------------|------------|------------|------------
-in   | cmd.indicator.set_visual_element   | int_map    | duration   | Requests visual element (led or some other light source) to display information. Key is a name of indicator component and value is actual value to set. Duration property defines how long the indicator should display the information
-in   | cmd.indicator.set_text             | str_map    | duration   | Requests text indicator to display text. Key is name of indicator component and value is text to be displayed by the component. Duration property defines how long the indicator should display the information
+in   | cmd.indicator.set_visual_element   | int_map    | duration   | Requests visual element (led or some other light source) to display information. Key is a name of indicator component and value is actual value to set.
+in   | cmd.indicator.set_text             | str_map    | duration   | Requests text indicator to display text. Key is name of indicator component and value is text to be displayed by the component.
+in   | cmd.indicator.identify             | null       |            | Requests device to identify itself by switching a visual indicator on and off several times.
 
+#### Interface props
+
+Name                  | Value example                                                            | Description
+----------------------|--------------------------------------------------------------------------|-------------
+duration              | "10"                                                                     | Defines how long the indicator should display the information in seconds.
 ### Product Specific Services
 
 Documentation of product specific service can be found [here](product-specific-services.md).
