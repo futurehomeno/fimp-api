@@ -713,12 +713,13 @@ Name        | Value example | Description
 Name                        | Value example                                                         | Description
 ----------------------------|-----------------------------------------------------------------------|-------------
 `sup_components`            | ["is_secured", "door_is_closed", "bolt_is_locked", "latch_is_closed"] | List of supported lock configuration components.
-`supported_op_types`        | ["timed", "constant"]                                                 | List of supported operation types.
+`sup_op_types`              | ["timed", "constant"]                                                 | List of supported operation types.
+`sup_modes`                 | ["unsecured", "secured"]                                              | List of supported modes.
 `min_volume`                | 0                                                                     | Minimum volume level.
 `max_volume`                | 2                                                                     | Maximum volume level.
 `supports_auto_relock`      | true                                                                  | Defines if device supports auto-relock capability.
 `supports_hold_and_release` | false                                                                 | Defines if device supports hold and release capability.
-`supports_block-to-block`   | true                                                                  | Defines if device supports block-to-block capability.
+`supports_block_to_block`   | true                                                                  | Defines if device supports block_to_block capability.
 `supports_twist_assist`     | false                                                                 | Defines if device supports twist assist capability.
 `min_lock_timeout_seconds`  | 0                                                                     | Defines minimum value of lock going to a secured state after receiving cmd.lock.set with one of timed modes as a value. This properties value represents seconds.
 `max_lock_timeout_seconds`  | 59                                                                    | Defines maximum value of lock going to a secured state after receiving cmd.lock.set with one of timed modes as a value. This properties value represents seconds.
@@ -727,7 +728,10 @@ Name                        | Value example                                     
 `min_hold_and_release_time` | 1                                                                     | Defines minimum value of hold and release functionality in seconds.
 `max_hold_and_release_time` | 65535                                                                 | Defines maximum value of hold and release functionality in seconds.
 `min_auto_relock_time`      | 0                                                                     | Defines minimum value of lock going automatically to a secured state in seconds.
-`max_hold_and_release_time` | 65535                                                                 | Defines maximum value of lock going automatically to a secured state in seconds.
+`max_auto_relock_time`      | 65535                                                                 | Defines maximum value of lock going automatically to a secured state in seconds.
+`sup_out_handles`           | [1, 4]                                                                | Defines which outside handles are available to operate.
+`sup_in_handles`            | [1, 2, 3, 4]                                                          | Defines which inside handles are available to operate.
+`sup_handles`               | false                                                                 | Defines whether door lock gives an information about how many handles it has. False means, we must ommit "outside_handles_mode" and "inside_handles_mode" when sending "cmd.lock.set_configuration".
 
 
 #### Example
@@ -801,13 +805,17 @@ Explanation of cmd.lock.set_configuration interface value properties.
 
 - hold_and_release_time - This field is used to specify the time setting in seconds for letting the latch retracted after a device mode has been changed to unsecured. The value 0 must indicate that the hold and release functionality is disabled and a device must not keep the latch retracted when the door lock mode becomes unsecured. Values in range 1...65535 must indicate that the hold and release functionality is enabled and the door lock latch must keep open according to the time in seconds indicated by this field. This field will be ignored (so also can be ommited by client) if a device does not support a capability of hold and release (service property 'supports_hold_and_release').
 
-- block_to_block - The value true must indicate that the block-to-block functionality is enabled and a device must activate its motors until blocked to try to reach the mode indicated by a cmd.lock.set, even if it detects to be already in a specified mode. The value false must indicate that the block-to-block functionality is disabled and a device may ignore cmd.lock.set message if it detects to be already in the specified mode. This field will be ignored (so also can be ommited by client) if a device does not support a capability of block-to-block (service property 'supports_block_to_block').
+- block_to_block - The value true must indicate that the block_to_block functionality is enabled and a device must activate its motors until blocked to try to reach the mode indicated by a cmd.lock.set, even if it detects to be already in a specified mode. The value false must indicate that the block_to_block functionality is disabled and a device may ignore cmd.lock.set message if it detects to be already in the specified mode. This field will be ignored (so also can be ommited by client) if a device does not support a capability of block_to_block (service property 'supports_block_to_block').
 
 - twist_assist - The value true must indicate that the twist assist functionality is enabled and value false indicates that it's disabled. This field will be ignored (so also can be ommited by client) if a device does not support a capability of twist assist (service property 'supports_twist_assist').
 
-Possible values for sup_components service property for Z-Wave protocol.
+Possible values for sup_modes service property for Z-Wave protocol.
 
 - `unsecured`, `unsecured_with_timeout`, `unsecured_for_inside_door_handles`, `unsecured_for_inside_door_handles_with_timeout`, `unsecured_for_outside_door_handles`, `unsecured_for_outside_door_handles_with_timeout`, `secured`
+
+Possible values for sup_components service property for Z-Wave protocol.
+
+- `door_is_closed`, `door_is_open`, `bolt_is_locked`, `bolt_is_unlocked`, `latch_is_closed`, `latch_is_open`
 
 Possible values for operation_type property for Z-Wave protocol.
 
