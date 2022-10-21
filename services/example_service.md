@@ -1,6 +1,6 @@
 # Example Service
 
-This sections should contain a short description of the service and its purpose. This example showcases a service which contain: 
+This section should contain a short description of the service and its purpose. This example showcases a service which contain: 
 * example of a service property
 * example of an interface with an interface property
 * example of an interface with a specific storage requirement
