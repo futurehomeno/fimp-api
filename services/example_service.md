@@ -1,11 +1,15 @@
 # Example Service
 
-Short description of the service and its purpose. This example showcases a service which contain: 
+This sections should contain a short description of the service and its purpose. This example showcases a service which contain: 
 * example of a service property
 * example of an interface with an interface property
 * example of an interface with a specific storage requirement
 * definition of an object
 * definition of an enum
+
+> Please note that:
+> * columns **Properties** and **Storage** in the **Interfaces** table are optional and should not be added if not needed
+> * sections **Interface properties**, **Service properties**, **Definitions**, and **Adapter guidelines** are optional and should not be added if not needed
 
 ## Service name
 
@@ -61,7 +65,13 @@ Short description of the service and its purpose. This example showcases a servi
   "val": {
     "field_a": 123.45,
     "field_b": "value_2"
-  }
+  },
+  "props": null,
+  "tags": null,
+  "src": "-",
+  "ver": "1",
+  "uid": "3cd089e1-a453-4410-9ce5-b3aa61ae443f",
+  "topic": "pt:j1/mt:evt/rt:dev/rn:example_adapter/ad:1/sv:example_service/ad:1"
 }
 ```
 
@@ -78,7 +88,12 @@ Short description of the service and its purpose. This example showcases a servi
   },
   "storage": {
     "sub_value": "val_2"
-  }
+  },
+  "tags": null,
+  "src": "-",
+  "ver": "1",
+  "uid": "3cd089e1-a453-4410-9ce5-b3aa61ae443f",
+  "topic": "pt:j1/mt:evt/rt:dev/rn:example_adapter/ad:1/sv:example_service/ad:1"
 }
 ```
 
