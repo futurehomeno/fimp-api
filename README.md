@@ -4,37 +4,6 @@
 * [Component discovery mechanism](#component-discovery-mechanism)
 * [Adding / removing things to FH system](#adding--removing-things-to-fh-system)
 * [Services](#services)
-   * [Basic service](#basic-service)
-   * [System related device service](#system-related-device-service)
-   * [Output binary switch service](#output-binary-switch-service)
-   * [Output level switch service](#output-level-switch-service)
-   * [Meter services](#meter-services)
-   * [Numeric sensor services](#numeric-sensor-services)
-   * [Contact sensor service](#contact-sensor-service)
-   * [Presence sensor service](#presence-sensor-service)
-   * [Alarm services](#alarm-services)
-   * [Battery service](#battery-service)
-   * [Thermostat service](#thermostat-service)
-   * [Water heater service](#water-heater-service)
-   * [Door lock service](#door-lock-service)
-   * [User code service](#user-code-service)
-   * [Color control service](#color-control-service)
-   * [Scene controller service](#scene-controller-service)
-   * [Fan control service](#fan-control-service)
-   * [Siren service](#siren-service)
-   * [Indicator service](#indicator-service)
-   * [Barrier control service](#barrier-control-service)
-   * [Media player](#media-player-service)
-   * [Complex alarm system service](#complex-alarm-system-service)
-   * [Chargepoint service](#chargepoint-service)
-   * [Inverter services](#inverter-services)
-   * [Battery charge controller service](#battery-charge-controller-service)
-   * [Gateway service](#gateway-service)
-   * [Version service](#version-service)
-   * [Virtual meter service](#virtual-meter-service)
-   * [Logging service](#logging-interfaces)
-   * [Technology specific service](#technology-specific-service)
-
 
 ## Service overview
 
@@ -90,7 +59,7 @@ Example: add z-wave device, remove z-wave device, add zigbee device, remove zigb
 
 ## Services
 
-- Generic
+- Generic Services
   - [Basic](services/generic/basic.md)
   - [Output binary switch](services/generic/output_binary_switch.md)
   - [Output level switch](services/generic/output_level_switch.md)
@@ -115,9 +84,9 @@ Example: add z-wave device, remove z-wave device, add zigbee device, remove zigb
   - [Scene control](services/generic/scene_control.md)
   - [Siren control](services/generic/siren_control.md)
   - [Media player](services/generic/media_player.md)
-- Product specific
+- Product Specific Services
   - [Doorman](services/specific/doorman.md)
-- Meta 
+- Meta Services
   - [System](services/meta/system.md)
   - [Association](services/meta/association.md)
   - [Gateway](services/meta/gateway.md)
