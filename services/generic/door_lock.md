@@ -6,33 +6,36 @@
 
 #### Interfaces
 
-Type | Interface                     | Value type | Properties               | Description
------|-------------------------------|------------|--------------------------|------------------
-in   | cmd.lock.get_report           | null       |                          |
-in   | cmd.lock.set                  | bool       |                          | Use true to secure a lock and false to unsecure.
-in   | cmd.lock.set_with_code        | str_map    |                          | Used to lock/unlock locks required PIN/RFID, {“op”:”lock”, ”code_type”:”pin”, "code":”12345” }.
-out  | evt.lock.report               | bool_map   | timeout_s, lock_type     | value = {"is_secured":true, "door_is_closed":true, "bolt_is_locked":true, "latch_is_closed":true}.
+Type | Interface                     | Value type | Properties                      | Description
+-----|-------------------------------|------------|---------------------------------|------------------
+in   | cmd.lock.get_report           | null       |                                 |
+in   | cmd.lock.set                  | bool       | mode_op                         | Use true to secure a lock and false to unsecure.
+in   | cmd.lock.set_with_code        | str_map    |                                 | Used to lock/unlock locks required PIN/RFID, {“op”:”lock”, ”code_type”:”pin”, "code":”12345” }.
+out  | evt.lock.report               | bool_map   | timeout_m, timeout_s, lock_type | value = {"is_secured":true, "door_is_closed":true, "bolt_is_locked":true, "latch_is_closed":true}.
 -|||
-in   | cmd.open.get_report           | null       |                          |
-out  | evt.open.report               | bool       | true = open              | Used to report if the door is open or closed.
+in   | cmd.open.get_report           | null       |                                 |
+out  | evt.open.report               | bool       | true = open                     | Used to report if the door is open or closed.
 -|||
-in   | cmd.auto_lock.set             | bool       | true = auto-lock enabled | Enable/disable auto-lock feature.
-in   | cmd.auto_lock.get_report      | null       |                          |
-out  | evt.auto_lock.report          | bool       | true = auto-lock enabled |
+in   | cmd.auto_lock.set             | bool       | true = auto-lock enabled        | Enable/disable auto-lock feature.
+in   | cmd.auto_lock.get_report      | null       |                                 |
+out  | evt.auto_lock.report          | bool       | true = auto-lock enabled        |
 -|||
-in   | cmd.volume.set                | int        | `min_volume`-`max_volume`
-in   | cmd.volume.get_report         | null       |
-out  | evt.volume.report             | int        | `min_volume`-`max_volume`
+in   | cmd.volume.set                | int        | `min_volume`-`max_volume`       |
+in   | cmd.volume.get_report         | null       |                                 |
+out  | evt.volume.report             | int        | `min_volume`-`max_volume`       |
 -|||
-in   | cmd.lock.set_configuration    | object     |                          | Used to set configuration for door lock. Properties described within Notes section.
-in   | evt.lock.configuration_report | object     |                          | Used to report actual configuration for door lock.
+in   | cmd.lock.set_configuration    | object     |                                 | Used to set configuration for door lock. Properties described within Notes section.
+in   | cmd.lock.get_configuration    | null       |                                 | Used to get current configuration for door lock.     
+out  | evt.lock.configuration_report | object     |                                 | Used to report current configuration for door lock.
 
 #### Interface props
 
 Name        | Value example | Description
 ------------|---------------|-------------
-`lock_type` | "key"         | how lock was activated, it can take values: "key", "pin", "rfid"
-`timeout_s` |               |
+`mode_op`   | "in", "tmout" | Optional. Used to describe advanced unsecure operation mode.
+`lock_type` | "key"         | How lock was activated, it can take values: "key", "pin", "rfid".
+`timeout_s` | "6"           | Remaining time in seconds before the lock will be automatically locked again. 
+`timeout_m` | "5"           | Remaining time in minutes before the lock will be automatically locked again. 
 
 #### Service props
 
