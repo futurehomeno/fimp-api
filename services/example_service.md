@@ -28,9 +28,9 @@ This section should contain a short description of the service and its purpose. 
 
 ## Interface properties
 
-| Name         | Example   | Description                                                                                                     |
-|--------------|-----------|-----------------------------------------------------------------------------------------------------------------|
-| `property_a` | `"val_1"` | This is an example value, one of possible values defined in [`sup_vals`](#service-properties) service property. |
+| Name         | Example   | Required | Description                                                                                                     |
+|--------------|-----------|----------|-----------------------------------------------------------------------------------------------------------------|
+| `property_a` | `"val_1"` | No       | This is an example value, one of possible values defined in [`sup_vals`](#service-properties) service property. |
 
 > Note that all interface properties included in the FIMP message must be strings as per the message schema.
 

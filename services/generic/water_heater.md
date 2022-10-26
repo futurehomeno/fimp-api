@@ -8,18 +8,18 @@ Water heater service represents a water heater device such as a water boiler or 
 
 ## Interfaces
 
-| Type | Interface               | Value type | Storage    | Description                                                                                                                           |
-|------|-------------------------|------------|------------|---------------------------------------------------------------------------------------------------------------------------------------|
-| in   | cmd.mode.get_report     | null       |            | Requests the water heater `mode`.                                                                                                     |
-| in   | cmd.mode.set            | string     |            | Sets the water heater `mode`. Must be one of the values declared in [`sup_modes`](#service-properties) property.                      |
-| out  | evt.mode.report         | string     |            | Reports the water heater `mode`.                                                                                                      |
-| -    |                         |            |            |                                                                                                                                       |
-| in   | cmd.setpoint.get_report | string     |            | Gets the value for the provided `setpoint`. Must be one of the setpoints declared in [`sup_setpoints`](#service-properties) property. |
-| in   | cmd.setpoint.set        | object     |            | Sets the value of a setpoint. See the [`setpoint_object`](#definitions) definition for reference.                                     |
-| out  | evt.setpoint.report     | object     | `setpoint` | Reports the value of a setpoint. See the [`setpoint_object`](#definitions) definition for reference.                                  |
-| -    |                         |            |            |                                                                                                                                       |
-| in   | cmd.state.get_report    | null       |            | Requests the operational `state` of the device.                                                                                       |
-| out  | evt.state.report        | string     |            | Reports the operational `state` of the device, one of the values declared in [`sup_states`](#service-properties) property.            |
+| Type | Interface               | Value type | Storage    | Description                                                                                                                                    |
+|------|-------------------------|------------|------------|------------------------------------------------------------------------------------------------------------------------------------------------|
+| in   | cmd.mode.get_report     | null       |            | Requests the water heater `mode`.                                                                                                              |
+| in   | cmd.mode.set            | string     |            | Sets the water heater `mode`. Must be one of the values declared in [`sup_modes`](#service-properties) property.                               |
+| out  | evt.mode.report         | string     |            | Reports the water heater `mode`.                                                                                                               |
+| -    |                         |            |            |                                                                                                                                                |
+| in   | cmd.setpoint.get_report | string     |            | Gets the value for the provided `setpoint` in value. Must be one of the setpoints declared in [`sup_setpoints`](#service-properties) property. |
+| in   | cmd.setpoint.set        | object     |            | Sets the value of a setpoint. See the [`setpoint_object`](#definitions) definition for reference.                                              |
+| out  | evt.setpoint.report     | object     | `setpoint` | Reports the value of a setpoint. See the [`setpoint_object`](#definitions) definition for reference.                                           |
+| -    |                         |            |            |                                                                                                                                                |
+| in   | cmd.state.get_report    | null       |            | Requests the operational `state` of the device.                                                                                                |
+| out  | evt.state.report        | string     |            | Reports the operational `state` of the device, one of the values declared in [`sup_states`](#service-properties) property.                     |
 
 ## Service properties
 
@@ -33,6 +33,7 @@ Water heater service represents a water heater device such as a water boiler or 
 | `sup_step`      | float     | `1.0`                                 | Supported step for the temperature control.                                                           |
 
 > A device may define their own modes and setpoints outside the well-defined lists contained in the definitions section.
+> However, it is recommended to use the well-defined values whenever possible.
 
 ## Definitions
 
