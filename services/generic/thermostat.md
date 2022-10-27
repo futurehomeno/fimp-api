@@ -43,10 +43,10 @@ Thermostat service is used to control the temperature in a room or a building an
 | unit  | string | `"C"`    | Setpoint unit.                                                                        |
 
 * `mode` is a mode of operation of the device, well-defined modes include: `off`, `heat`, `cool`, `aux_heat`, `energy_heat`, `energy_cool`, `fan`, `fan_only`, `auto`,
-  `auto_changeover`, `dry`, `dry_air`, `moist_air`, `resume`, `furnace`.
+  `auto_changeover`, `dry`, `dry_air`, `moist_air`, `resume`, `furnace`, `manufacturer_specific`.
 
-* `setpoint` represents a specific setpoint configuration, usually corresponding to a specific mode, like in the case of  `heat` and `cool`. Certain modes may not have a
-  corresponding setpoint, like `off` and `fan_only`, while others may use multiple setpoints, like `auto` mode which should utilize values from both `heat` and `cool` setpoints.
+* `setpoint` represents a specific setpoint configuration used by the device in a specific mode of operation; a mode may use **none, one or more** setpoints, e.g.: 
+  mode `auto` utilizes both `heat` and `cool` setpoints to keep the temperature between set values.
 
 * `state` is an operational state of the device, well-defined states include: `idle`, `heat`, `cool`, `fan`.
 

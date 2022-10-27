@@ -1,6 +1,7 @@
 # Basic Service
 
-A generic service and the most simple way to interact with a device. The actual meaning of "basic" varies from device to device.
+A generic service allowing to interact with an actuator of a device. 
+If a device supports an actuator that is not supported by the adapter, then the basic service might be used to provide a partial functionality of this unsupported actuator.
 
 > Please note that basic service is required by Z-Wave specification and serves as a fallback service for devices that are not yet supported by the adapter in order to maintain
 > a rudimentary forward-compatibility. As such this service should not be implemented outside of Z-Wave. Other adapters should use only dedicated services instead.

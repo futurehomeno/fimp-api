@@ -25,13 +25,11 @@ Typical examples are SDCO (Smoke and Carbon Monoxide Detector), leak detector or
 
 ## Interfaces
 
-| Type | Interface            | Value type | Storage | Description                                                                                                 |
-|------|----------------------|------------|---------|-------------------------------------------------------------------------------------------------------------|
-| in   | cmd.alarm.get_report | str_map    |         | Requests [`event`](#service-names) status. See [`event_request`](#definitions) definition for more details. |
-| out  | evt.alarm.report     | str_map    | `event` | Reports [`event`](#service-names) status. See [`event_report`](#definitions) definition for more details.   |
-| in   | cmd.alarm.clear      | string     |         | Clears [`event`](#service-names) provided in the value.                                                     |
-
-> Interface cmd.alarm.get_report is used in Z-Wave to clear last alarm for a given event.
+| Type | Interface            | Value type | Storage | Description                                                                                                                                      |
+|------|----------------------|------------|---------|--------------------------------------------------------------------------------------------------------------------------------------------------|
+| in   | cmd.alarm.get_report | str_map    |         | Requests [`event`](#service-names) status. See [`event_request`](#definitions) definition for more details. May not be supported by all devices. |
+| out  | evt.alarm.report     | str_map    | `event` | Reports [`event`](#service-names) status. See [`event_report`](#definitions) definition for more details.                                        |
+| in   | cmd.alarm.clear      | string     |         | Clears [`event`](#service-names) provided in the value.                                                                                          |
 
 ## Service props
 

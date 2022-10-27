@@ -1,9 +1,9 @@
 # Virtual Meter Service
 
 This service enables a device to report an accumulated consumption and/or pulses in case it does not have its own metering capabilities, e.g. relay with output binary switch
-service or thermostat. For example a virtual electricity meter works by accumulating momentary power measured in Watts into lifetime energy consumption
+service or thermostat. A virtual electricity meter works by accumulating momentary power measured in Watts into lifetime energy consumption
 measured in kWh. If a virtual meter service is present, upon manual configuration providing a consumption per supported unit, a proper meter service will be added to the device.
-The service then will calculate cumulated consumption at every state change, mode change and at least once during a configured interval.
+The service then will calculate accumulated consumption at every state change, mode change and at least once during a configured interval.
 
 ## Service names
 
