@@ -2,24 +2,27 @@
 
 The service represent devices like garage doors, barriers, window protection shades, and similar.
 
+> Please note that blinds and similar devices might also be supported in a limited way using more generic 
+> [`out_bin_switch`](/services/generic/output_binary_switch.md) and [`out_lvl_switch`](/services/generic/output_level_switch.md) services.
+
 ## Service name
 
 `barrier_ctrl`
 
 ## Interfaces
 
-| Type | Interface                | Value type | Properties   | Description                                                                                                                                                                |
-|------|--------------------------|------------|--------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| in   | cmd.notiftype.get_report | null       |              | Requests notification types the device is using while opening/closing door.                                                                                                |
-| in   | cmd.notiftype.set        | bool_map   |              | Sets notification type the device is is using while opening/closing door. Configurable notification types are defined in [`sup_notiftypes`](#service-properties) property. |
-| out  | evt.notiftype.report     | bool_map   |              | Returns notification types the device is using while opening/closing door.                                                                                                 |
-| -    |                          |            |              |                                                                                                                                                                            |
-| in   | cmd.op.stop              | null       |              | Commence emergency stop of any operation.                                                                                                                                  |
-| -    |                          |            |              |                                                                                                                                                                            |
-| in   | cmd.state.get_report     | null       |              | Requests the current state of the device.                                                                                                                                  |
-| out  | evt.state.report         | string     | `stopped_at` | Reports the current state of the device, one of values defined in [`sup_states`](#service-properties) property.                                                            |
-| -    |                          |            |              |                                                                                                                                                                            |
-| in   | cmd.tstate.set           | string     |              | Sets the target state of the device to the one of values defined in [`sup_tstates`](#service-properties) property.                                                         |
+| Type | Interface                | Value type | Properties   | Description                                                                                                                                                                              |
+|------|--------------------------|------------|--------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| in   | cmd.notiftype.get_report | null       |              | Requests notification types the device supports when signalling opening/closing of the door.                                                                                             |
+| in   | cmd.notiftype.set        | bool_map   |              | Sets notification type the device is using when signalling opening/closing of the door. Configurable notification types are defined in [`sup_notiftypes`](#service-properties) property. |
+| out  | evt.notiftype.report     | bool_map   |              | Returns notification types the device is using while opening/closing door.                                                                                                               |
+| -    |                          |            |              |                                                                                                                                                                                          |
+| in   | cmd.op.stop              | null       |              | Stops any operation immediatelly.                                                                                                                                                        |
+| -    |                          |            |              |                                                                                                                                                                                          |
+| in   | cmd.state.get_report     | null       |              | Requests the current state of the device.                                                                                                                                                |
+| out  | evt.state.report         | string     | `stopped_at` | Reports the current state of the device, one of values defined in [`sup_states`](#service-properties) property.                                                                          |
+| -    |                          |            |              |                                                                                                                                                                                          |
+| in   | cmd.tstate.set           | string     |              | Sets the target state of the device to the one of values defined in [`sup_tstates`](#service-properties) property.                                                                       |
 
 ## Interface properties
 
@@ -29,11 +32,11 @@ The service represent devices like garage doors, barriers, window protection sha
 
 ## Service properties
 
-| Name             | Type      | Example                                    | Description                                                                                        |
-|------------------|-----------|--------------------------------------------|----------------------------------------------------------------------------------------------------|
-| `sup_notiftypes` | str_array | `["audio", "visual"]`                      | List of supported notification types. Possible values are: `audio`, `visual`.                      |
-| `sup_states`     | str_array | `["open", "closed", "closing", "opening"]` | List of supported states. Possible values are:  `closed`, `closing`, `stopped`, `opening`, `open`. |
-| `sup_tstates`    | str_array | `["open", "closed"]`                       | List of supported target states. Possible values are: `closed`, `open`.                            |
+| Name             | Type      | Example                                    | Description                                                                                       |
+|------------------|-----------|--------------------------------------------|---------------------------------------------------------------------------------------------------|
+| `sup_notiftypes` | str_array | `["audio", "visual"]`                      | List of supported notification types. Allowed values are: `audio`, `visual`.                      |
+| `sup_states`     | str_array | `["open", "closed", "closing", "opening"]` | List of supported states. Allowed values are:  `closed`, `closing`, `stopped`, `opening`, `open`. |
+| `sup_tstates`    | str_array | `["open", "closed"]`                       | List of supported target states. Allowed values are: `closed`, `open`.                            |
 
 ## Examples
 

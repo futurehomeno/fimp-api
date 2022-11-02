@@ -15,7 +15,7 @@ The service can be used to control color components of a lighting device, such a
 | out  | evt.color.report           | int_map    | Returns map of color components, where value is the component intensity.                                                                                         |
 | -    |                            |            |                                                                                                                                                                  |
 | in   | cmd.color.start_transition | object     | Starts a single color component transition, see the [`transition`](#definitions) object definition for more details.                                             |
-| in   | cmd.color.stop_transition  | str        | Stop fading/enhancing single color component. val = "red"                                                                                                        |
+| in   | cmd.color.stop_transition  | str        | Stops transition of the single color component referenced in the value.                                                                                          |
 
 ## Service properties
 
@@ -45,11 +45,11 @@ The service can be used to control color components of a lighting device, such a
 
 * `transition` is an object representing a single color transition change with the following structure:
 
-| Field      | Type   | Example | Description                                         |
-|------------|--------|---------|-----------------------------------------------------|
-| component  | string | `"red"` | One of the supported `color_component` values.      |
-| transition | string | `"up"`  | Direction of the transition, either `up` or `down`. |
-| duration   | int    | `127`   | Optional duration of the transition in seconds.     |
+| Field      | Type   | Example | Description                                                                                                             |
+|------------|--------|---------|-------------------------------------------------------------------------------------------------------------------------|
+| component  | string | `"red"` | One of the supported `color_component` values. See [`sup_components`](#service-properties) property for allowed values. |
+| transition | string | `"up"`  | Direction of the transition, either `up` or `down`.                                                                     |
+| duration   | int    | `127`   | Optional duration of the transition in seconds. See [`sup_durations`](#service-properties) property for allowed values. |
 
 * `transition_range` is an object with the following structure:
 

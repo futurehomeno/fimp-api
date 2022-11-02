@@ -19,6 +19,9 @@ Output level switch service acts as a level controller for devices such as dimme
 | in   | cmd.lvl.stop       | null       |                         | Stops a level change.                                                                                          |
 | out  | evt.lvl.report     | int        |                         | Reports the level value.                                                                                       |
 
+> Please note that some rare devices might support a limited scope of the service implementing only 
+> `cmd.lvl.start` and `cmd.lvl.stop` interfaces and not be capable of reporting the current level.
+
 ## Interface properties
 
 | Name        | Example | Required | Description                                                                                                                |

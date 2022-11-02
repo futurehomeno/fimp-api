@@ -2,6 +2,8 @@
 
 The service is used to control a fan operational modes, speed and receive state updates.
 
+> Please note that some fan devices might be supported in a limited way using [`thermostat`](/services/generic/thermostat.md) service.
+
 ## Service name
 
 `fan_ctrl`

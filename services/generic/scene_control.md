@@ -14,7 +14,7 @@ The service represents a device which can be used to control scenes, such as a r
 | in   | cmd.scene.set        | string     | Sets the scene to the one provided in the value.                       |
 | out  | evt.scene.report     | string     | Event is generated whenever scene button is pressed on the controller. |
 
-> Devices designed only as scene controllers may support only `evt.scene.report` interface and send report whenever a button is pressed.
+> Devices designed only as scene controllers may support only `evt.scene.report` interface and send report whenever a physical button is pressed.
 > Devices designed only as scene activators may support only `cmd.scene.set` interface and can be used to activate a scene by sending a command.
 
 ## Service properties
