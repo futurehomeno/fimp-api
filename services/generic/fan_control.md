@@ -1,33 +1,42 @@
-### Fan control service
+# Fan Control Service
 
-The service has to be used to control a fan operational modes, speed and receive state updates.
+The service is used to control a fan operational modes, speed and receive state updates.
 
-#### Service names
+> Please note that some fan devices might be supported in a limited way using [`thermostat`](/services/generic/thermostat.md) service.
+
+## Service name
 
 `fan_ctrl`
 
-#### Interfaces
+## Interfaces
 
-Type | Interface              | Value type |  Description
------|------------------------|------------|-------------------
-in   | cmd.lvl.get_report     | null       | The command is a request for current fan speed level.
-in   | cmd.lvl.set            | int        | Fan speed, value 0 - 100 %
-out  | evt.lvl.report         | null       | Current fan speed level.
--|||
-in   | cmd.mode.get_report    | null       | The command is a request for current fan mode report.
-in   | cmd.mode.set           | string     | Fan mode. Supported values: auto_low, auto_high, auto_mid, low, high, mid,  humid_circulation, up_down,  left_right, quiet
-out  | evt.mode.report        | string     | Current fan mode
--|||
-in   | cmd.modelvl.get_report | string     | The command is a request for fan speed level for particular mode. If mode is set to "", the device should report levels for all modes.
-in   | cmd.modelvl.set        | int_map    | val = {"mid":90, "auto_low":10}
-out  | evt.modelvl.report     | int_map    | val = {"mid":90, "auto_low":10}
--|||
-in   | cmd.state.get_report   | null       | The command is a request for current fan state report
-out  | evt.state.report       | string     | Report operational state. Supported values: idle, low, high, mid
+| Type | Interface           | Value type | Description                                                                                |
+|------|---------------------|------------|--------------------------------------------------------------------------------------------|
+| in   | cmd.mode.get_report | null       | Requests the current fan mode.                                                             |
+| in   | cmd.mode.set        | string     | Sets the fan mode to one of values defined in [`sup_modes`](#service-properties) property. |
+| out  | evt.mode.report     | string     | Current fan mode                                                                           |
 
-#### Service props
+## Service properties
 
-Name         | Value example      | Description
--------------|--------------------|-------------
-`sup_modes`  | auto_low, auto_mid | List of supported modes
-`sup_states` | idle, low, high    |
+| Name         | Type      | Example           | Description                                                                             |
+|--------------|-----------|-------------------|-----------------------------------------------------------------------------------------|
+| `sup_modes`  | str_array | `["low", "high"]` | List of supported modes. Possible values are: `quiet`, `low`, `medium`, `high`, `auto`. |
+
+## Examples
+
+* Example of a command to set fan mode to `low`:
+
+```json
+    {
+      "serv": "fan_ctrl",
+      "type": "cmd.mode.set",
+      "val_t": "string",
+      "val": "low",
+      "props": {},
+      "tags": [],
+      "src": "-",
+      "ver": "1",
+      "uid": "eb99fe48-3276-4a21-acd4-a6cbfb3a800d",
+      "topic": "pt:j1/mt:cmd/rt:dev/rn:sensibo/ad:1/sv:fan_ctrl/ad:1"
+    }
+```

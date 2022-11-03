@@ -19,7 +19,7 @@
     - [Chargepoint](/services/generic/chargepoint.md)
     - [Door lock](/services/generic/door_lock.md)
     - [User code](/services/generic/user_code.md)
-    - [Schedule entry](/services/meta/schedule.md)
+    - [Schedule entry](/services/generic/schedule_entry.md)
     - [Barrier control](/services/generic/barrier_control.md)
     - [Fan control](/services/generic/fan_control.md)
     - [Color control](/services/generic/color_control.md)

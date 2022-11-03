@@ -1,38 +1,22 @@
-### Inverter services
+# Inverter Services
 
-An inverter device is normally composed of one or several inverter services. Detailed diagram - [Inverter and battery charge controller](static/inverter.png)
+> **Important!** Inverter services are experimental and are subject to be removed or modified in a backwards in-compatible way.
 
-#### Service name
+An inverter device is normally composed of one or several inverter services.
 
-`inverter_grid_conn` - represents inverter connection to grid.
+![Inverter and Battery](./../../static/inverter.png)
 
-#### Interfaces
+## Service names
 
-Type | Interface                | Value type | Properties | Description
------|--------------------------|------------|------------|--------------
-out  | evt.meter_ext.report     | float_map  |            | [Extended meter report](#extended-report-object) with up to 17 data points.
-in   | cmd.meter_ext.get_report | null       |            | Request extended report.
+| Service name             | Description                                                 |
+|--------------------------|-------------------------------------------------------------|
+| `inverter_grid_conn`     | Represents inverter connection to the electric grid.        |
+| `inverter_consumer_conn` | Represents the inverter connection to consumer's household. |
+| `inverter_solar_conn`    | Represents the inverter connection to the solar panel.      |
 
+## Interfaces
 
-#### Service name
-
-`inverter_consumer_conn` - represents inverter connection to consumer.
-
-#### Interfaces
-
-Type | Interface                | Value type | Properties | Description
------|--------------------------|------------|------------|--------------
-out  | evt.meter_ext.report     | float_map  |            | [Extended meter report](#extended-report-object) with up to 17 data points.
-in   | cmd.meter_ext.get_report | null       |            | Request extended report.
-
-
-#### Service name
-
-`inverter_solar_conn` - represents inverter connection to solar panel.
-
-#### Interfaces
-
-Type | Interface                | Value type | Properties | Description
------|--------------------------|------------|------------|--------------
-out  | evt.meter_ext.report     | float_map  |            | [Extended meter report](#extended-report-object) with up to 17 data points.
-in   | cmd.meter_ext.get_report | null       |            | Request extended report.
+| Type | Interface                | Value type | Description                                                              |
+|------|--------------------------|------------|--------------------------------------------------------------------------|
+| out  | evt.meter_ext.report     | float_map  | Returns [extended meter report](/services/generic/meter.md#definitions). |
+| in   | cmd.meter_ext.get_report | null       | Request the extended report.                                             |
