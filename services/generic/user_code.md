@@ -2,6 +2,8 @@
 
 User code service is used by door locks, keypads and other security panels to enter and manage pin codes and RFIDs.
 
+> Please note that this service is subject to minor backwards-incompatible changes in the future required to better align Zigbee and Z-Wave implementations.
+
 ## Service name
 
 `user_code`
@@ -15,6 +17,8 @@ User code service is used by door locks, keypads and other security panels to en
 | out  | evt.usercode.users_report  | object     | `"users"` | Lists all users as a mapping of [`slot`](#definitions) object array to identification types. See [example](#user-listing) for more details. |
 | out  | evt.usercode.config_report | str_map    | `event`   | Confirms the success of a set or a clear command. See [`config_report`](#definitions) definition for more details.                          |
 | out  | evt.usercode.access_report | str_map    | `event`   | Notifies about access attempt. See [`access_report`](#definitions) definition for more details.                                             |
+
+> Please note that for backwards compatibility `evt.usercode.users_report` is sent with static `"users"` storage sub-value. Consult the [example](#user-listing) for more details.
 
 ## Service properties
 
