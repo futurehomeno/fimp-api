@@ -26,6 +26,62 @@ Message:
 
 val - is error code, src - origin of the error.
 
+## Requesting status of a single device.
+
+An adapter has to support an API for requesting a device state.
+
+### Command
+
+Topic: `pt:j1/mt:cmd/rt:ad/rn:zigbee/ad:1`
+
+Message:
+
+```json
+{
+    "serv": "zigbee",
+    "type": "cmd.network.get_node",
+    "val_t": "int",
+    "val": 80,
+    "props": null,
+    "tags": null,
+    "ctime": "2018-11-22T23:14:40+0100",
+    "uid":"76533455876765"
+}
+```
+
+
+## Report event.
+
+Report events has to be sent by adapters after invocation of command and also autonomously, when device's state change is being detected.
+
+Topic: `pt:j1/mt:cmd/rt:ad/rn:zigbee/ad:1`
+
+Message:
+
+```json
+{
+    "serv": "zigbee",
+    "type": "evt.network.node_report",
+    "val_t": "object",
+    "val": {
+      "address": 80,
+      "status": "UP",
+    },
+    "props": null,
+    "tags": null,
+    "ctime": "2018-11-22T23:14:40+0100",
+    "uid":"76533455876765"
+}
+```
+
+### Definitions
+
+* `status` describes a reachability of a device, well-defined statuses include: `UP` and `DOWN`.
+
+* Command value has to be treated as `node_id` (according to Z-Wave) or `uuid` (according to Zigbee). Above description is also applicable for `address` property within event report value.
+
+* Algorithm of detecting device's reachability depends on adapters. Status always has to be up-to-date with reality.
+
 ## Requesting list of devices
 
 An adapter has to support an API for requesting a list of devices and respond with the list.
