@@ -85,7 +85,7 @@ Message:
 | address | string | `"80"`   | Address of a device.                                  |
 | status  | string | `"DOWN"` | Device's reachability status. One of: `UP` or `DOWN`. |
 
-* Command value has to be treated as `node_id` (according to Z-Wave) or `uuid` (according to Zigbee). Above description is also applicable for `address` property within event report value.
+* Command value is an `address` uniquely identifying a thing. In case of Z-Wave `address` is equal to `node_id` within the network, while in Zigbee it is equal to `uuid`. Other adapters may have their own understanding of the address, such as unique ID in the third party cloud API.
 
 * Algorithm of detecting device's reachability depends on adapters. Status always has to be up-to-date with reality.
 
