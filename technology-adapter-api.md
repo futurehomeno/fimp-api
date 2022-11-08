@@ -40,12 +40,14 @@ Message:
 {
     "serv": "zigbee",
     "type": "cmd.network.get_node",
-    "val_t": "int",
-    "val": 80,
+    "val_t": "string",
+    "val": "80",
     "props": null,
     "tags": null,
+    "ver": "1",
     "ctime": "2018-11-22T23:14:40+0100",
-    "uid":"76533455876765"
+    "uid": "e604e951-7afb-4f96-981b-62e905757686",
+    "topic": "pt:j1/mt:cmd/rt:ad/rn:zigbee/ad:1"
 }
 ```
 
@@ -54,7 +56,7 @@ Message:
 
 Report events has to be sent by adapters after invocation of command and also autonomously, when device's state change is being detected.
 
-Topic: `pt:j1/mt:cmd/rt:ad/rn:zigbee/ad:1`
+Topic: `pt:j1/mt:evt/rt:ad/rn:zigbee/ad:1`
 
 Message:
 
@@ -64,19 +66,24 @@ Message:
     "type": "evt.network.node_report",
     "val_t": "object",
     "val": {
-      "address": 80,
+      "address": "80",
       "status": "UP",
     },
     "props": null,
     "tags": null,
+    "ver": "1",
     "ctime": "2018-11-22T23:14:40+0100",
-    "uid":"76533455876765"
+    "uid": "e604e951-7afb-4f96-981b-62e905757686",
+    "topic": "pt:j1/mt:evt/rt:ad/rn:zigbee/ad:1"
 }
 ```
 
 ### Definitions
 
-* `status` describes a reachability of a device, well-defined statuses include: `UP` and `DOWN`.
+| Field   | Type   | Example  | Description                                           |
+|---------|--------|----------|-------------------------------------------------------|
+| address | string | `"80"`   | Address of a device.                                  |
+| status  | string | `"DOWN"` | Device's reachability status. One of: `UP` or `DOWN`. |
 
 * Command value has to be treated as `node_id` (according to Z-Wave) or `uuid` (according to Zigbee). Above description is also applicable for `address` property within event report value.
 
