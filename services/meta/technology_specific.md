@@ -94,6 +94,7 @@ This service is used to handle specific protocol capabilities that were not cove
   "tags": [],
   "src": "-",
   "ver": "1",
+  "uid": "eb99fe48-3276-4a21-acd4-a6cbfb3a800d",
   "topic": "pt:j1/mt:cmd/rt:dev/rn:zw/ad:1/sv:technology_specific/ad:17_0"
 }
 ```
@@ -118,6 +119,7 @@ This service is used to handle specific protocol capabilities that were not cove
   "tags": [],
   "src": "-",
   "ver": "1",
+  "uid": "eb99fe48-3276-4a21-acd4-a6cbfb3a800d",
   "topic": "pt:j1/mt:cmd/rt:dev/rn:zw/ad:1/sv:technology_specific/ad:17_0"
 }
 ```
@@ -143,6 +145,7 @@ This service is used to handle specific protocol capabilities that were not cove
   "tags": [],
   "src": "-",
   "ver": "1",
+  "uid": "eb99fe48-3276-4a21-acd4-a6cbfb3a800d",
   "topic": "pt:j1/mt:cmd/rt:dev/rn:zw/ad:1/sv:technology_specific/ad:17_0"
 }
 ```
@@ -167,6 +170,7 @@ This service is used to handle specific protocol capabilities that were not cove
   "tags": [],
   "src": "-",
   "ver": "1",
+  "uid": "eb99fe48-3276-4a21-acd4-a6cbfb3a800d",
   "topic": "pt:j1/mt:cmd/rt:dev/rn:zw/ad:1/sv:technology_specific/ad:17_0"
 }
 ```
@@ -192,6 +196,7 @@ This service is used to handle specific protocol capabilities that were not cove
   "tags": [],
   "src": "-",
   "ver": "1",
+  "uid": "eb99fe48-3276-4a21-acd4-a6cbfb3a800d",
   "topic": "pt:j1/mt:cmd/rt:dev/rn:zw/ad:1/sv:technology_specific/ad:17_0"
 }
 ```
