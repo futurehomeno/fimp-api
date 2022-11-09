@@ -26,6 +26,69 @@ Message:
 
 val - is error code, src - origin of the error.
 
+## Requesting status of a single device.
+
+An adapter has to support an API for requesting a device state.
+
+### Command
+
+Topic: `pt:j1/mt:cmd/rt:ad/rn:zigbee/ad:1`
+
+Message:
+
+```json
+{
+    "serv": "zigbee",
+    "type": "cmd.network.get_node",
+    "val_t": "string",
+    "val": "80",
+    "props": null,
+    "tags": null,
+    "ver": "1",
+    "ctime": "2018-11-22T23:14:40+0100",
+    "uid": "e604e951-7afb-4f96-981b-62e905757686",
+    "topic": "pt:j1/mt:cmd/rt:ad/rn:zigbee/ad:1"
+}
+```
+
+
+## Report event.
+
+Report events has to be sent by adapters after invocation of command and also autonomously, when device's state change is being detected.
+
+Topic: `pt:j1/mt:evt/rt:ad/rn:zigbee/ad:1`
+
+Message:
+
+```json
+{
+    "serv": "zigbee",
+    "type": "evt.network.node_report",
+    "val_t": "object",
+    "val": {
+      "address": "80",
+      "status": "UP",
+    },
+    "props": null,
+    "tags": null,
+    "ver": "1",
+    "ctime": "2018-11-22T23:14:40+0100",
+    "uid": "e604e951-7afb-4f96-981b-62e905757686",
+    "topic": "pt:j1/mt:evt/rt:ad/rn:zigbee/ad:1"
+}
+```
+
+### Definitions
+
+| Field   | Type   | Example  | Description                                           |
+|---------|--------|----------|-------------------------------------------------------|
+| address | string | `"80"`   | Address of a device.                                  |
+| status  | string | `"DOWN"` | Device's reachability status. One of: `UP` or `DOWN`. |
+
+* Command value is an `address` uniquely identifying a thing. In case of Z-Wave `address` is equal to `node_id` within the network, while in Zigbee it is equal to `uuid`. Other adapters may have their own understanding of the address, such as unique ID in the third party cloud API.
+
+* Algorithm of detecting device's reachability depends on adapters. Status always has to be up-to-date with reality.
+
 ## Requesting list of devices
 
 An adapter has to support an API for requesting a list of devices and respond with the list.
