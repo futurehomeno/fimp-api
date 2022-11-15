@@ -1,30 +1,54 @@
-### Technology specific service
+# Technology Specific Service
 
 This service is used to handle specific protocol capabilities that were not covered generically by any other FIMP service.
 
-#### Service name
+## Service name
 
 `technology_specific`
 
-#### Interfaces
+## Interfaces
 
-Type | Interface               | Value type | Description
------|-------------------------|------------|--------------
-out  | evt.notification.report | object     | Notification reports that are sent by devices.
-out  | evt.sensor.report       | object     | Multilevel sensor reports with unknown sensor type or/and unknown unit.
-out  | evt.meter.report        | object     | Meter reports with unknown meter type or/and unit.
-in   | cmd.meter.reset         | null       | Resets all historical readings for all meters of this device.
+| Type | Interface               | Value type | Storage            | Description                                                                                                                    |
+|------|-------------------------|------------|--------------------|--------------------------------------------------------------------------------------------------------------------------------|
+| out  | evt.notification.report | object     | `category:subject` | Reports notifications that are sent by the device. See [`notification_report`](#definitions) for details.                      |
+| out  | evt.sensor.report       | object     | `type:unit`        | Reports multilevel sensor readings including unknown sensor and unknown unit. See [`sensor_report`](#definitions) for details. |
+| out  | evt.meter.report        | object     | `type:unit`        | Reports meter readings with unknown meter type or/and unit. See [`meter_report`](#definitions) for details.                    |
+| in   | cmd.meter.reset         | null       |                    | Resets all historical readings for all meters of this device.                                                                  |
 
-#### Interface storage
+## Definitions
 
-Name        | Value example                 | Description
-------------|-------------------------------|-------------
-`sub_value` | "home_security:sensor_status" | With usage of sub_value, Vinculum will know that it has to store separate value for every pair of choosen properties for given notification.
+* `notification_report` is an object with the following structure:
 
+| Field    | Type   | Example                  | Description                                   |
+|----------|--------|--------------------------|-----------------------------------------------|
+| domain   | string | `"zwave"`                | Domain for the notification.                  |
+| type     | string | `"state"`                | Either `event` or `state`.                    |
+| category | string | `"home_security"`        | Category of the notification.                 |
+| subject  | string | `"motion_sensor_status"` | Actual subject or type of the event or state. |
+| value    | string | `"motion_detected"`      | Value of the event or state.                  |
 
-#### Examples
+* `sensor_report` is an object with the following structure:
 
-Motion Detection occurs for state Motion Sensor Status:
+| Field  | Type   | Example   | Description                  |
+|--------|--------|-----------|------------------------------|
+| domain | string | `"zwave"` | Domain for the notification. |
+| type   | string | `"7"`     | Type of the sensor.          |
+| unit   | string | `"10"`    | Unit of the reported value.  |
+| value  | float  | `20.5`    | Reported value.              |
+
+* `meter_report` is an object with the following structure:
+
+| Field     | Type   | Example    | Description                  |
+|-----------|--------|------------|------------------------------|
+| domain    | string | `"zwave"`  | Domain for the notification. |
+| type      | string | `"11"`     | Type of the sensor.          |
+| unit      | string | `"10"`     | Unit of the reported value.  |
+| rate_type | string | `"import"` | Either `import` or `export`. |
+| value     | float  | `20.5`     | Reported value.              |
+
+## Examples
+
+* Example of motion detection state reported by motion sensor within the home security category:
 
 ```json
 {
@@ -40,11 +64,16 @@ Motion Detection occurs for state Motion Sensor Status:
   },
   "storage": {
        "sub_value": "home_security:motion_sensor_status"
-  }
+  },
+  "props": {},
+  "tags": [],
+  "src": "-",
+  "ver": "1",
+  "topic": "pt:j1/mt:cmd/rt:dev/rn:zw/ad:1/sv:technology_specific/ad:17_0"
 }
 ```
 
-Motion Sensor Status state has been changed to State Idle:
+* Example of idle state reported by motion sensor within the home security category:
 
 ```json
 {
@@ -60,11 +89,17 @@ Motion Sensor Status state has been changed to State Idle:
   },
   "storage": {
        "sub_value": "home_security:motion_sensor_status"
-  }
+  },
+  "props": {},
+  "tags": [],
+  "src": "-",
+  "ver": "1",
+  "uid": "eb99fe48-3276-4a21-acd4-a6cbfb3a800d",
+  "topic": "pt:j1/mt:cmd/rt:dev/rn:zw/ad:1/sv:technology_specific/ad:17_0"
 }
 ```
 
-Stateles (event) notification occurs:
+* Example of a stateless event notification of glass breakage within the home security category:
 
 ```json
 {
@@ -79,11 +114,17 @@ Stateles (event) notification occurs:
   },
   "storage": {
        "sub_value": "home_security:glass_breakage"
-  }
+  },
+  "props": {},
+  "tags": [],
+  "src": "-",
+  "ver": "1",
+  "uid": "eb99fe48-3276-4a21-acd4-a6cbfb3a800d",
+  "topic": "pt:j1/mt:cmd/rt:dev/rn:zw/ad:1/sv:technology_specific/ad:17_0"
 }
 ```
 
-Unknown notification occurs:
+* Unknown notification:
 
 ```json
 {
@@ -99,11 +140,17 @@ Unknown notification occurs:
   },
   "storage": {
        "sub_value": "31:30"
-  }
+  },
+  "props": {},
+  "tags": [],
+  "src": "-",
+  "ver": "1",
+  "uid": "eb99fe48-3276-4a21-acd4-a6cbfb3a800d",
+  "topic": "pt:j1/mt:cmd/rt:dev/rn:zw/ad:1/sv:technology_specific/ad:17_0"
 }
 ```
 
-Sensor report with unknown sensor type and unit:
+* Sensor report with unknown sensor type and unit:
 
 ```json
 {
@@ -118,11 +165,17 @@ Sensor report with unknown sensor type and unit:
   },
   "storage": {
       "sub_value": "7:10"
-  }
+  },
+  "props": {},
+  "tags": [],
+  "src": "-",
+  "ver": "1",
+  "uid": "eb99fe48-3276-4a21-acd4-a6cbfb3a800d",
+  "topic": "pt:j1/mt:cmd/rt:dev/rn:zw/ad:1/sv:technology_specific/ad:17_0"
 }
 ```
 
-Meter report with unknown meter type and unit:
+* Meter report with unknown meter type and unit:
 
 ```json
 {
@@ -138,6 +191,12 @@ Meter report with unknown meter type and unit:
   },
   "storage": {
       "sub_value": "11:10:import"
-  }
+  },
+  "props": {},
+  "tags": [],
+  "src": "-",
+  "ver": "1",
+  "uid": "eb99fe48-3276-4a21-acd4-a6cbfb3a800d",
+  "topic": "pt:j1/mt:cmd/rt:dev/rn:zw/ad:1/sv:technology_specific/ad:17_0"
 }
 ```

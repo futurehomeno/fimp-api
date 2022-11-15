@@ -9,4 +9,3 @@
 
 - Z Wave
   - [Time](/z-wave/Time.md)
-  - [User Code](/z-wave/User_Code.md)
