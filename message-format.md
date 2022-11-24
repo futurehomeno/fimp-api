@@ -10,7 +10,7 @@ props    | Map<String, String> | Yes      | Map of properties.
 resp_to  | String              | No*      | Response topic where requester will expect to receive response.
 serv     | String              | Yes      | Service name the interface is part of.
 src      | String              | Yes      | Source or of the message, should be set only for commands.
-tags     | List<String>        | No       | List of tags.
+tags     | List\<String>       | No       | List of tags.
 type     | String              | Yes      | Interface type, defines message format.
 uid      | String              | Yes      | Unique message identifier.
 val      | dynamic             | Yes      | "payload" - type is defined by `val_t`.
