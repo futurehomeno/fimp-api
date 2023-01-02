@@ -21,7 +21,7 @@ Sound Switch service allows you to control the sound tones on the device.
 
 | Name        | Type   | Description                                                                                                                   |
 | ----------- | ------ | ----------------------------------------------------------------------------------------------------------------------------- |
-| `sup_tones` | object | List of supported tones. Contains `tone_id`, `duration` (in seconds) and the `name` of the tone. See Examples.                |
+| `sup_tones` | object | Array of objects, see definition of [`supported_tone`](#definitions).                                                         |
 
 ## Definitions
 
@@ -29,15 +29,23 @@ Sound Switch service allows you to control the sound tones on the device.
 
 | Field             | Example       | Description                                                                                                       |
 | ----------------- | ------------- | ----------------------------------------------------------------------------------------------------------------- |
-| `default_tone_id` | `1, 5, 25`  | Tone must be one of [`sup_tones`](#service-properties). It will be used in case an unsupported tone is requested. |
-| `volume`          | `0, 35, 70` | Volume should be a value between 0-100 where 0 mutes the device.                                                  |
+| `default_tone_id` | `1, 5, 25`    | Tone must be one of [`sup_tones`](#service-properties). It will be used in case an unsupported tone is requested. |
+| `volume`          | `0, 35, 70`   | Volume should be a value between 0-100 where 0 mutes the device.                                                  |
 
 * `play_map` is an int_map with the following structure:
 
 | Field     | Example       | Description                                                                                                            |
 | --------- | ------------- | ---------------------------------------------------------------------------------------------------------------------- |
-| `tone_id` | `1, 5, 25`  | Tone must be one of [`sup_tones`](#service-properties). Special values: 0 - stop playing, 255 - play the default tone. |
-| `volume`  | `0, 35, 70` | Optional, some devices do not support this. Volume should be a value between 0-100 where 0 mutes the device.           |
+| `tone_id` | `1, 5, 25`    | Tone must be one of [`sup_tones`](#service-properties). Special values: 0 - stop playing, 255 - play the default tone. |
+| `volume`  | `0, 35, 70`   | Optional, some devices do not support this. Volume should be a value between 0-100 where 0 mutes the device.           |
+
+* `supported_tone` is an object with the following structure:
+
+| Field      | Type   | Example                   | Description                                    |
+| ---------- | ------ | ------------------------- | ---------------------------------------------- |
+| `tone_id`  | int    | `1, 5, 25`                | Id of the tone. Must be a value between 1-254. |
+| `duration` | int    | `5, 13, 10`               | Duration of the sound described in seconds.    |
+| `name`     | string | `"06 Chimes", "17 Alarm"` | Name of the tone.                              |
 
 ## Examples
 
