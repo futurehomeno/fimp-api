@@ -17,7 +17,7 @@ in   | cmd.association.delete_all | int        |                | Remove all mem
 in   | cmd.association.get_report | int        |                | Request report of a specific association group.                                                                                                                                          |
 out  | evt.association.report     | object     | `max_supports` | Reports members of a specific association. Property `max_supports` defines how many devices can be added to this group. See [`association_members`](#definitions) for value definition.  |
 in   | cmd.groups_info.get_report | null       |                | Z-Wave only. Request detailed information about supported association groups.                                                                                                            |
-out  | evt.groups_info.report     | object     |                | Z-Wave only. Returns a list of supported associations groups with descriptions. See [`association_info_object`](#definitions).                                                           |
+out  | evt.groups_info.report     | object     |                | Z-Wave only. Returns a list of supported associations groups with descriptions. See [`association_info`](#definitions).                                                           |
 
 ## Service Props
 
@@ -33,7 +33,7 @@ Name             | Supported Values                                | Description
  
 | Field        | Type      | Example           | Description                                    |
 |--------------|-----------|-------------------|------------------------------------------------|
-| `group`      | int       | `1, 3, 5`         | Id of the supported group.                     |
+| `group`      | int       | `1`, `3`, `5`     | Id of the supported group.                     |
 | `members`    | str_array | `["2_0", "15_1"]` | List of group members.                         |
 
 > The `group` field is completely ignored for zigbee. The field can be null, empty or removed completely for commands and will be missing for events. Zigbee-ad internally creates a group with an ID that's equal to the device ID.
@@ -42,17 +42,17 @@ Name             | Supported Values                                | Description
 
 | Field        | Type   | Example                                   | Description                                                       |
 |--------------|--------|-------------------------------------------|-------------------------------------------------------------------|
-| `group_num`  | int    | `1, 3, 5`                                 | Id of the supported group.                                        |
-| `trigger`    | string | `"Sensor - Temperature", "Control Key 2"` | General description of the trigger type.                          |
-| `name`       | string | `"Lifeline", "Dimmer (S1)"`               | Name of the group, specified by the device manufacturer.          |
+| `group`      | int    | `1`, `3`                                  | Id of the supported group.                                        |
+| `trigger`    | string | `"Sensor - Temperature"`                  | General description of the trigger type.                          |
+| `name`       | string | `"Lifeline"`, `"Dimmer (S1)"`             | Name of the group, specified by the device manufacturer.          |
 | `commands`   | object | `[{"class": 128, "command": 3}]`          | Array of [`commands`](#definitions).                              |
 
 * `commands` is an int_map describing specific commands sent by an association:
  
-| Field        | Type | Example         | Description                                           |
-|--------------|------|-----------------|-------------------------------------------------------|
-| `class`      | int  | `104, 128, 130` | Command class.                                        |
-| `command`    | int  | `1, 3, 4`       | Id of the specific command in that command class.     |
+| Field        | Type | Example      | Description                                           |
+|--------------|------|--------------|-------------------------------------------------------|
+| `class`      | int  | `104`, `128` | Command class.                                        |
+| `command`    | int  | `1`, `3`     | Id of the specific command in that command class.     |
 
 * `trigger` describes the event which will trigger sending an association command. This can be one of the following:
   * `Lifeline` - special, used only fro receiving reports from the device.
@@ -142,7 +142,7 @@ Name             | Supported Values                                | Description
           "command": 1
         }
       ],
-      "group_num": 1,
+      "group": 1,
       "name": "Lifeline",
       "trigger": "Lifeline"
     },
@@ -153,7 +153,7 @@ Name             | Supported Values                                | Description
           "command": 1
         }
       ],
-      "group_num": 2,
+      "group": 2,
       "name": "Basic set",
       "trigger": "Notification - Smoke"
     },
@@ -164,7 +164,7 @@ Name             | Supported Values                                | Description
           "command": 1
         }
       ],
-      "group_num": 3,
+      "group": 3,
       "name": "Scene set",
       "trigger": "Control Key 1"
     }
