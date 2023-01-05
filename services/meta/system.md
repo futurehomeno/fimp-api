@@ -1,17 +1,15 @@
-### System related device service
+# System related device service
 
-#### Service names
+## Service names
 
 `dev_sys`
 
-#### Interfaces
+## Interfaces
 
 Type | Interface                   | Value type | Description
 -----|---------------------------- |------------|------------
 in   | cmd.config.get_report       | str_array  | Requests service to respond with config report. If array is empty - report all parameters.
-in   | cmd.config.get_supp_list    | null       | Requests service to respond with a list of supported configurations.
 in   | cmd.config.set              | str_map    | Sets configuration. Value is a key-value pairs.
-in   | cmd.config.supp_list_report | str_map    | List of supported configurations. Key - config name, value - short description.
 in   | cmd.thing.reboot            | string     | Requests device to run either complete reboot or reboot specific component.
 out  | evt.config.report           | str_map    | Reports configurations in form of key-value pairs.
 -|||
@@ -33,7 +31,35 @@ in   | cmd.node_reinterview        | str_map    | Value example `{"max_age":"1"}
 in   | cmd.channel.get             | null    | Requests the current Zigbee channel.
 out  | evt.channel.report          | int     | Reports the current Zigbee channel. The value is 0 if the network has not been established yet.
 
-#### Notes
+## Service props
+
+| Name                | Type   | Description                                                                                  |
+|---------------------|--------|----------------------------------------------------------------------------------------------|
+| `sup_configuration` | object | Optional. List of supported configuration params, see [`configuration_param`](#definitions). |
+
+## Definitions
+
+* `configuration_param` is an object of the following structure:
+
+| Name            | Type   | Example                | Description                                                     |
+|-----------------|--------|------------------------|-----------------------------------------------------------------|
+| `param_id`      | int    | `2`                    | Id of the parameter.                                            |
+| `name`          | string | `"Temperature alarms"` | Name of the parameter.                                          |
+| `format`        | string | `"radio buttons"`      | Format of the parameter. One of [`param_format`](#definitions). |
+| `size`          | int    | `2`                    | Size of the parameter. Can be one of: 1, 2 or 4.                |
+| `min`           | int    | `-3`                   | Minimum value of the parameter.                                 |
+| `max`           | int    | `50`                   | Maximum value of the parameter.                                 |
+| `default`       | int    | `10`                   | Default value of the parameter.                                 |
+| `read_only`     | bool   | `true`                 | Defines whether parameter is non-modifiable.                    |
+| `advanced`      | bool   | `false`                | Defines whether parameter is advanced.                          |
+| `alters_device` | bool   | `false`                | Defines whether parameter will alter device capabilities.       |
+
+* `param_format` can be one of the following:
+  * `"unsigned number"`
+  * `"signed number"`
+  * `"radio buttons"` - treated as unsigned number
+  * `"checkboxes"` - bit field, maximum value will have all supported bits set to 1
+## Notes
 
 - Z-Wave configuration values should be in form <value>;size, for instance 12;2
 - Z-Wave association member should be in form <node_id>\_<endpoint_id>, for instance 10_0
