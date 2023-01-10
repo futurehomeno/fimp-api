@@ -1,4 +1,4 @@
-# Futurehome IoT Messaging Protocol - FIMP
+# FIMP - Futurehome IoT Messaging Protocol
 
 * [Service overview](#service-overview)
 * [Component discovery mechanism](#component-discovery-mechanism)
