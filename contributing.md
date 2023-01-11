@@ -2,7 +2,8 @@
 
 ## Local Preview
 
-This documentation is utilizing [Docsify](https://docsify.js.org/#/) for rendering purposes. To preview the documentation locally you need to have Docsify CLI installed which in turn requires NPM package manager.
+This documentation uses [Docsify](https://docsify.js.org/#/) for rendering purposes. 
+To preview the documentation locally you need to have Docsify CLI installed which in turn requires NPM package manager.
 
 To install Node JS with bundled NPM on MacOS using Homebrew run the following command:
 

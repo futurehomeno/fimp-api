@@ -4,8 +4,8 @@ Messages sent over MQTT adhering to the FIMP protocol are JSON messages which me
 
 ## Example message
 
-Following is the example of a FIMP message containing energy consumption report from an electricity meter. More examples can be found in particular [services](services/services.md)
-specifications.
+The Following is an example of a FIMP message containing energy consumption report from an electricity meter. 
+More examples can be found in particular [services](services/services.md) specifications.
 
 ```json
 {
@@ -33,22 +33,22 @@ specifications.
 
 ## Message Properties
 
-Following is the list of message properties in accordance to FIMP version 1.
+The following is a list of message properties in accordance with FIMP version 1.
 
 | Property  | Type         | Example                                   | Required | Description                                                                                                                                                                                                                          |
 |-----------|--------------|-------------------------------------------|----------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `serv`    | String       | `"out_bin_switch"`                        | Yes      | The name of the service the interface is part of. Service names should utilize `snake_case`.                                                                                                                                         |
 | `type`    | String       | `"evt.binary.report"`                     | Yes      | The name of the interface represented by the message. See the [Interface Format](#interface-format) section for more details.                                                                                                        |
 | `val_t`   | String       | `"bool"`                                  | Yes      | Type of the value stored in `val` property. See the list of [Value Types](#value-types) section for more details.                                                                                                                    |
-| `val`     | Any          | `3.33`                                    | Yes      | Payload of the message of which type is defined in `val_t` property.                                                                                                                                                                 |
+| `val`     | Any          | `3.33`                                    | Yes      | Payload of the message which type is defined in `val_t` property.                                                                                                                                                                    |
 | `storage` | Object       | `{"sub_value": "kWh"}`                    | No       | Defines optional storage aggregation key for multi-value reports. Applies only to device reports. Parser must accept missing key or `null` value as an empty `object`.                                                               |
 | `props`   | String Map   | `{"unit":"W"}`                            | No       | An optional map of properties. Please note that all properties including numeric ones must be encoded as strings. Parser must accept missing key or `null` value as an empty `map`.                                                  |
 | `tags`    | String Array | `{"test"}`                                | No       | An optional list of tags. Parser must accept missing key or `null` value as an empty `array`.                                                                                                                                        |
-| `resp_to` | String       | `"pt:j1/mt:rsp/rt:app/rn:angry-dog/ad:1"` | No       | A topic where a response to the request will be expected. Does not apply to most of the broadcast type of events, especially asynchronous device events for which adapter will ignore this property. Parser must accept missing key. |
+| `resp_to` | String       | `"pt:j1/mt:rsp/rt:app/rn:angry-dog/ad:1"` | No       | A topic where a response to the request will be expected. Does not apply to most of the broadcast type of events, especially asynchronous device events for which adapter ignores this property. Parser must accept the missing key. |
 | `corid`   | String       | `"e0749aaa-05b8-4983-89e1-f225b539cc40"`  | No       | Response correlation identifier that is equal to the `uid` property of the request, used for request-response matching. Parser must accept missing key.                                                                              |
 | `uid`     | String       | `"9bb1be75-35d7-4069-ac00-b974315f7ec3"`  | Yes      | A unique message identifier in form of UUID. It is recommended to use Version 4.                                                                                                                                                     |
 | `ctime`   | String       | `"2022-12-02T10:08:27.5+01:00"`           | Yes      | Message creation time in RFC3339 format. For compatibility reasons a message parser must treat a missing key as the current timestamp. See [time format](#time-format) section for disambiguation.                                   |
-| `src`     | String       | `"smarthome-app"`                         | Yes      | Name of the message publisher identifying a HUB, mobile or cloud application or service. For compatibility reasons a message parser must tolerate a missing key.                                                                     |
+| `src`     | String       | `"smarthome-app"`                         | Yes      | Name of the message publisher identifying a HUB or mobile application or a cloud service. For compatibility reasons a message parser must tolerate a missing key.                                                                    |
 | `ver`     | String       | `"1"`                                     | Yes      | Version of the message format. The current version is `1`.                                                                                                                                                                           |
 | `topic`   | String       | `"pt:j1/mt:evt/rt:app/rn:vinculum/ad:1"`  | No       | The MQTT topic on which the message was originally received, required only when message is processed outside of MQTT context, for example in a Kafka stream.                                                                         |
 
@@ -75,7 +75,7 @@ Since message `val` property can be of any type, `val_t` defines what type it is
 
 ## Time Format
 
-Time must be formatted in accordance to the RFC3339 format. A message parser must be able to read all the following timestamps as valid.
+The timestamp must be formatted in accordance to the RFC3339 format. A message parser must be able to read all the following timestamps as valid.
 When producing messages it is recommended to only use the first one.
 
 | Format                                   | Recommended |
@@ -87,7 +87,7 @@ When producing messages it is recommended to only use the first one.
 
 ## Interface Format
 
-Each interface consist of three segments separated by a dot in accordance to this schema `{type}.{attribute}.{action}`:
+Each interface consists of three segments separated by a dot in accordance with this schema `{type}.{attribute}.{action}`:
 
 | Segment     | Example      | Description                                                                                                                                                                         |
 |-------------|--------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
