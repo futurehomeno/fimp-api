@@ -22,14 +22,14 @@ User code service is used by door locks, keypads and other security panels to en
 
 ## Service properties
 
-| Name              | Type      | Example                    | Description                                                                         |
-|-------------------|-----------|----------------------------|-------------------------------------------------------------------------------------|
-| `sup_usercodes`   | str_array | ["pin", "rfid"]            | List of supported user code types. Possible values are: `pin`, `rfid`.              |
-| `sup_userstatus`  | str_array | ["enabled", "disabled"]    | List of supported user status types. Possible values are: `enabled` and `disabled`. |
-| `sup_usertypes`   | str_array | ["unrestricted", "master"] | List of supported user types. Possible values are: `unrestricted` and `master`.     |
-| `sup_users`       | int       | `10`                       | Number of supported user slots.                                                     |
-| `min_code_length` | int       | `4`                        | Minimum length of a user code.                                                      |
-| `max_code_length` | int       | `4`                        | Maximum length of a user code.                                                      |
+| Name              | Type      | Example                 | Description                                                                         |
+|-------------------|-----------|-------------------------|-------------------------------------------------------------------------------------|
+| `sup_usercodes`   | str_array | ["pin", "rfid"]         | List of supported user code types. Possible values are: `pin`, `rfid`.              |
+| `sup_userstatus`  | str_array | ["enabled", "disabled"] | List of supported user status types. Possible values are: `enabled` and `disabled`. |
+| `sup_usertypes`   | str_array | ["normal", "master"]    | List of supported user types. Possible values are: `normal` and `master`.           |
+| `sup_users`       | int       | `10`                    | Number of supported user slots.                                                     |
+| `min_code_length` | int       | `4`                     | Minimum length of a user code.                                                      |
+| `max_code_length` | int       | `4`                     | Maximum length of a user code.                                                      |
 
 ## Definitions
 
