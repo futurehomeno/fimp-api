@@ -33,11 +33,12 @@ Output level switch service acts as a level controller for devices such as dimme
 
 ## Service properties
 
-| Name      | Type   | Example    | Description                                                         |
-|-----------|--------|------------|---------------------------------------------------------------------|
-| `max_lvl` | int    | `99`       | A maximum supported level value.                                    |
-| `min_lvl` | int    | `0`        | A minimum supported level value.                                    |
-| `sw_type` | string | `"on_off"` | A type of level switch. Supported values are `on_off` or `up_down`. |
+| Name            | Type | Example | Description                                                                               |
+|-----------------|------|---------|-------------------------------------------------------------------------------------------|
+| `max_lvl`       | int  | `99`    | A maximum supported level value.                                                          |
+| `min_lvl`       | int  | `0`     | A minimum supported level value.                                                          |
+| `sup_duration`  | bool | `true`  | Indicates whether the device supports the `duration` property in level control commands.  |
+| `sup_start_lvl` | bool | `true`  | Indicates whether the device supports the `start_lvl` property in level control commands. |
 
 ## Examples
 
