@@ -40,11 +40,12 @@ An electricity meter service can represent a stand-alone AMS meter, like a HAN s
 
 ## Service properties
 
-| Name                | Type      | Value example                                                  | Description                                                        |
-|---------------------|-----------|----------------------------------------------------------------|--------------------------------------------------------------------|
-| `sup_units`         | str_array | `["W", "kWh", "A", "V"]`                                       | List of supported import/consumption units.                        |
-| `sup_export_units`  | str_array | `["W", "kWh", "A", "V"]`                                       | List of supported export/production units.                         |
-| `sup_extended_vals` | str_array | `["e_import", "p_import", "u1", "u2", "u3", "i1", "i2", "i3"]` | List of values contained in the [`extended_report`](#definitions). |
+| Name                | Type      | Value example                                                  | Description                                                                                               |
+|---------------------|-----------|----------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------|
+| `sup_units`         | str_array | `["W", "kWh", "A", "V"]`                                       | List of supported import/consumption units.                                                               |
+| `sup_export_units`  | str_array | `["W", "kWh", "A", "V"]`                                       | List of supported export/production units.                                                                |
+| `sup_extended_vals` | str_array | `["e_import", "p_import", "u1", "u2", "u3", "i1", "i2", "i3"]` | List of values contained in the [`extended_report`](#definitions).                                        |
+| `is_virtual`        | bool      | `true`                                                         | Field is present and equals `true` if the service is virtual, and `false` or not being present otherwise. |
 
 ## Definitions
 
