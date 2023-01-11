@@ -6,6 +6,6 @@
 - [Technology Adapter Api](/technology-adapter-api.md)
 - [Thing Management](/thing-management.md)
 - [Topics](/topics.md)
-
 - Z Wave
   - [Time](/z-wave/Time.md)
+- [Contributing](/contributing.md)
