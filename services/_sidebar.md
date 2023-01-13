@@ -25,7 +25,8 @@
     - [Color control](/services/generic/color_control.md)
     - [Scene control](/services/generic/scene_control.md)
     - [Siren control](/services/generic/siren_control.md)
-    - [Media player](/services/generic/media_player.md)
+    - [Media player](/services/generic/media_player.md) 
+    - [Sound switch](/services/generic/sound_switch.md)
   - Product Specific Services
     - [Doorman](/services/specific/doorman.md)
   - Meta and Utility Services
