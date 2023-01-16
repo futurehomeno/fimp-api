@@ -20,37 +20,44 @@ Parameters service represents configuration of a device.
 
 * `sup_parameter` is an object of the following structure:
 
-| Field        | Type   | Example                              | Description                                                                   |
-|--------------|--------|--------------------------------------|-------------------------------------------------------------------------------|
-| parameter_id | string | `"1"`                                | Id of the parameter.                                                          |
-| name         | string | `"Sensitivity of the PR sensor"`     | Name of the parameter.                                                        |
-| description  | string | `""`                                 | Description of the parameter.                                                 |
-| widget_type  | string | `"select"`                           | Format of the parameter, one of [`widget_type`](#definitions).                |
-| value_type   | string | `"int"`                              | Type of the value.                                                            |
-| options      | object | `[{"label":"Option 1", "value": 1}]` | Only for`select` and `multiselect`. Array of [`select_option`](#definitions). |
-| min          | int    | `-1`                                 | Only for `input`. Minimum possible value of the parameter.                    |
-| max          | int    | `20`                                 | Only for `input`. Maximum possible value of the parameter.                    |
-| default      | int    | `1`                                  | Default value of the parameter.                                               |
-| read_only    | bool   | `false`                              | If true - value cannot be set.                                                |
+| Field         | Type   | Example                                 | Description                                                                    |
+|---------------|--------|-----------------------------------------|--------------------------------------------------------------------------------|
+| parameter_id  | string | `"1"`                                   | Id of the parameter.                                                           |
+| name          | string | `"Sensitivity of the PR sensor"`        | Name of the parameter.                                                         |
+| description   | string | `""`                                    | Description of the parameter.                                                  |
+| widget_type   | string | `"select"`                              | Format of the parameter, one of [`widget_type`](#definitions).                 |
+| value_type    | string | `"int"`                                 | Type of the value.                                                             |
+| options       | object | `[{"label":"Option 1", "value": 1}]`    | Only for `select` and `multiselect`. Array of [`select_option`](#definitions). |
+| min           | int    | `-1`                                    | Only for `input`. Minimum possible value of the parameter.                     |
+| max           | int    | `20`                                    | Only for `input`. Maximum possible value of the parameter.                     |
+| default_value | object | `{"value_type": "int", "int_value": 1}` | Value, see ['value`](#definitions).                                            |
+| read_only     | bool   | `false`                                 | If true - value cannot be set.                                                 |
 
 * `widget_type` can be one of:
   * `input` - input a number,
   * `select` - select one item from supported options,
   * `multiselect` - select multiple items from supported options.
-  
+
+* `value` is an object of the following structure:
+
+| Field           | Type      | Example  | Description                                 |
+|-----------------|-----------|----------|---------------------------------------------|
+| value_type      | string    | `"int"`  | Value type.                                 |
+| int_value       | int       | `1`      | Only if `value_type` is `int`. Value.       | 
+| int_array_value | int_array | `[1, 3]` | Only if `value_type` is `int_array`. Value. | 
+
 * `select_option` is an object of the following structure:
 
-| Field | Type   | Example      | Description          |
-|-------|--------|--------------|----------------------|
-| label | string | `"Option 1"` | Label of the option. |
-| value | int    | `1`          | Value of the option. | 
+| Field | Type   | Example                                 | Description                         |
+|-------|--------|-----------------------------------------|-------------------------------------|
+| label | string | `"Option 1"`                            | Label of the option.                |
+| value | object | `{"value_type": "int", "int_value": 1}` | Value, see ['value`](#definitions). |
 
 * `parameter_value` is an object of the following structure:
 
-| Field        | Type                  | Example | Description                                                                                              |
-|--------------|-----------------------|---------|----------------------------------------------------------------------------------------------------------|
-| parameter_id | string                | `"1"`   | Id of the parameter.                                                                                     |
-| value_type   | string                | `"int"` | Type of the value. Can be either`"int"` (for `input` and `select`) or `"int_array"` (for `multiselect`). |
-| value        | based on value_type   | `1`     | Value of the parameter.                                                                                  |
+| Field        | Type      | Example                                 | Description                         |
+|--------------|-----------|-----------------------------------------|-------------------------------------|
+| parameter_id | string    | `"1"`                                   | Id of the parameter.                |
+| value        | object    | `{"value_type": "int", "int_value": 1}` | Value, see ['value`](#definitions). |
 
 ## Examples
