@@ -61,3 +61,71 @@ Parameters service represents configuration of a device.
 | value        | object    | `{"value_type": "int", "int_value": 1}` | Value, see ['value`](#definitions). |
 
 ## Examples
+
+* Example of `evt.sup_params.report`:
+```json 
+{
+  "serv": "parameters",
+  "type": "evt.sup_params.report",
+  "val_t": "object",
+  "val":  [{
+      "default_value": {
+        "value": 1,
+        "value_type": "int"
+      },
+      "description": "",
+      "name": "LED alarm event reporting",
+      "options": [
+        {
+          "label": "Option 0",
+          "value": 0
+        },
+        {
+          "label": "Option 1",
+          "value": 1
+        },
+        {
+          "label": "Option 2",
+          "value": 2
+        }
+      ],
+      "parameter_id": "2",
+      "read_only": false,
+      "value_type": "int",
+      "widget_type": "select"
+    },
+    {
+      "default_value": {
+        "value": 5,
+        "value_type": "int"
+      },
+      "description": "",
+      "max": 60,
+      "min": -20,
+      "name": "Low temperature alarm level",
+      "parameter_id": "8",
+      "read_only": false,
+      "value_type": "int",
+      "widget_type": "input"
+    }],
+  "props": {},
+  "topic": "pt:j1/mt:evt/rt:dev/rn:zw/ad:1/sv:parameters/ad:149_0"
+```
+
+* Example of `evt.param.report`:
+```json
+{
+  "serv": "parameters",
+  "type": "evt.param.report",
+  "val_t": "object",
+  "val": {
+    "parameter_id": "2",
+    "value": {
+      "int_value": 1,
+      "value_type": "int"
+    }
+  },
+  "props": {},
+  "topic": "pt:j1/mt:evt/rt:dev/rn:zw/ad:1/sv:parameters/ad:149_0"
+}
+```
