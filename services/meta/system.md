@@ -31,34 +31,6 @@ in   | cmd.node_reinterview        | str_map    | Value example `{"max_age":"1"}
 in   | cmd.channel.get             | null    | Requests the current Zigbee channel.
 out  | evt.channel.report          | int     | Reports the current Zigbee channel. The value is 0 if the network has not been established yet.
 
-## Service props
-
-| Name                | Type   | Description                                                                                  |
-|---------------------|--------|----------------------------------------------------------------------------------------------|
-| `sup_configuration` | object | Optional. List of supported configuration params, see [`configuration_param`](#definitions). |
-
-## Definitions
-
-* `configuration_param` is an object of the following structure:
-
-| Name            | Type   | Example                | Description                                                     |
-|-----------------|--------|------------------------|-----------------------------------------------------------------|
-| `param_id`      | int    | `2`                    | Id of the parameter.                                            |
-| `name`          | string | `"Temperature alarms"` | Name of the parameter.                                          |
-| `format`        | string | `"radio buttons"`      | Format of the parameter. One of [`param_format`](#definitions). |
-| `size`          | int    | `2`                    | Size of the parameter. Can be one of: 1, 2 or 4.                |
-| `min`           | int    | `-3`                   | Minimum value of the parameter.                                 |
-| `max`           | int    | `50`                   | Maximum value of the parameter.                                 |
-| `default`       | int    | `10`                   | Default value of the parameter.                                 |
-| `read_only`     | bool   | `true`                 | Defines whether parameter is non-modifiable.                    |
-| `advanced`      | bool   | `false`                | Defines whether parameter is advanced.                          |
-| `alters_device` | bool   | `false`                | Defines whether parameter will alter device capabilities.       |
-
-* `param_format` can be one of the following:
-  * `"unsigned number"`
-  * `"signed number"`
-  * `"radio buttons"` - treated as unsigned number
-  * `"checkboxes"` - bit field, maximum value will have all supported bits set to 1
 ## Notes
 
 - Z-Wave configuration values should be in form <value>;size, for instance 12;2
