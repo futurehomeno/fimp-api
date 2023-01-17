@@ -13,8 +13,15 @@ Parameters service allows configuration of a device.
 | in   | cmd.sup_params.get_report | null       | Requests information about known parameters.                                                                 |
 | out  | evt.sup_params.report     | object     | Reports known parameters of the device, contains array of [`sup_parameter`](#definitions) objects.           |
 | in   | cmd.param.set             | object     | Sets parameter, see [`parameter_value`](#definitions).                                                       |
-| in   | cmd.param.get_report      | str_array  | Requests report with currently set values for specified parameters, if empty requests all parameters.        |
+| in   | cmd.param.get_report      | str_array  | Requests report with currently set values for specified parameters.                                          |
 | out  | evt.param.report          | object     | Reports current value for specified parameters, contains array of [`parameter_value`](#definitions) objects. |
+
+
+## Service properties
+
+| Name      | Type      | Example | Description                                                |
+|-----------|-----------|---------|------------------------------------------------------------|
+| sup_sizes | int_array | `[1,2]` | Optional. Defines supported sizes of the parameter values. |
 
 ## Definitions
 
@@ -55,10 +62,11 @@ Parameters service allows configuration of a device.
 
 * `parameter_value` is an object of the following structure:
 
-| Field        | Type   | Example                                 | Description                         |
-|--------------|--------|-----------------------------------------|-------------------------------------|
-| parameter_id | string | `"1"`                                   | Id of the parameter.                |
-| value        | object | `{"value_type": "int", "int_value": 1}` | Value, see [`value`](#definitions). |
+| Field        | Type   | Example                                 | Description                                                                          |
+|--------------|--------|-----------------------------------------|--------------------------------------------------------------------------------------|
+| parameter_id | string | `"1"`                                   | Id of the parameter.                                                                 |
+| value        | object | `{"value_type": "int", "int_value": 1}` | Value, see [`value`](#definitions).                                                  |
+| size         | int    | `"1"`                                   | Required only if [`sup_sizes`](#service-properties) is set. Size of parameter value. |
 
 ## Examples
 

@@ -8,10 +8,10 @@
 
 Type | Interface                   | Value type | Description
 -----|---------------------------- |------------|------------
-in   | cmd.config.get_report       | str_array  | Requests service to respond with config report. If array is empty - report all parameters.
-in   | cmd.config.set              | str_map    | Sets configuration. Value is a key-value pairs.
+in   | cmd.config.get_report       | str_array  | **Deprecated** Service `parameters` should be used instead. Requests service to respond with config report. If array is empty - report all parameters.
+in   | cmd.config.set              | str_map    | **Deprecated** Service `parameters` should be used instead. Sets configuration. Value is a key-value pairs.
 in   | cmd.thing.reboot            | string     | Requests device to run either complete reboot or reboot specific component.
-out  | evt.config.report           | str_map    | Reports configurations in form of key-value pairs.
+out  | evt.config.report           | str_map    | **Deprecated** Service `parameters` should be used instead. Reports configurations in form of key-value pairs.
 -|||
 in   | cmd.group.add_members       | object     | Adds members to the group. Object has the same format as members_report
 in   | cmd.group.delete_members    | object     | Object has the same format as report.
