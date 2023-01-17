@@ -41,6 +41,7 @@ If product is too specific for its functionalities to be supported by generic se
 Meta and utility services are not representing a functionality of a device, but rather a feature of the system, adapter or network.
 
 - [System](/services/meta/system.md)
+- [Parameters](/services/meta/parameters.md)
 - [Association](/services/meta/association.md)
 - [Gateway](/services/meta/gateway.md)
 - [Indicator](/services/meta/indicator.md)
