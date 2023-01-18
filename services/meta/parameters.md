@@ -87,24 +87,15 @@ Parameters service allows for advanced configuration of a device.
       "options": [
         {
           "label": "Example option 1",
-          "value": {
-            "value_type": "int",
-            "int_value": 0
-          }
+          "value": 0
         },
         {
           "label": "Example option 2",
-          "value": {
-            "value_type": "int",
-            "int_value": 1
-          }
+          "value": 1
         },
         {
           "label": "Example option 3",
-          "value": {
-            "value_type": "int",
-            "int_value": 2
-          }
+          "value": 2
         }
       ],
       "default_value": 0,
