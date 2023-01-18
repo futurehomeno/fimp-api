@@ -1,6 +1,8 @@
 # Parameters Service
 
-Parameters service allows configuration of a device.
+Parameters service allows for advanced configuration of a device.
+
+> Please note that this service is experimental and may be changed in the future.
 
 ## Service name
 
@@ -8,69 +10,67 @@ Parameters service allows configuration of a device.
 
 ## Interfaces
 
-| Type | Interface                 | Value type | Description                                                                                                  |
-|------|---------------------------|------------|--------------------------------------------------------------------------------------------------------------|
-| in   | cmd.sup_params.get_report | null       | Requests information about known parameters.                                                                 |
-| out  | evt.sup_params.report     | object     | Reports known parameters of the device, contains array of [`sup_parameter`](#definitions) objects.           |
-| in   | cmd.param.set             | object     | Sets parameter, see [`parameter_value`](#definitions).                                                       |
-| in   | cmd.param.get_report      | str_array  | Requests report with currently set values for specified parameters.                                          |
-| out  | evt.param.report          | object     | Reports current value for specified parameters, contains array of [`parameter_value`](#definitions) objects. |
+| Type | Interface                 | Value type | Storage        | Description                                                                                             |
+|------|---------------------------|------------|----------------|---------------------------------------------------------------------------------------------------------|
+| in   | cmd.sup_params.get_report | null       |                | Requests information about known parameters. Present if the device supports parameters discovery.       |
+| out  | evt.sup_params.report     | object     |                | Reports known parameters of the device, contains an array of [`sup_parameter`](#definitions) objects.   |
+| in   | cmd.param.set             | object     |                | Sets the parameter, see [`parameter_value`](#definitions).                                              |
+| in   | cmd.param.get_report      | string     | `parameter_id` | Requests report with currently set values for the specified parameter.                                  |
+| out  | evt.param.report          | object     |                | Reports the current value for a specified parameter, contains [`parameter_value`](#definitions) object. |
 
+> Some devices may not support parameter discovery while still supporting setting parameters manually if we know their ID and size.
+> In such cases the service will not provide `cmd.sup_params.get_report` interface and require the user to provide the parameter ID and size manually.
+> The list of supported parameters and their respective sizes can usually be found in the manual provided by the device producer.
 
 ## Service properties
 
-| Name      | Type      | Example | Description                                                |
-|-----------|-----------|---------|------------------------------------------------------------|
-| sup_sizes | int_array | `[1,2]` | Optional. Defines supported sizes of the parameter values. |
+| Name            | Type      | Example  | Description                                                                                                                                             |
+|-----------------|-----------|----------|---------------------------------------------------------------------------------------------------------------------------------------------------------|
+| req_param_sizes | int_array | `[1, 2]` | Optional. Indicates that the device does not support parameter discovery and requires parameter size to be provided manually, when setting a parameter. |
 
 ## Definitions
 
-* `sup_parameter` is an object of the following structure:
+* `sup_parameter` is an object with the following structure:
 
-| Field         | Type   | Example                                                                  | Description                                                                    |
-|---------------|--------|--------------------------------------------------------------------------|--------------------------------------------------------------------------------|
-| parameter_id  | string | `"1"`                                                                    | ID of the parameter.                                                           |
-| name          | string | `"Sensitivity of the PR sensor"`                                         | Name of the parameter.                                                         |
-| description   | string | `""`                                                                     | Description of the parameter.                                                  |
-| widget_type   | string | `"select"`                                                               | Format of the parameter, one of [`widget_type`](#definitions).                 |
-| value_type    | string | `"int"`                                                                  | Type of the value.                                                             |
-| options       | object | `[{"label":"Option 1", "value": {"value_type": "int", "int_value": 1}}]` | Only for `select` and `multiselect`. Array of [`select_option`](#definitions). |
-| min           | int    | `-1`                                                                     | Only for `input`. Minimum possible value of the parameter.                     |
-| max           | int    | `20`                                                                     | Only for `input`. Maximum possible value of the parameter.                     |
-| default_value | object | `{"value_type": "int", "int_value": 1}`                                  | Default value, see [`value`](#definitions).                                    |
-| read_only     | bool   | `false`                                                                  | If true value cannot be set.                                                   |
+| Field         | Type   | Example                              | Description                                                                              |
+|---------------|--------|--------------------------------------|------------------------------------------------------------------------------------------|
+| parameter_id  | string | `"1"`                                | ID of the parameter.                                                                     |
+| name          | string | `"Sensitivity of the PR sensor"`     | Optional name of the parameter.                                                          |
+| description   | string | `""`                                 | Optional description of the parameter.                                                   |
+| widget_type   | string | `"select"`                           | Format of the parameter, one of [`widget_type`](#definitions).                           |
+| value_type    | string | `"int"`                              | Type of the value, one of [`widget_type`](#definitions).                                 |
+| options       | object | `[{"label":"Option 1", "value": 1}]` | Applies only to `select` and `multiselect`. Array of [`select_option`](#definitions).    |
+| min           | int    | `-1`                                 | Applies only to `int` and `string` typed `input`. Minimum value/length of the parameter. |
+| max           | int    | `20`                                 | Applies only to `int` and `string` typed `input`. Maximum value/length of the parameter. |
+| default_value | any    | `1`                                  | Default value, the type is defined in `value_type` property.                             |
+| read_only     | bool   | `false`                              | If true value cannot be set.                                                             |
 
 * `widget_type` can be one of:
     * `input` - input a single value,
     * `select` - select one item from supported options,
     * `multiselect` - select multiple items from supported options.
 
-* `value` is an object with the following structure:
-
-| Field           | Type      | Example  | Description                                |
-|-----------------|-----------|----------|--------------------------------------------|
-| value_type      | string    | `"int"`  | Value type.                                |
-| int_value       | int       | `1`      | Only if `value_type` is `int` value.       | 
-| int_array_value | int_array | `[1, 3]` | Only if `value_type` is `int_array` value. | 
+* `value_type` can be one of `int`, `int_array`, `string`, `str_array`, `bool`.
 
 * `select_option` is an object of the following structure:
 
-| Field | Type   | Example                                 | Description                         |
-|-------|--------|-----------------------------------------|-------------------------------------|
-| label | string | `"Option 1"`                            | Label of the option.                |
-| value | object | `{"value_type": "int", "int_value": 1}` | Value, see [`value`](#definitions). |
+| Field | Type   | Example      | Description                                                                                                                                                  |
+|-------|--------|--------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| label | string | `"Option 1"` | Optional label of the option.                                                                                                                                |
+| value | any    | `1`          | Option value, the type is inferred from `value_type` property, e.g. for a multiselect property of the `int_array` type, the option value type must be `int`. |
 
 * `parameter_value` is an object of the following structure:
 
-| Field        | Type   | Example                                 | Description                                                                          |
-|--------------|--------|-----------------------------------------|--------------------------------------------------------------------------------------|
-| parameter_id | string | `"1"`                                   | Id of the parameter.                                                                 |
-| value        | object | `{"value_type": "int", "int_value": 1}` | Value, see [`value`](#definitions).                                                  |
-| size         | int    | `"1"`                                   | Required only if [`sup_sizes`](#service-properties) is set. Size of parameter value. |
+| Field        | Type   | Example | Description                                                                                                                       |
+|--------------|--------|---------|-----------------------------------------------------------------------------------------------------------------------------------|
+| parameter_id | string | `"1"`   | ID of the parameter.                                                                                                              |
+| value_type   | string | `"int"` | Type of the value, one of [`widget_type`](#definitions).                                                                          |
+| value        | any    | `1`     | Value, the type is defined in `value_type` property.                                                                              |
+| size         | int    | `2`     | Required only if [`req_param_sizes`](#service-properties) is set and parameter discovery is not available, and ignored otherwise. |
 
 ## Examples
 
-* Example of `evt.sup_params.report`:
+* Example of message containing supported parameter specification:
 
 ```json 
 {
@@ -79,38 +79,46 @@ Parameters service allows configuration of a device.
   "val_t": "object",
   "val": [
     {
-      "parameter_id": "2",
-      "name": "LED alarm event reporting",
-      "description": "",
+      "parameter_id": "1",
+      "name": "Example select parameter",
+      "description": "Example long description of the parameter.",
       "value_type": "int",
       "widget_type": "select",
       "options": [
         {
-          "label": "Option 0",
+          "label": "Example option 1",
           "value": {
             "value_type": "int",
             "int_value": 0
           }
         },
         {
-          "label": "Option 1",
+          "label": "Example option 2",
           "value": {
             "value_type": "int",
             "int_value": 1
           }
         },
         {
-          "label": "Option 2",
+          "label": "Example option 3",
           "value": {
             "value_type": "int",
             "int_value": 2
           }
         }
       ],
-      "default_value": {
-        "value": 1,
-        "value_type": "int"
-      },
+      "default_value": 0,
+      "read_only": false
+    },
+    {
+      "parameter_id": "2",
+      "name": "Example input parameter",
+      "description": "Example long description of the parameter.",
+      "value_type": "int",
+      "widget_type": "input",
+      "min": -5,
+      "max": 5,
+      "default_value": 0,
       "read_only": false
     }
   ],
@@ -123,22 +131,43 @@ Parameters service allows configuration of a device.
 }
 ```
 
-* Example of `evt.param.report`:
+* Example of message containing parameter value report:
 
 ```json
 {
   "serv": "parameters",
   "type": "evt.param.report",
   "val_t": "object",
-  "val": [
-    {
-      "parameter_id": "2",
-      "value": {
-        "int_value": 1,
-        "value_type": "int"
-      }
-    }
-  ],
+  "val": {
+    "parameter_id": "2",
+    "value_type": "int",
+    "value": 3
+  },
+  "storage": {
+    "sub_value": "2"
+  },
+  "props": {},
+  "tags": [],
+  "src": "-",
+  "ver": "1",
+  "uid": "961d2024-0d85-43ae-82e8-dd93085aaf78",
+  "topic": "pt:j1/mt:evt/rt:dev/rn:zw/ad:1/sv:parameters/ad:149_0"
+}
+```
+
+* Example of a command setting a parameter value when service does not support parameter discovery:
+
+```json
+{
+  "serv": "parameters",
+  "type": "cmd.param.set",
+  "val_t": "object",
+  "val": {
+    "parameter_id": "3",
+    "value_type": "int",
+    "value": 53,
+    "size": 4
+  },
   "props": {},
   "tags": [],
   "src": "-",
