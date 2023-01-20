@@ -1,19 +1,17 @@
-### System related device service
+# System related device service
 
-#### Service names
+## Service names
 
 `dev_sys`
 
-#### Interfaces
+## Interfaces
 
 Type | Interface                   | Value type | Description
 -----|---------------------------- |------------|------------
-in   | cmd.config.get_report       | str_array  | Requests service to respond with config report. If array is empty - report all parameters.
-in   | cmd.config.get_supp_list    | null       | Requests service to respond with a list of supported configurations.
-in   | cmd.config.set              | str_map    | Sets configuration. Value is a key-value pairs.
-in   | cmd.config.supp_list_report | str_map    | List of supported configurations. Key - config name, value - short description.
+in   | cmd.config.get_report       | str_array  | **Deprecated** Service `parameters` should be used instead. Requests service to respond with config report. If array is empty - report all parameters.
+in   | cmd.config.set              | str_map    | **Deprecated** Service `parameters` should be used instead. Sets configuration. Value is a key-value pairs.
 in   | cmd.thing.reboot            | string     | Requests device to run either complete reboot or reboot specific component.
-out  | evt.config.report           | str_map    | Reports configurations in form of key-value pairs.
+out  | evt.config.report           | str_map    | **Deprecated** Service `parameters` should be used instead. Reports configurations in form of key-value pairs.
 -|||
 in   | cmd.group.add_members       | object     | Adds members to the group. Object has the same format as members_report
 in   | cmd.group.delete_members    | object     | Object has the same format as report.
@@ -33,7 +31,7 @@ in   | cmd.node_reinterview        | str_map    | Value example `{"max_age":"1"}
 in   | cmd.channel.get             | null    | Requests the current Zigbee channel.
 out  | evt.channel.report          | int     | Reports the current Zigbee channel. The value is 0 if the network has not been established yet.
 
-#### Notes
+## Notes
 
 - Z-Wave configuration values should be in form <value>;size, for instance 12;2
 - Z-Wave association member should be in form <node_id>\_<endpoint_id>, for instance 10_0
