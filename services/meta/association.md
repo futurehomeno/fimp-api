@@ -1,37 +1,48 @@
-### Association Service
-This service allows creating a direct association between a source device (e.g. switch) and a set of destination devices (e.g. lamps). The `group` needs to be specified for zwave-ad while it's implicitly set for zigbee-ad.
+# Association Service
+This service allows creating a direct association between a source device (e.g. switch) and a set of destination devices (e.g. lamps). All devices taking part in the association process need to be included and controllable. The `group` needs to be specified for zwave-ad while it's implicitly set for zigbee-ad.
 
 This service intends to replace `group` commands in `dev_sys` service.
 
-A controllable device (like a lamp) would have a list of `in_services` that would indicate the services it supports. A controller (like a button) would have a list of `out_services` instead.
-
-#### Service Name
+## Service Name
 
 `association`
 
-#### Interfaces
+## Interfaces
 
-Type | Interface                  | Value type | Description
------|-----------------------     |------------|------------
-in   | cmd.association.add        | object     | Add members to the group
-in   | cmd.association.delete     | object     | Remove association for a single member
-in   | cmd.association.delete_all | string     | Remove associations for all group members
-in   | cmd.association.get_report | string     | Get all members of a group
-out  | evt.association.report     | object     | Response for `get_report`
+| Type | Interface                  | Value type | Properties     | Storage | Description                                                                                                                                                                             |
+| -----|----------------------------|------------|----------------|---------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| in   | cmd.association.add        | object     |                |         | Add members to a specific association group. See [`association_members`](#definitions) for value definition.                                                                            |
+| in   | cmd.association.delete     | object     |                |         | Remove members from an association group. See [`association_members`](#definitions) for value definition.                                                                               |
+| in   | cmd.association.delete_all | string     |                |         | Remove all members from an association group.                                                                                                                                           |
+| in   | cmd.association.get_report | string     |                |         | Request report of a specific association group.                                                                                                                                         |
+| out  | evt.association.report     | object     | `max_supports` | `group` | Reports members of a specific association. Property `max_supports` defines how many devices can be added to this group. See [`association_members`](#definitions) for value definition. |
 
-#### Service Props
+## Service properties
 
-Name             | Supported Values           | Description
------------------|----------------------------|-------------
-`in_services`   | `["out_bin_switch", "out_lvl_switch", "color"]` | List of services that can be controlled, e.g. on a lamp
-`out_services`   | `["out_bin_switch", "out_lvl_switch", "color"]` | List of services the device can control, e.g. on a button
+| Name           | Example            | Description                                                                  |
+|----------------|--------------------|------------------------------------------------------------------------------|
+| `sup_groups`   | `["1", "2", "3"]`  | List of supported groups. If present, `group` field is required in messages. |
 
-#### Examples
+## Interface properties
 
-_IMPORTANT_
+| Name           | Example  | Description                                            |                      
+|----------------|----------|--------------------------------------------------------|
+| `max_supports` | `2`, `7` | Maximum number of members in the specific association. |
 
-- The `group` field is completely ignored for zigbee. The field can be null, empty or removed completely for commands and will be missing for events.
-- Zigbee-ad internally creates a group with an ID that's equal to the device ID.
+## Definitions
+
+* `association_members` is an object describing association group members:
+ 
+| Field        | Type      | Example           | Description                                    |
+|--------------|-----------|-------------------|------------------------------------------------|
+| `group`      | string    | `"1"`, `"3"`      | Id of the supported group.                     |
+| `members`    | str_array | `["2_0", "15_1"]` | List of group members.                         |
+
+> The `group` field is completely ignored for Zigbee. The field can be null, empty or removed completely for commands and will be missing for events. Zigbee-ad internally creates a group with an ID that's equal to the device ID.
+   
+## Examples
+
+* Example of adding members to an association.
 
 ```json
 {
@@ -39,50 +50,53 @@ _IMPORTANT_
   "type": "cmd.association.add",
   "val_t": "object",
   "val": {
-    "group": "group_1",
+    "group": "1",
     "members": ["2_1"]
   },
   "props": null,
   "tags": null
 }
+```
 
+* Example of deleting members from an association.
+
+```json
 {
   "serv": "association",
   "type": "cmd.association.delete",
   "val_t": "object",
   "val": {
-    "group": "group_1",
+    "group": "1",
     "members":["2_1"]
   },
   "props": null,
   "tags": null
 }
+```
 
-{
-  "serv": "association",
-  "type": "cmd.association.delete_all",
-  "val_t": "str",
-  "val": "group_1",
-  "props": null,
-  "tags": null
-}
+* Example of an association report request.
 
+```json
 {
   "serv": "association",
   "type": "cmd.association.get_report",
-  "val_t": "str",
-  "val": "group_1",
+  "val_t": "string",
+  "val": "2",
   "props": null,
   "tags": null
 }
+```
 
+* Example of a report of association members.
+
+```json
 {
   "serv": "association",
   "type": "evt.association.report",
   "val_t": "object",
   "val": {
-    "group": "group_1",
-    "member": ["2_1", "3_1"],
+    "group": "3",
+    "members": ["2_1", "3_1"],
   },
   "props": null,
   "tags": null
