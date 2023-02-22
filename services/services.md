@@ -49,7 +49,6 @@ Meta and utility services are not representing a functionality of a device, but 
 - [OTA](/services/meta/ota.md)
 - [Time](/services/meta/time.md)
 - [Version](/services/meta/version.md)
-- [Logging](/services/meta/logging.md)
 - [Technology specific](/services/meta/technology_specific.md)
 
 ## Documentation guidelines
