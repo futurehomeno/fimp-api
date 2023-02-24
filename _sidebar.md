@@ -1,11 +1,11 @@
 - [Home](/README.md)
-- [Component Discovery](/component-discovery.md)
+- [Topic Format](/topic-format.md)
 - [Message Format](/message-format.md)
 - [Services](/services/services.md)
 - [System Management](/system-management.md)
 - [Technology Adapter Api](/technology-adapter-api.md)
 - [Thing Management](/thing-management.md)
-- [Topics](/topics.md)
+- [Component Discovery](/component-discovery.md)
 - Z Wave
   - [Time](/z-wave/Time.md)
 - [Contributing](/contributing.md)
