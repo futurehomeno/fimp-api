@@ -1,8 +1,8 @@
 # Topic Format
 
 All messages sent over MQTT adhering to the FIMP protocol must be published on topics that follow the format described in this document.
-A topic is divided into multiple segments which allow to distinguish between different types of messages, resources and services.
-The segments are separated by a forward slash `/` which allow for selective subscriptions in accordance with the MQTT protocol
+A topic is divided into multiple segments which allow distinguishing between different types of messages, resources, and services.
+The segments are separated by a forward slash `/` which allows for selective subscriptions in accordance with the MQTT protocol.
 
 ## Topic segments
 
@@ -22,7 +22,7 @@ Following is the list of all topic segments and their description:
 
 ## Resource types
 
-Each valid topic consists of various number of segments depending on the represented resource type. The following is the list of all resource types:
+Each valid topic consists of a various number of segments depending on the represented resource type. The following is the list of all resource types:
 
 | Resource Type | Name        | Segments | Description                                                                    |
 |---------------|-------------|----------|--------------------------------------------------------------------------------|
@@ -52,11 +52,10 @@ Each valid topic consists of various number of segments depending on the represe
 | `pt:j1/mt:cmd/rt:cloud/rn:backend-service/ad:metrics-collector` | Cloud       | Topic on which a backend service `metrics-collector` listens for a command.                                                   |
 | `pt:j1/mt:rsp/rt:cloud/rn:backend-service/ad:metrics-collector` | Cloud       | Topic on which a backend service `metrics-collector` listens for a response.                                                  |
 | `pt:j1/mt:rsp/rt:cloud/rn:remote-client/ad:smarthome-app`       | Cloud       | Topic on which a remote client `smarthome-app` listens for a response.                                                        |
-| `pt:j1/mt:evt/rt:discovery`                                     | Discovery   | Special topic on which all resources publish their service discovery reports.                                                 |
-| `pt:j1/mt:cmd/rt:discovery`                                     | Discovery   | Special topic on which all service discovery reports can be requested.                                                        |
-
+| `pt:j1/mt:evt/rt:discovery`                                     | Discovery   | Special topic on which all resources publish their system component discovery reports.                                        |
+| `pt:j1/mt:cmd/rt:discovery`                                     | Discovery   | Special topic on which all system component discovery reports can be requested.                                               |
 
 > Both resource name and address in the response type topics are arbitrary and can be set to any value.
-> It is recommended to use resource name of the application or component issuing a command.
+> It is recommended to use resource name of the application or system component issuing a command.
 > Wherever needed it is possible to use pseudo-random hashes as resource address to emulate synchronous request-response behavior like `pt:j1/mt:rsp/rt:app/rn:tpflow/ad:0d082607`.
-> For more details see [`resp_to`](/message-format.md#message-properties) message property in message format section.
+> For additional details see [`resp_to`](/message-format.md#message-properties) message property in message format section.
