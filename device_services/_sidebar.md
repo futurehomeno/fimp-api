@@ -1,5 +1,5 @@
 - [FIMP](/README.md)
-- [Services](/device_services/services.md)
+- [Services](/device_services/device_services.md)
   - Generic Services
     - [Basic](/device_services/generic/basic.md)
     - [Output binary switch](/device_services/generic/output_binary_switch.md)

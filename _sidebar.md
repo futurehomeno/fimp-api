@@ -4,7 +4,7 @@
 - [Hub](/hub/hub.md)
   - [Gateway Service](/hub/gateway_service.md)
   - [Component Discovery](/hub/component_discovery.md)
-- [Technology Adapter](/technology_adapter/technology_adapter.md)
+- [Adapter](/adapter/adapter.md)
   - [Technology Adapter Api](/technology-adapter-api.md)
   - [Thing Management](/thing-management.md)
   - [System Management](/system-management.md)
