@@ -18,5 +18,5 @@ An inverter device is normally composed of one or several inverter services.
 
 | Type | Interface                | Value type | Description                                                              |
 |------|--------------------------|------------|--------------------------------------------------------------------------|
-| out  | evt.meter_ext.report     | float_map  | Returns [extended meter report](/services/generic/meter.md#definitions). |
+| out  | evt.meter_ext.report     | float_map  | Returns [extended meter report](/device_services/generic/meter.md#definitions). |
 | in   | cmd.meter_ext.get_report | null       | Request the extended report.                                             |

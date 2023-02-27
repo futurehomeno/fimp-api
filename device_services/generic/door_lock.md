@@ -2,7 +2,7 @@
 
 Door lock service is used to control door locks. It is used to lock and unlock doors, as well as to get the current state of the lock.
 
-> Door lock device functionalities can be extended by [user code](/services/generic/user_code.md) and [schedule entry](/services/generic/schedule_entry.md) services.
+> Door lock device functionalities can be extended by [user code](/device_services/generic/user_code.md) and [schedule entry](/device_services/generic/schedule_entry.md) services.
 
 ## Service name
 

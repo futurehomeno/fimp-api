@@ -46,7 +46,7 @@ The most popular sensors measure temperature, air humidity, or light intensity.
 | `sensor_weight`      | kg, lbs                  | Weight sensor                   |
 | `sensor_wind`        | kph                      | Wind sensor                     |
 
-> Please note that `sensor_power` and `sensor_voltage` services are deprecated. A [`meter_elec`](/services/generic/meter.md) service should be used instead for reporting
+> Please note that `sensor_power` and `sensor_voltage` services are deprecated. A [`meter_elec`](/device_services/generic/meter.md) service should be used instead for reporting
 > electricity measurements.
 
 ## Interfaces

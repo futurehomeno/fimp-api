@@ -3,7 +3,7 @@
 The service represent devices like garage doors, barriers, window protection shades, and similar.
 
 > Please note that blinds and similar devices might also be supported in a limited way using more generic 
-> [`out_bin_switch`](/services/generic/output_binary_switch.md) and [`out_lvl_switch`](/services/generic/output_level_switch.md) services.
+> [`out_bin_switch`](/device_services/generic/output_binary_switch.md) and [`out_lvl_switch`](/device_services/generic/output_level_switch.md) services.
 
 ## Service name
 

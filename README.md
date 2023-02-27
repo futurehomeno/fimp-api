@@ -60,4 +60,4 @@ Example: add z-wave device, remove z-wave device, add zigbee device, remove zigb
 
 ## Services
 
-List of all supported services with their documentation can be found in this [document](/services/services.md).
+List of all supported services with their documentation can be found in this [document](/device_services/services.md).

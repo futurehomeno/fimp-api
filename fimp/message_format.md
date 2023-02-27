@@ -5,7 +5,7 @@ Messages sent over MQTT adhering to the FIMP protocol are JSON messages which me
 ## Example message
 
 The Following is an example of a FIMP message containing energy consumption report from an electricity meter. 
-More examples can be found in particular [services](services/services.md) specifications.
+More examples can be found in particular [services](/device_services/device_services.md) specifications.
 
 ```json
 {
@@ -95,7 +95,7 @@ Each interface consists of three segments separated by a dot in accordance with 
 | *attribute* | `lvl`        | Defines the **attribute** or a **domain** of the service. A service might have multiple attributes, while each attribute might have multiple interfaces. Must utilize `snake_case`. |
 | *action*    | `get_report` | Defines the **action** invoked by the command or reported **data** in the case of an event. Must utilize `snake_case`.                                                              |
 
-Typically, getter, setter and report interfaces are bundled by the common `attribute`. For example in case of [`out_lvl_switch`](/services/generic/output_level_switch.md) service:
+Typically, getter, setter and report interfaces are bundled by the common `attribute`. For example in case of [`out_lvl_switch`](/device_services/generic/output_level_switch.md) service:
 
 * `cmd.lvl.get_report` is used to perform *action* of getting the report of the current `lvl` *attribute* value.
 * `cmd.lvl.set` is used to perform *action* of setting the `lvl` *attribute* value.
