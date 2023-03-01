@@ -9,7 +9,7 @@ Sound Switch service allows to control the sound tones on the remote device.
 ## Interfaces
 
 | Type | Interface             | Value type | Description                                                                           |
-| ---- | --------------------- | ---------- | ------------------------------------------------------------------------------------- |
+|------|-----------------------|------------|---------------------------------------------------------------------------------------|
 | in   | cmd.config.get_report | null       | Requests the current configuration of the device.                                     |
 | in   | cmd.config.set        | int_map    | Configures default tone and volume, see [`config_map`](#definitions) for more info.   |
 | out  | evt.config.report     | int_map    | Reports default tone and volume, see [`config_map`](#definitions) for more info.      |
@@ -21,7 +21,7 @@ Sound Switch service allows to control the sound tones on the remote device.
 ## Service properties
 
 | Name                        | Type   | Description                                                                        |
-| --------------------------- | ------ | ---------------------------------------------------------------------------------- |
+|-----------------------------|--------|------------------------------------------------------------------------------------|
 | `sup_tones`                 | object | Array of objects, see definition of [`supported_tone`](#definitions).              |   
 | `supports_play_with_volume` | bool   | If true then the device will support setting volume in [`play_map`](#definitions). |
 
@@ -30,21 +30,21 @@ Sound Switch service allows to control the sound tones on the remote device.
 * `config_map` is an int_map of the following structure:
 
 | Field             | Example         | Description                                                                                                       |
-| ----------------- | --------------- | ----------------------------------------------------------------------------------------------------------------- |
+|-------------------|-----------------|-------------------------------------------------------------------------------------------------------------------|
 | `default_tone_id` | `1`, `5`, `25`  | Tone must be one of [`sup_tones`](#service-properties). It will be used in case an unsupported tone is requested. |
 | `volume`          | `0`, `35`, `70` | Volume should be a value between 0-100 where 0 mutes the device.                                                  |
 
 * `play_map` is an int_map of the following structure:
 
 | Field     | Example         | Description                                                                                                                                                          |
-| --------- | --------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|-----------|-----------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `tone_id` | `1`, `5`, `25`  | Optional, if missing default tone will be played. Tone must be one of [`sup_tones`](#service-properties).                                                            |
 | `volume`  | `0`, `35`, `70` | Optional, some devices do not support this. See [`supports_play_with_volume`](#service-properties). Volume should be a value between 0-100 where 0 mutes the device. |
 
 * `supported_tone` is an object of the following structure:
 
 | Field      | Type   | Example                     | Description                                    |
-| ---------- | ------ | --------------------------- | ---------------------------------------------- |
+|------------|--------|-----------------------------|------------------------------------------------|
 | `tone_id`  | int    | `1`, `5`, `25`              | Id of the tone. Must be a value between 1-254. |
 | `duration` | int    | `5`, `13`, `10`             | Duration of the sound described in seconds.    |
 | `name`     | string | `"06 Chimes"`, `"17 Alarm"` | Name of the tone.                              |
@@ -58,7 +58,10 @@ Sound Switch service allows to control the sound tones on the remote device.
   "serv": "sound_switch",
   "type": "evt.config.report",
   "val_t": "int_map",
-  "val": {"default_tone_id": 1, "volume":45},
+  "val": {
+    "default_tone_id": 1,
+    "volume": 45
+  },
   "props": {},
   "tags": [],
   "src": "-",
@@ -71,7 +74,7 @@ Sound Switch service allows to control the sound tones on the remote device.
 * Example of `sup_tones`:
 
 ```json
-"sup_tones": [
+[
   {
     "duration": 5,
     "name": "01 Ding Dong",

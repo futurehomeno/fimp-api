@@ -18,7 +18,12 @@ Following is the list of all topic segments and their description:
 | `sv`    | Service name     | `out_bin_switch` | Name of the device service.                                                                       |
 | `ad`    | Service address  | `1_1`            | An arbitrary string defining address of the device service.                                       |
 
-> While service address can be any arbitrary string, by Zigbee/Z-Wave convention service addresses contain node ID/UID, underscore and channel/endpoint.
+> While service address segment can be any arbitrary string it is recommended to follow convention of:
+> * `{THING_ADDRESS}_{GROUP_ID}` for things with multiple groups
+> * `{THING_ADDRESS}` for things with single group
+> 
+> For example in Z-Wave it is effectively `{NODE_ID}_{CHANNEL_ID}` while in Zigbee `{UID}_{ENDPOINT_ID}`.
+> Consult [inclusion_report](/adapter/thing_management.md#definitions) specification for more details.
 
 ## Resource types
 

@@ -23,12 +23,12 @@ Thermostat service is used to control the temperature in a room or a building an
 
 ## Service properties
 
-| Name            | Type      | Example                           | Description                                                                                                                                                        |
-|-------------------|-----------|--------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `sup_modes`       | str_array | `["off", "heat", "cool", "auto"]`          | List of supported modes, see the definition of [`mode`](#definitions) for well-defined examples.                                                                   |
-| `sup_setpoints`   | str_array | `["heat", "cool"]`                         | List of supported setpoints for which a value can be set. Usually a sub-set of `sup_modes`. See the definition of [`setpoint`](#definitions) for more information. |
-| `sup_temperatures`| object    | `{"heat": {"min": 10, "max": 30}}`         | List of supported temperature ranges of each setpoint, see [`range`] (#definitions) object definition. 
-| `sup_states`      | str_array | `["idle", "heat", "cool"]`                 | List of supported states, see the definition of [`state`](#definitions) for well-defined examples.                                                                 |
+| Name               | Type      | Example                            | Description                                                                                                                                                        |
+|--------------------|-----------|------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `sup_modes`        | str_array | `["off", "heat", "cool", "auto"]`  | List of supported modes, see the definition of [`mode`](#definitions) for well-defined examples.                                                                   |
+| `sup_setpoints`    | str_array | `["heat", "cool"]`                 | List of supported setpoints for which a value can be set. Usually a sub-set of `sup_modes`. See the definition of [`setpoint`](#definitions) for more information. |
+| `sup_temperatures` | object    | `{"heat": {"min": 10, "max": 30}}` | List of supported temperature ranges of each setpoint, see [`range`] (#definitions) object definition.                                                             |
+| `sup_states`       | str_array | `["idle", "heat", "cool"]`         | List of supported states, see the definition of [`state`](#definitions) for well-defined examples.                                                                 |
 
 > A device may define their own modes and setpoints outside the well-defined lists contained in the definitions section.
 > However, it is recommended to use the well-defined values whenever possible.

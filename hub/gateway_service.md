@@ -1,19 +1,21 @@
 # Gateway Service
 
-The service represents gateway or a hub and provides a way to interact with it on the highest level.
-A special topic must be used to issue commands to the gateway.
+The gateway service represents a hub as a whole and provides a way to interact with it on the highest level.
+A special topic `pt:j1/mt:cmd/rt:ad/rn:gateway/ad:1` must be used to issue commands to the gateway.
 
-## Topics
+## FIMP Specification
+
+### Topics
 
 `pt:j1/mt:cmd/rt:ad/rn:gateway/ad:1`
 
 `pt:j1/mt:evt/rt:ad/rn:gateway/ad:1`
 
-## Service name
+### Service name
 
 `gateway`
 
-## Interfaces
+### Interfaces
 
 | Type | Interface                 | Value type | Description                                       |
 |------|---------------------------|------------|---------------------------------------------------|
@@ -24,7 +26,7 @@ A special topic must be used to issue commands to the gateway.
 
 > All applications running on the hub are required to listen for the `evt.gateway.factory_reset` event and perform a factory reset of their own data.
 
-## Examples
+### Examples
 
 * Example of a factory reset command:
 

@@ -6,24 +6,26 @@ Whenever an application or adapter receives a discovery request it has to respon
 
 > **Important!** System component discovery protocol is experimental and can be modified in a backwards in-compatible way.
 
-## Topics
+## FIMP Specification
+
+### Topics
 
 `pt:j1/mt:cmd/rt:discovery`
 
 `pt:j1/mt:evt/rt:discovery`
 
-## Service name
+### Service name
 
 `system`
 
-## Interfaces
+### Interfaces
 
 | Type | Interface             | Value type | Description                                                                                          |
 |------|-----------------------|------------|------------------------------------------------------------------------------------------------------|
 | in   | cmd.discovery.request | null       | Requests a discovery report from all system components.                                              |
 | out  | evt.discovery.report  | object     | Reports component specification. See [`discovery_report`](#definitions) definition for more details. |
 
-## Definitions
+### Definitions
 
 * `discovery_report` is an object with the following structure:
 
@@ -77,7 +79,7 @@ Whenever an application or adapter receives a discovery request it has to respon
 | val_t   | string | `"object"`         | Value type, see [value types ](/fimp/message_format.md#value-types) for more information.                                             |
 | version | string | `"1"`              | Supported version of the protocol.                                                                                                    |
 
-## Examples
+### Examples
 
 * Example of a system component discovery request:
 
@@ -161,7 +163,7 @@ Whenever an application or adapter receives a discovery request it has to respon
     "instance_id": "1",
     "version": "3.0.36",
     "resource_full_name": "Vinculum",
-    "description": "Device database.",
+    "description": "Device database and abstraction layer.",
     "author": "dev@futurehome.no",
     "doc_url": "",
     "app_info": {

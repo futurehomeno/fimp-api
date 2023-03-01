@@ -33,7 +33,7 @@ This service relies on `time` and `time_parameters` services to be present in th
 | Field        | Example | Description                                                                                                      |
 |--------------|---------|------------------------------------------------------------------------------------------------------------------|
 | slot         | 1       | Number of the schedule slot of the user. Must be between 1 and value in [`slots`](#service-properties) property. |
-| user_id      | 1       | Number of the user slot as defined in the [`user_code`](/device_services/generic/user_code.md) service.                 |
+| user_id      | 1       | Number of the user slot as defined in the [`user_code`](/device_services/generic/user_code.md) service.          |
 | year_start   | 20      | Value from 0 to 99 that represents the year in the century. Value should be skipped if slot is empty.            |
 | month_start  | 1       | Value from 1 to 12 that represents the month in a year. Value should be skipped if slot is empty.                |
 | day_start    | 1       | Value from 1 to 31 that represents the date of the month. Value should be skipped if slot is empty.              |
@@ -49,10 +49,10 @@ This service relies on `time` and `time_parameters` services to be present in th
 
 * `schdule_slot` is an int map with the following structure:
 
-| Field        | Example | Description                                                                                                      |
-|--------------|---------|------------------------------------------------------------------------------------------------------------------|
-| slot         | 1       | Number of the schedule slot of the user. Must be between 1 and value in [`slots`](#service-properties) property. |
-| user_id      | 1       | Number of the user slot as defined in the [`user_code`](/device_services/generic/user_code.md) service.                 |
+| Field   | Example | Description                                                                                                      |
+|---------|---------|------------------------------------------------------------------------------------------------------------------|
+| slot    | 1       | Number of the schedule slot of the user. Must be between 1 and value in [`slots`](#service-properties) property. |
+| user_id | 1       | Number of the user slot as defined in the [`user_code`](/device_services/generic/user_code.md) service.          |
 
 ## Examples
 
