@@ -81,7 +81,7 @@ Every adapter should define its own service name.
 | in   | cmd.thing.exclusion               | bool       |                                                   | For `true` starts and for `false` stops a thing exclusion process.                                                          | 
 | out  | evt.thing.exclusion_status_report | string     |                                                   | Returns stage of the ongoing exclusion process,  see [`exclusion_status`](#definitions).                                    |
 | out  | evt.thing.exclusion_report        | object     |                                                   | Reports thing exclusion, see [`thing_identifier`](#definitions).                                                            |
-| in   | cmd.thing.delete                  | object     |                                                   | Requests thing deletion if device is offline or exclusion process is not supported, see [`thing_identifier`](#definitions). |
+| in   | cmd.thing.delete                  | str_map    |                                                   | Requests thing deletion if device is offline or exclusion process is not supported, see [`thing_identifier`](#definitions). |
 
 ### Interface properties
 
@@ -396,7 +396,7 @@ Every adapter should define its own service name.
 {
   "serv": "zigbee",
   "type": "cmd.thing.delete",
-  "val_t": "object",
+  "val_t": "str_map",
   "val": {
     "address": "21"
   },
