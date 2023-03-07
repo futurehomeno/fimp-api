@@ -34,15 +34,20 @@ Network exclusion flow is used by wireless network adapters to exclude devices f
 
 * Client sends `cmd.thing.exclusion` command to the adapter to start exclusion process and switch adapter into unpairing mode.
 * User interacts with a physical device to switch it into unpairing mode, e.g. clicks a button on a device three times in a quick sequence.
+  That process should be described in a device manual.
 * At any time the adapter can generate `evt.thing.exclusion_status_report` event to report the current status of the exclusion process.
 * Once exclusion is finished adapter generates `evt.thing.exclusion_report` event with the excluded thing address.
 
+> Zigbee adapter does not support classic network exclusion and only allows simple forced exclusion flow.
+
 ### Forced Exclusion
 
-If a device is offline and unreachable or the adapter does not support the network exclusion flow, the device can be force deleted from the system using this flow.
+If a device is offline and unreachable or the adapter does not support the classic network exclusion flow, the device can be force deleted from the system using this flow.
 
 * Client sends `cmd.thing.delete` command to the adapter to force delete a thing.
 * Adapter removes the thing from the network and generates `evt.thing.exclusion_report` event with the excluded thing address.
+
+> Z-Wave adapter will allow forced exclusion only for offline devices it has lost connection with.
 
 ### Requesting Inclusion Report
 
