@@ -4,12 +4,13 @@ The following document describes the interaction flows and FIMP specification us
 
 ## Flows
 
-### Network Inclusion
+### Classic Network Inclusion
 
 Network inclusion flow is used by wireless network adapters, such as Z-Wave and Zigbee, to include new devices into the network and add them to the system.
 
 * Client sends `cmd.thing.inclusion` command to the adapter with `true` value to start inclusion process and switch adapter into pairing mode.
 * User interacts with a physical device to switch it into pairing mode, e.g. clicks a button on a device three times in a quick sequence.
+  That process should be described in a device manual.
 * At any time the adapter can generate `evt.thing.inclusion_status_report` event to report the current status of the inclusion process.
 * If pairing of the device requires PIN and client support PIN request, the adapter generates `evt.thing.pin_needed` report.
     * Client sends `cmd.thing.pin` command with the PIN to the adapter.
@@ -27,7 +28,7 @@ Adapters utilizing custom protocol communication through local network or third-
 Preliminary steps of such flows will often include authentication with a third-party system, specific configuration, and selecting devices to be connected to the system.
 At the end of this process the adapter is always required to generate `evt.thing.inclusion_report` event with the thing specification.
 
-### Network Exclusion
+### Classic Network Exclusion
 
 Network exclusion flow is used by wireless network adapters to exclude devices from the network and remove them from the system.
 
