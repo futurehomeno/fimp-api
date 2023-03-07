@@ -22,7 +22,7 @@ Following is the list of all topic segments and their description:
 > * `{THING_ADDRESS}_{GROUP_ID}` for things with multiple groups
 > * `{THING_ADDRESS}` for things with single group
 > 
-> For example in Z-Wave it is effectively `{NODE_ID}_{CHANNEL_ID}` while in Zigbee `{UID}_{ENDPOINT_ID}`.
+> For example in Z-Wave it is effectively `{NODE_ID}_{CHANNEL_ID}` while in Zigbee `{UDID}_{ENDPOINT_ID}`.
 > Consult [inclusion_report](/adapter/thing_management.md#definitions) specification for more details.
 
 ## Resource types

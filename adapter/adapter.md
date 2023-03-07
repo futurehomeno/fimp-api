@@ -8,7 +8,8 @@ Their main role is to be an adapter between FIMP and a specific technology proto
 * relaying commands to the things,
 * relaying events from the things.
 
-Adapters might use various communication technologies, such as Z-Wave and Zigbee wireless connection, direct connection through the local network or indirect through a third-party cloud provider.
+Adapters might use various communication technologies, such as Z-Wave and Zigbee wireless networks, direct connection through the local network or indirect through a third-party 
+cloud provider.
 
 ## Adapter Service
 
