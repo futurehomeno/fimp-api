@@ -15,17 +15,17 @@ An electricity meter service can represent a stand-alone AMS meter, like a HAN s
 
 ## Interfaces
 
-| Type | Interface                | Value type | Properties                                            | Storage | Description                                                                                                                                                                 |
-|------|--------------------------|------------|-------------------------------------------------------|---------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| in   | cmd.meter.get_report     | string     |                                                       |         | Value is an import/consumption `unit` defined in [`sup_units`](#service-properties) property. May not be supported by all meters. Empty value requests all supported units. |
-| out  | evt.meter.report         | float      | `unit`, `prv_data`, `delta_t`, `direction`, `virtual` | `unit`  | Returns an import/consumption meter report for `unit` specified in properties.                                                                                              |
-| in   | cmd.meter.reset          | null       |                                                       |         | Resets all historical readings.                                                                                                                                             |
-| -    |                          |            |                                                       |         |                                                                                                                                                                             |
-| in   | cmd.meter_exp.get_report | string     |                                                       |         | Value is a export/production `unit` defined in [`sup_export_units`](#service-properties) property.                                                                          |
-| out  | evt.meter_exp.report     | float      | `unit`, `prv_data`, `delta_t`, `direction`            | `unit`  | Returns a export/production meter report for `unit` specified in properties.                                                                                                |
-| -    |                          |            |                                                       |         |                                                                                                                                                                             |
-| in   | cmd.meter_ext.get_report | null       |                                                       |         | Requests an extended electricity report.                                                                                                                                    |
-| out  | evt.meter_ext.report     | float_map  |                                                       |         | Returns an extended electricity report. See [`extended_report`](#definitions) definition for more information.                                                              |
+| Type | Interface                   | Value type | Properties                                            | Storage | Description                                                                                                                                                                 |
+|------|-----------------------------|------------|-------------------------------------------------------|---------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| in   | cmd.meter.get_report        | string     |                                                       |         | Value is an import/consumption `unit` defined in [`sup_units`](#service-properties) property. May not be supported by all meters. Empty value requests all supported units. |
+| out  | evt.meter.report            | float      | `unit`, `prv_data`, `delta_t`, `direction`, `virtual` | `unit`  | Returns an import/consumption meter report for `unit` specified in properties.                                                                                              |
+| in   | cmd.meter.reset             | null       |                                                       |         | Resets all historical readings.                                                                                                                                             |
+| -    |                             |            |                                                       |         |                                                                                                                                                                             |
+| in   | cmd.meter_export.get_report | string     |                                                       |         | Value is a export/production `unit` defined in <br/>[`sup_export_units`](#service-properties) property.                                                                     |
+| out  | evt.meter_export.report     | float      | `unit`, `prv_data`, `delta_t`, `direction`            | `unit`  | Returns a export/production meter report for `unit` specified in properties.                                                                                                |
+| -    |                             |            |                                                       |         |                                                                                                                                                                             |
+| in   | cmd.meter_ext.get_report    | null       |                                                       |         | Requests an extended electricity report.                                                                                                                                    |
+| out  | evt.meter_ext.report        | float_map  |                                                       |         | Returns an extended electricity report. See [`extended_report`](#definitions) definition for more information.                                                              |
 
 > For backward compatibility the service reports imported/consumed values using `evt.meter.report` interface and exported/produced values using `evt.meter.export_report`.
 
@@ -123,7 +123,7 @@ An electricity meter service can represent a stand-alone AMS meter, like a HAN s
 ```json
 {
   "serv": "meter_elec",
-  "type": "evt.meter_exp.report",
+  "type": "evt.meter_export.report",
   "val_t": "float",
   "val": 0,
   "storage": {
