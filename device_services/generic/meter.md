@@ -36,7 +36,7 @@ An electricity meter service can represent a stand-alone AMS meter, like a HAN s
 | `unit`      | `"kWh"`    | Yes      | One of the units defined in `sup_units` property. See list of [well-defined units](#service-names) for each service. |
 | `delta_t`   | `"60"`     | No       | Elapsed time in seconds between the current reading and the previous one if the device supports this feature.        |
 | `prv_data`  | `"123.5"`  | No       | Contains the previous meter reading for the same unit if the device supports this feature.                           |
-| `direction` | `"export"` | No       | Either `import` for `evt.meter.report` or `export` for `evt.meter.export_report`.                                    |
+| `direction` | `"export"` | No       | Either `import` for `evt.meter.report` or `export` for `evt.meter_export.report`.                                    |
 | `virtual`   | `"true"`   | No       | Field is present and equals `true` if the measurement was calculated by a virtual service.                           |
 
 ## Service properties
