@@ -17,12 +17,13 @@ A special topic `pt:j1/mt:cmd/rt:ad/rn:gateway/ad:1` must be used to issue comma
 
 ### Interfaces
 
-| Type | Interface                 | Value type | Description                                       |
-|------|---------------------------|------------|---------------------------------------------------|
-| in   | cmd.gateway.reboot        | null       | Reboots the gateway.                              |
-| in   | cmd.gateway.shutdown      | null       | Powers down the gateway.                          |
-| in   | cmd.gateway.factory_reset | null       | Instructs the gateway to perform a factory reset. |
-| out  | evt.gateway.factory_reset | null       | Reports that the factory reset started.           |
+| Type | Interface                 | Value type | Description                                                                                      |
+|------|---------------------------|------------|--------------------------------------------------------------------------------------------------|
+| in   | cmd.gateway.identify      | null       | Identifies the hub visually, a light will turn on for 600ms then turn off for 200ms three times. |
+| in   | cmd.gateway.reboot        | null       | Reboots the gateway.                                                                             |
+| in   | cmd.gateway.shutdown      | null       | Powers down the gateway.                                                                         |
+| in   | cmd.gateway.factory_reset | null       | Instructs the gateway to perform a factory reset.                                                |
+| out  | evt.gateway.factory_reset | null       | Reports that the factory reset started.                                                          |
 
 > All applications running on the hub are required to listen for the `evt.gateway.factory_reset` event and perform a factory reset of their own data.
 
