@@ -1,5 +1,6 @@
 # FIMP - Futurehome IoT Messaging Protocol 
-### [(HTML version)](https://futurehomeno.github.io/fimp-api/#/)
+
+## [(HTML version)](https://futurehomeno.github.io/fimp-api/#/)
 
 * [Service overview](#service-overview)
 * [Component discovery mechanism](#component-discovery-mechanism)
@@ -60,4 +61,4 @@ Example: add z-wave device, remove z-wave device, add zigbee device, remove zigb
 
 ## Services
 
-List of all supported services with their documentation can be found in this [document](/services/services.md).
+List of all supported services with their documentation can be found in this [document](/device_services/services.md).
