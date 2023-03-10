@@ -186,11 +186,35 @@ This service is used to handle specific protocol capabilities that were not cove
     "domain": "zwave",
     "type": "11",
     "unit": "10",
-    "rate_type": "import",
     "value": 20
   },
   "storage": {
-      "sub_value": "11:10:import"
+      "sub_value": "11:10"
+  },
+  "props": {},
+  "tags": [],
+  "src": "-",
+  "ver": "1",
+  "uid": "eb99fe48-3276-4a21-acd4-a6cbfb3a800d",
+  "topic": "pt:j1/mt:cmd/rt:dev/rn:zw/ad:1/sv:technology_specific/ad:17_0"
+}
+```
+
+* Export meter report with unknown meter type and unit:
+
+```json
+{
+  "serv": "technology_specific",
+  "type": "evt.meter_export.report",
+  "val_t": "object",
+  "val": {
+    "domain": "zwave",
+    "type": "11",
+    "unit": "10",
+    "value": 20
+  },
+  "storage": {
+      "sub_value": "11:10"
   },
   "props": {},
   "tags": [],
