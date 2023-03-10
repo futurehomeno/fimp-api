@@ -1,8 +1,8 @@
 # Thing Management
 
-The following document describes the interaction flows and FIMP specification used in management of things.
+The following document describes the interaction flows and FIMP specification used in management of things, specifically how to add and remove them from the system.
 
-## Flows
+## Behaviors and Flows
 
 ### Classic Network Inclusion
 
@@ -24,7 +24,7 @@ See [Smart Start](/adapter/zwave_smart_start.md) documentation for more details.
 
 ### Custom Inclusion
 
-Adapters utilizing custom protocol communication through local network or third-party cloud will have their own specific inclusion flow specified it in their own documentation.
+Adapters utilizing custom protocol communication through local network or third-party cloud will have their own specific inclusion flow specified in their own documentation.
 Preliminary steps of such flows will often include authentication with a third-party system, specific configuration, and selecting devices to be connected to the system.
 At the end of this process the adapter is always required to generate `evt.thing.inclusion_report` event with the thing specification.
 
@@ -119,7 +119,7 @@ Every adapter should define its own service name.
 | sw_ver              | string      | `"257"`                        | Optional software version of the thing.                                                                                                                                                  |
 | comm_tech           | string      | `"zw"`                         | Technology used by the adapter to communicate with the device, one of `zw`, `zigbee`, `local_network`, `cloud` values.                                                                   |
 | power_source        | string      | `"ac"`                         | Power source of the device. Possible values: "dc", "ac", "battery".                                                                                                                      |
-| wakeup_interval     | int         | `3600`                         | Wakeup interval for battery powered devices in seconds.                                                                                                                                  |
+| wakeup_interval     | string      | `"3600"`                       | Wakeup interval for battery powered devices in seconds, value `-1` indicates that it is not applicable.                                                                                  |
 | security            | string      | `"insecure"`                   | Level of communication security, either `insecure` or `secure`.                                                                                                                          |
 | tech_specific_props | str_map     | `{"zw_lib_type": "3"}`         | Optional custom properties of the thing specific to the technology adapter.                                                                                                              |
 | prop_set            | any_map_map | `{"set_a":{"prop_1":"val_1"}}` | Optional map of custom property sets of services specific to the technology adapter. These sets can be referenced from [`service_definition`](#definitions).                             |
@@ -255,7 +255,7 @@ Every adapter should define its own service name.
     "sw_ver": "257",
     "comm_tech": "zw",
     "power_source": "ac",
-    "wakeup_interval": -1,
+    "wakeup_interval": "-1",
     "security": "insecure",
     "services": [
       {
@@ -390,7 +390,7 @@ Every adapter should define its own service name.
 }
 ```
 
-* Example of an event confirming successful exclusion process:
+* Example of a command to force delete a thing with address 21:
 
 ```json
 {
