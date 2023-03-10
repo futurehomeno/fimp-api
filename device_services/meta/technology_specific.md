@@ -13,6 +13,7 @@ This service is used to handle specific protocol capabilities that were not cove
 | out  | evt.notification.report | object     | `category:subject` | Reports notifications that are sent by the device. See [`notification_report`](#definitions) for details.                      |
 | out  | evt.sensor.report       | object     | `type:unit`        | Reports multilevel sensor readings including unknown sensor and unknown unit. See [`sensor_report`](#definitions) for details. |
 | out  | evt.meter.report        | object     | `type:unit`        | Reports meter readings with unknown meter type or/and unit. See [`meter_report`](#definitions) for details.                    |
+| out  | evt.meter_export.report | object     | `type:unit`        | Reports export meter readings with unknown meter type or/and unit. See [`meter_report`](#definitions) for details.                    |
 | in   | cmd.meter.reset         | null       |                    | Resets all historical readings for all meters of this device.                                                                  |
 
 ## Definitions
@@ -43,7 +44,6 @@ This service is used to handle specific protocol capabilities that were not cove
 | domain    | string | `"zwave"`  | Domain for the notification. |
 | type      | string | `"11"`     | Type of the sensor.          |
 | unit      | string | `"10"`     | Unit of the reported value.  |
-| rate_type | string | `"import"` | Either `import` or `export`. |
 | value     | float  | `20.5`     | Reported value.              |
 
 ## Examples
