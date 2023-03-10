@@ -2,147 +2,122 @@
 
 SmartStart inclusion is a process of adding a device with a pre-configuration step using a DSK printed on the back of the device. With this functionality, you simply set up your device and power it on. The device is then automatically recognized and added to the network because it already comes with a configuration set by default.
 
-There are two ways of adding a device to the NPL:
-
-1. Scanning the DSK using a mobile phone camera (QR).
-2. Manually entering the DSK into the Node Provisioning List.
-
 ### What is the Node Provisioning List?
 
 NPL is a list which contains all the DSKs for devices that will be added using SmartStart (if those are SmartStart capable) or by classic inclusion with Security S2 without the additional classic inclusion security bootstrapping key exchange step. It is a Z-Wave abstraction which is used mostly for SmartStart functionality but also for simplifying inclusion of S2 capable nodes. It comes with the possibility to add, edit or remove its entries.
 
-### Additional documentation for SmartStart and NPL
+### Flows
 
-All documents are located in z-wave/smartstart directory.
+* Inclusion
+  * Client sends a `cmd.npl.qr` with a valid QR code value or `cmd.npl.entry_upsert`. These add an npl entry to the list.
+  * When the device is turned on the pairing process will start automatically.
 
-1. Node Provisioning Information Type Registry: Most of properties used in FIMP model are taken from this document. Example: 3.1.2.8 SmartStart Inclusion Setting Information Type is basically translated to "inclusion_setting" in FIMP protocol.
-2. Node Provisioning QR Code Format: Document for any kind of front end application which would want to implement QR Code scanning capability.
-3. Z-Wave Network Protocol Command Class Specification: Adnotation 4.5.12.5 shows diagrams for use cases of SmartStart and NPL.
+* Removing from list
+  * Client sends `cmd.npl.entry_delete` with the DSK of the entry which is to be deleted.  
 
-### NPL Data Model
+## FIMP Specification
 
-All of the properties are optional with three exceptions: 'inclusion_setting', 'bootstraping_mode' and 'network_status'.
+### Topics
 
-#### `inclusion_setting`
+Every adapter should have unique resource name and use the following topics in accordance with [topic format](/fimp/topic_format.md):
 
-Can be one of the following:
+`pt:j1/mt:cmd/rt:ad/rn:{RESOURCE_NAME}/ad:1`
 
-- `pending`: Device will be added to network right after powering it up.
-- `passive`: Controller has decided to not perform inclusion right after powering up a device. When get for all entries is executed this state is changed automatically to 'pending'.
-- `ignored`: Controller has decided to not perform inclusion right after powering up a device. This state can be changed only manually.
+`pt:j1/mt:evt/rt:ad/rn:{RESOURCE_NAME}/ad:1`
 
-#### `bootstrapping_mode`
+### Service name
 
-Can be one of the following:
+Every adapter should define its own service name.
 
-- `s2_only`: Device must manually be set to Learn Mode and follow S2 bootstraping instructions.
-- `smart_start`: Device will be included and S2 bootstrapped automatically using Z-Wave Smart Start.
-- `smart_start_lr`: Device will be included and S2 bootstrapped automatically using Z-Wave Long Range Smart Start.
+### Interfaces
 
-#### `network_status`
+| Type | Interface                  | Value type | Description                                                                            |
+|------|----------------------------|------------|----------------------------------------------------------------------------------------|
+| in   | cmd.npl.qr                 | string     | Add an NPL entry from a qr code.                                                       |
+| in   | cmd.npl.entry_upsert       | object     | Insert or update a NPL entry. See [`NPL_entry`](#definitions) for more information.    |
+| in   | cmd.npl.entry_delete       | string     | Remove a device with the specific [`DSK`](#definitions) from the NPL list.             |
+| in   | cmd.npl.all_entries_remove | null       | Remove all entries from the NPL list.                                                  |
+| in   | cmd.npl.entry_get          | string     | Request a report of a NPL entry with the specific [`DSK`](#definitions).               |
+| in   | cmd.npl.all_entries_get    | null       | Request a report of all NPL entries.                                                   |
+| out  | evt.npl.entry_report       | object     | Report of a specific NPL entry. See [`NPL_entry`](#definitions) for more information.  |                              
+| out  | evt.npl.list               | object     | Report of all NPL list entries. Value is an array of [`NPL_entry`](#definitions).      |
 
-Object containing nodeId and status.
+### Definitions
 
-> `status` can be:
-- `not_in_network`: A device is not currently included in the network.
-- `added`: A device is included in the network and is functional.
-- `failed`: A device is included in the network but is now marked as failing (e.g. communication fails or it has not woken up for longer than expected)
-> `nodeId`: Unique identifier assigned to a device by a Smarthub.
+* `DSK` - Device Specific Key, unique for each device. Example value: `"67656-08786-98576-65768-67656-08786-98576-65768"`.
 
-#### `generic_device_class`
+* `inclusion_setting` can be one of the following:
+  * `"pending"` - Device will be added to network right after powering it up.
+  * `"passive"` - Controller has decided to not perform inclusion right after powering up a device. When get for all entries is executed this state is changed automatically to 'pending'.
+  * `"ignored"` - Controller has decided to not perform inclusion right after powering up a device. This state can be changed only manually.
 
-Z-Wave generic device class (represented by a number).
+* `bootstrapping_mode` can be one of the following:
+  * `"s2_only"` - Device must manually be set to Learn Mode and follow S2 bootstraping instructions.
+  * `"smart_start"` - Device will be included and S2 bootstrapped automatically using Z-Wave Smart Start.
+  * `"smart_start_lr"` - Device will be included and S2 bootstrapped automatically using Z-Wave Long Range Smart Start.
 
-#### `specific_device_class`
-
-Z-Wave specific device class. Pair of generic_device_class and specific_device_class represents specific device type.
-
-#### `installer_icon_type`
-
-Z-Wave specification has a list of icons with integer values corresponding with each of them.
-
-#### `manufacturer_id`
-
-Unique integer value given for every manufacturer who sells Z-Wave devices.
-
-#### `product_type`
-
-Manufacturer - defined integer value which should represent a group of devices within a single manufacturer.
-
-#### `product_id`
-
-Manufacturer - defined integer value which right along with manufacturer_id and product_type creates a unique set of number representing one single Z-Wave device model.
-
-#### `application_version`
-
-Version of application installed on Z-Wave device.
-
-#### `application_subversion`
-
-Subversion of application installed on Z-Wave device.
-
-#### `inclusion_request_interval`
-
-Interval defined by seconds for sending inclusion requests from slave device to Z-Wave controller. Default is set to 512 seconds.
-
-#### `uuid_representation`
-
-Described in Node Provisioning Information Type Registry 3.1.2.4.
-
-#### `uuid`
-
-Described in Node Provisioning Information Type Registry 3.1.2.4.
-
-#### `supported_protocols`
-
-Can be one of the following:
-
-- 0: Z-Wave is supported
-- 1: Z-Wave Long Range is supported
-
-#### `name`
-
-The name of the device being upserted in the NPL.
-The Name:
-- must be UTF-8 encoded
-- must not contain any appended termination characters
-- may contain the dot
-- must not contain the underscore character “_”.
-- Each name sub-string (separated by the dot character “.”) must not end with the dash character “-”.
-
-Device name is case sensitive.
-The combined Name and Location strings must not be longer than 62 characters.
+* `joining_info_type` describes security level, possible values: `"s0"`, `"s2_unauth"`, `"s2_auth"`, `"s2_ac"`.
 
 
-#### `location`
+* `NPL_entry` is an object with the following structure:
 
-Location assigned to a device.
-The Location:
-- must be UTF-8 encoded
-- must not contain any appended termination characters
-- may contain the dot
-- must not contain the underscore character “_”.
-- Each location sub-string (separated by the dot character “.”) must not end with the dash character “-”.
+| Field    | Type   | Description                                                                 |
+|----------|--------|-----------------------------------------------------------------------------|
+| dsk      | string | See [`DSK`](#definitions) for more information.                             |
+| metadata | object | Device's information. See [`metadata`](#definitions) for object definition. |
 
-Device location is case sensitive.
-The combined Name and Location strings must not be longer than 62 characters.
+* `metadata` is an object with the following structure:
 
-#### `joining_info_type`
+| Field                      | Type      | Description                                                                                                                           |
+|----------------------------|-----------|---------------------------------------------------------------------------------------------------------------------------------------|
+| product_type_info          | object    | Device class information. See [`product_type_info`](#definitions).                                                                    |
+| product_id_info            | object    | Product id information. See [`product_id_info`](#definitions).                                                                        |
+| inclusion_request_interval | int       | Interval defined in seconds for sending inclusion requests from slave device to the Z-Wave controller. Default is set to 512 seconds. |
+| uuid16_info                | object    | UUID16 assigned to the device. See [`uuid16_info`](#definitions).                                                                     |
+| supported_protocols        | int       | Defines supported Z-Wave protocol. 0 - default Z-Wave, 1 - Z-Wave Long Range.                                                         |
+| name                       | string    | Name of the device.(#definitions).                                                                                                    |
+| location                   | string    | Location assigned to the device.(#definitions).                                                                                       |                
+| inclusion_setting          | string    | See [`inclusion_setting`](#definitions) for more information.                                                                         |
+| joining_info_type          | str_array | Array of [`joining_info_type`](#definitions).                                                                                         |
+| bootstrapping_mode         | string    | See [`bootstrapping_mode`](#definitions) for more information.                                                                        |     
 
-Array of strings which represents joining mode.
-Possible values: ["s0", "s2_unauth", "s2_auth", "s2_ac"]
+> `name` and `location` rules:
+>  - must be UTF-8 encoded
+>  - must not contain any appended termination characters
+>  - may contain the dot
+>  - must not contain the underscore character “_”.
+>  - each name sub-string (separated by the dot character “.”) must not end with the dash character “-”.
+>
+> Both are case sensitive. The combined Name and Location strings must not be longer than 62 characters.
 
-### NPL Report Data Model
+* `product_type_info` is an object with the following structure:
 
-#### `dsk`
+| Field                 | Type | Example | Description                            |
+|-----------------------|----- |---------|----------------------------------------|
+| generic_device_class  | int  | `7`     | Generic device class.                  |
+| specific_device_class | int  | `2`     | Specific device class.                 |
+| installer_icon_type   | int  | `1567`  | Icon of the device from specification. |
 
-The DSK of the device that has been acted upon.
+* `product_id_info` is an object with the following structure:
 
-### Adding a Z-Wave device to NPL with QR Code
+| Field                  | Type | Example | Description                                                  |
+|------------------------|----- |------------------------------------------------------------------------|
+| manufacturer_id        | int  | `271`   | Unique value given for every Z-Wave devices manufacturer.    |
+| product_type           | int  | `1463`  | Represents a group of devices within a single manufacturer.  |
+| product_id             | int  | `3562`  | Represents a specific device within specific `product_type`. |
+| application_version    | int  | `1`     | Version of application installed on Z-Wave device.           |
+| application_subversion | int  | `2`     | Subversion of application installed on Z-Wave device.        |
 
-Topic: `pt:j1/mt:cmd/rt:ad/rn:zw/ad:1`
+* `uuid16_info` is an object with the following structure:
 
-Message (command):
+| Field               | Type   | Example | Description                  |
+|---------------------|--------|---------|------------------------------|
+| uuid_representation | int    | `271`   | Format of the UUID16.        |
+| uuid                | string | `1463`  | UUID assigned to the device. |
+
+### Examples
+
+* Example of adding a Z-Wave device to NPL with QR Code:
 
 ```json
 {
@@ -157,11 +132,7 @@ Message (command):
 }
 ```
 
-### Adding or editing a Z-Wave device to NPL manually
-
-Topic: `pt:j1/mt:cmd/rt:ad/rn:zw/ad:1`
-
-Message (command):
+* Example of adding or editing device to NPL manually:
 
 ```json
 {
@@ -208,11 +179,7 @@ Message (command):
 }
 ```
 
-### Removing a Z-Wave device from NPL
-
-Topic: `pt:j1/mt:cmd/rt:ad/rn:zw/ad:1`
-
-Message (command):
+* Example of removing a device from NPL:
 
 ```json
 {
@@ -227,11 +194,7 @@ Message (command):
 }
 ```
 
-### Remove all NPL entries.
-
-Topic: `pt:j1/mt:cmd/rt:ad/rn:zw/ad:1`
-
-Message (command):
+* Example of removing all NPL entries:
 
 ```json
 {
@@ -246,11 +209,7 @@ Message (command):
 }
 ```
 
-### Get NPL entry report for given DSK.
-
-Topic: `pt:j1/mt:cmd/rt:ad/rn:zw/ad:1`
-
-Message (command):
+* Example of getting a NPL entry report for given DSK:
 
 ```json
 {
@@ -265,11 +224,7 @@ Message (command):
 }
 ```
 
-### Get NPL all entries report.
-
-Topic: `pt:j1/mt:cmd/rt:ad/rn:zw/ad:1`
-
-Message (command):
+* Example of getting all NPL entries report:
 
 ```json
 {
@@ -284,11 +239,7 @@ Message (command):
 }
 ```
 
-### Report for NPL Entry
-
-Topic: `pt:j1/mt:cmd/rt:ad/rn:zw/ad:1`
-
-Message (command):
+* Example of report for a NPL Entry:
 
 ```json
 {
@@ -339,17 +290,13 @@ Message (command):
 }
 ```
 
-### Report after getting all entries for a NPL
-
-Topic: `pt:j1/mt:cmd/rt:ad/rn:zw/ad:1`
-
-Message (command):
+* Example of report for all NPL entries:
 
 ```json
 {
     "serv": "zwave-ad",
     "type": "evt.npl.list",
-    "val_t": "str_array",
+    "val_t": "object",
     "val": [
         {
             "dsk": "67656-08786-98576-65768-67656-08786-98576-65768",
