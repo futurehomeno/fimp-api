@@ -36,22 +36,21 @@ Breaking down the example `pt:j1/mt:evt/rt:dev/rn:zw/ad:1/sv:out_bin_switch/ad:1
 
 Lastly, not that each interface within a service share the same address and that a service can never have more than one interface of the same type.
 
-[FIMP message format](message-format.md)
+[FIMP message format](/fimp/message_format.md)
 
-[Topic examples](topics.md)
+[Topic examples](/fimp/topic_format.md)
 
 ## Component discovery mechanism
 
 The mechanism allows dynamically discover different system component like adapters and application.
 
-[Component discovery flow and messages](component-discovery.md)
+[Component discovery flow and messages](/hub/component_discovery.md)
 
 ## Adding / removing things to FH system
 
 Things can be added to FH ecosystem in 2 ways:
 
-1. [Adding/removing a thing to FH system via adapter](thing-management.md)
-2. [Connecting/disconnecting a system to FH system](system-management.md)
+1. [Adding/removing a thing to FH system via adapter](/adapter/thing_management.md)
 
 First method should be used to add a thing which isn't paired with underlying RF module, for instance: Z-Wave, Zigbee, Bluetooth
 
@@ -61,4 +60,4 @@ Example: add z-wave device, remove z-wave device, add zigbee device, remove zigb
 
 ## Services
 
-List of all supported services with their documentation can be found in this [document](/device_services/services.md).
+List of all supported services with their documentation can be found in this [document](/device_services/device_services.md).
