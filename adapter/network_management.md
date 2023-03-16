@@ -40,36 +40,36 @@ Every adapter should define its own service name.
 | in   | cmd.network.get_all_nodes    | null       | Requests state of all things.                                                                                     |                         
 | out  | evt.network.all_nodes_report | object     | Reports state of all things, an array of [`node_report`](#definitions) objects.                                   |
 | in   | cmd.network.update           | string     | Requests update of the network topology, see [`network_update_mode`](#definitions) definition for allowed values. | 
-| in   | cmd.network.node_update      | int        | Requests an interview and discovery of its capabilities for the provided address of a thing.                      |
+| in   | cmd.network.node_update      | string¹    | Requests an interview and discovery of its capabilities for the provided address of a thing.                      |
 | in   | cmd.network.reset            | null       | Requests forceful removal of all things and resets the network.                                                   |
 | out  | evt.network.reset_done       | null       | Reports that network reset has been completed.                                                                    |
+
+> ¹ For backwards compatibility Zigbee and Z-Wave adapters must also accept integer value. 
 
 ### Definitions
 
 * `node_report` is an object with the following structure:
 
-| Field           | Type   | Example                  | Description                                                                                                                         |
-|-----------------|--------|--------------------------|-------------------------------------------------------------------------------------------------------------------------------------|
-| address         | string | `"4"`                    | Unique address of a thing, equal to `address` field in [inclusion_report](/adapter/thing_management.md#definitions) for this thing. |
-| hash            | string | `"zw_398_3_12"`          | Equal to `product_hash` field in [inclusion_report](/adapter/thing_management.md#definitions) for this thing.                       |
-| alias           | string | `"Fibaro Double Switch"` | Equal to `product_name` field in [inclusion_report](/adapter/thing_management.md#definitions) for this thing.                       |
-| power_source    | string | `"ac"`                   | Equal to `power_source` field in [inclusion_report](/adapter/thing_management.md#definitions) for this thing.                       |
-| wakeup_interval | string | `"3600"`                 | Equal to `wakeup_interval` field in [inclusion_report](/adapter/thing_management.md#definitions) for this thing.                    |
-| comm_tech       | string | `"zw"`                   | Equal to `comm_tech` field in [inclusion_report](/adapter/thing_management.md#definitions) for this thing.                          |
-| status          | string | `"UP"`                   | Status of a thing, either `UP` or `DOWN`, see [`node_status_matrix`](#definitions).                                                 |
-| sub_status      | string | `"online"`               | Sub status of a thing, one of `online`, `sleeping`, `updating`, `configuring`, `offline`, see [`node_status_matrix`](#definitions). |
-| conn_quality    | string | `"high"`                 | Network connection quality rating, one of `low`, `medium`, `high`, or `undefined` if unknown or not applicable.                     |
-| conn_type       | string | `"direct"`               | Either `direct` or `indirect`, if communication is going through hops or third party cloud services/proxies.                        |
+| Field            | Type      | Example                  | Description                                                                                                                         |
+|------------------|-----------|--------------------------|-------------------------------------------------------------------------------------------------------------------------------------|
+| address          | string    | `"4"`                    | Unique address of a thing, equal to `address` field in [inclusion_report](/adapter/thing_management.md#definitions) for this thing. |
+| hash             | string    | `"zw_398_3_12"`          | Equal to `product_hash` field in [inclusion_report](/adapter/thing_management.md#definitions) for this thing.                       |
+| alias            | string    | `"Fibaro Double Switch"` | Equal to `product_name` field in [inclusion_report](/adapter/thing_management.md#definitions) for this thing.                       |
+| power_source     | string    | `"ac"`                   | Equal to `power_source` field in [inclusion_report](/adapter/thing_management.md#definitions) for this thing.                       |
+| wakeup_interval  | string    | `"3600"`                 | Equal to `wakeup_interval` field in [inclusion_report](/adapter/thing_management.md#definitions) for this thing.                    |
+| comm_tech        | string    | `"zw"`                   | Equal to `comm_tech` field in [inclusion_report](/adapter/thing_management.md#definitions) for this thing.                          |
+| status           | string    | `"UP"`                   | Reachability status of a thing, either `UP` for online devices or `DOWN` for an offline device.                                     |
+| operationability | str_array | `["sleep", "update"]`    | Operationability status of a thing, an array with zero, one or more non-exclusive statuses, see [`operationability`](#definitions). |
+| conn_quality     | string    | `"high"`                 | Network connection quality rating, one of `low`, `medium`, `high`, or `undefined` if unknown or not applicable.                     |
+| conn_type        | string    | `"direct"`               | Either `direct` or `indirect`, if communication is going through hops or third party cloud services/proxies.                        |
 
-* `node_status_matrix` is a matrix of possible `status` and `sub_status` values:
+* `operationability` is one of the following values:
 
-| `status` | `sub_status`  | Default | Description                                                                                         |
-|----------|---------------|---------|-----------------------------------------------------------------------------------------------------|
-| `UP`     | `online`      | Yes     | Connection to the thing is working and it is ready to receive commands and emit events.             |
-| `UP`     | `sleeping`    | No      | Connection to the thing is working but it is sleeping and waiting for next wake up period.          |
-| `UP`     | `updating`    | No      | Connection to the thing is working but it is busy updating its firmware.                            |
-| `UP`     | `discovering` | No      | Connection to the thing is working but adapter is interviewing it and discovering its capabilities. |
-| `DOWN`   | `offline`     | Yes     | Connection to the thing is not working and it is considered offline.                                |
+| `operationability` | Description                                                                                                                                       |
+|--------------------|---------------------------------------------------------------------------------------------------------------------------------------------------|
+| `sleep`            | Indicates that a sleeping device is currently sleeping and will process any incoming commands will with a delay upon the next wakeup period.      |
+| `discovery`        | Indicates that a device is being discovered by the adapter and some of its functionalities might not be yet available or visible.                 |
+| `update`           | Indicates that a device is being updated with a new firmware which may lead to reduced responsiveness or temporary unavailability during reboots. |
 
 * `network_update_mode` is one of the following values: `full`, `topology`.
 
@@ -107,7 +107,7 @@ Every adapter should define its own service name.
     "wakeup_interval": "3600",
     "comm_tech": "zw",
     "status": "UP",
-    "sub_status": "sleeping",
+    "operationability": ["sleep"],
     "conn_quality": "medium",
     "conn_type": "indirect"
   },
@@ -154,7 +154,7 @@ Every adapter should define its own service name.
       "wakeup_interval": "3600",
       "comm_tech": "zw",
       "status": "UP",
-      "sub_status": "sleeping",
+      "operationability": ["sleep"],
       "conn_quality": "medium",
       "conn_type": "indirect"
     },
@@ -166,7 +166,7 @@ Every adapter should define its own service name.
       "wakeup_int": "-1",
       "comm_tech": "zw",
       "status": "DOWN",
-      "sub_status": "offline",
+      "operationability": [],
       "conn_quality": "high",
       "conn_type": "direct"
     }
@@ -204,8 +204,8 @@ Every adapter should define its own service name.
 {
   "serv": "zwave-ad",
   "type": "cmd.network.node_update",
-  "val_t": "int",
-  "val": 12,
+  "val_t": "string",
+  "val": "12",
   "props": null,
   "tags": null,
   "src": "-",
