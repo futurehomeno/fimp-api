@@ -44,7 +44,6 @@ Meta and utility services are not representing a functionality of a device, but 
 - [System](/device_services/meta/system.md)
 - [Parameters](/device_services/meta/parameters.md)
 - [Association](/device_services/meta/association.md)
-- [Gateway](/device_services/meta/gateway.md)
 - [Indicator](/device_services/meta/indicator.md)
 - [OTA](/device_services/meta/ota.md)
 - [Time](/device_services/meta/time.md)
