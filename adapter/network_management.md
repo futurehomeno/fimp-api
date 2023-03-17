@@ -69,7 +69,7 @@ Every adapter should define its own service name.
 
 | `operationability` | Description                                                                                                                                       |
 |--------------------|---------------------------------------------------------------------------------------------------------------------------------------------------|
-| `sleep`            | Indicates that a sleeping device is currently sleeping and will process any incoming commands will with a delay upon the next wakeup period.      |
+| `sleep`            | Indicates that a sleeping device is currently sleeping and will process any incoming commands with a delay upon the next wakeup period.           |
 | `discovery`        | Indicates that a device is being discovered by the adapter and some of its functionalities might not be yet available or visible.                 |
 | `update`           | Indicates that a device is being updated with a new firmware which may lead to reduced responsiveness or temporary unavailability during reboots. |
 
