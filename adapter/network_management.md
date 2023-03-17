@@ -43,8 +43,10 @@ Every adapter should define its own service name.
 | in   | cmd.network.node_update      | string¹    | Requests an interview and discovery of its capabilities for the provided address of a thing.                      |
 | in   | cmd.network.reset            | null       | Requests forceful removal of all things and resets the network.                                                   |
 | out  | evt.network.reset_done       | null       | Reports that network reset has been completed.                                                                    |
+| in   | cmd.ping.send                | string     | Requests execution of a ping for the provided address of a thing.                                                 |
+| out  | evt.ping.report              | object     | Reports ping results, see [`ping_report`](#definitions) definition.                                               |
 
-> ¹ For backwards compatibility Zigbee and Z-Wave adapters must also accept integer value. 
+> ¹ For backwards compatibility Zigbee and Z-Wave adapters must also accept integer value.
 
 ### Definitions
 
@@ -72,6 +74,23 @@ Every adapter should define its own service name.
 | `update`           | Indicates that a device is being updated with a new firmware which may lead to reduced responsiveness or temporary unavailability during reboots. |
 
 * `network_update_mode` is one of the following values: `full`, `topology`.
+
+* `ping_report` is an object with the following structure:
+
+| Field   | Type   | Example                                          | Description                                                                                                                                                   |
+|---------|--------|--------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| address | string | `"4"`                                            | Unique address of a thing.                                                                                                                                    |
+| status  | string | `"SUCCESS"`                                      | Either `SUCCESS` for a successful ping or `FAILED` if response was not received within configured timeout.                                                    |
+| delay   | int    | `321`                                            | Number of milliseconds between sending a ping and receiving a response or acknowledgement.                                                                    |
+| nodes   | object | `[{"address":"4","type":"rssi","value":"-87"}]"` | An optional array of node connection quality, where the first element represents the hub while the last one the thing. See [`routing_quality`](#definitions). |
+
+* `routing_quality` is an object with the following structure:
+
+| Field   | Type   | Example  | Description                                                     |
+|---------|--------|----------|-----------------------------------------------------------------|
+| address | string | `"4"`    | Unique address of a thing.                                      |
+| type    | string | `"rssi"` | Type of connection quality measurement, either `rssi` or `lqi`. |
+| value   | string | `"-87"`  | Value of connection quality.                                    |
 
 ### Examples
 
@@ -107,7 +126,9 @@ Every adapter should define its own service name.
     "wakeup_interval": "3600",
     "comm_tech": "zw",
     "status": "UP",
-    "operationability": ["sleep"],
+    "operationability": [
+      "sleep"
+    ],
     "conn_quality": "medium",
     "conn_type": "indirect"
   },
@@ -154,7 +175,9 @@ Every adapter should define its own service name.
       "wakeup_interval": "3600",
       "comm_tech": "zw",
       "status": "UP",
-      "operationability": ["sleep"],
+      "operationability": [
+        "sleep"
+      ],
       "conn_quality": "medium",
       "conn_type": "indirect"
     },
@@ -242,6 +265,58 @@ Every adapter should define its own service name.
   "type": "evt.network.reset_done",
   "val_t": "null",
   "val": null,
+  "props": null,
+  "tags": null,
+  "src": "-",
+  "ver": "1",
+  "ctime": "2018-11-22T23:14:40+0100",
+  "uid": "1e965f4c-07ee-4e3e-8c03-e61e9aa9192a",
+  "topic": "pt:j1/mt:evt/rt:ad/rn:zw/ad:1"
+}
+```
+
+* Example of a command requesting ping for thing at address 4:
+
+```json
+{
+  "serv": "zwave-ad",
+  "type": "cmd.ping.send",
+  "val_t": "string",
+  "val": "4",
+  "props": null,
+  "tags": null,
+  "src": "-",
+  "ver": "1",
+  "ctime": "2018-11-22T23:14:40+0100",
+  "uid": "1e965f4c-07ee-4e3e-8c03-e61e9aa9192a",
+  "topic": "pt:j1/mt:cmd/rt:ad/rn:zw/ad:1"
+}
+```
+
+* Example of a report containing ping report for thing 4 connected indirectly through single hop at address 2:
+
+```json
+{
+  "serv": "zwave-ad",
+  "type": "evt.ping.report",
+  "val_t": "object",
+  "val": {
+    "address": "4",
+    "status": "SUCCESS",
+    "delay": 341,
+    "nodes": [
+      {
+        "address": "2",
+        "type": "rssi",
+        "value": "-57"
+      },
+      {
+        "address": "4",
+        "type": "rssi",
+        "value": "-87"
+      }
+    ]
+  },
   "props": null,
   "tags": null,
   "src": "-",
