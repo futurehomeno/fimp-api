@@ -36,7 +36,7 @@ Additionally, an entry in the NPL will used to simplify classic inclusion of S2 
 | in   | cmd.npl.entry_upsert       | object     | Insert or update an NPL entry. See [`NPL_entry`](#definitions) for more information.  |
 | in   | cmd.npl.entry_delete       | string     | Remove a device with the specific [`DSK`](#definitions) from the NPL list.            |
 | in   | cmd.npl.all_entries_remove | null       | Remove all entries from the NPL list.                                                 |
-| in   | cmd.npl.entry_get          | string     | Request a report of a NPL entry with the specific [`DSK`](#definitions).              |
+| in   | cmd.npl.entry_get          | string     | Request a report of an NPL entry with the specific [`DSK`](#definitions).              |
 | in   | cmd.npl.all_entries_get    | null       | Request a report of all NPL entries.                                                  |
 | out  | evt.npl.entry_report       | object     | Report of a specific NPL entry. See [`NPL_entry`](#definitions) for more information. |                              
 | out  | evt.npl.list               | object     | Report of all NPL list entries. Value is an array of [`NPL_entry`](#definitions).     |
