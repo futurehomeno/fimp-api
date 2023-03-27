@@ -8,13 +8,13 @@ This service is used to handle specific protocol capabilities that were not cove
 
 ## Interfaces
 
-| Type | Interface               | Value type | Storage            | Description                                                                                                                    |
-|------|-------------------------|------------|--------------------|--------------------------------------------------------------------------------------------------------------------------------|
-| out  | evt.notification.report | object     | `category:subject` | Reports notifications that are sent by the device. See [`notification_report`](#definitions) for details.                      |
-| out  | evt.sensor.report       | object     | `type:unit`        | Reports multilevel sensor readings including unknown sensor and unknown unit. See [`sensor_report`](#definitions) for details. |
-| out  | evt.meter.report        | object     | `type:unit`        | Reports meter readings with unknown meter type or/and unit. See [`meter_report`](#definitions) for details.                    |
-| out  | evt.meter_export.report | object     | `type:unit`        | Reports export meter readings with unknown meter type or/and unit. See [`meter_report`](#definitions) for details.                    |
-| in   | cmd.meter.reset         | null       |                    | Resets all historical readings for all meters of this device.                                                                  |
+| Type | Interface               | Value type | Storage     | Aggregation        | Description                                                                                                                    |
+|------|-------------------------|------------|-------------|--------------------|--------------------------------------------------------------------------------------------------------------------------------|
+| out  | evt.notification.report | object     | `aggregate` | `category:subject` | Reports notifications that are sent by the device. See [`notification_report`](#definitions) for details.                      |
+| out  | evt.sensor.report       | object     | `aggregate` | `type:unit`        | Reports multilevel sensor readings including unknown sensor and unknown unit. See [`sensor_report`](#definitions) for details. |
+| out  | evt.meter.report        | object     | `aggregate` | `type:unit`        | Reports meter readings with unknown meter type or/and unit. See [`meter_report`](#definitions) for details.                    |
+| out  | evt.meter_export.report | object     | `aggregate` | `type:unit`        | Reports export meter readings with unknown meter type or/and unit. See [`meter_report`](#definitions) for details.             |
+| in   | cmd.meter.reset         | null       |             |                    | Resets all historical readings for all meters of this device.                                                                  |
 
 ## Definitions
 
@@ -39,12 +39,12 @@ This service is used to handle specific protocol capabilities that were not cove
 
 * `meter_report` is an object with the following structure:
 
-| Field     | Type   | Example    | Description                  |
-|-----------|--------|------------|------------------------------|
-| domain    | string | `"zwave"`  | Domain for the notification. |
-| type      | string | `"11"`     | Type of the sensor.          |
-| unit      | string | `"10"`     | Unit of the reported value.  |
-| value     | float  | `20.5`     | Reported value.              |
+| Field  | Type   | Example   | Description                  |
+|--------|--------|-----------|------------------------------|
+| domain | string | `"zwave"` | Domain for the notification. |
+| type   | string | `"11"`    | Type of the sensor.          |
+| unit   | string | `"10"`    | Unit of the reported value.  |
+| value  | float  | `20.5`    | Reported value.              |
 
 ## Examples
 
@@ -63,7 +63,8 @@ This service is used to handle specific protocol capabilities that were not cove
     "value": "motion_detected"
   },
   "storage": {
-       "sub_value": "home_security:motion_sensor_status"
+    "strategy": "aggregate",
+    "sub_value": "home_security:motion_sensor_status"
   },
   "props": {},
   "tags": [],
@@ -88,7 +89,8 @@ This service is used to handle specific protocol capabilities that were not cove
     "value": "state_idle"
   },
   "storage": {
-       "sub_value": "home_security:motion_sensor_status"
+    "strategy": "aggregate",
+    "sub_value": "home_security:motion_sensor_status"
   },
   "props": {},
   "tags": [],
@@ -113,7 +115,8 @@ This service is used to handle specific protocol capabilities that were not cove
     "value": "glass_breakage"
   },
   "storage": {
-       "sub_value": "home_security:glass_breakage"
+    "strategy": "aggregate",
+    "sub_value": "home_security:glass_breakage"
   },
   "props": {},
   "tags": [],
@@ -139,7 +142,8 @@ This service is used to handle specific protocol capabilities that were not cove
     "value": "30"
   },
   "storage": {
-       "sub_value": "31:30"
+    "strategy": "aggregate",
+    "sub_value": "31:30"
   },
   "props": {},
   "tags": [],
@@ -164,7 +168,7 @@ This service is used to handle specific protocol capabilities that were not cove
     "value": 20
   },
   "storage": {
-      "sub_value": "7:10"
+    "sub_value": "7:10"
   },
   "props": {},
   "tags": [],
@@ -189,7 +193,8 @@ This service is used to handle specific protocol capabilities that were not cove
     "value": 20
   },
   "storage": {
-      "sub_value": "11:10"
+    "strategy": "aggregate",
+    "sub_value": "11:10"
   },
   "props": {},
   "tags": [],
@@ -214,7 +219,8 @@ This service is used to handle specific protocol capabilities that were not cove
     "value": 20
   },
   "storage": {
-      "sub_value": "11:10"
+    "strategy": "aggregate",
+    "sub_value": "11:10"
   },
   "props": {},
   "tags": [],

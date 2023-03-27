@@ -8,18 +8,18 @@ Thermostat service is used to control the temperature in a room or a building an
 
 ## Interfaces
 
-| Type | Interface               | Value type | Storage    | Description                                                                                                                                    |
-|------|-------------------------|------------|------------|------------------------------------------------------------------------------------------------------------------------------------------------|
-| in   | cmd.mode.get_report     | null       |            | Requests the thermostat `mode`.                                                                                                                |
-| in   | cmd.mode.set            | string     |            | Sets the thermostat `mode`. Must be one of the values declared in [`sup_modes`](#service-properties) property.                                 |
-| out  | evt.mode.report         | string     |            | Reports the thermostat `mode`.                                                                                                                 |
-| -    |                         |            |            |                                                                                                                                                |
-| in   | cmd.setpoint.get_report | string     |            | Gets the value for the provided `setpoint` in value. Must be one of the setpoints declared in [`sup_setpoints`](#service-properties) property. |
-| in   | cmd.setpoint.set        | str_map    |            | Sets the value of a setpoint. See the [`setpoint_map`](#definitions) definition for reference.                                                 |
-| out  | evt.setpoint.report     | str_map    | `setpoint` | Reports the value of a setpoint. See the [`setpoint_map`](#definitions) definition for reference.                                              |
-| -    |                         |            |            |                                                                                                                                                |
-| in   | cmd.state.get_report    | null       |            | Requests the operational `state` of the device.                                                                                                |
-| out  | evt.state.report        | string     |            | Reports the operational `state` of the device, one of the values declared in [`sup_states`](#service-properties) property.                     |
+| Type | Interface               | Value type | Storage     | Aggregation | Description                                                                                                                                    |
+|------|-------------------------|------------|-------------|-------------|------------------------------------------------------------------------------------------------------------------------------------------------|
+| in   | cmd.mode.get_report     | null       |             |             | Requests the thermostat `mode`.                                                                                                                |
+| in   | cmd.mode.set            | string     |             |             | Sets the thermostat `mode`. Must be one of the values declared in [`sup_modes`](#service-properties) property.                                 |
+| out  | evt.mode.report         | string     |             |             | Reports the thermostat `mode`.                                                                                                                 |
+| -    |                         |            |             |             |                                                                                                                                                |
+| in   | cmd.setpoint.get_report | string     |             |             | Gets the value for the provided `setpoint` in value. Must be one of the setpoints declared in [`sup_setpoints`](#service-properties) property. |
+| in   | cmd.setpoint.set        | str_map    |             |             | Sets the value of a setpoint. See the [`setpoint_map`](#definitions) definition for reference.                                                 |
+| out  | evt.setpoint.report     | str_map    | `aggregate` | `setpoint`  | Reports the value of a setpoint. See the [`setpoint_map`](#definitions) definition for reference.                                              |
+| -    |                         |            |             |             |                                                                                                                                                |
+| in   | cmd.state.get_report    | null       |             |             | Requests the operational `state` of the device.                                                                                                |
+| out  | evt.state.report        | string     |             |             | Reports the operational `state` of the device, one of the values declared in [`sup_states`](#service-properties) property.                     |
 
 ## Service properties
 
@@ -46,7 +46,7 @@ Thermostat service is used to control the temperature in a room or a building an
 * `mode` is a mode of operation of the device, well-defined modes include: `off`, `heat`, `cool`, `aux_heat`, `energy_heat`, `energy_cool`, `fan`, `fan_only`, `auto`,
   `auto_changeover`, `dry`, `dry_air`, `moist_air`, `resume`, `furnace`, `manufacturer_specific`.
 
-* `setpoint` represents a specific setpoint configuration used by the device in a specific mode of operation; a mode may use **none, one or more** setpoints, e.g.: 
+* `setpoint` represents a specific setpoint configuration used by the device in a specific mode of operation; a mode may use **none, one or more** setpoints, e.g.:
   mode `auto` utilizes both `heat` and `cool` setpoints to keep the temperature between set values.
 
 * `range` is an object with the following structure:
@@ -90,6 +90,7 @@ Thermostat service is used to control the temperature in a room or a building an
     "unit": "C"
   },
   "storage": {
+    "strategy": "aggregate",
     "sub_value": "heat"
   },
   "props": null,

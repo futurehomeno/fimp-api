@@ -8,15 +8,15 @@ User code service is used by door locks, keypads and other security panels to en
 
 `user_code`
 
-| Type | Interface                  | Value type | Storage   | Description                                                                                                                                 |
-|------|----------------------------|------------|-----------|---------------------------------------------------------------------------------------------------------------------------------------------|
-| in   | cmd.usercode.clear         | str_map    |           | Clears a single user slot. See [`clear_request`](#definitions) definition for more information.                                             |
-| in   | cmd.usercode.clear_all     | null       |           | Clears all slots.                                                                                                                           |
-| in   | cmd.usercode.get           | str_map    |           | Requests listing of all users.                                                                                                              |
-| in   | cmd.usercode.set           | str_map    |           | Creates a new user. See [`user`](#definitions) string map definition for more information.                                                  |
-| out  | evt.usercode.users_report  | object     | `"users"` | Lists all users as a mapping of [`slot`](#definitions) object array to identification types. See [example](#user-listing) for more details. |
-| out  | evt.usercode.config_report | str_map    | `event`   | Confirms the success of a set or a clear command. See [`config_report`](#definitions) definition for more details.                          |
-| out  | evt.usercode.access_report | str_map    | `event`   | Notifies about access attempt. See [`access_report`](#definitions) definition for more details.                                             |
+| Type | Interface                  | Value type | Storage     | Aggregation | Description                                                                                                                                 |
+|------|----------------------------|------------|-------------|-------------|---------------------------------------------------------------------------------------------------------------------------------------------|
+| in   | cmd.usercode.clear         | str_map    |             |             | Clears a single user slot. See [`clear_request`](#definitions) definition for more information.                                             |
+| in   | cmd.usercode.clear_all     | null       |             |             | Clears all slots.                                                                                                                           |
+| in   | cmd.usercode.get           | str_map    |             |             | Requests listing of all users.                                                                                                              |
+| in   | cmd.usercode.set           | str_map    |             |             | Creates a new user. See [`user`](#definitions) string map definition for more information.                                                  |
+| out  | evt.usercode.users_report  | object     | `skip`      |             | Lists all users as a mapping of [`slot`](#definitions) object array to identification types. See [example](#user-listing) for more details. |
+| out  | evt.usercode.config_report | str_map    | `skip`      |             | Confirms the success of a set or a clear command. See [`config_report`](#definitions) definition for more details.                          |
+| out  | evt.usercode.access_report | str_map    | `aggregate` | `event`     | Notifies about access attempt. See [`access_report`](#definitions) definition for more details.                                             |
 
 > Please note that for backwards compatibility `evt.usercode.users_report` is sent with static `"users"` storage sub-value. Consult the [example](#user-listing) for more details.
 
@@ -122,7 +122,7 @@ User code service is used by door locks, keypads and other security panels to en
     "identification": "pin"
   },
   "storage": {
-    "sub_value": "code_added"
+    "strategy": "skip"
   },
   "props": {},
   "tags": null,
@@ -160,7 +160,7 @@ User code service is used by door locks, keypads and other security panels to en
 ```json
 {
   "serv": "user_code",
-  "type": "evt.usercode.access_report",
+  "type": "evt.usercode.config_report",
   "val_t": "str_map",
   "val": {
     "event": "code_deleted",
@@ -169,7 +169,7 @@ User code service is used by door locks, keypads and other security panels to en
     "identification": "pin"
   },
   "storage": {
-    "sub_value": "code_deleted"
+    "strategy": "skip"
   },
   "props": {},
   "tags": null,
@@ -217,7 +217,7 @@ User code service is used by door locks, keypads and other security panels to en
     ]
   },
   "storage": {
-    "sub_value": "users"
+    "strategy": "skip"
   },
   "props": {},
   "tags": null,
@@ -244,6 +244,7 @@ User code service is used by door locks, keypads and other security panels to en
     "permission": "granted"
   },
   "storage": {
+    "strategy": "aggregate",
     "sub_value": "unlocked"
   },
   "props": {},
@@ -269,6 +270,7 @@ User code service is used by door locks, keypads and other security panels to en
     "permission": "granted"
   },
   "storage": {
+    "strategy": "aggregate",
     "sub_value": "locked"
   },
   "props": {},
@@ -293,6 +295,7 @@ User code service is used by door locks, keypads and other security panels to en
     "permission": "denied"
   },
   "storage": {
+    "strategy": "aggregate",
     "sub_value": "unauthorized"
   },
   "props": {},

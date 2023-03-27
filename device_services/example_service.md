@@ -1,6 +1,7 @@
 # Example Service
 
-This section should contain a short description of the service and its purpose. This example showcases a service which contain: 
+This section should contain a short description of the service and its purpose. This example showcases a service which contain:
+
 * example of a service property
 * example of an interface with an interface property
 * example of an interface with a specific storage requirement
@@ -17,14 +18,14 @@ This section should contain a short description of the service and its purpose. 
 
 ## Interfaces
 
-| Type | Interface               | Value type | Properties   | Storage      | Description                                                                           |
-|------|-------------------------|------------|--------------|--------------|---------------------------------------------------------------------------------------|
-| in   | cmd.domain_a.get_report | null       |              |              | Requests a report of something from domain A.                                         |
-| in   | cmd.domain_a.set        | object     |              |              | Sets something in domain A, see definition of [`object_a`](#definitions) object.      |
-| out  | evt.domain_a.report     | object     |              |              | Reports something from domain A, see definition of [`object_a`](#definitions) object. |
-| -    |                         |            |              |              |                                                                                       |
-| in   | cmd.domain_b.get_report | string     |              |              | Requests a report of something from domain B.                                         |
-| out  | evt.domain_b.report     | float      | `property_a` | `property_a` | Reports something from domain B.                                                      |
+| Type | Interface               | Value type | Properties   | Storage     | Aggregation  | Description                                                                           |
+|------|-------------------------|------------|--------------|-------------|--------------|---------------------------------------------------------------------------------------|
+| in   | cmd.domain_a.get_report | null       |              |             |              | Requests a report of something from domain A.                                         |
+| in   | cmd.domain_a.set        | object     |              |             |              | Sets something in domain A, see definition of [`object_a`](#definitions) object.      |
+| out  | evt.domain_a.report     | object     |              |             |              | Reports something from domain A, see definition of [`object_a`](#definitions) object. |
+| -    |                         |            |              |             |              |                                                                                       |
+| in   | cmd.domain_b.get_report | string     |              |             |              | Requests a report of something from domain B.                                         |
+| out  | evt.domain_b.report     | float      | `property_a` | `aggregate` | `property_a` | Reports something from domain B.                                                      |
 
 ## Interface properties
 
@@ -87,6 +88,7 @@ This section should contain a short description of the service and its purpose. 
     "property_a": "val_2"
   },
   "storage": {
+    "strategy": "aggregate",
     "sub_value": "val_2"
   },
   "tags": null,

@@ -8,12 +8,12 @@ Battery service represents a power unit within the device, usually found in batt
 
 ## Interfaces
 
-| Type | Interface          | Value type | Storage | Description                                                                                                                                                 |
-|------|--------------------|------------|---------|-------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| in   | cmd.lvl.get_report | null       |         | Requests the battery level report.                                                                                                                          |
-| out  | evt.lvl.report     | int        |         | Reports the battery level as percentage.                                                                                                                    |
-| -    |                    |            |         |                                                                                                                                                             |
-| out  | evt.alarm.report   | str_map    | `event` | Reports [`event`](#definitions) status. See [`event_report`](/device_services/generic/alarm.md#definitions) definition from alarm service for more details. |
+| Type | Interface          | Value type | Storage     | Aggregation | Description                                                                                                                                                 |
+|------|--------------------|------------|-------------|-------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| in   | cmd.lvl.get_report | null       |             |             | Requests the battery level report.                                                                                                                          |
+| out  | evt.lvl.report     | int        |             |             | Reports the battery level as percentage.                                                                                                                    |
+| -    |                    |            |             |             |                                                                                                                                                             |
+| out  | evt.alarm.report   | str_map    | `aggregate` | `event`     | Reports [`event`](#definitions) status. See [`event_report`](/device_services/generic/alarm.md#definitions) definition from alarm service for more details. |
 
 ## Service properties
 
@@ -56,6 +56,7 @@ Battery service represents a power unit within the device, usually found in batt
     "status": "activ"
   },
   "storage": {
+    "strategy": "aggregate",
     "sub_value": "low_battery"
   },
   "props": {},
