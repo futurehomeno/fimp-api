@@ -22,18 +22,17 @@ The service represent devices like garage doors, barriers, window protection sha
 | in   | cmd.state.get_report     | null       |            | Requests the current state of the device.                                                                                                                                                |
 | out  | evt.state.report         | string     | `position` | Reports the current state of the device, one of values defined in [`sup_states`](#service-properties) property.                                                                          |
 | -    |                          |            |            |                                                                                                                                                                                          |
-| in   | cmd.tstate.set           | string     | `stop_at`  | Sets the target state of the device to the one of values defined in [`sup_tstates`](#service-properties) property.                                                                       |
+| in   | cmd.tstate.set           | string     | `position` | Sets the target state of the device to the one of values defined in [`sup_tstates`](#service-properties) property.                                                                       |
 
 ## Interface properties
 
-| Name       | Required | Example | Description                                                                                                                                    |
-|------------|----------|---------|------------------------------------------------------------------------------------------------------------------------------------------------|
-| `position` | No       | `"30"`  | Position as percentage value at which the barrier stopped on emergency halt or currently is, where `1` is near closed while `99` is near open. |
-| `stop_at`  | No       | `"75"`  | Position as percentage value at which the barrier should stop.                                                                                 |
+| Name       | Required | Example | Description                                                                    |
+|------------|----------|---------|--------------------------------------------------------------------------------|
+| `position` | No       | `"30"`  | Position as percentage value where `1` is near closed while `99` is near open. |
 
-> Please note that properties `position` and `stop_at` are optional and depend directly on the device capabilities.
-> * Property `stop_at` will be ignored if the device does not support partial opening or closing, which should be indicated by `sup_stop_at` service property.
-> * Property `position` might be present only on "stopped" state report or never if the device does not support live progress reporting.  
+> Please note that property `position` is optional and depend directly on the device capabilities.
+> * Property `position` in `cmd.tstate.set` will be ignored if the device does not support partial opening or closing indicated by `sup_tposition` service property.
+> * Property `position` in `evt.state.report` might be present only on "stopped" state report or never if the device does not support live progress reporting.
 
 ## Service properties
 
@@ -42,7 +41,7 @@ The service represent devices like garage doors, barriers, window protection sha
 | `sup_notiftypes` | str_array | `["audio", "visual"]`                      | List of supported notification types. Allowed values are: `audio`, `visual`.                      |
 | `sup_states`     | str_array | `["open", "closed", "closing", "opening"]` | List of supported states. Allowed values are:  `closed`, `closing`, `stopped`, `opening`, `open`. |
 | `sup_tstates`    | str_array | `["open", "closed"]`                       | List of supported target states. Allowed values are: `closed`, `open`.                            |
-| `sup_stop_at`    | bool      | `true`                                     | Indicates whether the `stop_at` property is supported by `cmd.tstate.set` command.                |
+| `sup_tposition`  | bool      | `true`                                     | Indicates whether the `position` property is supported by `cmd.tstate.set` command.               |
 
 ## Examples
 
@@ -75,6 +74,25 @@ The service represent devices like garage doors, barriers, window protection sha
   "val_t": "string",
   "val": "open",
   "props": {},
+  "tags": [],
+  "src": "-",
+  "ver": "1",
+  "uid": "eb99fe48-3276-4a21-acd4-a6cbfb3a800d",
+  "topic": "pt:j1/mt:cmd/rt:dev/rn:zw/ad:1/sv:barrier_ctrl/ad:50_0"
+}
+```
+
+* Example of a command to open the barrier partially to 50% position:
+
+```json
+{
+  "serv": "barrier_ctrl",
+  "type": "cmd.tstate.set",
+  "val_t": "string",
+  "val": "open",
+  "props": {
+    "position": "50"
+  },
   "tags": [],
   "src": "-",
   "ver": "1",
