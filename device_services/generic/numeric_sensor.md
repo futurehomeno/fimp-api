@@ -46,21 +46,21 @@ The most popular sensors measure temperature, air humidity, or light intensity.
 | `sensor_weight`      | kg, lbs                  | Weight sensor                   |
 | `sensor_wind`        | kph                      | Wind sensor                     |
 
-> Please note that `sensor_power` and `sensor_voltage` services are deprecated. A [`meter_elec`](/device_services/generic/meter.md) service should be used instead for reporting
-> electricity measurements.
+> Please note that `sensor_power` and `sensor_voltage` services are deprecated. 
+> A [`meter_elec`](/device_services/generic/meter.md) service should be used instead for reporting electricity measurements.
 
 ## Interfaces
 
-| Type | Interface             | Value type | Properties | Storage | Description                                                               |
-|------|-----------------------|------------|------------|---------|---------------------------------------------------------------------------|
-| in   | cmd.sensor.get_report | string     |            |         | Value is the desired unit. Use empty value to get report in default unit. |
-| out  | evt.sensor.report     | float      | `unit`     | `unit`  |                                                                           |
+| Type | Interface             | Value type | Properties | Storage     | Aggregation | Description                                                               |
+|------|-----------------------|------------|------------|-------------|-------------|---------------------------------------------------------------------------|
+| in   | cmd.sensor.get_report | string     |            |             |             | Value is the desired unit. Use empty value to get report in default unit. |
+| out  | evt.sensor.report     | float      | `unit`     | `aggregate` | `unit`      |                                                                           |
 
 ## Interface properties
 
-| Name        | Example | Required | Description                                                                                                                            |
-|-------------|---------|----------|----------------------------------------------------------------------------------------------------------------------------------------|
-| `unit`      | `"C"`   | Yes      | One of the units defined in `sup_units` property.                                                                                      |
+| Name   | Example | Required | Description                                       |
+|--------|---------|----------|---------------------------------------------------|
+| `unit` | `"C"`   | Yes      | One of the units defined in `sup_units` property. |
 
 ## Service properties
 
@@ -79,6 +79,7 @@ The most popular sensors measure temperature, air humidity, or light intensity.
   "val_t": "float",
   "val": 22,
   "storage": {
+    "strategy": "aggregate",
     "sub_value": "C"
   },
   "props": {

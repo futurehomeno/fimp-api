@@ -13,12 +13,12 @@ This service relies on `time` and `time_parameters` services to be present in th
 
 ## Interfaces
 
-| Type | Interface                     | Value type | Storage        | Description                                                                                                                        |
-|------|-------------------------------|------------|----------------|------------------------------------------------------------------------------------------------------------------------------------|
-| in   | cmd.schedule_entry.get_report | int_map    |                | Gets the schedule entry report for the specified slot. See [`schedule_slot`](#definitions) definition for more information.        |
-| in   | cmd.schedule_entry.set        | int_map    |                | Sets the schedule entry for the specified slot. See [`year_day_schedule`](#definitions) definition for more information.           |
-| in   | cmd.schedule_entry.clear      | int_map    |                | Clears the schedule entry for the specified slot. See [`schedule_slot`](#definitions) definition for more information.             |
-| out  | evt.schedule_entry.report     | int_map    | `user_id:slot` | Reports the schedule entry report for the specified slot. See [`year_day_schedule`](#definitions) definition for more information. |
+| Type | Interface                     | Value type | Storage     | Aggregation    | Description                                                                                                                        |
+|------|-------------------------------|------------|-------------|----------------|------------------------------------------------------------------------------------------------------------------------------------|
+| in   | cmd.schedule_entry.get_report | int_map    |             |                | Gets the schedule entry report for the specified slot. See [`schedule_slot`](#definitions) definition for more information.        |
+| in   | cmd.schedule_entry.set        | int_map    |             |                | Sets the schedule entry for the specified slot. See [`year_day_schedule`](#definitions) definition for more information.           |
+| in   | cmd.schedule_entry.clear      | int_map    |             |                | Clears the schedule entry for the specified slot. See [`schedule_slot`](#definitions) definition for more information.             |
+| out  | evt.schedule_entry.report     | int_map    | `aggregate` | `user_id:slot` | Reports the schedule entry report for the specified slot. See [`year_day_schedule`](#definitions) definition for more information. |
 
 ## Service properties
 
@@ -148,6 +148,7 @@ This service relies on `time` and `time_parameters` services to be present in th
     "minute_end": 30
   },
   "storage": {
+    "strategy": "aggregate",
     "sub_value": "1:1"
   },
   "props": {},

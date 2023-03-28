@@ -10,13 +10,13 @@ Parameters service allows for advanced configuration of a device.
 
 ## Interfaces
 
-| Type | Interface                 | Value type | Storage        | Description                                                                                             |
-|------|---------------------------|------------|----------------|---------------------------------------------------------------------------------------------------------|
-| in   | cmd.sup_params.get_report | null       |                | Requests information about known parameters. Present if the device supports parameters discovery.       |
-| out  | evt.sup_params.report     | object     |                | Reports known parameters of the device, contains an array of [`sup_parameter`](#definitions) objects.   |
-| in   | cmd.param.set             | object     |                | Sets the parameter, see [`parameter_value`](#definitions).                                              |
-| in   | cmd.param.get_report      | string     | `parameter_id` | Requests report with currently set values for the specified parameter.                                  |
-| out  | evt.param.report          | object     |                | Reports the current value for a specified parameter, contains [`parameter_value`](#definitions) object. |
+| Type | Interface                 | Value type | Storage     | Aggregation    | Description                                                                                             |
+|------|---------------------------|------------|-------------|----------------|---------------------------------------------------------------------------------------------------------|
+| in   | cmd.sup_params.get_report | null       |             |                | Requests information about known parameters. Present if the device supports parameters discovery.       |
+| out  | evt.sup_params.report     | object     |             |                | Reports known parameters of the device, contains an array of [`sup_parameter`](#definitions) objects.   |
+| in   | cmd.param.set             | object     |             |                | Sets the parameter, see [`parameter_value`](#definitions).                                              |
+| in   | cmd.param.get_report      | string     | `aggregate` | `parameter_id` | Requests report with currently set values for the specified parameter.                                  |
+| out  | evt.param.report          | object     |             |                | Reports the current value for a specified parameter, contains [`parameter_value`](#definitions) object. |
 
 > Some devices may not support parameter discovery while still supporting setting parameters manually if we know their ID and size.
 > In such cases the service will not provide `cmd.sup_params.get_report` interface and require the user to provide the parameter ID and size manually.
@@ -135,6 +135,7 @@ Parameters service allows for advanced configuration of a device.
     "value": 3
   },
   "storage": {
+    "strategy": "aggregate",
     "sub_value": "2"
   },
   "props": {},
