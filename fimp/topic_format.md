@@ -8,21 +8,22 @@ The segments are separated by a forward slash `/` which allows for selective sub
 
 Following is the list of all topic segments and their description:
 
-| Segment | Name             | Examples         | Description                                                                                       |
-|---------|------------------|------------------|---------------------------------------------------------------------------------------------------|
-| `pt`    | Parser type      | `j1`             | Possible values are: `j1` (JSON v1), `j1c1` (JSON v1 Compression Type 1 gzip).                    |
-| `mt`    | Message type     | `evt`            | Possible values are: `cmd` (command), `evt` (event), `rsp` (response).                            |
-| `rt`    | Resource type    | `dev`            | Possible values are defined in [resource types](#resource-types) section.                         |
-| `rn`    | Resource name    | `zw`             | An arbitrary name of the application or component, preferably snake_case.                         |
-| `ad`    | Resource address | `1`              | An arbitrary string defining address of the resource, resources on the hub will normally use `1`. |
-| `sv`    | Service name     | `out_bin_switch` | Name of the device service.                                                                       |
-| `ad`    | Service address  | `1_1`            | An arbitrary string defining address of the device service.                                       |
+| Segment | Name             | Examples         | Description                                                                                         |
+|---------|------------------|------------------|-----------------------------------------------------------------------------------------------------|
+| `pt`    | Parser type      | `j1`             | Possible values are: `j1` (JSON v1), `j1c1` (JSON v1 Compression Type 1 gzip).                      |
+| `mt`    | Message type     | `evt`            | Possible values are: `cmd` (command), `evt` (event), `rsp` (response).                              |
+| `rt`    | Resource type    | `dev`            | Possible values are defined in [resource types](#resource-types) section.                           |
+| `rn`    | Resource name    | `zw`             | An arbitrary name of the application or component, preferably snake_case.                           |
+| `ad`    | Resource address | `1`              | An arbitrary string defining address of the resource, resources on the hub will normally use `1`.   |
+| `sv`    | Service name     | `out_bin_switch` | Name of the device service.                                                                         |
+| `ad`    | Service address  | `3`, `3_1`       | A string defining address of the device service. Must follow `{THING_ADDRESS}[_{GROUP_ID}]` format. |
 
-> While service address segment can be any arbitrary string it is recommended to follow convention of:
-> * `{THING_ADDRESS}_{GROUP_ID}` for things with multiple groups
-> * `{THING_ADDRESS}` for things with single group
-> 
-> For example in Z-Wave it is effectively `{NODE_ID}_{CHANNEL_ID}` while in Zigbee `{UDID}_{ENDPOINT_ID}`.
+> For backwards compatibility the service address segment must follow the `{THING_ADDRESS}[_{GROUP_ID}]` format. For example:
+> * in Z-Wave it is `{THING_ADDRESS}_{GROUP_ID}`, where `THING_ADDRESS` is equal to `NODE_ID` and `GROUP_ID` is equal to `CHANNEL_ID`
+> * in Zigbee it is `{THING_ADDRESS}_{GROUP_ID}`, where `THING_ADDRESS` is equal to `UDID` and `GROUP_ID` is equal to `ENDPOINT_ID`
+> * in a typical custom adapter it is just `{THING_ADDRESS}`, where `THING_ADDRESS` is an arbitrary string identifying the thing.
+>
+> Both thing `THING_ADDRESS` and `GROUP_ID` must be alphanumeric strings to allow parsing of the service address and to avoid collisions with MQTT topic special signs.
 > Consult [inclusion_report](/adapter/thing_management.md#definitions) specification for more details.
 
 ## Resource types
