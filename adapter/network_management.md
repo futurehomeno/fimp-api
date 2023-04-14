@@ -63,7 +63,7 @@ Every adapter should define its own service name.
 | status           | string    | `"UP"`                   | Reachability status of a thing, either `UP` for online devices or `DOWN` for an offline device.                                     |
 | operationability | str_array | `["sleep", "update"]`    | Operationability status of a thing, an array with zero, one or more non-exclusive statuses, see [`operationability`](#definitions). |
 | conn_quality     | string    | `"high"`                 | Network connection quality rating, one of `low`, `medium`, `high`, or `undefined` if unknown or not applicable.                     |
-| conn_type        | string    | `"direct"`               | Either `direct` or `indirect`, if communication is going through hops or third party cloud services/proxies.                        |
+| conn_type        | string    | `"direct"`               | One of `unknown`, `direct` or `indirect`, if communication is going through hops or third party cloud services/proxies.             |
 
 * `operationability` is one of the following values:
 
