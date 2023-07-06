@@ -7,6 +7,7 @@ Generic services are each representing an aspect or functionality of a device. T
 - [Basic](/device_services/generic/basic.md)
 - [Output binary switch](/device_services/generic/output_binary_switch.md)
 - [Output level switch](/device_services/generic/output_level_switch.md)
+- [Power regulator](/device_services/generic/power_regulator.md)
 - [Thermostat](/device_services/generic/thermostat.md)
 - [Water heater](/device_services/generic/water_heater.md)
 - [Meter](/device_services/generic/meter.md)

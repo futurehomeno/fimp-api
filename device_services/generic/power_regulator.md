@@ -1,0 +1,110 @@
+# Power Regulator Service
+
+Power regulator service acts as a controller responsible for turning the relay on and off for a given part of the duty cycle.
+
+## Service name
+
+`power_regulator`
+
+## Interfaces
+
+| Type | Interface            | Value type | Description                    |
+|------|----------------------|------------|--------------------------------|
+| in   | cmd.lvl.set          | int        | Sets the level value.          |                                                                               
+| in   | cmd.lvl.get_report   | null       | Requests the level value.      |
+| out  | evt.lvl.report       | int        | Reports the level value.       |
+| -    |                      |            |                                |
+| in   | cmd.cycle.set        | int        | Sets the duty cycle value.     |                                                                               
+| in   | cmd.cycle.get_report | null       | Requests the duty cycle value. |
+| out  | evt.cycle.report     | int        | Reports the duty cycle value.  |
+
+## Service properties
+
+| Name         | Type   | Example                            | Description                                                                               |
+|--------------|--------|------------------------------------|-------------------------------------------------------------------------------------------|
+| `max_lvl`    | int    | `100`                              | A maximum supported level value.                                                          |
+| `min_lvl`    | int    | `5`                                | A minimum supported level value.                                                          |
+| `lvl_step`   | int    | `5`                                | A step of level.                                                                          |
+| `sup_cycles` | object | `[{"min":60,"max":1800,"step":1}]` | Supported duty cycles settings in form of array of [`cycle_range`](#definitions) objects. |
+
+## Definitions
+
+* `cycle_range` is an object with the following structure:
+
+| Field | Type | Example | Description                                                 |
+|-------|------|---------|-------------------------------------------------------------|
+| min   | int  | `60`    | From what minimum value a duty cycle can be set in seconds. |
+| max   | int  | `1800`  | To what maximum value a duty cycle can be set in seconds.   |
+| step  | int  | `1`     | Step value for the range in seconds.                        |
+
+> Multiple ranges can be defined in the `sup_cycles` property to accommodate different duty cycle capabilities of the device.
+> An enum list of cycles can be defined by ranges with equal min and max value.
+> Ranges can also be used to define different precision, e.g. a second precision in range up to a minute and a minute precision in range up to an hour.
+
+## Examples
+
+* Example of the command to set the level to 75%:
+
+```json
+{
+  "serv": "power_regulator",
+  "type": "cmd.lvl.set",
+  "val_t": "int",
+  "val": 75,
+  "tags": [],
+  "src": "-",
+  "ver": "1",
+  "uid": "49b60210-5374-11ed-b6d0-33d4305f427b",
+  "topic": "pt:j1/mt:cmd/rt:dev/rn:zigbee/ad:1/sv:power_regulator/ad:124_0"
+}
+```
+
+* Example of the level report.
+
+```json
+{
+  "serv": "power_regulator",
+  "type": "evt.lvl.report",
+  "val_t": "int",
+  "val": 75,
+  "props": null,
+  "tags": null,
+  "src": "-",
+  "ver": "1",
+  "uid": "eb99fe48-3276-4a21-acd4-a6cbfb3a800d",
+  "topic": "pt:j1/mt:evt/rt:dev/rn:zigbee/ad:1/sv:power_regulator/ad:124_0"
+}
+```
+
+* Example of the command to set the duty cycle to 1800 seconds:
+
+```json
+{
+  "serv": "power_regulator",
+  "type": "cmd.cycle.set",
+  "val_t": "int",
+  "val": 1800,
+  "tags": [],
+  "src": "-",
+  "ver": "1",
+  "uid": "49b60210-5374-11ed-b6d0-33d4305f427b",
+  "topic": "pt:j1/mt:cmd/rt:dev/rn:zigbee/ad:1/sv:power_regulator/ad:124_0"
+}
+```
+
+* Example of the duty cycle report.
+
+```json
+{
+  "serv": "power_regulator",
+  "type": "evt.cycle.report",
+  "val_t": "int",
+  "val": 1800,
+  "props": null,
+  "tags": null,
+  "src": "-",
+  "ver": "1",
+  "uid": "eb99fe48-3276-4a21-acd4-a6cbfb3a800d",
+  "topic": "pt:j1/mt:evt/rt:dev/rn:zigbee/ad:1/sv:power_regulator/ad:124_0"
+}
+```
