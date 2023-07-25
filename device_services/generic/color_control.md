@@ -31,17 +31,17 @@ The service can be used to control color components of a lighting device, such a
 
 * `color_component` represents a single color component, see the table below for well-defined color components:
 
-| Color component | Z-Wave | Zigbee | Range   | Description                                                                                                                    |
-|-----------------|--------|--------|---------|--------------------------------------------------------------------------------------------------------------------------------|
-| `red`           | Yes    | Yes    | 0-255   | Defines intensity of red color.                                                                                                |
-| `green`         | Yes    | Yes    | 0-255   | Defines intensity of green color.                                                                                              |
-| `blue`          | Yes    | Yes    | 0-255   | Defines intensity of blue color.                                                                                               |
-| `warm_w`        | Yes    | No     | 0-255   | Is intensity of warm white light source. Mix of warm white and cold white intensity forms color temperature.                   |
-| `cold_w`        | Yes    | No     | 0-255   | Is intensity of cold white light source. Mix of warm white and cold white intensity forms color temperature.                   |
-| `temp`          | No     | Yes    | 1-65279 | Is the color temperature in Mired (micro reciprocal degree). Actual color temperature supported by end devices is 2700K-6500K. |
-| `amber`         | Yes    | No     | 0-255   | Defines intensity of amber color.                                                                                              |
-| `cyan`          | Yes    | No     | 0-255   | Defines intensity of cyan color.                                                                                               |
-| `purple`        | Yes    | No     | 0-255   | Defines intensity of purple color.                                                                                             |
+| Color component | Z-Wave | Zigbee | Range   | Description                                                                                                  |
+|-----------------|--------|--------|---------|--------------------------------------------------------------------------------------------------------------|
+| `red`           | Yes    | Yes    | 0-255   | Defines intensity of red color.                                                                              |
+| `green`         | Yes    | Yes    | 0-255   | Defines intensity of green color.                                                                            |
+| `blue`          | Yes    | Yes    | 0-255   | Defines intensity of blue color.                                                                             |
+| `warm_w`        | Yes    | No     | 0-255   | Is intensity of warm white light source. Mix of warm white and cold white intensity forms color temperature. |
+| `cold_w`        | Yes    | No     | 0-255   | Is intensity of cold white light source. Mix of warm white and cold white intensity forms color temperature. |
+| `temp`          | No     | Yes    | 1-65279 | Is the color temperature in Kelvins. Values supported by end devices are 2700K-6500K.                        |
+| `amber`         | Yes    | No     | 0-255   | Defines intensity of amber color.                                                                            |
+| `cyan`          | Yes    | No     | 0-255   | Defines intensity of cyan color.                                                                             |
+| `purple`        | Yes    | No     | 0-255   | Defines intensity of purple color.                                                                           |
 
 * `transition` is an object representing a single color transition change with the following structure:
 
