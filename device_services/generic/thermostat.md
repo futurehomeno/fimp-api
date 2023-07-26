@@ -39,7 +39,7 @@ Thermostat service is used to control the temperature in a room or a building an
 
 | Field | Type   | Example  | Description                                                                           |
 |-------|--------|----------|---------------------------------------------------------------------------------------|
-| type  | string | `"heat"` | One of the `mode` values declared in [`sup_setpoints`](#service-properties) property. |
+| type  | string | `"heat"` | One of the `setpoints` values declared in [`sup_setpoints`](#service-properties) property. |
 | temp  | string | `"21.5"` | Setpoint value in the provided unit.                                                  |
 | unit  | string | `"C"`    | Setpoint unit.                                                                        |
 
