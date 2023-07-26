@@ -10,9 +10,9 @@ Power regulator service acts as a controller responsible for turning the relay o
 
 | Type | Interface             | Value type | Description                     |
 |------|-----------------------|------------|---------------------------------|
-| in   | cmd.cycle.set         | int        | Sets the cycle value.           |                                                                               
-| in   | cmd.cycle.get_report  | null       | Requests the cycle value.       |
-| out  | evt.cycle.report      | int        | Reports the cycle value.        |
+| in   | cmd.cycle.set         | int        | Sets the duty cycle value.      |                                                                               
+| in   | cmd.cycle.get_report  | null       | Requests the duty cycle value.  |
+| out  | evt.cycle.report      | int        | Reports the duty cycle value.   |
 | -    |                       |            |                                 |
 | in   | cmd.period.set        | int        | Sets the duty period value.     |                                                                               
 | in   | cmd.period.get_report | null       | Requests the duty period value. |
@@ -22,9 +22,9 @@ Power regulator service acts as a controller responsible for turning the relay o
 
 | Name          | Type   | Example                            | Description                                                                                |
 |---------------|--------|------------------------------------|--------------------------------------------------------------------------------------------|
-| `max_lvl`     | int    | `100`                              | A maximum supported level value.                                                           |
-| `min_lvl`     | int    | `5`                                | A minimum supported level value.                                                           |
-| `lvl_step`    | int    | `5`                                | A step of level.                                                                           |
+| `max_cycle`   | int    | `100`                              | A maximum supported duty cycle value.                                                      |
+| `min_cycle`   | int    | `5`                                | A minimum supported duty cycle value.                                                      |
+| `cycle_step`  | int    | `5`                                | A step of duty cycle.                                                                      |
 | `sup_periods` | object | `[{"min":60,"max":1800,"step":1}]` | Supported duty period settings in form of array of [`period_range`](#definitions) objects. |
 
 ## Definitions
