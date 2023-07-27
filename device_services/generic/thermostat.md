@@ -24,6 +24,9 @@ Thermostat service is used to control the temperature in a room or a building an
 | in   | cmd.sensing.set         | string     |             |             | Sets the `sensing` type of the device, one of the valuesdeclared in `sup_sensing`.                                                                   |
 | in   | cmd.sensing.get_report  | null       |             |             | Requests the `sensing` type of the device.                                                                                                           |
 | out  | evt.sensing.report      | string     |             |             | Reports the `sensing` type of the device, one of the values declared in [`sup_sensing`](#service-properties) property.                               |
+| -    |                         |            |             |             |                                                                                                                                                      |
+| in   | cmd.window.get_report   | null       |             |             | Requests the state of the window.                                                                                                                    |
+| out  | evt.window.report       | bool       |             |             | Reports the state of the window. `true` if it is open and `false' if it is closed.                                                                  |
 
 ## Service properties
 
