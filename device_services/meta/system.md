@@ -1,37 +1,34 @@
 # System related device service
 
+System service is provides a set of optional interfaces for device management.
+
 ## Service names
 
 `dev_sys`
 
 ## Interfaces
 
-Type | Interface                   | Value type | Description
------|---------------------------- |------------|------------
-in   | cmd.config.get_report       | str_array  | **Deprecated** Service `parameters` should be used instead. Requests service to respond with config report. If array is empty - report all parameters.
-in   | cmd.config.set              | str_map    | **Deprecated** Service `parameters` should be used instead. Sets configuration. Value is a key-value pairs.
-in   | cmd.thing.reboot            | string     | Requests device to run either complete reboot or reboot specific component.
-out  | evt.config.report           | str_map    | **Deprecated** Service `parameters` should be used instead. Reports configurations in form of key-value pairs.
--|||
-in   | cmd.group.add_members       | object     | Adds members to the group. Object has the same format as members_report
-in   | cmd.group.delete_members    | object     | Object has the same format as report.
-in   | cmd.group.get_members       | string     | Value is a group name.
-out  | evt.group.members_report    | object     | Object structure `{"group":"group1", "members":["node1", "node2"]}`
--|||
-in   | cmd.node_block.set          | str_map    | Value: `{"period_hours": "1"}`, device will be blocked from now + 1h
-in   | cmd.node_block.get          | str_map    | Value example `{"expire_at":"2020-11-09T10:28:34Z", "isBlocked" : "true"}`.  Time is in local timezone.
-out  | evt.node_block.report"      | str_map    | Value example `{"expire_at":"2020-11-09T10:28:34Z"}`. Time is in local timezone.
--|||
-in   | cmd.wuptimer.get            | null       |
-in   | cmd.wuptimer.set            | str_map    | Value example `{"interval":"3600"}`. Interval is in seconds. Min and Max are device specific values. Please refeer to device datasheet.
-out  | evt.wuptimer.config_report  | str_map    | Value example `{"current": 4200, "default": 86400, "interval": 60, "maximum": 86400, "minimum": 1800}`
--|||
-in   | cmd.node_reinterview        | str_map    | Value example `{"max_age":"1"}`. The maximum age of the NodeInfo frame, given in 2^n minutes. If the cache entry does not exist or if it is older than the value given in this field,  the ZIP will attempt to get a Fresh NodeInfo frame before responding to the Node Info Cached Get command. A value of 15 means infinite, i.e. No Cache Refresh.
--|||
-in   | cmd.channel.get             | null    | Requests the current Zigbee channel.
-out  | evt.channel.report          | int     | Reports the current Zigbee channel. The value is 0 if the network has not been established yet.
+| Type | Interface                  | Value type | Description                                                                                                                                                                           |
+|------|----------------------------|------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| in   | cmd.thing.reboot           | bool       | Requests device to reboot. If value is `true` the reboot should omit graceful shutdown procedure if device supports it.                                                               |                                
+| -    |                            |            |                                                                                                                                                                                       |
+| in   | cmd.config.get_report      | str_array  | **Deprecated** Use `parameters` service instead. Requests service to respond with config report. If array is empty it should report all parameters.                                   |
+| in   | cmd.config.set             | str_map    | **Deprecated** Use `parameters` service instead. Sets configuration. Value is a map of key-value pairs. Configuration values should be in form `<value>;<size>`, for instance `12;2`. |
+| out  | evt.config.report          | str_map    | **Deprecated** Use `parameters` service instead. Reports configurations in form of key-value pairs.                                                                                   |
+| -    |                            |            |                                                                                                                                                                                       |
+| in   | cmd.group.add_members      | object     | **Deprecated** Use `association` service instead. Adds members to the group. Object has the same format as members report.                                                            |
+| in   | cmd.group.delete_members   | object     | **Deprecated** Use `association` service instead. Removes members from the group. Object has the same format as members report.                                                       |
+| in   | cmd.group.get_members      | string     | **Deprecated** Use `association` service instead. Requests report with members for a provided group.                                                                                  |
+| out  | evt.group.members_report   | object     | **Deprecated** Use `association` service instead. Reports members of a group, e.g.: `{"group":"3", "members":["10_0", "11_2"]}`.                                                      |
+| -    |                            |            |                                                                                                                                                                                       |
+| in   | cmd.node_block.set         | str_map    | Blocks device from now for the provided number of hours, e.g.: `{"period_hours": "1"}`.                                                                                               |
+| in   | cmd.node_block.get         | null       | Requests node block status.                                                                                                                                                           |
+| out  | evt.node_block.report      | str_map    | Reports node block status, e.g.: `{"expire_at":"2020-11-09T10:28:34Z", "isBlocked" : "true"}`.                                                                                        |
+| -    |                            |            |                                                                                                                                                                                       |
+| in   | cmd.wuptimer.get           | null       | Requests wake-up timer setting.                                                                                                                                                       |
+| in   | cmd.wuptimer.set           | str_map    | Sets up wake-up timer setting, e.g. `{"interval":"3600"}`. Interval is in seconds. Minimum and maximum values are device specific.                                                    |
+| out  | evt.wuptimer.config_report | str_map    | Reports the current wake-up timer configuration, e.g.: `{"current": 4200, "default": 86400, "interval": 60, "maximum": 86400, "minimum": 1800}`.                                      |
+| -    |                            |            |                                                                                                                                                                                       |
+| in   | cmd.channel.get            | null       | Requests the current Zigbee channel.                                                                                                                                                  |
+| out  | evt.channel.report         | int        | Reports the current Zigbee channel. The value is 0 if the network has not been established yet.                                                                                       |
 
-## Notes
-
-- Z-Wave configuration values should be in form <value>;size, for instance 12;2
-- Z-Wave association member should be in form <node_id>\_<endpoint_id>, for instance 10_0
