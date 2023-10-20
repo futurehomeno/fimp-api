@@ -153,6 +153,9 @@ The following table lists all supported electricity measurements, interfaces whi
 | Energy import phase 2         | `e2_import`                |                         |                                | kWh   |
 | Energy import phase 3         | `e3_import`                |                         |                                | kWh   |
 | Energy export total           | `e_export`                 |                         | `kWh`                          | kWh   |
+| Energy export phase 1         | `e1_export`                |                         |                                | kWh   |
+| Energy export phase 2         | `e2_export`                |                         |                                | kWh   |
+| Energy export phase 3         | `e3_export`                |                         |                                | kWh   |
 | Reactive energy import        | `e_import_react`           | `kVArh`                 |                                | kVArh |
 | Apparent energy import        | `e_import_apparent`        | `kVAh`                  |                                | kVAh  |
 | Reactive energy export        | `e_export_react`           |                         | `kVArh`                        | kVArh |
