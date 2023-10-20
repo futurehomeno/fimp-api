@@ -1,6 +1,6 @@
 # Parameters Service
 
-Parameters service allows for advanced configuration of a device.
+Parameters service allows for advanced configuration of a device. For a list of predefined parameters see [Predefined parameters](#predefined-parameters) section.
 
 > Please note that this service is experimental and may be changed in the future.
 
@@ -168,3 +168,15 @@ Parameters service allows for advanced configuration of a device.
   "topic": "pt:j1/mt:evt/rt:dev/rn:zw/ad:1/sv:parameters/ad:149_0"
 }
 ```
+
+## Predefined parameters
+
+Parameters service is primarily intended to support vendor-specific configuration parameters that can vary for every device.
+However, there are some predefined parameters which have a standardized meaning and are expected to have uniform implementation across devices which support them.
+
+| Parameter ID          | Name                | Value Type | Requirements                              | Description                                                                                                                                                                                                                                      | 
+|-----------------------|---------------------|------------|-------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `heat_control_mode`   | Heat control mode   | `string`   | `thermostat` or `power_regulator` service | Allows to switch heating control mode between thermostat and power <br/>regulator. Accepted values are `reg` for power regulator and `tht` for thermostat. Switch results in sending new inclusion report with requested device functionalities. |
+| `cable_always_locked` | Cable always locked | `bool`     | `chargepoint` service                     | Allows to enforce charging cable to be always locked on the EVSE side to prevent theft.                                                                                                                                                          |
+| `free_charging`       | Free charging       | `bool`     | `chargepoint` service                     | Determines whether chargepoint should automatically start charging an EV without an authorization or remote control trigger.                                                                                                                     |
+| `led_brightness`      | LED brightness      | `int`      | `chargepoint` service                     | Allows to set the brightness of the LED ring on the chargepoint. Accepted values are defined by `min` and `max` properties of the parameter definition.                                                                                          |
