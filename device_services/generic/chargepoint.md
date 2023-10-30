@@ -27,6 +27,10 @@ Chargepoint service is used to represent EV chargers.
 | in   | cmd.max_current.set             | int        |                                                                     | Sets the maximum offered current in `A`, must be an integer between `6` and `sup_max_current` service property value. |
 | in   | cmd.max_current.get_report      | null       |                                                                     | Requests the maximum offered energy.                                                                                  |
 | out  | evt.max_current.report          | int        |                                                                     | Reports the maximum offered current in `A`, this is effectively a static load balancing value.                        |
+| -    |                                 |            |                                                                     |                                                                                                                       |
+| in   | cmd.phase_mode.set              | string     |                                                                     | Sets the phase mode. See [the list](#definitions) of possible values.                                                 |
+| in   | cmd.phase_mode.get_report       | null       |                                                                     | Requests the phase mode.                                                                                              |
+| out  | evt.phase_mode.report           | string     |                                                                     | Reports the phase mode.                                                                                               |
 
 ## Interface properties
 
@@ -53,12 +57,26 @@ Chargepoint service is used to represent EV chargers.
 | `sup_max_current`    | int       | `32`                                                          | Maximum current limit in `A` as set by the installer.                                        |
 | `grid_type`          | string    | `"TN"`                                                        | Grid type of the charger. Possible values are `IT`, `TT` and `TN`.                           |
 | `phases`             | int       | `1`                                                           | Number of phases of the charger. Possible values are `1` and `3`.                            |
+| `sup_phase_modes`    | str_array | `["NL1L2L3", "NL1"]`                                          | Optionally supported phase modes. See [the list](#definitions) of possible values.           |
 
 ## Definitions
 
 * `state` is one of: `disconnected`, `requesting`, `charging`, `ready_to_charge`, `suspended_by_evse`, `suspended_by_ev`, `finished`, `reserved`, `unavailable`, `error`, `unknown`.
 
 > Please note that `ready_to_charge` and `charging` are states required for charging control, while others have only informative value.
+
+* `phase_mode` defines allowed phase balancing modes, see table below for more details:
+
+| Value     | Input EVSE            | Output EV             | Grid       |
+|-----------|-----------------------|-----------------------|------------|
+| `NL1L2L3` | `N`, `L1`, `L2`, `L3` | `N`, `L1`, `L2`, `L3` | `TN`, `TT` |
+| `NL1`     | `N`, `L1`             | `N`, `L1`             | `TN`, `TT` |
+| `NL2`     | `N`, `L2`             | `N`, `L1`             | `TN`, `TT` |
+| `NL3`     | `N`, `L3`             | `N`, `L1`             | `TN`, `TT` |
+| `L1L2L3`  | `L1`, `L2`, `L3`      | `N`, `L1`, `L2`       | `IT`       |
+| `L1L2`    | `L1`, `L2`            | `N`, `L1`             | `IT`       |
+| `L2L3`    | `L2`, `L3`            | `N`, `L1`             | `IT`       |
+| `L3L1`    | `L1`, `L3`            | `N`, `L1`             | `IT`       |
 
 ## Examples
 
