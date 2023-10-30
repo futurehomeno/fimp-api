@@ -79,7 +79,7 @@ Chargepoint service is used to represent EV chargers.
 | `L3L1`     | L1 L3        | N L1       | `IT`                   |
 
 > Based on an EVSE capabilities and its configuration a chargepoint service may support only a subset of the above modes.
-> For example a chargepoint connected to a `TN` grid which and capable of charging from all 3 phases at once or 1st phase only, 
+> For example a chargepoint connected to a `TN` grid and capable of charging from all 3 phases at once or 1st phase only, 
 > should list `NL1L2L3` and `NL1` as supported phase modes.
 
 ## Examples
