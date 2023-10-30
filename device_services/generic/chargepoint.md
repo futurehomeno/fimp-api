@@ -78,6 +78,9 @@ Chargepoint service is used to represent EV chargers.
 | `L2L3`    | L2 L3      | N L1       | `IT`       |
 | `L3L1`    | L1 L3      | N L1       | `IT`       |
 
+> Based on device capabilities and its configuration a chargepoint may support only a subset of the above modes. 
+> For example a chargepoint in TN installation capable to switch between 3 phases and 1 phase only will support `NL1L2L3` and `NL1` modes.
+
 ## Examples
 
 * Example of a command to start charging an EV using a `slow` charging mode:
