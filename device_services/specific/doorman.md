@@ -77,7 +77,15 @@ Topic example:
 
 - cmd.doorman_param.set
 
-    Sets Doorman's parameters. For the valid `parameter_id` values and what they mean, check the delivery PDF above.
+    Sets Doorman's parameters. For the valid `parameter_id` values and what they mean, check with corresponding version of Doorman cluster implementation. Some examplary parameters are:
+
+  	DoormanSilentMode              = 0x01
+	DoormanAutoRelock              = 0x02
+	DoormanLanguage                = 0x05
+	DoormanSystemArmHoldTime       = 0x10
+	DoormanHomeAwayAlarmMode       = 0x11
+	DoormanPartAlarmSystem         = 0x12
+	DoormanUserCodeBlockingEnable  = 0x13
 
     ```jsx
     {
