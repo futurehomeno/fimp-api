@@ -8,29 +8,29 @@ Chargepoint service is used to represent EV chargers.
 
 ## Interfaces
 
-| Type | Interface                       | Value type | Properties                                                          | Description                                                                                                           |
-|------|---------------------------------|------------|---------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------|
-| in   | cmd.charge.start                | null       | `charging_mode`                                                     | Starts/resumes charging an EV. Charger must be in `ready_to_charge` state.                                            |
-| in   | cmd.charge.stop                 | null       |                                                                     | Stops/pauses charging an EV. Charger must be in `charging` state.                                                     |
-| -    |                                 |            |                                                                     |                                                                                                                       |
-| in   | cmd.state.get_report            | null       |                                                                     | Gets the `state` of the chargepoint.                                                                                  |
-| out  | evt.state.report                | string     | `charging_mode`                                                     | Reports the `state` of the chargepoint, see [`sup_states`](#service-properties) for list of possible states.          |
-| -    |                                 |            |                                                                     |                                                                                                                       |
-| in   | cmd.cable_lock.set              | bool       |                                                                     | Locks and unlocks the cable/connector.                                                                                |
-| in   | cmd.cable_lock.get_report       | null       |                                                                     | Gets the status of the cable/connector lock.                                                                          |
-| out  | evt.cable_lock.report           | bool       | `cable_current`                                                     | Reports `true` if the cable/connector is **locked** and `false` otherwise.                                            |
-| -    |                                 |            |                                                                     |                                                                                                                       |
-| in   | cmd.current_session.set_current | int        |                                                                     | Sets the offered current for the ongoing session in `A`, must be an integer between `6` and `max_current` value.      |
-| in   | cmd.current_session.get_report  | null       |                                                                     | Requests energy consumed during the current session and optionally additional characteristics.                        |
-| out  | evt.current_session.report      | float      | `previous_session`, `started_at`,  `finished_at`, `offered_current` | Reports energy consumed during the current session in `kWh` and optionally additional characteristics.                |
-| -    |                                 |            |                                                                     |                                                                                                                       |
-| in   | cmd.max_current.set             | int        |                                                                     | Sets the maximum offered current in `A`, must be an integer between `6` and `sup_max_current` service property value. |
-| in   | cmd.max_current.get_report      | null       |                                                                     | Requests the maximum offered energy.                                                                                  |
-| out  | evt.max_current.report          | int        |                                                                     | Reports the maximum offered current in `A`, this is effectively a static load balancing value.                        |
-| -    |                                 |            |                                                                     |                                                                                                                       |
-| in   | cmd.phase_mode.set              | string     |                                                                     | Sets the phase mode. See [the list](#definitions) of possible values.                                                 |
-| in   | cmd.phase_mode.get_report       | null       |                                                                     | Requests the phase mode.                                                                                              |
-| out  | evt.phase_mode.report           | string     |                                                                     | Reports the phase mode.                                                                                               |
+| Type | Interface                       | Value type | Properties                                                          | Description                                                                                                               |
+|------|---------------------------------|------------|---------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------|
+| in   | cmd.charge.start                | null       | `charging_mode`                                                     | Starts/resumes charging an EV. Charger must be in `ready_to_charge` state.                                                |
+| in   | cmd.charge.stop                 | null       |                                                                     | Stops/pauses charging an EV. Charger must be in `charging` state.                                                         |
+| -    |                                 |            |                                                                     |                                                                                                                           |
+| in   | cmd.state.get_report            | null       |                                                                     | Gets the `state` of the chargepoint.                                                                                      |
+| out  | evt.state.report                | string     | `charging_mode`                                                     | Reports the `state` of the chargepoint, see [`sup_states`](#service-properties) for list of possible states.              |
+| -    |                                 |            |                                                                     |                                                                                                                           |
+| in   | cmd.cable_lock.set              | bool       |                                                                     | Locks and unlocks the cable/connector.                                                                                    |
+| in   | cmd.cable_lock.get_report       | null       |                                                                     | Gets the status of the cable/connector lock.                                                                              |
+| out  | evt.cable_lock.report           | bool       | `cable_current`                                                     | Reports `true` if the cable/connector is **locked** and `false` otherwise.                                                |
+| -    |                                 |            |                                                                     |                                                                                                                           |
+| in   | cmd.current_session.set_current | int        |                                                                     | Sets the offered current for the ongoing session in `A`, must be an integer between `6` and `max_current` value.          |
+| in   | cmd.current_session.get_report  | null       |                                                                     | Requests energy consumed during the current session and optionally additional characteristics.                            |
+| out  | evt.current_session.report      | float      | `previous_session`, `started_at`,  `finished_at`, `offered_current` | Reports energy consumed during the current session in `kWh` and optionally additional characteristics.                    |
+| -    |                                 |            |                                                                     |                                                                                                                           |
+| in   | cmd.max_current.set             | int        |                                                                     | Sets the maximum offered current in `A`, must be an integer between `6` and `sup_max_current` service property value.     |
+| in   | cmd.max_current.get_report      | null       |                                                                     | Requests the maximum offered energy.                                                                                      |
+| out  | evt.max_current.report          | int        |                                                                     | Reports the maximum offered current in `A`, this is effectively a static load balancing value.                            |
+| -    |                                 |            |                                                                     |                                                                                                                           |
+| in   | cmd.phase_mode.set              | string     |                                                                     | Sets the phase mode for chargepoints installed in 3-phase configuration. See [the list](#definitions) of possible values. |
+| in   | cmd.phase_mode.get_report       | null       |                                                                     | Requests the phase mode.                                                                                                  |
+| out  | evt.phase_mode.report           | string     |                                                                     | Reports the phase mode.                                                                                                   |
 
 ## Interface properties
 
@@ -65,21 +65,21 @@ Chargepoint service is used to represent EV chargers.
 
 > Please note that `ready_to_charge` and `charging` are states required for charging control, while others have only informative value.
 
-* `phase_mode` defines allowed phase balancing modes, see table below for more details:
+* `phase_mode` defines allowed phase balancing modes for chargepoints installed in 3-phase configuration, see table below for more details on modes:
 
-| Value     | Input EVSE | Output EV  | Grid       |
-|-----------|------------|------------|------------|
-| `NL1L2L3` | N L1 L2 L3 | N L1 L2 L3 | `TN`, `TT` |
-| `NL1`     | N L1       | N L1       | `TN`, `TT` |
-| `NL2`     | N L2       | N L1       | `TN`, `TT` |
-| `NL3`     | N L3       | N L1       | `TN`, `TT` |
-| `L1L2L3`  | L1 L2 L3   | N L1 L2    | `IT`       |
-| `L1L2`    | L1 L2      | N L1       | `IT`       |
-| `L2L3`    | L2 L3      | N L1       | `IT`       |
-| `L3L1`    | L1 L3      | N L1       | `IT`       |
+| Phase mode | Grid to EVSE | EVSE to EV | Allowed for grid types |
+|------------|--------------|------------|------------------------|
+| `NL1L2L3`  | N L1 L2 L3   | N L1 L2 L3 | `TN`, `TT`             |
+| `NL1`      | N L1         | N L1       | `TN`, `TT`             |
+| `NL2`      | N L2         | N L1       | `TN`, `TT`             |
+| `NL3`      | N L3         | N L1       | `TN`, `TT`             |
+| `L1L2L3`   | L1 L2 L3     | N L1 L2    | `IT`                   |
+| `L1L2`     | L1 L2        | N L1       | `IT`                   |
+| `L2L3`     | L2 L3        | N L1       | `IT`                   |
+| `L3L1`     | L1 L3        | N L1       | `IT`                   |
 
-> Based on device capabilities and its configuration a chargepoint may support only a subset of the above modes. 
-> For example a chargepoint in TN installation capable to switch between 3 phases and 1 phase only will support `NL1L2L3` and `NL1` modes.
+> Based on an EVSE capabilities and its configuration a chargepoint service may support only a subset of the above modes.
+> For example a chargepoint connected to a TN grid which is capable charging from all 3 phases at once or 1st phase only, should list `NL1L2L3` and `NL1` as supported phase modes.
 
 ## Examples
 
