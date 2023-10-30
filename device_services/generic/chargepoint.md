@@ -55,9 +55,9 @@ Chargepoint service is used to represent EV chargers.
 | `sup_states`         | str_array | `["disconnected", "charging", "ready_to_charge", "finished"]` | List of possible states of the chargepoint. See [the list](#definitions) of possible values. |
 | `sup_charging_modes` | str_array | `["slow", "normal"]`                                          | Optionally supported charging modes.                                                         |
 | `sup_max_current`    | int       | `32`                                                          | Maximum current limit in `A` as set by the installer.                                        |
+| `sup_phase_modes`    | str_array | `["NL1L2L3", "NL1"]`                                          | Optionally supported phase modes. See [the list](#definitions) of possible values.           |
 | `grid_type`          | string    | `"TN"`                                                        | Grid type of the charger. Possible values are `IT`, `TT` and `TN`.                           |
 | `phases`             | int       | `1`                                                           | Number of phases of the charger. Possible values are `1` and `3`.                            |
-| `sup_phase_modes`    | str_array | `["NL1L2L3", "NL1"]`                                          | Optionally supported phase modes. See [the list](#definitions) of possible values.           |
 
 ## Definitions
 
@@ -67,16 +67,16 @@ Chargepoint service is used to represent EV chargers.
 
 * `phase_mode` defines allowed phase balancing modes, see table below for more details:
 
-| Value     | Input EVSE            | Output EV             | Grid       |
-|-----------|-----------------------|-----------------------|------------|
-| `NL1L2L3` | `N`, `L1`, `L2`, `L3` | `N`, `L1`, `L2`, `L3` | `TN`, `TT` |
-| `NL1`     | `N`, `L1`             | `N`, `L1`             | `TN`, `TT` |
-| `NL2`     | `N`, `L2`             | `N`, `L1`             | `TN`, `TT` |
-| `NL3`     | `N`, `L3`             | `N`, `L1`             | `TN`, `TT` |
-| `L1L2L3`  | `L1`, `L2`, `L3`      | `N`, `L1`, `L2`       | `IT`       |
-| `L1L2`    | `L1`, `L2`            | `N`, `L1`             | `IT`       |
-| `L2L3`    | `L2`, `L3`            | `N`, `L1`             | `IT`       |
-| `L3L1`    | `L1`, `L3`            | `N`, `L1`             | `IT`       |
+| Value     | Input EVSE | Output EV  | Grid       |
+|-----------|------------|------------|------------|
+| `NL1L2L3` | N L1 L2 L3 | N L1 L2 L3 | `TN`, `TT` |
+| `NL1`     | N L1       | N L1       | `TN`, `TT` |
+| `NL2`     | N L2       | N L1       | `TN`, `TT` |
+| `NL3`     | N L3       | N L1       | `TN`, `TT` |
+| `L1L2L3`  | L1 L2 L3   | N L1 L2    | `IT`       |
+| `L1L2`    | L1 L2      | N L1       | `IT`       |
+| `L2L3`    | L2 L3      | N L1       | `IT`       |
+| `L3L1`    | L1 L3      | N L1       | `IT`       |
 
 ## Examples
 
