@@ -25,8 +25,6 @@ out  | evt.doorman_activity.report   | str_map    | Sent after an activity | {�
 in   | cmd.doorman.arm_confirm       | str_map    |                        | {“sequence_number”:”0”, “operating_parameter”:”0”}
 out  | evt.doorman_tag.report        | str_map    |                        | {“type”:”unrecognized_tag”, "tag_id": "123456789ABC"}
 
-More details and examples can be found on [Notion](https://www.notion.so/Assa-Abloy-Yale-doorman-v2-Zigbee-c94f3164a74f4035bf2d47d29ec9c9c0).
-
 ### Interface props
 
 Name              | Value                                              | Description
