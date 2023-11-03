@@ -69,14 +69,14 @@ Chargepoint service is used to represent EV chargers.
 
 | Phase mode | Grid to EVSE | EVSE to EV | Allowed for grid types |
 |------------|--------------|------------|------------------------|
-| `NL1L2L3`  | N L1 L2 L3   | N L1 L2 L3 | `TN`, `TT`             |
-| `NL1`      | N L1         | N L1       | `TN`, `TT`             |
-| `NL2`      | N L2         | N L1       | `TN`, `TT`             |
-| `NL3`      | N L3         | N L1       | `TN`, `TT`             |
-| `L1L2L3`   | L1 L2 L3     | N L1 L2    | `IT`                   |
-| `L1L2`     | L1 L2        | N L1       | `IT`                   |
-| `L2L3`     | L2 L3        | N L1       | `IT`                   |
-| `L3L1`     | L1 L3        | N L1       | `IT`                   |
+| `NL1L2L3`  | N L1 L2 L3   | N L1 L2 L3 | `TN`                   |
+| `NL1`      | N L1         | N L1       | `TN`                   |
+| `NL2`      | N L2         | N L1       | `TN`                   |
+| `NL3`      | N L3         | N L1       | `TN`                   |
+| `L1L2L3`   | L1 L2 L3     | N L1 L2    | `IT`, `TT`             |
+| `L1L2`     | L1 L2        | N L1       | `IT`, `TT`             |
+| `L2L3`     | L2 L3        | N L1       | `IT`, `TT`             |
+| `L3L1`     | L1 L3        | N L1       | `IT`, `TT`             |
 
 > Based on an EVSE capabilities and its configuration a chargepoint service may support only a subset of the above modes.
 > For example a EVSE connected to a `TN` grid and capable of charging from all 3 phases at once or 1st phase only, 
