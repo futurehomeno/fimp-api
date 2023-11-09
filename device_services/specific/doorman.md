@@ -21,7 +21,7 @@ in   | cmd.doorman_user.set          | str_map    | Set pin or tag         | {"n
 in   | cmd.doorman_user.get_all      | null       | Get all user slots     |
 out  | evt.doorman_user.report       | object     | Response to get_all    | See below
 in   | cmd.doorman_user.clear        | str_map    |                        | {“slot_number”:”1”}
-out  | evt.doorman_activity.report   | str_map    | Sent after an activity | {“event_type”:”id”, “status”:”0”, “error_code”:”0”, “user_status”:”added”, “slot_number”:”0”, “alarm_type”:”0”, “alarm_level”:”0”, “arming_parameter”:”0”, “sequence_number”:”0”, ”card_uid_data”:”12345678”}
+out  | evt.doorman_activity.report   | str_map    | Sent after an activity | {“event_type”:”id”, “status”:”0”, “error_code”:”0”, “user_status”:”added”, “slot_number”:”0”, “alarm_type”:”0”, “alarm_level”:”0”, “arming_parameter”:”0”, “sequence_number”:”0”}
 in   | cmd.doorman.arm_confirm       | str_map    |                        | {“sequence_number”:”0”, “operating_parameter”:”0”}
 out  | evt.doorman_tag.report        | str_map    |                        | {“type”:”unrecognized_tag”, "tag_id": "123456789ABC"}
 
