@@ -61,9 +61,24 @@ Chargepoint service is used to represent EV chargers.
 
 ## Definitions
 
-* `state` is one of: `disconnected`, `requesting`, `charging`, `ready_to_charge`, `suspended_by_evse`, `suspended_by_ev`, `finished`, `reserved`, `unavailable`, `error`, `unknown`.
+* `state` is one of the following values:
 
-> Please note that `ready_to_charge` and `charging` are states required for charging control, while others have only informative value.
+| `state`             | OCPP status              | Description                                                                        |
+|---------------------|--------------------------|------------------------------------------------------------------------------------|
+| `disconnected`      | Available                | EV is not connected to the EVSE.                                                   |
+| `requesting`        | Preparing                | EV is connected to the EVSE but is not yet ready to charge.                        |
+| `ready_to_charge`   | Preparing, SuspendedEVSE | EV is ready to charge but session has not yet been started or charging is paused.  |
+| `charging`          | Charging                 | EV is charging.                                                                    |
+| `switching_phases`  | SuspendedEVSE            | Charging session is active but EVSE is not ready to charge due to phase switching. |
+| `suspended_by_ev`   | SuspendedEV              | Charging session is active but EV is not ready to charge at the moment.            |
+| `suspended_by_evse` | SuspendedEVSE            | Charging session is active but EVSE is not ready to charge at the moment.          |
+| `finished`          | Finishing                | Charging session is finishing or has been finished and awaits EV to be unplugged.  |
+| `reserved`          | Reserved                 | EVSE is reserved for a future charging session.                                    |
+| `unavailable`       | Unavailable              | EVSE is not available for charging because of maintenance or firmware update.      |
+| `error`             | Faulted                  | EVSE is in an error state.                                                         |
+| `unknown`           | -                        | EVSE state is unknown.                                                             |
+
+> Please note that `ready_to_charge` and `charging` are states required for charging control, while others have mostly informative value.
 
 * `phase_mode` defines allowed phase balancing modes for EVSEs installed in 3-phase configuration, see table below for more details on modes:
 
@@ -79,7 +94,7 @@ Chargepoint service is used to represent EV chargers.
 | `L3L1`     | L1 L3        | N L1       | `IT`, `TT`             |
 
 > Based on an EVSE capabilities and its configuration a chargepoint service may support only a subset of the above modes.
-> For example a EVSE connected to a `TN` grid and capable of charging from all 3 phases at once or 1st phase only, 
+> For example a EVSE connected to a `TN` grid and capable of charging from all 3 phases at once or 1st phase only,
 > should list `NL1L2L3` and `NL1` as supported phase modes.
 
 ## Examples
