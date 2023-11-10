@@ -219,7 +219,7 @@ Topic example:
     ```jsx
     {
       "type": "evt.open.report",
-      "serv": "doorlock",
+      "serv": "door_lock",
       "val_t": "bool",
       "val": false,
       "tags": null,
