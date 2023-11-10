@@ -12,6 +12,7 @@ Door lock service is used to control door locks. It is used to lock and unlock d
 
 | Type | Interface                     | Value type | Properties                            | Description                                                                                                                                  |
 |------|-------------------------------|------------|---------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------|
+| out  | evt.open.report               | bool       |                                       | Simple lock status - true if open, false if closed     
 | in   | cmd.lock.get_report           | null       |                                       | Requests the lock status.                                                                                                                    |
 | in   | cmd.lock.set                  | bool       | `mode_op` `firstname`, `uuid`         | **Secures** the lock if the provided value is `true` and unlocks it if the value is `false`.                                                 |
 | out  | evt.lock.report               | bool_map   | `timeout_m`, `timeout_s`, `lock_type` | Returns the lock status as a boolean map of components defined in [`sup_components`](#service-properties) property.                          |
