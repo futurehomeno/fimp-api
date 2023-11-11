@@ -286,9 +286,9 @@ Topic example:
     }
     ```
 
-- evt.doorman_activity.report
+- evt.doorman_activity.report 
 
-    Sent by the lock when an event happens
+    Sent by the lock when an alarm event happens (event_type=0)
 
     ```jsx
     {
@@ -296,11 +296,81 @@ Topic example:
       "serv": "doorman",
       "val_t": "str_map",
       "val": {
-        "alarm_level": "1",
-        "alarm_type": "21",
-        "error_code": "0",
         "event_type": "0",
-        "status": "53"
+        "error_code": "0",
+	"status": "53"
+        "alarm_type": "21",
+        "alarm_level": "1",
+	"secure_mode": "true", // sent only when secure mode has changed
+      },
+      "tags": null,
+      "props": null,
+      "ver": "1",
+      "corid": "",
+      "ctime": "2020-04-24T17:12:50.659+02:00",
+      "uid": "58a915ee-afdf-4769-b819-123d5979154b"
+    }
+    ```
+
+    Sent by the lock when a user event happens (event_type=1)
+
+    ```jsx
+    {
+      "type": "evt.doorman_activity.report",
+      "serv": "doorman",
+      "val_t": "str_map",
+      "val": {
+        "event_type": "1",
+        "error_code": "0",
+	"slot_number": "0"
+        "status": "53",
+        "user_status": "added", //or "removed"
+      },
+      "tags": null,
+      "props": null,
+      "ver": "1",
+      "corid": "",
+      "ctime": "2020-04-24T17:12:50.659+02:00",
+      "uid": "58a915ee-afdf-4769-b819-123d5979154b"
+    }
+    ```
+
+    Sent by the lock when an arm event happens (event_type=2)
+
+    ```jsx
+    {
+      "type": "evt.doorman_activity.report",
+      "serv": "doorman",
+      "val_t": "str_map",
+      "val": {
+        "event_type": "2",
+        "error_code": "0",
+	"slot_number": "0"
+        "status": "53",
+        "arming_parameter": "0", // 0 - unlock, 1 - unlock with relock, 2 - lock, 255 - no action
+      },
+      "tags": null,
+      "props": null,
+      "ver": "1",
+      "corid": "",
+      "ctime": "2020-04-24T17:12:50.659+02:00",
+      "uid": "58a915ee-afdf-4769-b819-123d5979154b"
+    }
+    ```
+
+    Sent by the lock when an unlock event happens (event_type=3)
+
+    ```jsx
+    {
+      "type": "evt.doorman_activity.report",
+      "serv": "doorman",
+      "val_t": "str_map",
+      "val": {
+        "event_type": "3",
+        "error_code": "0",
+	"slot_number": "0"
+        "status": "53",
+        "card_uid_data": "AACDEF12", // 8 bytes string
       },
       "tags": null,
       "props": null,
