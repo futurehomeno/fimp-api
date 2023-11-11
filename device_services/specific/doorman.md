@@ -17,13 +17,13 @@ in   | cmd.doorman.integration       | str_map    | Start lock integration | {"n
 in   | cmd.doorman_param.set         | str_map    |                        | {"parameter_id":"5", "value":"5"}
 in   | cmd.doorman_param.get_report  | null       |                        | 
 out  | evt.doorman_param.report      | str_map    | Response to get_report | 
-in   | cmd.doorman_user.set          | str_map    | Set pin or tag         | {"name":"Jon", “slot_number”:”1”, "code_type":"pin", ”code”:”123456”}
+in   | cmd.doorman_user.set          | str_map    | Set pin or tag         | {"name":"Jon", "slot_number":"1", "code_type":"pin", "code":"123456"}
 in   | cmd.doorman_user.get_all      | null       | Get all user slots     |
 out  | evt.doorman_user.report       | object     | Response to get_all    | See below
-in   | cmd.doorman_user.clear        | str_map    |                        | {“slot_number”:”1”}
-out  | evt.doorman_activity.report   | str_map    | Sent after an activity | {“event_type”:”id”, “status”:”0”, “error_code”:”0”, “user_status”:”added”, “slot_number”:”0”, “alarm_type”:”0”, “alarm_level”:”0”, “arming_parameter”:”0”, “sequence_number”:”0”, ”card_uid_data”:”12345678”}
-in   | cmd.doorman.arm_confirm       | str_map    |                        | {“sequence_number”:”0”, “operating_parameter”:”0”}
-out  | evt.doorman_tag.report        | str_map    |                        | {“type”:”unrecognized_tag”, "tag_id": "123456789ABC"}
+in   | cmd.doorman_user.clear        | str_map    |                        | {"slot_number":"1"}
+out  | evt.doorman_activity.report   | str_map    | Sent after an activity | {"event_type":"id", "status":"0", "error_code":"0", "user_status":"added", "slot_number":"0", "alarm_type":"0", "alarm_level":"0", "arming_parameter":"0", "sequence_number":"0", "card_uid_data":"12345678"}
+in   | cmd.doorman.arm_confirm       | str_map    |                        | {"sequence_number":"0", "operating_parameter":"0"}
+out  | evt.doorman_tag.report        | str_map    |                        | {"type":"unrecognized_tag", "tag_id": "123456789ABC"}
 
 ### Interface props
 
@@ -33,7 +33,7 @@ Name              | Value                                              | Descrip
 `code_type`       | "pin", "tag", "tag+pin", "24h", "s4+pin", "s8+pin" | List of supported code types Valid length for specified slots
 `pin_code_length` | 6 (For slot number 0-19), 4 - For slot number 20   | Valid length for specified slots
 `card_uid_data`   |                                                    | The Hex format of the TAG UID
-`user_status`     | “added”, “removed”                                 | Determines whether a user was successfully added or removed from the system.
+`user_status`     | "added", "removed"                                 | Determines whether a user was successfully added or removed from the system.
 
 ### Configuration parameters
 
