@@ -196,10 +196,10 @@ Topic example:
       "val": {
         "event_type": "0",
         "error_code": "0",
-	"status": "53"
+        "status": "53"
         "alarm_type": "21",
         "alarm_level": "1",
-	"secure_mode": "true", // sent only when secure mode has changed
+        "secure_mode": "true", // sent only when secure mode has changed
       },
       "tags": null,
       "props": null,
@@ -220,7 +220,7 @@ Topic example:
       "val": {
         "event_type": "1",
         "error_code": "0",
-	"slot_number": "0"
+        "slot_number": "0"
         "status": "53",
         "user_status": "added", //or "removed"
       },
@@ -243,7 +243,7 @@ Topic example:
       "val": {
         "event_type": "2",
         "error_code": "0",
-	"slot_number": "0"
+        "slot_number": "0"
         "status": "53",
         "arming_parameter": "0",
       },
@@ -266,9 +266,9 @@ Topic example:
       "val": {
         "event_type": "3",
         "error_code": "0",
-	"slot_number": "0"
+        "slot_number": "0"
         "status": "53",
-        "card_uid_data": "AACDEF12", // 8 bytes string
+        "card_uid_data": "AACDEF12",
       },
       "tags": null,
       "props": null,
