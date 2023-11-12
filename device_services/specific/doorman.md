@@ -35,8 +35,8 @@ Name                | Value                                                    |
 `arming_parameter`  |  0 - unlock, 1 - unlock with relock, 2 - lock, 255 - no action | Used in evt.doorman_activity_report as a corresponding field to `operating_parameter` from cmd.doorman.arm_config.
 `user_status`       | "added", "removed"                                       | Determines whether a user was successfully added or removed from the system.
 `secure_mode`       | "true", "false"                                          | Determines whether the device is in the secure mode
-`alarm_type`        | Enum value - alarm code                                  | Determines the alarm type in evt.doorman_activity_report event_type=0
-`alarm_level`       | Enum value - value with reference to `alarm_type`        | Parameter value of the alarm type from evt.doorman_activity_report event_type=0
+`alarm_type`        | <0-255>                                                  | Enum value indicating the alarm type in evt.doorman_activity_report event_type=0
+`alarm_level`       | <0-255>                                                  | Enum value parameter for the alarm type from evt.doorman_activity_report event_type=0
 
 ### Configuration parameters
 
