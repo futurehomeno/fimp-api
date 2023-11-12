@@ -132,7 +132,8 @@ Topic example:
       "val": {
         "name": "Jon"
         "slot_number": "1",
-        "code": "111111"
+        "code": "111111",
+        "code_type":"pin"
       },
       "props": null,
       "tags": null,
@@ -188,7 +189,7 @@ Topic example:
         "slots": [
           {
             "id": 3,
-    	"name": "Jon",
+            "name": "Jon",
             "created_at": "2020-04-22T16:05:03.48677828+02:00"
           }
         ]
