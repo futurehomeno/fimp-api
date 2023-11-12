@@ -15,8 +15,8 @@ Type | Interface                     | Value Type | Description            | Exa
 out  | evt.doorman_session.report    | null       | Integration required   | 
 in   | cmd.doorman.integration       | str_map    | Start lock integration | {"name":"Jon", "slot_number":"0", "code_type":"pin", "code":"123456"}
 in   | cmd.doorman_param.set         | str_map    |                        | {"parameter_id":"5", "value":"5"}
-in   | cmd.doorman_param.get_report  | null       |                        | 
-out  | evt.doorman_param.report      | str_map    | Response to get_report | 
+in   | cmd.doorman_param.get_report  | null       |                        |
+out  | evt.doorman_param.report      | str_map    | Response to get_report | List of all available [parameters](#configuration-parameters) in format {"key":"value"}
 in   | cmd.doorman_user.set          | str_map    | Set pin or tag         | {"name":"Jon", "slot_number":"1", "code_type":"pin", "code":"123456"}
 in   | cmd.doorman_user.get_all      | null       | Get all user slots     |
 out  | evt.doorman_user.report       | object     | Response to get_all    | See below
