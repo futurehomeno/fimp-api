@@ -56,8 +56,6 @@ Topic example:
 
 `pt:j1/mt:cmd/rt:dev/rn:zigbee/ad:1/sv:doorman/ad:2_1`
 
-*Note: number `2` at the end of the topic is the device address. Change it to the actual address when sending the commands.*
-
 - cmd.doorman.integration
 
     Sent automatically from the hub upon reception of `evt.doorman.session_report`
@@ -67,8 +65,7 @@ Topic example:
     "serv": "doorman",
     "type": "cmd.doorman.integration",
     "val_t": "str_map",
-    "val": {"slot_number":"0", "code_type":"pin",
-    "code":"123456"},
+    "val": {"slot_number":"0", "code_type":"pin", "code":"123456", "name": "Jon"},
     "props": null,
     "tags": null,
     "src": "thingsplex-ui",
@@ -78,15 +75,7 @@ Topic example:
 
 - cmd.doorman_param.set
 
-    Sets Doorman's parameters. For the valid `parameter_id` values and what they mean, check with corresponding version of Doorman cluster implementation. Some examplary parameters are:
-
-  	DoormanSilentMode              = 0x01
-	DoormanAutoRelock              = 0x02
-	DoormanLanguage                = 0x05
-	DoormanSystemArmHoldTime       = 0x10
-	DoormanHomeAwayAlarmMode       = 0x11
-	DoormanPartAlarmSystem         = 0x12
-	DoormanUserCodeBlockingEnable  = 0x13
+    Sets configuration parameter from the [list](#configuration-parameters). For the valid `parameter_id` values and what they mean, check with corresponding version of Doorman cluster implementation
 
     ```jsx
     {
@@ -100,8 +89,6 @@ Topic example:
       "ver": "1"
     }
     ```
-
-    [Configuration parameters](https://www.notion.so/3de70e7b58d1489482f2115a2e486866)
 
 - cmd.doorman_param.get_report
 
