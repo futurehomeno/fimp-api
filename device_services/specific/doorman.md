@@ -32,9 +32,9 @@ Name                | Value                                                    |
 `slot_number`       |  0-9 for PIN codes, 10-19 for RFID tags, 20 for 24h code | ID assigned to each user.
 `code_type`         | "pin", "tag", "tag+pin", "24h", "s4+pin", "s8+pin"       | List of supported code types Valid length for specified slots
 `card_uid_data`     |                                                          | The Hex format of the TAG UID used in evt.doorman_activity.report event_type=3
-`arming_parameter`  |  0 - unlock, 1 - unlock with relock, 2 - lock, 255 - no action | Used in evt.doorman_activity_report as a corresponding field to `operating_parameter` from cmd.doorman.arm_config.
-`user_status`       | "added", "removed"                                       | Determines whether a user was successfully added or removed from the system.
-`secure_mode`       | "true", "false"                                          | Determines whether the device is in the secure mode
+`arming_parameter`  |  0 - unlock, 1 - unlock with relock, 2 - lock, 255 - no action | Used in evt.doorman_activity_report event_type=2 to correspond with `operating_parameter` from cmd.doorman.arm_config
+`user_status`       | "added", "removed"                                       | Determines whether a user was successfully added or removed from the system in evt.doorman_activity_report event_type=1
+`secure_mode`       | "true", "false"                                          | Determines whether the device is in the secure mode in evt.doorman_activity_report event_type=0
 `alarm_type`        | <0-255>                                                  | Enum value indicating the alarm type in evt.doorman_activity_report event_type=0
 `alarm_level`       | <0-255>                                                  | Enum value parameter for the alarm type from evt.doorman_activity_report event_type=0
 
