@@ -199,9 +199,7 @@ Topic example:
     }
     ```
 
-- evt.doorman_activity.report 
-
-    Sent by the lock when an alarm event happens (event_type=0)
+- evt.doorman_activity.report sent by the device upon alarm event (event_type=0)
 
     ```jsx
     {
@@ -225,7 +223,7 @@ Topic example:
     }
     ```
 
-    Sent by the lock when a user event happens (event_type=1)
+- evt.doorman_activity.report sent by the device upon user event (event_type=1)
 
     ```jsx
     {
@@ -248,7 +246,7 @@ Topic example:
     }
     ```
 
-    Sent by the lock when an arm event happens (event_type=2)
+- evt.doorman_activity.report sent by the device upon arm event (event_type=2)
 
     ```jsx
     {
@@ -271,7 +269,7 @@ Topic example:
     }
     ```
 
-    Sent by the lock when an unlock event happens (event_type=3)
+- evt.doorman_activity.report sent by the device upon unlock event (event_type=3)
 
     ```jsx
     {
