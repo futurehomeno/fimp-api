@@ -22,17 +22,17 @@ in   | cmd.doorman_user.get_all      | null       | Get all user slots     |
 out  | evt.doorman_user.report       | object     | Response to get_all    | See below
 in   | cmd.doorman_user.clear        | str_map    |                        | {"slot_number":"1"}
 out  | evt.doorman_activity.report   | str_map    | Triggered by an event from the device | Each of 4 types has a different format, see examples below |
-in   | cmd.doorman.arm_confirm       | str_map    |                        | {"sequence_number":"0", "operating_parameter":"0"}
+in   | cmd.doorman.arm_confirm       | str_map    | Sets arming setting    | {"operating_parameter":"0"}
 out  | evt.doorman_tag.report        | str_map    | tag_id is 8-byte long  | {"type":"unrecognized_tag", "tag_id": "123456AB"}
 
 ### Interface props
 
 Name                | Value                                                    | Description
 --------------------|----------------------------------------------------------|-------------
-`slot_number`       |  0-9 for PIN codes, 10-19 for RFID tags, 20 for 24h code | ID assigned to each user.
+`slot_number`       | 0-9 for PIN codes, 10-19 for RFID tags, 20 for 24h code | ID assigned to each user.
 `code_type`         | "pin", "tag", "tag+pin", "24h", "s4+pin", "s8+pin"       | List of supported code types Valid length for specified slots
 `card_uid_data`     |                                                          | The Hex format of the TAG UID used in evt.doorman_activity.report event_type=3
-`arming_parameter`  |  0 - unlock, 1 - unlock with relock, 2 - lock, 255 - no action | Used in evt.doorman_activity_report event_type=2 to correspond with `operating_parameter` from cmd.doorman.arm_config
+`arming_parameter`  | 0 - disarming, 1 - arming                                | Determines disarming/arming setting on the device
 `user_status`       | "added", "removed"                                       | Determines whether a user was successfully added or removed from the system in evt.doorman_activity_report event_type=1
 `secure_mode`       | "true", "false"                                          | Determines whether the device is in the secure mode in evt.doorman_activity_report event_type=0
 `alarm_type`        | <0-255>                                                  | Enum value indicating the alarm type in evt.doorman_activity_report event_type=0
