@@ -199,23 +199,6 @@ Topic example:
     }
     ```
 
-- evt.op.ack
-
-    Sent by the adapter as an Ack for some commands
-
-    ```jsx
-    {
-      "type": "evt.op.ack",
-      "serv": "doorman",
-      "val_t": "string",
-      "val": "ack",
-      "ver": "1",
-      "corid": "08d2da8b-0d2c-4a2c-a0d7-8facc48b302",
-      "ctime": "2019-09-13T11:12:51.597+09:00",
-      "uid": "08d2da8b-0d2c-4a2c-a0d7-8facc48b3026"
-    }
-    ```
-
 - evt.open.report
 
     Sent by the adapter when the door opens/closes.
