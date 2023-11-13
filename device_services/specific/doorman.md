@@ -23,7 +23,7 @@ out  | evt.doorman_user.report       | object     | Response to get_all    | See
 in   | cmd.doorman_user.clear        | str_map    |                        | {"slot_number":"1"}
 out  | evt.doorman_activity.report   | str_map    | Triggered by an event from the device | Each of 4 types has a different format, see examples below |
 in   | cmd.doorman.arm_confirm       | str_map    | Sets arming setting    | {"operating_parameter":"0"}
-out  | evt.doorman_tag.report        | str_map    | tag_id is 8-byte long  | {"type":"unrecognized_tag", "tag_id": "123456AB"}
+out  | evt.doorman_tag.report        | str_map    | tag_id is 8-byte long  | {"type":"unrecognized_tag", "tag_id": "12345678AABBCCDD"}
 
 ### Interface props
 
@@ -268,7 +268,7 @@ Topic example:
         "error_code": "0",
         "slot_number": "0"
         "status": "53",
-        "card_uid_data": "AACDEF12",
+        "card_uid_data": "12345678AABBCCDD",
       },
       "tags": null,
       "props": null,
