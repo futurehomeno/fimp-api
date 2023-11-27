@@ -38,7 +38,7 @@ Parameters service allows for advanced configuration of a device. For a list of 
 | name          | string | `"Sensitivity of the PR sensor"`     | Optional name of the parameter.                                                          |
 | description   | string | `""`                                 | Optional description of the parameter.                                                   |
 | widget_type   | string | `"select"`                           | Format of the parameter, one of [`widget_type`](#definitions).                           |
-| value_type    | string | `"int"`                              | Type of the value, one of [`widget_type`](#definitions).                                 |
+| value_type    | string | `"int"`                              | Type of the value, one of [`value_type`](#definitions).                                  |
 | options       | object | `[{"label":"Option 1", "value": 1}]` | Applies only to `select` and `multiselect`. Array of [`select_option`](#definitions).    |
 | min           | int    | `-1`                                 | Applies only to `int` and `string` typed `input`. Minimum value/length of the parameter. |
 | max           | int    | `20`                                 | Applies only to `int` and `string` typed `input`. Maximum value/length of the parameter. |
