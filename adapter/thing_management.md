@@ -70,26 +70,28 @@ Every adapter should define its own service name.
 
 ### Interfaces
 
-| Type | Interface                         | Value type | Properties                                        | Description                                                                                                                 |
-|------|-----------------------------------|------------|---------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------|
-| in   | cmd.thing.inclusion               | bool       | `pin`, `force_non_secure`, `supports_pin_request` | For `true` starts and for `false` stops a thing inclusion process.                                                          |                         
-| out  | evt.thing.inclusion_status_report | string     |                                                   | Returns stage of the ongoing inclusion process, see [`inclusion_status`](#definitions).                                     |
-| out  | evt.thing.inclusion_report        | object     |                                                   | Reports thing specification, see [`inclusion_report`](#definitions).                                                        |
-| in   | cmd.thing.get_inclusion_report    | string     |                                                   | Requests inclusion report for the provided thing address.                                                                   |
-| out  | evt.thing.pin_needed              | null       |                                                   | Informs that PIN is required to continue a thing inclusion.                                                                 |
-| in   | cmd.thing.pin                     | string     |                                                   | Provides PIN required for a thing inclusion.                                                                                |
-| in   | cmd.thing.exclusion               | bool       |                                                   | For `true` starts and for `false` stops a thing exclusion process.                                                          | 
-| out  | evt.thing.exclusion_status_report | string     |                                                   | Returns stage of the ongoing exclusion process,  see [`exclusion_status`](#definitions).                                    |
-| out  | evt.thing.exclusion_report        | object     |                                                   | Reports thing exclusion, see [`thing_identifier`](#definitions).                                                            |
-| in   | cmd.thing.delete                  | str_map    |                                                   | Requests thing deletion if device is offline or exclusion process is not supported, see [`thing_identifier`](#definitions). |
+| Type | Interface                         | Value type | Properties                                                             | Description                                                                                                                 |
+|------|-----------------------------------|------------|------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------|
+| in   | cmd.thing.inclusion               | bool       | `pin`, `force_non_secure`, `supports_pin_request`, `qr_code`, `qr_ctx` | For `true` starts and for `false` stops a thing inclusion process.                                                          |                         
+| out  | evt.thing.inclusion_status_report | string     |                                                                        | Returns stage of the ongoing inclusion process, see [`inclusion_status`](#definitions).                                     |
+| out  | evt.thing.inclusion_report        | object     |                                                                        | Reports thing specification, see [`inclusion_report`](#definitions).                                                        |
+| in   | cmd.thing.get_inclusion_report    | string     |                                                                        | Requests inclusion report for the provided thing address.                                                                   |
+| out  | evt.thing.pin_needed              | null       |                                                                        | Informs that PIN is required to continue a thing inclusion.                                                                 |
+| in   | cmd.thing.pin                     | string     |                                                                        | Provides PIN required for a thing inclusion.                                                                                |
+| in   | cmd.thing.exclusion               | bool       |                                                                        | For `true` starts and for `false` stops a thing exclusion process.                                                          | 
+| out  | evt.thing.exclusion_status_report | string     |                                                                        | Returns stage of the ongoing exclusion process,  see [`exclusion_status`](#definitions).                                    |
+| out  | evt.thing.exclusion_report        | object     |                                                                        | Reports thing exclusion, see [`thing_identifier`](#definitions).                                                            |
+| in   | cmd.thing.delete                  | str_map    |                                                                        | Requests thing deletion if device is offline or exclusion process is not supported, see [`thing_identifier`](#definitions). |
 
 ### Interface properties
 
-| Name                   | Example   | Required | Description                                                                  |
-|------------------------|-----------|----------|------------------------------------------------------------------------------|
-| `pin`                  | `"12345"` | No       | PIN to be used during the inclusion process.                                 |
-| `force_non_secure`     | `"true"`  | No       | Force non-secure inclusion process to pair the device.                       |
-| `supports_pin_request` | `"true"`  | No       | Indicates that the client supports PIN request during the inclusion process. |
+| Name                   | Example                                                                  | Required | Description                                                                            |
+|------------------------|--------------------------------------------------------------------------|----------|----------------------------------------------------------------------------------------|
+| `pin`                  | `"12345"`                                                                | No       | PIN to be used during the inclusion process.                                           |
+| `force_non_secure`     | `"true"`                                                                 | No       | Force non-secure inclusion process to pair the device.                                 |
+| `supports_pin_request` | `"true"`                                                                 | No       | Indicates that the client supports PIN request during the inclusion process.           |
+| `qr_code`              | `"385cfbfffee34acc,565977,06,0523,3248799657aee175c79ccdca394be8867460"` | No       | QR code data scanned from device, which contains Zigbee install code and IEEE address. |
+| `qr_ctx`               | `"zg_XXX"`                                                               | No       | Additional data required during Zigbee device pairing.                                 |
 
 ### Definitions
 
