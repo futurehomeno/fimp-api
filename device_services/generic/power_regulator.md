@@ -8,15 +8,17 @@ Power regulator service acts as a controller responsible for turning the relay o
 
 ## Interfaces
 
-| Type | Interface             | Value type | Description                     |
-|------|-----------------------|------------|---------------------------------|
-| in   | cmd.cycle.set         | int        | Sets the duty cycle value.      |                                                                               
-| in   | cmd.cycle.get_report  | null       | Requests the duty cycle value.  |
-| out  | evt.cycle.report      | int        | Reports the duty cycle value.   |
-| -    |                       |            |                                 |
-| in   | cmd.period.set        | int        | Sets the duty period value.     |                                                                               
-| in   | cmd.period.get_report | null       | Requests the duty period value. |
-| out  | evt.period.report     | int        | Reports the duty period value.  |
+| Type | Interface             | Value type | Description                                                                                                                                  |
+|------|-----------------------|------------|----------------------------------------------------------------------------------------------------------------------------------------------|
+| in   | cmd.binary.set        | bool       | Turns device on and off. Setting `true` should result in setting the duty cycle to the last known non-zero value or fallback to the maximum. |
+|      |                       |            |                                                                                                                                              |
+| in   | cmd.cycle.set         | int        | Sets the duty cycle value.                                                                                                                   |                                                                               
+| in   | cmd.cycle.get_report  | null       | Requests the duty cycle value.                                                                                                               |
+| out  | evt.cycle.report      | int        | Reports the duty cycle value.                                                                                                                |
+| -    |                       |            |                                                                                                                                              |
+| in   | cmd.period.set        | int        | Sets the duty period value.                                                                                                                  |                                                                               
+| in   | cmd.period.get_report | null       | Requests the duty period value.                                                                                                              |
+| out  | evt.period.report     | int        | Reports the duty period value.                                                                                                               |
 
 ## Service properties
 
