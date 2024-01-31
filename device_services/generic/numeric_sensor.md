@@ -11,6 +11,7 @@ The most popular sensors measure temperature, air humidity, or light intensity.
 | `sensor_accely`      | m/s2                     | Acceleration, Y-axis            |
 | `sensor_accelz`      | m/s2                     | Acceleration, Z-axis            |
 | `sensor_airflow`     | m3/h, ft3/m              | Air flow sensor                 |
+| `sensor_airq`        | pm25, pm10, aqi          | Air quality sensor              |
 | `sensor_anglepos`    | %, degN, degS            | Angle Position sensor           |
 | `sensor_atmo`        | kPa, ha, mbar            | Atmospheric pressure sensor.    |
 | `sensor_baro`        | kPa, ha, mbar            | Barometric  pressure sensor.    |
