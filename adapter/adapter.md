@@ -12,10 +12,8 @@ Adapters may use various communication technologies, such as Z-Wave and Zigbee w
 cloud provider.
 
 ## Service name
-All adapters should use their resource names as service names.\
-<span style="color:red">Exception!</span>\
-Due to the backwards compatibility, Z-Wave's service name is `zwave-ad` (while its resource name is `zw`).
-
+All adapters should use their resource names as service names.
+> **Exception!** Due to the backwards compatibility, Z-Wave's service name is `zwave-ad` (while its resource name is `zw`).
 
 ## Thing Management
 
