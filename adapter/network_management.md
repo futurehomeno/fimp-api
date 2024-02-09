@@ -29,7 +29,7 @@ Every adapter should have unique resource name and use the following topics in a
 
 ### Service name
 
-Every adapter should define its own service name.
+See general requirement for adapter [service names](/adapter/adapter.md#service-name).
 
 ### Interfaces
 
