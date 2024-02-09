@@ -11,6 +11,10 @@ Their main role is to be an adapter between FIMP and a specific technology proto
 Adapters may use various communication technologies, such as Z-Wave and Zigbee wireless networks, direct connection through the local network or indirect through a third-party
 cloud provider.
 
+## Service name
+All adapters should use their resource names as service names.
+> **Exception!** Due to the backwards compatibility, Z-Wave's service name is `zwave-ad` (while its resource name is `zw`).
+
 ## Thing Management
 
 For description of how to add and remove things from the system see the [thing management](/adapter/thing_management.md) documentation.
