@@ -18,7 +18,7 @@ Chargepoint service is used to represent EV chargers.
 | -    |                                 |            |                                                                     |                                                                                                                       |
 | in   | cmd.cable_lock.set              | bool       |                                                                     | Locks and unlocks the cable/connector.                                                                                |
 | in   | cmd.cable_lock.get_report       | null       |                                                                     | Gets the status of the cable/connector lock.                                                                          |
-| out  | evt.cable_lock.report           | bool       | `cable_current`                                                     | Reports `true` if the cable/connector is **locked** and `false` otherwise.                                            |
+| out  | evt.cable_lock.report           | bool       | `cable_current`, `cable_plugged`                                    | Reports `true` if the cable/connector is **locked** and `false` otherwise.                                            |
 | -    |                                 |            |                                                                     |                                                                                                                       |
 | in   | cmd.current_session.set_current | int        |                                                                     | Sets the offered current for the ongoing session in `A`, must be an integer between `6` and `max_current` value.      |
 | in   | cmd.current_session.get_report  | null       |                                                                     | Requests energy consumed during the current session and optionally additional characteristics.                        |
@@ -34,14 +34,15 @@ Chargepoint service is used to represent EV chargers.
 
 ## Interface properties
 
-| Name               | Example                          | Required | Description                                                                                            |
-|--------------------|----------------------------------|----------|--------------------------------------------------------------------------------------------------------|
-| `charging_mode`    | `"slow"`                         | No       | One of charging modes defined in [`sup_charging_modes`](#service-properties) property.                 |
-| `cable_current`    | `"16"`                           | No       | Maximum current in `A` supported by the cable. Reading may be available only when cable is plugged in. |
-| `previous_session` | `"2.5"`                          | No       | Reports energy consumed during previous session in `kWh`.                                              |
-| `started_at`       | `"2022-09-01T08:00:00Z02:00"`    | No       | Time of current session start in RFC3339 format.                                                       |
-| `finished_at`      | `"2022-09-01T12:00:00Z02:00"`    | No       | Time of current session end in RFC3339 format. Present only if the current session has finished.       |
-| `offered_current`  | `"8"`                            | No       | Reports offered current in `A`, this is effectively a dynamic load balancing value.                    |
+| Name               | Example                       | Required | Description                                                                                                                                 |
+|--------------------|-------------------------------|----------|---------------------------------------------------------------------------------------------------------------------------------------------|
+| `charging_mode`    | `"slow"`                      | No       | One of charging modes defined in [`sup_charging_modes`](#service-properties) property.                                                      |
+| `cable_current`    | `"16"`                        | No       | Maximum current in `A` supported by the cable. Reading may be available only when cable is plugged. Might not be supported by all chargers. |
+| `cable_plugged`    | `"true"`                      | No       | Detects whether the cable is plugged on the EVSE side. Might not be supported by all chargers.                                              |
+| `previous_session` | `"2.5"`                       | No       | Reports energy consumed during previous session in `kWh`.                                                                                   |
+| `started_at`       | `"2022-09-01T08:00:00Z02:00"` | No       | Time of current session start in RFC3339 format.                                                                                            |
+| `finished_at`      | `"2022-09-01T12:00:00Z02:00"` | No       | Time of current session end in RFC3339 format. Present only if the current session has finished.                                            |
+| `offered_current`  | `"8"`                         | No       | Reports offered current in `A`, this is effectively a dynamic load balancing value.                                                         |
 
 > Please note that `offered_current` property:
 > * is equal to `max_current` in a newly started charging session,
