@@ -24,9 +24,9 @@ Power regulator service acts as a controller responsible for turning the relay o
 
 | Name          | Type   | Example                            | Description                                                                                |
 |---------------|--------|------------------------------------|--------------------------------------------------------------------------------------------|
-| `max_cycle`   | int    | `100`                              | A maximum supported duty cycle value.                                                      |
-| `min_cycle`   | int    | `5`                                | A minimum supported duty cycle value.                                                      |
-| `cycle_step`  | int    | `5`                                | A step of duty cycle.                                                                      |
+| `max_cycle`   | int    | `100`                              | A maximum supported duty cycle value (in %).                                               |
+| `min_cycle`   | int    | `5`                                | A minimum supported duty cycle value (in %).                                               |
+| `cycle_step`  | int    | `5`                                | A step of duty cycle (in %).                                                               |
 | `sup_periods` | object | `[{"min":60,"max":1800,"step":1}]` | Supported duty period settings in form of array of [`period_range`](#definitions) objects. |
 
 ## Definitions
