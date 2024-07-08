@@ -40,8 +40,6 @@ An electricity meter service can represent a stand-alone AMS meter, like a HAN s
 
 | Field         | Type   | Example                              | Description                                                                                            |
 |---------------|--------|--------------------------------------|--------------------------------------------------------------------------------------------------------|
-| `udid`        | int    | `1`                                  | Thing unique ID                                                                                        |
-| `group`       | string | `1`                                  | Group unique ID [for Zigbee devices it will correspond to endpoint with tunneling cluster]             |
 | `protocol`    | int    | `3`                                  | ID of protocol which will be tunneled from device to adapter see [`tunneling_protocols`](#definitions) |
 
 * `tunneling_protocols`
@@ -168,8 +166,6 @@ An electricity meter service can represent a stand-alone AMS meter, like a HAN s
   "type": "evt.meter_log.start",
   "val_t": "object",
   "val": {
-    "udid": 1,
-    "group": 1,
     "protocol": 3
   },
   "props": null,
