@@ -28,35 +28,8 @@ An electricity meter service can represent a stand-alone AMS meter, like a HAN s
 | -    |                             |            |                                          |             |             |                                                                                                                                                                                     |
 | in   | cmd.meter_ext.get_report    | str_array  |                                          |             |             | Requests an extended electricity report for listed extended values. Empty or null value requests all supported extended values.                                                     |
 | out  | evt.meter_ext.report        | float_map  |                                          | `split`     |             | Returns an extended electricity report. See [electricity measurements](#electricity-measurements) section for more information.                                                     |
-| -    |                             |            |                                          |             |             |                                                                                                                                                                                     |
-| out  | cmd.meter_log.start         | object     |                                          |             |             | Request thing to open a tunnel to metering device and adapter to start logging received data. see [`tunnel_request`](#definitions).                                                 |
-| out  | cmd.meter_log.stop          | null       |                                          |             |             | Request thing to close the tunnel and adapter to conclude the log. Tunnel should be closed when not needed because of network load management.                                      |
 
 > For backward compatibility the service reports imported/consumed values using `evt.meter.report` interface and exported/produced values using `evt.meter_export.report`.
-
-## Definitions
-
-* `tunnel request` is an object with following structure:
-
-| Field         | Type   | Example                              | Description                                                                                            |
-|---------------|--------|--------------------------------------|--------------------------------------------------------------------------------------------------------|
-| `protocol`    | int    | `3`                                  | ID of protocol which will be tunneled from device to adapter see [`tunneling_protocols`](#definitions) |
-
-* `tunneling_protocols`
-
-| ID        | Description                    |
-|-----------|--------------------------------|
-| `0`       | DLMS/COSEM (IEC 62056)         |
-| `1`       | IEC 61107                      |
-| `2`       | ANSI C12                       |
-| `3`       | M-BUS                          |
-| `4`       | SML                            |
-| `5`       | ClimateTalk                    |
-| `6`       | GB-HRGP                        |
-| `7`       | IP v4                          |
-| `8`       | IP v6                          |
-| `200-254` | Manufacturer defined protocols |
-
 
 ## Interface properties
 
@@ -149,24 +122,6 @@ An electricity meter service can represent a stand-alone AMS meter, like a HAN s
   },
   "storage": {
     "strategy": "split"
-  },
-  "props": null,
-  "tags": null,
-  "src": "-",
-  "ver": "1",
-  "uid": "e604e951-7afb-4f96-981b-62e905757686",
-  "topic": "pt:j1/mt:evt/rt:dev/rn:zigbee/ad:1/sv:meter_elec/ad:1_2"
-}
-```
-* Open a tunnel to an AMS through Futurehome HAN NVE
-
-```json
-{
-  "serv": "meter_elec",
-  "type": "evt.meter_log.start",
-  "val_t": "object",
-  "val": {
-    "protocol": 3
   },
   "props": null,
   "tags": null,
