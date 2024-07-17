@@ -8,15 +8,15 @@ This service allows for the control of diagnostic functionalities of associated 
 
 ## Interfaces
 
-| Type | Interface                  | Value type | Properties        | Description                                                                                                                                                                                  |
-|------|----------------------------|------------|-------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| out  | cmd.log.start              | null       | `tunnel_protocols` | Commands the Adapter to start logging device related data. If log should contain a data tunneled from auxiliary device protocol must be specified. see [`sup_protocols`](#service-properties) |
-| out  | cmd.log.stop               | null       |                   | Commands the Adapter to stop logging device related data.                                                                                                                                    |
+| Type | Interface                  | Value type | Properties         | Description                                                                                                                                                                                              |
+|------|----------------------------|------------|--------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| out  | cmd.log.start              | null       | `tunnel_protocols` | "Commands the Adapter to start logging device-related data. If the log should contain data tunneled from an auxiliary device, the protocol must be specified. See [sup_protocols](#service-properties)." |
+| out  | cmd.log.stop               | null       |                    | Commands the Adapter to stop logging device related data.                                                                                                                                                |
 
 ## Service properties
 
-| Name           | Example           | Description                                                            |
-|----------------|-------------------|------------------------------------------------------------------------|
+| Name            | Example           | Description                                                            |
+|-----------------|-------------------|------------------------------------------------------------------------|
 | `sup_protocols` | `["iec_61107"]`   | List of supported communication protocols to be used for thing logging |
 
 ## Interface properties
@@ -42,7 +42,7 @@ This service allows for the control of diagnostic functionalities of associated 
 }
 ```
 
-* Example of deleting members from an association.
+* Example of disabling device related data logging
 
 ```json
 {
