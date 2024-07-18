@@ -10,7 +10,7 @@ This service allows for the control of diagnostic functionalities of associated 
 
 | Type | Interface                  | Value type | Properties         | Description                                                                                                                                                                                              |
 |------|----------------------------|------------|--------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| out  | cmd.log.start              | null       | `tunnel_protocols` | "Commands the Adapter to start logging device-related data. If the log should contain data tunneled from an auxiliary device, the protocol must be specified. See [sup_protocols](#service-properties)." |
+| out  | cmd.log.start              | null       | `tunnel_protocol` | "Commands the Adapter to start logging device-related data. If the log should contain data tunneled from an auxiliary device, the protocol must be specified. See [sup_protocols](#service-properties)." |
 | out  | cmd.log.stop               | null       |                    | Commands the Adapter to stop logging device related data.                                                                                                                                                |
 
 ## Service properties
