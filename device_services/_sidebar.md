@@ -39,3 +39,4 @@
     - [Time](/device_services/meta/time.md)
     - [Version](/device_services/meta/version.md)
     - [Technology specific](/device_services/meta/technology_specific.md)
+    - [Diagnostic](/device_services/meta/diagnostic.md)
