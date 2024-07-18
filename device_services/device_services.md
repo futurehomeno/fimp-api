@@ -31,7 +31,6 @@ Generic services are each representing an aspect or functionality of a device. T
 - [Siren control](/device_services/generic/siren_control.md)
 - [Media player](/device_services/generic/media_player.md)
 - [Sound switch](/device_services/generic/sound_switch.md)
-- [Diagnostic](/device_services/meta/diagnostic.md)
 
 ## Product specific services
 
@@ -51,6 +50,7 @@ Meta and utility services are not representing a functionality of a device, but 
 - [Time](/device_services/meta/time.md)
 - [Version](/device_services/meta/version.md)
 - [Technology specific](/device_services/meta/technology_specific.md)
+- [Diagnostic](/device_services/meta/diagnostic.md)
 
 ## Documentation guidelines
 
