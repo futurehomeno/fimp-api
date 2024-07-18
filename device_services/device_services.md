@@ -31,6 +31,7 @@ Generic services are each representing an aspect or functionality of a device. T
 - [Siren control](/device_services/generic/siren_control.md)
 - [Media player](/device_services/generic/media_player.md)
 - [Sound switch](/device_services/generic/sound_switch.md)
+- [Diagnostic](/device_services/meta/diagnostic.md)
 
 ## Product specific services
 
