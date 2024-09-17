@@ -62,12 +62,14 @@ The most popular sensors measure temperature, air humidity, or light intensity.
 | Name   | Example | Required | Description                                       |
 |--------|---------|----------|---------------------------------------------------|
 | `unit` | `"C"`   | Yes      | One of the units defined in `sup_units` property. |
+| `idx ` | `"1"`   | No       | Sensor index. If ommited than idx=0 is concluded. |
 
 ## Service properties
 
 | Name        | Type      | Example | Description                                                                                 |
 |-------------|-----------|---------|---------------------------------------------------------------------------------------------|
 | `sup_units` | str_array | ["C"]   | List of supported units. See list of [well-defined units](#service-names) for each service. |
+| `count`     | int       | 5       | Number of sensors of the same type in the service. Identified by index.                     |
 
 ## Examples
 
@@ -84,7 +86,8 @@ The most popular sensors measure temperature, air humidity, or light intensity.
     "sub_value": "C"
   },
   "props": {
-    "unit": "C"
+    "unit": "C",
+    "idx": 1, // second sensor
   },
   "tags": null,
   "src": "-",
