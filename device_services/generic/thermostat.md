@@ -8,28 +8,37 @@ Thermostat service is used to control the temperature in a room or a building an
 
 ## Interfaces
 
-| Type | Interface               | Value type | Storage     | Aggregation | Description                                                                                                                                    |
-|------|-------------------------|------------|-------------|-------------|------------------------------------------------------------------------------------------------------------------------------------------------|
-| in   | cmd.mode.get_report     | null       |             |             | Requests the thermostat `mode`.                                                                                                                |
-| in   | cmd.mode.set            | string     |             |             | Sets the thermostat `mode`. Must be one of the values declared in [`sup_modes`](#service-properties) property.                                 |
-| out  | evt.mode.report         | string     |             |             | Reports the thermostat `mode`.                                                                                                                 |
-| -    |                         |            |             |             |                                                                                                                                                |
-| in   | cmd.setpoint.get_report | string     |             |             | Gets the value for the provided `setpoint` in value. Must be one of the setpoints declared in [`sup_setpoints`](#service-properties) property. |
-| in   | cmd.setpoint.set        | str_map    |             |             | Sets the value of a setpoint. See the [`setpoint_map`](#definitions) definition for reference.                                                 |
-| out  | evt.setpoint.report     | str_map    | `aggregate` | `setpoint`  | Reports the value of a setpoint. See the [`setpoint_map`](#definitions) definition for reference.                                              |
-| -    |                         |            |             |             |                                                                                                                                                |
-| in   | cmd.state.get_report    | null       |             |             | Requests the operational `state` of the device.                                                                                                |
-| out  | evt.state.report        | string     |             |             | Reports the operational `state` of the device, one of the values declared in [`sup_states`](#service-properties) property.                     |
+| Type | Interface                 | Value type | Storage     | Aggregation | Description                                                                                                                                    |
+|------|---------------------------|------------|-------------|-------------|------------------------------------------------------------------------------------------------------------------------------------------------|
+| in   | cmd.mode.get_report       | null       |             |             | Requests the thermostat `mode`.                                                                                                                |
+| in   | cmd.mode.set              | string     |             |             | Sets the thermostat `mode`. Must be one of the values declared in [`sup_modes`](#service-properties) property.                                 |
+| out  | evt.mode.report           | string     |             |             | Reports the thermostat `mode`.                                                                                                                 |
+| -    |                           |            |             |             |                                                                                                                                                |
+| in   | cmd.setpoint.get_report   | string     |             |             | Gets the value for the provided `setpoint` in value. Must be one of the setpoints declared in [`sup_setpoints`](#service-properties) property. |
+| in   | cmd.setpoint.set          | str_map    |             |             | Sets the value of a setpoint. See the [`setpoint_map`](#definitions) definition for reference.                                                 |
+| out  | evt.setpoint.report       | str_map    | `aggregate` | `type`      | Reports the value of a setpoint. See the [`setpoint_map`](#definitions) definition for reference.                                              |
+| -    |                           |            |             |             |                                                                                                                                                |
+| in   | cmd.state.get_report      | null       |             |             | Requests the operational `state` of the device.                                                                                                |
+| out  | evt.state.report          | string     |             |             | Reports the operational `state` of the device, one of the values declared in [`sup_states`](#service-properties) property.                     |
+| -    |                           |            |             |             |                                                                                                                                                |
+| in   | cmd.sensor.set            | string     |             |             | Sets the temperature sensor type. Measurement from this sensor is used by thermostat's.                                                        |
+| in   | cmd.sensor.get_report     | null       |             |             | Gets the selected temperature sensor type.                                                                                                     |
+| out  | evt.sensor.report         | string     |             |             | Reports the selected temperature sensor type.                                                                                                  |
+| -    |                           |            |             |             |                                                                                                                                                |
+| in   | cmd.ext_temp.set          | int        |             |             | Sets the external temperature value. If selected sensor type is `external` this temperature value is used by thermostat. Props: `unit`         |
+| in   | cmd.ext_temp.get_report   | string     |             |             | Gets the external temperature value in unit specified by value. Empty value concludes `C`.                                                     |
+| out  | evt.ext_temp.report       | int        |             |             | Reports the selected temperature sensor type.  Props: `unit`                                                                                   |
 
 ## Service properties
 
-| Name               | Type      | Example                            | Description                                                                                                                                                        |
-|--------------------|-----------|------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `sup_modes`        | str_array | `["off", "heat", "cool", "auto"]`  | List of supported modes, see the definition of [`mode`](#definitions) for well-defined examples.                                                                   |
-| `sup_setpoints`    | str_array | `["heat", "cool"]`                 | List of supported setpoints for which a value can be set. Usually a sub-set of `sup_modes`. See the definition of [`setpoint`](#definitions) for more information. |
-| `sup_temperatures` | object    | `{"heat": {"min": 10, "max": 30}}` | List of supported temperature ranges of each setpoint, see [`range`](#definitions) object definition.                                                              |
-| `sup_states`       | str_array | `["idle", "heat", "cool"]`         | List of supported states, see the definition of [`state`](#definitions) for well-defined examples.                                                                 |
-| `sup_step`         | float     | `1.0`                              | Supported step for the temperature control.                                                                                                                        |
+| Name               | Type      | Example                                     | Description                                                                                                                                                        |
+|--------------------|-----------|---------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `sup_modes`        | str_array | `["off", "heat", "cool", "auto"]`           | List of supported modes, see the definition of [`mode`](#definitions) for well-defined examples.                                                                   |
+| `sup_setpoints`    | str_array | `["heat", "cool"]`                          | List of supported setpoints for which a value can be set. Usually a sub-set of `sup_modes`. See the definition of [`setpoint`](#definitions) for more information. |
+| `sup_temperatures` | object    | `{"heat": {"min": 10, "max": 30}}`          | List of supported temperature ranges of each setpoint, see [`range`](#definitions) object definition.                                                              |
+| `sup_states`       | str_array | `["idle", "heat", "cool"]`                  | List of supported states, see the definition of [`state`](#definitions) for well-defined examples.                                                                 |    
+| `sup_sensors`      | str_array | `["internal", "external", "room", "floor"]` | List of supported sensor types                                                                                                                                     |
+| `sup_step`         | float     | `1.0`                                       | Step size for the setpoint control.    
 
 > A device may define their own modes and setpoints outside the well-defined lists contained in the definitions section.
 > However, it is recommended to use the well-defined values whenever possible.
@@ -38,11 +47,11 @@ Thermostat service is used to control the temperature in a room or a building an
 
 * `setpoint_map` is a string map with the following structure:
 
-| Field | Type   | Example  | Description                                                                           |
-|-------|--------|----------|---------------------------------------------------------------------------------------|
+| Field | Type   | Example  | Description                                                                                |
+|-------|--------|----------|--------------------------------------------------------------------------------------------|
 | type  | string | `"heat"` | One of the `setpoints` values declared in [`sup_setpoints`](#service-properties) property. |
-| temp  | string | `"21.5"` | Setpoint value in the provided unit.                                                  |
-| unit  | string | `"C"`    | Setpoint unit.                                                                        |
+| temp  | string | `"21.5"` | Setpoint value in the provided unit.                                                       |
+| unit  | string | `"C"`    | Setpoint unit.                                                                             |
 
 * `mode` is a mode of operation of the device, well-defined modes include: `off`, `heat`, `cool`, `aux_heat`, `energy_heat`, `energy_cool`, `fan`, `fan_only`, `auto`,
   `auto_changeover`, `dry`, `dry_air`, `moist_air`, `resume`, `furnace`, `manufacturer_specific`.
