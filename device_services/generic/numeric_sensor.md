@@ -11,13 +11,13 @@ The most popular sensors measure temperature, air humidity, or light intensity.
 | `sensor_accely`      | m/s2                     | Acceleration, Y-axis            |
 | `sensor_accelz`      | m/s2                     | Acceleration, Z-axis            |
 | `sensor_airflow`     | m3/h, ft3/m              | Air flow sensor                 |
-| `sensor_airq`        | pm25, pm10, aqi          | Air quality sensor              |
+| `sensor_airq`        | pm25, pm10, aqi, ppm     | Air quality sensor              |
 | `sensor_anglepos`    | %, degN, degS            | Angle Position sensor           |
 | `sensor_atmo`        | kPa, ha, mbar            | Atmospheric pressure sensor.    |
 | `sensor_baro`        | kPa, ha, mbar            | Barometric  pressure sensor.    |
 | `sensor_co2`         | ppm                      | CO2-level sensor                |
 | `sensor_co`          | mol/m3                   | Carbon Monoxide level sensor    |
-| `sensor_current`     | A, mA                    | Current sensor                  |
+| `sensor_current`     | A, mA                    | Current sensor **Deprecated.**  |
 | `sensor_dew`         | C, F                     | Dew point sensor                |
 | `sensor_direct`      | deg                      | Direction sensor                |
 | `sensor_distance`    | m, cm, ft                | Distance sensor                 |
@@ -47,29 +47,29 @@ The most popular sensors measure temperature, air humidity, or light intensity.
 | `sensor_weight`      | kg, lbs                  | Weight sensor                   |
 | `sensor_wind`        | kph                      | Wind sensor                     |
 
-> Please note that `sensor_power` and `sensor_voltage` services are deprecated. 
+> Please note that `sensor_power`, `sensor_current` and `sensor_voltage` services are deprecated. 
 > A [`meter_elec`](/device_services/generic/meter.md) service should be used instead for reporting electricity measurements.
 
 ## Interfaces
 
 | Type | Interface             | Value type | Properties | Storage     | Aggregation | Description                                                               |
 |------|-----------------------|------------|------------|-------------|-------------|---------------------------------------------------------------------------|
-| in   | cmd.sensor.get_report | string     |            |             |             | Value is the desired unit. Use empty value to get report in default unit. |
+| in   | cmd.sensor.get_report | string     | `name`     |             |             | Value is the desired unit. Use empty value to get report in default unit. |
 | out  | evt.sensor.report     | float      | `unit`     | `aggregate` | `unit`      |                                                                           |
 
 ## Interface properties
 
-| Name   | Example | Required | Description                                       |
-|--------|---------|----------|---------------------------------------------------|
-| `unit` | `"C"`   | Yes      | One of the units defined in `sup_units` property. |
-| `idx ` | `"1"`   | No       | Sensor index. If ommited than idx=0 is concluded. |
+| Name   | Example   | Required | Description                                                       |
+|--------|-----------|----------|-------------------------------------------------------------------|
+| `unit` | `"C"`     | Yes      | One of the units defined in `sup_units` property.                 |
+| `name `| `"floor"` | No       | Sensor name. If ommited than first from `sup_names` is concluded. |
 
 ## Service properties
 
-| Name        | Type      | Example | Description                                                                                 |
-|-------------|-----------|---------|---------------------------------------------------------------------------------------------|
-| `sup_units` | str_array | ["C"]   | List of supported units. See list of [well-defined units](#service-names) for each service. |
-| `count`     | int       | 5       | Number of sensors of the same type in the service. Identified by index.                     |
+| Name        | Type      | Example           | Description                                                                                 |
+|-------------|-----------|-------------------|---------------------------------------------------------------------------------------------|
+| `sup_units` | str_array | ["C"]             | List of supported units. See list of [well-defined units](#service-names) for each service. |
+| `sup_names` | str_array | ["room", "floor"] | List of supported sensors. Identified by their names.                                       |
 
 ## Examples
 
@@ -94,5 +94,24 @@ The most popular sensors measure temperature, air humidity, or light intensity.
   "ver": "1",
   "uid": "5c0df678-144b-4184-b024-f0cd6f6aa382",
   "topic": "pt:j1/mt:evt/rt:dev/rn:zw/ad:1/sv:sensor_temp/ad:18_2"
+}
+```
+
+* Example of a temperature sensor get_report:
+
+```json
+{
+  "serv": "sensor_temp",
+  "type": "cmd.sensor.get_report",
+  "val_t": "string",
+  "val": "",
+  "props": {
+    "idx": 1, // second sensor
+  },
+  "tags": null,
+  "src": "-",
+  "ver": "1",
+  "uid": "5c0df678-144b-4184-b024-f0cd6f6aa383",
+  "topic": "pt:j1/mt:cmd/rt:dev/rn:zw/ad:1/sv:sensor_temp/ad:18_2"
 }
 ```
