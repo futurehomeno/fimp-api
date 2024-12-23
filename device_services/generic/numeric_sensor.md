@@ -87,7 +87,7 @@ The most popular sensors measure temperature, air humidity, or light intensity.
   },
   "props": {
     "unit": "C",
-    "idx": 1, // second sensor
+    "name": "room", 
   },
   "tags": null,
   "src": "-",
@@ -106,7 +106,7 @@ The most popular sensors measure temperature, air humidity, or light intensity.
   "val_t": "string",
   "val": "",
   "props": {
-    "idx": 1, // second sensor
+    "name": "floor", 
   },
   "tags": null,
   "src": "-",
