@@ -63,13 +63,13 @@ User code service is used by door locks, keypads and other security panels to en
 
 * `config_report` is a string map with the following structure:
 
-| Field          | Example        | Description                                                                                            |
-|----------------|----------------|--------------------------------------------------------------------------------------------------------|
-| event          | `"code_added"` | One of the following values: `code_added`, `code_deleted`.                                             |
-| error          | `"rejected"`   | Operation error, empty string if success. Errors are nto well deficnes, they are device specific.      |
-| slot           | `"3"`          | Slot used for the user, must be within range defined in [`sup_users`](#service-properties) property.   |
-| alias          | `"Jon"`        | User alias or a display name.                                                                          |
-| identification | `"pin"`        | One of the supported identification types declared in [`sup_usercodes`](#service-properties) property. |
+| Field          | Example        | Description                                                                                                  |
+|----------------|----------------|--------------------------------------------------------------------------------------------------------------|
+| event          | `"code_added"` | One of the following values: `code_added`, `code_deleted`.                                                   |
+| error          | `"rejected"`   | Error if operation was not succesfull. Empty string if success. Errors are device specific not well defined. |
+| slot           | `"3"`          | Slot used for the user, must be within range defined in [`sup_users`](#service-properties) property.         |
+| alias          | `"Jon"`        | User alias or a display name.                                                                                |
+| identification | `"pin"`        | One of the supported identification types declared in [`sup_usercodes`](#service-properties) property.       |
 
 * `access_report` is a string map with the following structure:
 
