@@ -167,7 +167,7 @@ User code service is used by door locks, keypads and other security panels to en
   "val_t": "str_map",
   "val": {
     "event": "code_deleted",
-    "error: "",
+    "error": "",
     "slot": "3",
     "alias": "Jon",
     "identification": "pin"
