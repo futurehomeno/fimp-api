@@ -51,7 +51,7 @@ User code service is used by door locks, keypads and other security panels to en
 |------------|--------|-----------------------------------------|---------------------------------------------------|
 | slot       | int    | `3`                                     | Slot used for the user.                           |
 | alias      | string | `"Jon"`                                 | User alias or display name.                       |
-| userId     | string | `"987654321"`                           | An optional custom user identification.           |
+| user_id    | string | `"987654321"`                           | An optional custom user identification.           |
 | created_at | string | `"2022-11-30T15:42:54.593324971+01:00"` | An optional user creation time in RFC3339 format. |
 
 * `clear_request` is a string map with the following structure:
@@ -66,6 +66,7 @@ User code service is used by door locks, keypads and other security panels to en
 | Field          | Example        | Description                                                                                            |
 |----------------|----------------|--------------------------------------------------------------------------------------------------------|
 | event          | `"code_added"` | One of the following values: `code_added`, `code_deleted`.                                             |
+| error          | `"rejected"`   | Operation error, empty string if success. Errors are nto well deficnes, they are device specific.      |
 | slot           | `"3"`          | Slot used for the user, must be within range defined in [`sup_users`](#service-properties) property.   |
 | alias          | `"Jon"`        | User alias or a display name.                                                                          |
 | identification | `"pin"`        | One of the supported identification types declared in [`sup_usercodes`](#service-properties) property. |
@@ -117,6 +118,7 @@ User code service is used by door locks, keypads and other security panels to en
   "val_t": "str_map",
   "val": {
     "event": "code_added",
+    "error": "",
     "slot": "3",
     "alias": "Jon",
     "identification": "pin"
@@ -132,6 +134,7 @@ User code service is used by door locks, keypads and other security panels to en
   "topic": "pt:j1/mt:evt/rt:dev/rn:zw/ad:1/sv:user_code/ad:110_0"
 }
 ```
+
 
 ### User deletion
 
@@ -164,6 +167,33 @@ User code service is used by door locks, keypads and other security panels to en
   "val_t": "str_map",
   "val": {
     "event": "code_deleted",
+    "error: "",
+    "slot": "3",
+    "alias": "Jon",
+    "identification": "pin"
+  },
+  "storage": {
+    "strategy": "skip"
+  },
+  "props": {},
+  "tags": null,
+  "src": "-",
+  "ver": "1",
+  "uid": "b25dc2dc-a693-4184-8f3c-9476eb557bc5",
+  "topic": "pt:j1/mt:evt/rt:dev/rn:zw/ad:1/sv:user_code/ad:110_0"
+}
+```
+
+* Example of a response rejecting the command:
+
+```json
+{
+  "serv": "user_code",
+  "type": "evt.usercode.config_report",
+  "val_t": "str_map",
+  "val": {
+    "event": "code_deleted",
+    "error": "not_authorizes",
     "slot": "3",
     "alias": "Jon",
     "identification": "pin"
