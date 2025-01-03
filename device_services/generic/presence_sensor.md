@@ -12,6 +12,8 @@ Presence sensor service is a binary sensor used by devices such as motion and pr
 |------|-------------------------|------------|-------------------------------------------------------------------|
 | in   | cmd.presence.get_report | null       | Requests the presence report.                                     |
 | out  | evt.presence.report     | bool       | Reports `true` if presence is **detected** and `false` otherwise. |
+| in   | cmd.movement.get_report | null       | Requests the movement report.                                     |
+| out  | evt.movement.report     | bool       | Reports `true` if movement is **detected** and `false` otherwise. |
 
 ## Examples
 
