@@ -31,7 +31,7 @@ An electricity meter service can represent a stand-alone AMS meter, like a HAN s
 | -    |                                  |            |                                          |             |             |
 | in   | cmd.meter_transformer.get_report | null       |                                          |             |             | Requests a list of transformation ratios for each measurement affected by the transformer.                                                                                                               |
 | out  | evt.meter_transformer.report     | float_map  |                                          | `split`     |             | Returns a map of transformation ratios for each measurement affected by the transformer.                                                                                            |
-| in   | cmd.meter_transformer.set        | float_map  |                                          |             |             | Sets the transformer ratio for the selected unit. Each measurement received from the device is multiplied by the corresponding ratio before being reported.                      | 
+| in   | cmd.meter_transformer.set        | float_map  |                                          | `split`     |             | Sets the transformer ratio for the selected unit. Each measurement received from the device is multiplied by the corresponding ratio before being reported.                      | 
 
 > For backward compatibility the service reports imported/consumed values using `evt.meter.report` interface and exported/produced values using `evt.meter_export.report`.
 
