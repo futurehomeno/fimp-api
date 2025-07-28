@@ -17,17 +17,24 @@ An electricity meter service can represent a stand-alone AMS meter, like a HAN s
 
 ## Interfaces
 
-| Type | Interface                   | Value type | Properties                               | Storage     | Aggregation | Description                                                                                                                                                                         |
-|------|-----------------------------|------------|------------------------------------------|-------------|-------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| in   | cmd.meter.get_report        | string     |                                          |             |             | Value is an import/consumption `unit` defined in [`sup_units`](#service-properties) property. May not be supported by all meters. Empty or null value requests all supported units. |
-| out  | evt.meter.report            | float      | `unit`, `prv_data`, `delta_t`, `virtual` | `aggregate` | `unit`      | Returns an import/consumption meter report for `unit` specified in properties.                                                                                                      |
-| in   | cmd.meter.reset             | null       |                                          |             |             | Resets all historical readings.                                                                                                                                                     |
-| -    |                             |            |                                          |             |             |                                                                                                                                                                                     |
-| in   | cmd.meter_export.get_report | string     |                                          |             |             | Value is a export/production `unit` defined in [`sup_export_units`](#service-properties) property.                                                                                  |
-| out  | evt.meter_export.report     | float      | `unit`, `prv_data`, `delta_t`            | `aggregate` | `unit`      | Returns a export/production meter report for `unit` specified in properties.                                                                                                        |
-| -    |                             |            |                                          |             |             |                                                                                                                                                                                     |
-| in   | cmd.meter_ext.get_report    | str_array  |                                          |             |             | Requests an extended electricity report for listed extended values. Empty or null value requests all supported extended values.                                                     |
-| out  | evt.meter_ext.report        | float_map  |                                          | `split`     |             | Returns an extended electricity report. See [electricity measurements](#electricity-measurements) section for more information.                                                     |
+| Type | Interface                        | Value type | Properties                               | Storage     | Aggregation | Description                                                                                                                                                                         |
+|------|----------------------------------|------------|------------------------------------------|-------------|-------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| in   | cmd.meter.get_report             | string     |                                          |             |             | Value is an import/consumption `unit` defined in [`sup_units`](#service-properties) property. May not be supported by all meters. Empty or null value requests all supported units. |
+| out  | evt.meter.report                 | float      | `unit`, `prv_data`, `delta_t`, `virtual` | `aggregate` | `unit`      | Returns an import/consumption meter report for `unit` specified in properties.                                                                                                      |
+| in   | cmd.meter.reset                  | null       |                                          |             |             | Resets all historical readings.                                                                                                                                                     |
+| -    |                                  |            |                                          |             |             |                                                                                                                                                                                     |
+| in   | cmd.meter_export.get_report      | string     |                                          |             |             | Value is a export/production `unit` defined in [`sup_export_units`](#service-properties) property.                                                                                  |
+| out  | evt.meter_export.report          | float      | `unit`, `prv_data`, `delta_t`            | `aggregate` | `unit`      | Returns a export/production meter report for `unit` specified in properties.                                                                                                        |
+| -    |                                  |            |                                          |             |             |                                                                                                                                                                                     |
+| in   | cmd.meter_ext.get_report         | str_array  |                                          |             |             | Requests an extended electricity report for listed extended values. Empty or null value requests all supported extended values.                                                |
+| out  | evt.meter_ext.report             | float_map  |                                          | `split`     |             | Returns an extended electricity report. See [electricity measurements](#electricity-measurements) section for more information.                                                    |
+| -    |                                  |            |                                          |             |             |
+| in   | cmd.meter_transformer.get_report | null       |                                          |             |             | Requests list of ratios for each measurement affected by transformer. 
+                                                                |
+| out  | evt.meter_transformer.report     | float_map  | `unit`, `prv_data`, `delta_t`, `virtual` |  `split`    |             | Return list of ratios for each measurement affected by transformer.  
+                                                                | 
+| in   | cmd.meter_transformer.set        | float_map  |                                          |             |             | Set transformer ratio for selected `unit`. Each measurements received fro the device is multiplied by corresponding ratio set in this command before reported.
+                                                                |
 
 > For backward compatibility the service reports imported/consumed values using `evt.meter.report` interface and exported/produced values using `evt.meter_export.report`.
 
@@ -119,6 +126,31 @@ An electricity meter service can represent a stand-alone AMS meter, like a HAN s
     "u1": 234.75,
     "u2": 234.75,
     "u3": 234.75
+  },
+  "storage": {
+    "strategy": "split"
+  },
+  "props": null,
+  "tags": null,
+  "src": "-",
+  "ver": "1",
+  "uid": "e604e951-7afb-4f96-981b-62e905757686",
+  "topic": "pt:j1/mt:evt/rt:dev/rn:zigbee/ad:1/sv:meter_elec/ad:1_2"
+}
+```
+
+* Example of a transformer ratio set:
+
+```json
+{
+  "serv": "meter_elec",
+  "type": "cmd.meter_transformer.set",
+  "val_t": "float_map",
+  "val": {
+   "A": 40,
+   "kWh": 1,
+   "W": 40,
+   "V": 1
   },
   "storage": {
     "strategy": "split"
