@@ -157,7 +157,7 @@ An electricity meter service can represent a stand-alone AMS meter, like a HAN s
   "src": "-",
   "ver": "1",
   "uid": "e604e951-7afb-4f96-981b-62e905757686",
-  "topic": "pt:j1/mt:evt/rt:dev/rn:zigbee/ad:1/sv:meter_elec/ad:1_2"
+  "topic": "pt:j1/mt:cmd/rt:dev/rn:zigbee/ad:1/sv:meter_elec/ad:1_2"
 }
 ```
 
