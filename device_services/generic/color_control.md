@@ -42,6 +42,9 @@ The service can be used to control color components of a lighting device, such a
 | `amber`         | Yes    | No     | 0-255   | Defines intensity of amber color.                                                                            |
 | `cyan`          | Yes    | No     | 0-255   | Defines intensity of cyan color.                                                                             |
 | `purple`        | Yes    | No     | 0-255   | Defines intensity of purple color.                                                                           |
+| `hue`           | No     | Yes    | 0-255   | Defines hue component value in HSV color model.                                                              |
+| `saturation`    | No     | Yes    | 0-255   | Defines saturation component value in HSV color model.                                                       |
+| `value`         | No     | Yes    | 0-255   | Defines value component value in HSV color model.                                                            |
 
 * `transition` is an object representing a single color transition change with the following structure:
 
