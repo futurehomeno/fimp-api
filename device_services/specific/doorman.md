@@ -13,29 +13,29 @@ Yale Doorman custom service definition.
 Type | Interface                     | Value Type | Description            | Example
 -----|-------------------------------|------------|------------------------| --------
 out  | evt.doorman_session.report    | null       | Integration required   | 
-in   | cmd.doorman.integration       | str_map    | Start lock integration | {"slot_number":"0", "code_type":"pin", "code":"123456"}
+in   | cmd.doorman.integration       | str_map    | Start lock integration | {"name":"Jon", "slot_number":"0", "code_type":"pin", "code":"123456"}
 in   | cmd.doorman_param.set         | str_map    |                        | {"parameter_id":"5", "value":"5"}
-in   | cmd.doorman_param.get_report  | null       |                        | 
-out  | evt.doorman_param.report      | str_map    | Response to get_report | 
-in   | cmd.doorman_user.set          | str_map    | Set pin or tag         | {"name":"Jon", “slot_number”:”1”, ”code”:”123456”}
+in   | cmd.doorman_param.get_report  | null       |                        |
+out  | evt.doorman_param.report      | str_map    | Response to get_report | List of all available [parameters](#configuration-parameters) in format {"ID":"_value_"}
+in   | cmd.doorman_user.set          | str_map    | Set pin or tag         | {"name":"Jon", "slot_number":"1", "code_type":"pin", "code":"123456"}
 in   | cmd.doorman_user.get_all      | null       | Get all user slots     |
 out  | evt.doorman_user.report       | object     | Response to get_all    | See below
-in   | cmd.doorman_user.clear        | str_map    |                        | {“slot_number”:”1”}
-out  | evt.doorman_activity.report   | str_map    | Sent after an activity | {“event_type”:”id”, “status”:”0”, “error_code”:”0”, “user_status”:”added”, “slot_number”:”0”, “alarm_type”:”0”, “alarm_level”:”0”, “arming_parameter”:”0”, “sequence_number”:”0”, ”card_uid_data”:”12345678”}
-in   | cmd.doorman.arm_confirm       | str_map    |                        | {“sequence_number”:”0”, “operating_parameter”:”0”}
-out  | evt.op.ack                    | string     | Command sent to lock. Applies to `cmd.doorman_param.set` | Value can be "ack" or "nack"
-
-More details and examples can be found on [Notion](https://www.notion.so/Assa-Abloy-Yale-doorman-v2-Zigbee-c94f3164a74f4035bf2d47d29ec9c9c0).
+in   | cmd.doorman_user.clear        | str_map    |                        | {"slot_number":"1"}
+out  | evt.doorman_activity.report   | str_map    | Modes settings         | {"secure_mode": "true", "auto_lock": "true", "three_min_lock": "false"}
+in   | cmd.doorman.arm_confirm       | str_map    | Sets arming setting    | {"operating_parameter":"0"}
+out  | evt.doorman_tag.report        | str_map    | tag_id is 8-byte long  | {"type":"unrecognized_tag", "tag_id": "12345678AABBCCDD"}
 
 ### Interface props
 
-Name              | Value                                              | Description
-------------------|----------------------------------------------------|-------------
-`slot_number`     | 0-19                                               | 0-9 (PIN codes), 10-19 (RFID tags), 20 (24h codes)
-`code_type`       | "pin", "tag", "tag+pin", "24h", "s4+pin", "s8+pin" | List of supported code types Valid length for specified slots
-`pin_code_length` | 6 (For slot number 0-19), 4 - For slot number 20   | Valid length for specified slots
-`card_uid_data`   |                                                    | The Hex format of the TAG UID
-`user_status`     | “added”, “removed”                                 | Determines whether a user was successfully added or removed from the system.
+Name                | Value                                                    | Description
+--------------------|----------------------------------------------------------|-------------
+`slot_number`       | 0-9 for PIN codes, 10-19 for RFID tags, 20 for 24h code | ID assigned to each user.
+`code_type`         | "pin", "tag", "tag+pin", "24h", "s4+pin", "s8+pin"       | List of supported code types Valid length for specified slots
+`card_uid_data`     |                                                          | The Hex format of the TAG UID used in evt.doorman_activity.report event_type=3
+`arming_parameter`  | 0 - disarming, 1 - arming                                | Determines disarming/arming setting on the device
+`secure_mode`       | "true", "false"                                          | Determines whether the device is in the secure mode in evt.doorman_activity_report. Sent only when changed.
+`auto_lock`         | "true", "false"                                          | Determines whether the device is in the auto mode in evt.doorman_activity_report. Sent only when changed.
+`secure_mode`       | "true", "false"                                          | Determines whether the device is in the 3 min lock mode in evt.doorman_activity_report. Sent only when changed.
 
 ### Configuration parameters
 
@@ -55,8 +55,6 @@ Topic example:
 
 `pt:j1/mt:cmd/rt:dev/rn:zigbee/ad:1/sv:doorman/ad:2_1`
 
-*Note: number `2` at the end of the topic is the device address. Change it to the actual address when sending the commands.*
-
 - cmd.doorman.integration
 
     Sent automatically from the hub upon reception of `evt.doorman.session_report`
@@ -66,8 +64,7 @@ Topic example:
     "serv": "doorman",
     "type": "cmd.doorman.integration",
     "val_t": "str_map",
-    "val": {"slot_number":"0", "code_type":"pin",
-    "code":"123456"},
+    "val": {"slot_number":"0", "code_type":"pin", "code":"123456", "name": "Jon"},
     "props": null,
     "tags": null,
     "src": "thingsplex-ui",
@@ -77,7 +74,7 @@ Topic example:
 
 - cmd.doorman_param.set
 
-    Sets Doorman's parameters. For the valid `parameter_id` values and what they mean, check the delivery PDF above.
+    Sets configuration parameter from the [list](#configuration-parameters). For the valid `parameter_id` values and what they mean, check with corresponding version of Doorman cluster implementation
 
     ```jsx
     {
@@ -91,8 +88,6 @@ Topic example:
       "ver": "1"
     }
     ```
-
-    [Configuration parameters](https://www.notion.so/3de70e7b58d1489482f2115a2e486866)
 
 - cmd.doorman_param.get_report
 
@@ -123,7 +118,8 @@ Topic example:
       "val": {
         "name": "Jon"
         "slot_number": "1",
-        "code": "111111"
+        "code": "111111",
+        "code_type":"pin"
       },
       "props": null,
       "tags": null,
@@ -179,7 +175,7 @@ Topic example:
         "slots": [
           {
             "id": 3,
-    	"name": "Jon",
+            "name": "Jon",
             "created_at": "2020-04-22T16:05:03.48677828+02:00"
           }
         ]
@@ -189,100 +185,7 @@ Topic example:
     }
     ```
 
-- evt.op.ack
-
-    Sent by the adapter as an Ack for some commands
-
-    ```jsx
-    {
-      "type": "evt.op.ack",
-      "serv": "doorman",
-      "val_t": "string",
-      "val": "ack",
-      "ver": "1",
-      "corid": "08d2da8b-0d2c-4a2c-a0d7-8facc48b302",
-      "ctime": "2019-09-13T11:12:51.597+09:00",
-      "uid": "08d2da8b-0d2c-4a2c-a0d7-8facc48b3026"
-    }
-    ```
-
-- evt.open.report
-
-    Sent by the adapter when the door opens/closes.
-
-    ```jsx
-    {
-      "type": "evt.open.report",
-      "serv": "doorlock",
-      "val_t": "bool",
-      "val": false,
-      "tags": null,
-      "props": null,
-      "ver": "1",
-      "corid": "",
-      "ctime": "2020-05-06T11:55:21.02+02:00",
-      "uid": "8ed699b1-86bc-47ae-9c88-03ecc4b5c132"
-    }
-    ```
-
-- evt.alarm.report
-
-    Sent by the adapter upon certain events
-
-    ```jsx
-    {
-      "type": "evt.alarm.report",
-      "serv": "alarm_lock",
-      "val_t": "str_map",
-      "val": {
-        "event": "manual_lock",
-        "status": "active"
-      },
-      "tags": null,
-      "props": null,
-      "ver": "1",
-      "corid": "",
-      "ctime": "2020-04-24T17:12:50.686+02:00",
-      "uid": "aeae3ebd-9db9-4cad-a9db-23ee493f5f83"
-    }
-    ```
-
-    Event types:
-
-    ```jsx
-    serviceName: "alarm_lock"
-    eventTypes: {
-        "jammed",
-        "manual_unlock",
-        "manual_lock",
-        "rf_unlock",
-        "rf_lock",
-        "keypad_unlock",
-        "keypad_lock",
-        "tag_unlock",
-        "tag_lock",
-        "auto_locked",
-        "lock_failed",
-        "door_opened",
-        "door_closed"
-    }
-
-    serviceName: "alarm_burglar"
-    eventTypes: {
-        "tamper_invalid_code",
-        "tamper_removed_cover",
-        "tamper_force_open"
-    }
-
-    serviceName: "alarm_power"
-    eventTypes: {
-        "replace_soon"
-    }
-    ```
-
-- evt.doorman_activity.report
-
-    Sent by the lock when an event happens
+- evt.doorman_activity.report sent by the device upon secure mode change
 
     ```jsx
     {
@@ -290,11 +193,7 @@ Topic example:
       "serv": "doorman",
       "val_t": "str_map",
       "val": {
-        "alarm_level": "1",
-        "alarm_type": "21",
-        "error_code": "0",
-        "event_type": "0",
-        "status": "53"
+        "secure_mode": "true",
       },
       "tags": null,
       "props": null,

@@ -12,8 +12,9 @@ Door lock service is used to control door locks. It is used to lock and unlock d
 
 | Type | Interface                     | Value type | Properties                            | Description                                                                                                                                  |
 |------|-------------------------------|------------|---------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------|
+| out  | evt.open.report               | bool       |                                       | Simple lock status - true if open, false if closed     
 | in   | cmd.lock.get_report           | null       |                                       | Requests the lock status.                                                                                                                    |
-| in   | cmd.lock.set                  | bool       | `mode_op`                             | **Secures** the lock if the provided value is `true` and unlocks it if the value is `false`.                                                 |
+| in   | cmd.lock.set                  | bool       | `mode_op` `firstname`, `uuid`         | **Secures** the lock if the provided value is `true` and unlocks it if the value is `false`.                                                 |
 | out  | evt.lock.report               | bool_map   | `timeout_m`, `timeout_s`, `lock_type` | Returns the lock status as a boolean map of components defined in [`sup_components`](#service-properties) property.                          |
 | -    |                               |            |                                       |                                                                                                                                              |
 | in   | cmd.auto_lock.set             | bool       |                                       | Enables/disables the auto-lock feature.                                                                                                      |
@@ -33,6 +34,8 @@ Door lock service is used to control door locks. It is used to lock and unlock d
 | Name        | Example                    | Required | Description                                                                                                                                                                                                                                                                                                                               |
 |-------------|----------------------------|----------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `mode_op`   | `"unsecured_with_timeout"` | No       | Optionally defines mode of an unlock operation. Possible values are an applicable sub-set of [`sup_modes`](#service-properties): `unsecured_with_timeout`, `unsecured_for_inside_door_handles`, `unsecured_for_inside_door_handles_with_timeout`, `unsecured_for_outside_door_handles`,`unsecured_for_outside_door_handles_with_timeout`. |
+| `firstname` | `Bjarne`                   | No       | Name of the user who issued the message                                                                       |
+| `uuid`      | `"f3bb49a9-80de-4831-a45f-5af5143d0c53"`                   | No       | A Universally Unique Identifier (UUID) - 128-bit label of a user                                              | 
 | `lock_type` | `"key"`                    | No       | How lock was activated, it can take values such as `key`, `pin`, `rfid`.                                                                                                                                                                                                                                                                  |
 | `timeout_s` | `"30"`                     | No       | Remaining time in seconds before the lock will be automatically secured again.                                                                                                                                                                                                                                                            |
 | `timeout_m` | `"2"`                      | No       | Remaining time in minutes before the lock will be automatically secured again.                                                                                                                                                                                                                                                            |
@@ -176,5 +179,21 @@ Door lock service is used to control door locks. It is used to lock and unlock d
   "ver": "1",
   "uid": "49b60210-5374-11ed-b6d0-33d4305f427b",
   "topic": "pt:j1/mt:cmd/rt:dev/rn:zw/ad:1/sv:door_lock/ad:59_0"
+}
+```
+
+* Example of a command locking the lock with user's details:
+```json
+{
+  "serv": "door_lock",
+  "type": "cmd.lock.set",
+  "val_t": "bool",
+  "val": true,
+  "props": {
+    "firstname": "Bjarne",
+    "uuid": "f3bb49a9-80de-4831-a45f-5af5143d0c53"
+  },
+  "tags": null,
+  "ver": "1"
 }
 ```
