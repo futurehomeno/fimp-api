@@ -9,25 +9,21 @@ The following document describes the common interface for error reporting.
 * A command with a value outside the advertised range or not in the supported list must be rejected with an error report (`out_of_range` or `not_supported`), for example a value above `max_current`, outside `min` and `max`, or not listed in `sup_modes` or `sup_setpoints`.
   Such a value must not be changed silently, for example clamped, capped or rounded, and then applied.
 * A failure found after the command was accepted, for example when a device or a cloud service rejects it later, must still be reported. The report carries the `corid` of that command, see [correlation](#correlation).
+* A fault not tied to a command, for example a device fault or a lost connection, must not be reported with `evt.error.report`. It is reported through the own reports of the service, such as state, alarm or connectivity reports.
 
 ## Topics
 
-An error report that answers a command is published:
+An error report is published:
 * on the topic given in the `resp_to` property of the command, when the command has one,
 * otherwise on the event topic that mirrors the command topic: the same address with `mt:evt` in place of `mt:cmd`.
   For example, a command received on `pt:j1/mt:cmd/rt:dev/rn:zw/ad:1/sv:out_bin_switch/ad:12_0` is answered on `pt:j1/mt:evt/rt:dev/rn:zw/ad:1/sv:out_bin_switch/ad:12_0`.
 
-Errors that do not answer a command should be rare. Such a report carries no `corid` and no `cmd_*` properties, only the error code, the `msg` property and optionally the `src` property.
-It is published on the topic most representative for the error source and context. For example, a technology adapter should report errors:
-* concerning a particular device on the device event topic, e.g. `pt:j1/mt:evt/rt:dev/rn:zw/ad:1/sv:dev_sys/ad:95_0`,
-* concerning the adapter itself on the adapter event topic, e.g. `pt:j1/mt:evt/rt:ad/rn:zw/ad:1`.
-
 ## Service name
 
 Interface for error reporting does not have its own dedicated service and always belongs to a particular service where the error occurred.
-An error report that answers a command carries the service of that command.
+An error report carries the service of the command it answers.
 
-A device service that accepts commands must list `evt.error.report` among its interfaces in the [inclusion report](/adapter/thing_management.md#definitions).
+Every service that accepts commands must list `evt.error.report` among its interfaces, for a device service in its [inclusion report](/adapter/thing_management.md#definitions).
 
 ## Interfaces
 
@@ -52,22 +48,23 @@ A device service that accepts commands must list `evt.error.report` among its in
 An implementation may define additional codes for conditions specific to it. Such codes must utilize `snake_case`.
 A consumer must treat a code it does not know as `internal`.
 
-> Please note that older implementations may still send a free-form text in the value instead of an error code.
-> A consumer should then read the text as the message.
+> Please note that older implementations may still send a free-form text in the value instead of an error code, and error reports without `corid`.
+> A consumer must tolerate both and should read such a text as the message.
 
 ## Interface properties
 
-| Name          | Example                                                   | Required                               | Description                                                                                                                                                |
-|---------------|-----------------------------------------------------------|----------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `msg`         | `"Maximum current must be between 6 and 32 A."`           | Yes                                    | One plain human-readable sentence describing the error. It must not contain URLs, identifiers of accounts or devices, keys, tokens or raw response bodies. |
-| `src`         | `"60"`                                                    | No                                     | An arbitrary string defining a source, an origin or a general context for the error.                                                                       |
-| `cmd_topic`   | `"pt:j1/mt:cmd/rt:dev/rn:easee/ad:1/sv:chargepoint/ad:1"` | Yes, when the report answers a command | Topic of the command the report answers.                                                                                                                   |
-| `cmd_service` | `"chargepoint"`                                           | Yes, when the report answers a command | Service of the command the report answers.                                                                                                                 |
-| `cmd_type`    | `"cmd.max_current.set"`                                   | Yes, when the report answers a command | Type or interface name of the command the report answers.                                                                                                  |
+| Name          | Example                                                   | Required | Description                                                                                                                                                                                                                                                                |
+|---------------|-----------------------------------------------------------|----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `msg`         | `"Maximum current must be between 6 and 32 A."`           | Yes      | Describes the error. For every code except `internal` it is one plain human-readable sentence; for `internal` it may carry technical detail of the failure. It must not contain URLs, keys, tokens, passwords, identifiers of accounts or devices, or raw response bodies. |
+| `src`         | `"60"`                                                    | No       | An arbitrary string defining a source, an origin or a general context for the error.                                                                                                                                                                                       |
+| `cmd_topic`   | `"pt:j1/mt:cmd/rt:dev/rn:easee/ad:1/sv:chargepoint/ad:1"` | Yes      | Topic of the command the report answers.                                                                                                                                                                                                                                   |
+| `cmd_service` | `"chargepoint"`                                           | Yes      | Service of the command the report answers.                                                                                                                                                                                                                                 |
+| `cmd_type`    | `"cmd.max_current.set"`                                   | Yes      | Type or interface name of the command the report answers.                                                                                                                                                                                                                  |
 
 ## Correlation
 
-An error report that answers a command must carry the `corid` message property equal to the `uid` of that command, also when the failure is found after the command was accepted.
+An error report always answers a command and must carry the `corid` message property equal to the `uid` of that command, also when the failure is found after the command was accepted.
+There is no error report without a `corid`.
 See [message properties](/fimp/message_format.md#message-properties) for more details.
 
 ## Storage
