@@ -52,6 +52,10 @@ Meta and utility services are not representing a functionality of a device, but 
 - [Time](/device_services/meta/time.md)
 - [Version](/device_services/meta/version.md)
 
+## Errors
+
+A command with a value outside what the service advertises, for example in its `sup_*` service properties or in the range given by its interface description, must be answered with an [error report](/common_interfaces/error_reporting.md#when-an-error-must-be-reported).
+
 ## Documentation guidelines
 
 When preparing or updating a service documentation, please follow the [example service](/device_services/example_service.md) template.
