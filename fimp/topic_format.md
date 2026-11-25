@@ -64,4 +64,4 @@ Each valid topic consists of a various number of segments depending on the repre
 > Both resource name and address in the response type topics are arbitrary and can be set to any value.
 > It is recommended to use resource name of the application or system component issuing a command.
 > Wherever needed it is possible to use pseudo-random hashes as resource address to emulate synchronous request-response behavior like `pt:j1/mt:rsp/rt:app/rn:tpflow/ad:0d082607`.
-> For additional details see [`resp_to`](/message-format.md#message-properties) message property in message format section.
+> For additional details see [`resp_to`](/fimp/message_format.md#message-properties) message property in message format section.
