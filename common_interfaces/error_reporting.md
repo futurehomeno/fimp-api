@@ -7,7 +7,9 @@ The following document describes the common interface for error reporting.
 * A command that fails must be answered with exactly one `evt.error.report`.
   A report that looks like success must not be sent instead. A state report showing the real state of the device may be sent before the error report.
 * A command with a value outside the advertised range or not in the supported list must be rejected with an error report (`out_of_range` or `not_supported`), for example a value above `max_current`, outside `min` and `max`, or not listed in `sup_modes` or `sup_setpoints`.
-  Such a value must not be changed silently, for example clamped, capped or rounded, and then applied.
+  Such a value must not be changed silently, for example clamped, capped or rounded, and then applied, with these exceptions:
+  * a level in the [output level switch](/device_services/generic/output_level_switch.md) service outside `min_lvl` and `max_lvl` is limited to that range, and the report carries the level that was set,
+  * a value may be rounded to the step the service supports, for example a setpoint to the nearest half degree, and the report carries the stored value.
 * A failure found after the command was accepted, for example when a device or a cloud service rejects it later, must still be reported. The report carries the `corid` of that command, see [correlation](#correlation).
 * A fault not tied to a command, for example a device fault or a lost connection, must not be reported with `evt.error.report`. It is reported through the own reports of the service, such as state, alarm or connectivity reports.
 
