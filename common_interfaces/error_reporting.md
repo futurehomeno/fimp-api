@@ -45,6 +45,7 @@ Every service that accepts commands must list `evt.error.report` among its inter
 | `unauthorized`   | The implementation lacks a valid login or the rights for the action.  | The login to the cloud service of the device has expired.                           |
 | `device_refused` | The device or its cloud service received the command and rejected it. | A chargepoint rejects `cmd.charge.start` because no car is connected.               |
 | `unavailable`    | The device or the cloud service cannot be reached or did not answer.  | The device is offline or the request to its cloud service timed out.                |
+| `rate_limited`   | Refused for now because of too many requests; may be retried later.  | The cloud service of the device answers HTTP 429 Too Many Requests.                 |
 | `internal`       | Any other failure inside the implementation.                          | An unexpected error while processing the command.                                   |
 
 An implementation may define additional codes for conditions specific to it. Such codes must utilize `snake_case`.
